@@ -21,8 +21,9 @@ public abstract class Item {
 	
 	public abstract int hashCode();
 	
-	public abstract boolean equals();
+	public abstract boolean equals(Object obj);
+	
+	
 	
 	public abstract String toString();
-
 }
