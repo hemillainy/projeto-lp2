@@ -1,9 +1,9 @@
 package principal;
 
 public abstract class Item {
-	String nome;
-	double valor;
-	boolean emprestado;
+	protected String nome;
+	protected double valor;
+	protected boolean emprestado;
 
 	public Item(String nome, double valor) {
 		this.nome = nome;
