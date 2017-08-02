@@ -16,14 +16,17 @@ public abstract class Item {
 	}
 
 	public void setEmprestado() {
-		this.emprestado = true ? !isEmprestado() : false;
+		this.emprestado = !isEmprestado();
 	}
 	
 	public abstract int hashCode();
 	
 	public abstract boolean equals(Object obj);
 	
-	
+	public String status() {
+		String situacao = this.emprestado ? "Emprestado" : "Nao emprestado";
+		return situacao;
+	}
 	
 	public abstract String toString();
 }
