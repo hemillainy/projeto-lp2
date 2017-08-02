@@ -12,6 +12,7 @@ public class Show extends BluRay {
 	}
 	
 	public String toString() {
-		return this.nome + " Artista: " + this.artista + " - Duração: " + (this.duracao / 60) +  " Classificação: " + this.classificacao;
+		return "SHOW: " + this.nome + ", R$ " + this.valor + ", " + this.emprestado + ", " + this.duracao + " min" + ", " + 
+				this.classificacao + ", " + this.artista + ", " + this.faixas + "faixas";
 	}
 }
