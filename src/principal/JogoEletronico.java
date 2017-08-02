@@ -10,12 +10,6 @@ public class JogoEletronico extends Item {
 	}
 	
 	@Override
-	public String toString() {
-		return this.nome + " - " + this.plataforma + " - " + this.valor + " - " + 
-				status();
-	}
-	
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -44,6 +38,12 @@ public class JogoEletronico extends Item {
 		} else if (!plataforma.equals(other.plataforma))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "JOGO ELETRONICO: " + this.nome + ", R$ " + this.valor +
+				status() + ", " + this.plataforma;
 	}
 
 }
