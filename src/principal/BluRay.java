@@ -13,10 +13,6 @@ public abstract class BluRay extends Item {
 		this.duracao = duracao;
 	}
 	
-	public String toString() {
-		return this.nome + " - Duração: " + (this.duracao / 60) +  " Classificação: " + this.classificacao;
-	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
