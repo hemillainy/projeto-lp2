@@ -1,5 +1,6 @@
 package principal;
 
+import itens.Item;
 import java.util.HashMap;
 import java.util.Map;
 

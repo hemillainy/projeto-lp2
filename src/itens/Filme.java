@@ -1,4 +1,4 @@
-package principal;
+package itens;
 
 public class Filme extends BluRay {
 	
@@ -12,7 +12,7 @@ public class Filme extends BluRay {
 	}
 	
 	public String toString() {
-		return "FILME: " + this.nome + ", R$ " + this.valor + ", " + this.emprestado + ", " + this.duracao + " min" + ", " + 
+		return "FILME: " + this.nome + ", R$ " + this.valor + ", " + status.getValor() + ", " + this.duracao + " min" + ", " + 
 				this.classificacao + ", " + this.genero + ", " + this.lancamento;
 	}
 

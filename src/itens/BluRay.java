@@ -1,4 +1,4 @@
-package principal;
+package itens;
 
 public abstract class BluRay extends Item {
 	

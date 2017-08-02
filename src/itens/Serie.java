@@ -1,4 +1,4 @@
-package principal;
+package itens;
 
 public class Serie extends BluRay {
 
@@ -12,7 +12,7 @@ public class Serie extends BluRay {
 	}
 
 	public String toString() {
-		return "SERIE: " + this.nome + ", R$ " + this.valor + ", " + this.status() + ", " + this.duracao + " min" + ", "
+		return "SERIE: " + this.nome + ", R$ " + this.valor + ", " + status.getValor() + ", " + this.duracao + " min" + ", "
 				+ this.classificacao + ", " + this.genero + ", Temporada " + this.temporada;
 	}
 }

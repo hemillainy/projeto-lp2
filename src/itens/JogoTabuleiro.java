@@ -1,4 +1,4 @@
-package principal;
+package itens;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +54,7 @@ public class JogoTabuleiro extends Item {
 	public String toString() {
 		String completo = isComplete() ? "SEM PECAS PERDIDAS" : "COM PECAS PERDIDAS";
 		return "JOGO DE TABULEIRO: " + this.nome + ", R$ " + this.valor +
-				status() + completo;
+				status.getValor() + completo;
 	}
 
 }

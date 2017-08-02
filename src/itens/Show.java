@@ -1,4 +1,4 @@
-package principal;
+package itens;
 
 public class Show extends BluRay {
 	
@@ -12,7 +12,7 @@ public class Show extends BluRay {
 	}
 	
 	public String toString() {
-		return "SHOW: " + this.nome + ", R$ " + this.valor + ", " + this.emprestado + ", " + this.duracao + " min" + ", " + 
+		return "SHOW: " + this.nome + ", R$ " + this.valor + ", " + status.getValor() + ", " + this.duracao + " min" + ", " + 
 				this.classificacao + ", " + this.artista + ", " + this.faixas + "faixas";
 	}
 }
