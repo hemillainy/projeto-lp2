@@ -3,12 +3,13 @@ package principal;
 import java.util.Map;
 import java.util.HashMap;
 
-public class UserSystem {
+public class UserController {
+	private IdUsuario id;
 	private boolean aberto;
 	private Validacao validacao;
-	private Map<String, Usuario> usuarios;
+	private Map<IdUsuario, Usuario> usuarios;
 
-	public UserSystem() {
+	public UserController() {
 		aberto = true;
 		usuarios = new HashMap<>();
 		validacao = new Validacao();
@@ -19,59 +20,66 @@ public class UserSystem {
 	}
 
 	private boolean hasUsuario(String nome, String telefone) {
-		if (usuarios.containsKey(nome + telefone)) {
+		id = new IdUsuario(nome, telefone);
+		if (usuarios.containsKey(id)) {
 			return true;
 		}
 		return false;
 	}
 
 	public void cadastraUsuario(String nome, String telefone, String email) {
+		id = new IdUsuario(nome, telefone);
 		validacao.dadoUsuarioInvalido(nome, telefone, email);
 		if (!hasUsuario(nome, telefone)) {
 			Usuario usuario = new Usuario(nome, telefone, email);
-			usuarios.put(nome + telefone, usuario);
+			usuarios.put(id, usuario);
 		} else {
 			validacao.usuarioJaCadastrado();
 		}
 	}
 
 	public void removeUsuario(String nome, String telefone) {
+		id = new IdUsuario(nome, telefone);
 		if (hasUsuario(nome, telefone)) {
-			usuarios.remove(nome + telefone);
+			usuarios.remove(id);
 		} else {
 			validacao.usuarioInvalido();
 		}
 	}
 
 	public String getInfoUsuario(String nome, String telefone, String atributo) {
-		if (usuarios.containsKey(nome + telefone)) {
+		id = new IdUsuario(nome, telefone);
+		if (usuarios.containsKey(id)) {
 			if (atributo.equals("Email")) {
-				System.out.println("email");
-				return usuarios.get(nome + telefone).getEmail();
+				return usuarios.get(id).getEmail();
 			} else if (atributo.equals("Nome")) {
-				return usuarios.get(nome + telefone).getNome();
+				return usuarios.get(id).getNome();
 			}
 		}
 		return validacao.usuarioInvalido();
 	}
 
-	private void setKeyUsuario(Usuario usuario) {
-		usuarios.remove(usuario);
-		String id = usuario.getNome() + usuario.getTelefone();
-		usuarios.put(id, usuario);
+	private void setKey(String nome, String telefone, String valor, Usuario usuario) {
+		id = new IdUsuario(nome, telefone);
+		usuarios.remove(id);
+		IdUsuario novoId = new IdUsuario(nome, valor);
+		usuarios.put(novoId, usuario);
 	}
 
 	public void atualizaUsuario(String nome, String telefone, String atributo, String valor) {
-		if (usuarios.containsKey(nome + telefone)) {
+		id = new IdUsuario(nome, telefone);
+		if (usuarios.containsKey(id)) {
 			if (atributo.equals("Email")) {
-				usuarios.get(nome + telefone).setEmail(valor);
+				usuarios.get(id).setEmail(valor);
 			} else if (atributo.equals("Telefone")) {
-				Usuario usuario = usuarios.get(nome + telefone);
-				usuario.setTelefone(telefone);
-				setKeyUsuario(usuario);
+				Usuario usuario = usuarios.get(id);
+				usuario.setTelefone(valor);
+				setKey(nome, telefone, valor, usuario);
 			}
 		} else {
 			validacao.usuarioInvalido();
 		}
 	}
+	
+	
 }

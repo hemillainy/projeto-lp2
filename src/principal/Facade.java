@@ -4,13 +4,13 @@ import easyaccept.EasyAccept;
 
 public class Facade {
 	public static void main(String[] args){
-		args = new String[]{"Facade", "acceptance_test/us1_test.txt"};
+		args = new String[]{"principal.Facade", "acceptance_test/us1_test.txt"};
 		EasyAccept.main(args);
 	}
-	private UserSystem sistema;
+	private UserController sistema;
 
 	public void iniciarSistema(){
-		sistema = new UserSystem();
+		sistema = new UserController();
 	}
 	public void cadastrarUsuario(String nome, String celular, String email){
 		sistema.cadastraUsuario(nome, celular, email);
