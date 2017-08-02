@@ -16,7 +16,7 @@ public abstract class Item {
 	}
 
 	public void setEmprestado() {
-		this.emprestado = true ? !isEmprestado() : false;
+		this.emprestado = !isEmprestado();
 	}
 	
 	public abstract int hashCode();
