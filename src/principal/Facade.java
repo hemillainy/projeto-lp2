@@ -33,56 +33,65 @@ public class Facade {
 	public void atualizarUsuario(String nome, String telefone, String atributo, String valor) {
 		sistema.atualizaUsuario(nome, telefone, atributo, valor);
 	}
-	
+
 	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
-		
+
 	}
-	
+
 	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
-		
+
 	}
-	
+
 	public void adicionarPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {
-		
+
 	}
-	
-	public void cadastrarBluRayFilme(String nome, String telefone, String nomeItem, double preco, int duracao, String genero, String classificacao) {
-		
+
+	public void cadastrarBluRayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
+			String genero, String classificacao, int lancamento) {
+
 	}
-	
-	public void cadastrarBluRayShow(String nome, String telefone, String nomeItem, double preco, int duracao, int faixas, String artista, String classificacao) {
-		
+
+	public void cadastrarBluRayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
+			int faixas, String artista, String classificacao) {
+
 	}
-	
-	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao, int duracao, String classificacao, String genero, int temporada) {
-		
+
+	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
+			int duracao, String classificacao, String genero, int temporada) {
+
 	}
-	
+
 	public void adicionarBluRay(String nome, String telefone, String nomeBluRayTemporada, int duracao) {
-		
+
 	}
-	
+
+	public void getInfoItem(String nome, String telefone, String nomeItem, String atributo) {
+
+	}
+
 	public void removerItem(String nome, String telefone, String nomeItem) {
-		
+
 	}
-	
+
 	public void atualizarItem(String nome, String telefone, String nomeItem, String atributo, String valor) {
-		
+
 	}
-	
+
 	public void listarItensOrdenadosPorNome() {
-		
+
 	}
-	
+
 	public void listarItensOrdenadosPorValor() {
-		
+
 	}
-	
-	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) {
-		
+
+	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
+			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) {
+
 	}
-	
-	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente, String nomeItem, String dataEmprestimo, String dataDevolucao) {
-		
+
+	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
+			String nomeItem, String dataEmprestimo, String dataDevolucao) {
+
 	}
 }
