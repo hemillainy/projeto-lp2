@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JogoTabuleiro extends Item {
-	List<String> pecasPerdidas;
+	private List<String> pecasPerdidas;
+	private Status statusCompleto;
 
 	public JogoTabuleiro(String nome, double valor) {
 		super(nome, valor);
 		this.pecasPerdidas = new ArrayList<>();
+		this.statusCompleto = Status.COMPLETO;
 	}
 
 	public void adicionaPecaPerdida(String peca) {
 		this.pecasPerdidas.add(peca);
+		this.status = Status.INCOMPLETO;
 	}
 	
-	private boolean isComplete() {
-		return this.pecasPerdidas.isEmpty();
-	}
 
 	@Override
 	public int hashCode() {
@@ -52,9 +52,8 @@ public class JogoTabuleiro extends Item {
 
 	@Override
 	public String toString() {
-		String completo = isComplete() ? "SEM PECAS PERDIDAS" : "COM PECAS PERDIDAS";
 		return "JOGO DE TABULEIRO: " + this.nome + ", R$ " + this.valor +
-				status.getValor() + completo;
+				status.getValor() + statusCompleto.getValor();
 	}
 
 }
