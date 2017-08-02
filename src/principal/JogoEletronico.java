@@ -11,9 +11,8 @@ public class JogoEletronico extends Item {
 	
 	@Override
 	public String toString() {
-		String situacao = this.emprestado ? "EMPRESTADO" : "COM DONO";
 		return this.nome + " - " + this.plataforma + " - " + this.valor + " - " + 
-				situacao;
+				status();
 	}
 	
 	@Override
