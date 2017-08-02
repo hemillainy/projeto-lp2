@@ -9,7 +9,7 @@ public class UserController {
 	private Validacao validacao;
 	private Map<IdUsuario, Usuario> usuarios;
 
-	public UserController() {
+	public UserController() { 
 		aberto = true;
 		usuarios = new HashMap<>();
 		validacao = new Validacao();
@@ -19,8 +19,7 @@ public class UserController {
 		this.aberto = false;
 	}
 
-	private boolean hasUsuario(String nome, String telefone) {
-		id = new IdUsuario(nome, telefone);
+	private boolean hasUsuario(IdUsuario id) {
 		if (usuarios.containsKey(id)) {
 			return true;
 		}
@@ -30,7 +29,7 @@ public class UserController {
 	public void cadastraUsuario(String nome, String telefone, String email) {
 		id = new IdUsuario(nome, telefone);
 		validacao.dadoUsuarioInvalido(nome, telefone, email);
-		if (!hasUsuario(nome, telefone)) {
+		if (!hasUsuario(id)) {
 			Usuario usuario = new Usuario(nome, telefone, email);
 			usuarios.put(id, usuario);
 		} else {
@@ -40,7 +39,7 @@ public class UserController {
 
 	public void removeUsuario(String nome, String telefone) {
 		id = new IdUsuario(nome, telefone);
-		if (hasUsuario(nome, telefone)) {
+		if (hasUsuario(id)) {
 			usuarios.remove(id);
 		} else {
 			validacao.usuarioInvalido();
@@ -49,7 +48,7 @@ public class UserController {
 
 	public String getInfoUsuario(String nome, String telefone, String atributo) {
 		id = new IdUsuario(nome, telefone);
-		if (usuarios.containsKey(id)) {
+		if (hasUsuario(id)) {
 			if (atributo.equals("Email")) {
 				return usuarios.get(id).getEmail();
 			} else if (atributo.equals("Nome")) {
@@ -68,7 +67,7 @@ public class UserController {
 
 	public void atualizaUsuario(String nome, String telefone, String atributo, String valor) {
 		id = new IdUsuario(nome, telefone);
-		if (usuarios.containsKey(id)) {
+		if (hasUsuario(id)) {
 			if (atributo.equals("Email")) {
 				usuarios.get(id).setEmail(valor);
 			} else if (atributo.equals("Telefone")) {
@@ -80,6 +79,6 @@ public class UserController {
 			validacao.usuarioInvalido();
 		}
 	}
-	
-	
+	public String pesquisaDetalhesItem(String nome, String telefone, String item){
+	}
 }
