@@ -86,6 +86,9 @@ public class Facade {
 	public String listarItensOrdenadosPorValor() {
 		return sistema.listarItensOrdenadosPorValor();
 	}
+	public String pesquisarDetalhesItem(String nome, String telefone, String nomeItem){
+		return sistema.pesquisaDetalhesItem(nome, telefone, nomeItem);
+	}
 
 	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
 			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) {
