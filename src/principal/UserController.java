@@ -4,18 +4,12 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class UserController {
-	private boolean aberto;
 	private Validacao validacao;
 	private Map<IdUsuario, Usuario> usuarios;
 
 	public UserController() {
-		aberto = true;
 		usuarios = new HashMap<>();
 		validacao = new Validacao();
-	}
-
-	public void fechaSistema() {
-		this.aberto = false;
 	}
 
 	private boolean hasUsuario(IdUsuario id) {
@@ -50,7 +44,7 @@ public class UserController {
 			return validacao.usuarioInvalido();
 		}
 		if (atributo.equals("Email")) {
-			info = usuarios.get(id).getEmail();
+			info += usuarios.get(id).getEmail();
 		} else if (atributo.equals("Nome")) {
 			info = usuarios.get(id).getNome();
 		}
