@@ -1,7 +1,7 @@
 package enums;
 
 public enum StatusCompleto {
-	COMPLETO("SEM PECAS PERDIDAS"),
+	COMPLETO("COMPLETO"),
 	INCOMPLETO("COM PECAS PERDIDAS");
 	
 	private final String valor;
