@@ -44,8 +44,7 @@ public class JogoEletronico extends Item {
 
 	@Override
 	public String toString() {
-		return "JOGO ELETRONICO: " + this.nome + ", R$ " + this.preco +
-				status.getValor() + ", " + this.plataforma;
+		return "JOGO ELETRONICO: " + this.nome + ", R$ " + this.preco + ", " + status.getValor() + ", " + this.plataforma;
 	}
 
 }

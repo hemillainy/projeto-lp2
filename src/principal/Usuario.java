@@ -3,6 +3,7 @@ package principal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import itens.blurays.*;
@@ -14,7 +15,6 @@ public class Usuario {
 	private String email;
 	private String telefone;
 	private Validacao validacao;
-	private ArrayList<Item> itensOrdenados;
 	private Map<String, Item> itens;
 
 	public Usuario(String nome, String celular, String email) {
@@ -79,8 +79,9 @@ public class Usuario {
 			return false;
 		return true;
 	}
-	public Item getItem(String nomeItem){
-		return itens.get(nomeItem);
+	public List<Item> getItens(){
+		List<Item> listItens = new ArrayList(itens.values());
+		return listItens;
 	}
 	
 	public void cadastraItem(String nomeItem, double preco, String plataforma) {
@@ -160,12 +161,5 @@ public class Usuario {
 	public void cadastraItem(String nomeItem, double preco, String descricao, int duracao, String classificacao,
 			String genero, int temporada) {
 		itens.put(nomeItem, new Serie(nomeItem, preco, duracao, classificacao, genero, temporada));
-	}
-
-	public String listaItensOrdenadosPorNome() {
-		this.itensOrdenados = new ArrayList<>(itens.values());
-		System.out.println(itens.values());
-		Collections.sort(itensOrdenados);
-		return itensOrdenados.toString();
 	}
 }

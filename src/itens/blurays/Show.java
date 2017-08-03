@@ -13,6 +13,6 @@ public class Show extends BluRay {
 	
 	public String toString() {
 		return "SHOW: " + this.nome + ", R$ " + this.preco + ", " + status.getValor() + ", " + this.duracao + " min" + ", " + 
-				this.classificacao + ", " + this.artista + ", " + this.faixas + "faixas";
+				this.classificacao + ", " + this.artista + ", " + this.faixas + " faixas";
 	}
 }
