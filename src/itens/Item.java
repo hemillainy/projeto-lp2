@@ -2,12 +2,12 @@ package itens;
 
 public abstract class Item implements Comparable<Item> {
 	protected String nome;
-	protected double preco;
+	protected String preco;
 	protected Status status;
 
 	public Item(String nome, double valor) {
 		this.nome = nome;
-		this.preco = valor;
+		this.preco = String.valueOf(valor);
 		this.status = Status.NAO_EMPRESTADO;
 	}
 
@@ -15,7 +15,7 @@ public abstract class Item implements Comparable<Item> {
 		status = verificaEmprestado() ? Status.NAO_EMPRESTADO : Status.EMPRESTADO;
 	}
 	public String getValor(){
-		return String.format("%.f", preco);
+		return preco;
 	}
 
 	private boolean verificaEmprestado() {
@@ -35,5 +35,17 @@ public abstract class Item implements Comparable<Item> {
 	public abstract boolean equals(Object obj);
 
 	public abstract String toString();
+
+	public String getNome() {
+		return this.nome;
+	}
+
+	public void setNome(String valor) {
+		this.nome = valor;
+	}
+
+	public void setPreco(String valor) {
+		this.preco = valor;
+	}
 
 }
