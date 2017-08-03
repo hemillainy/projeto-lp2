@@ -4,19 +4,19 @@ import itens.jogos.Status;
 
 public abstract class Item implements Comparable<Item> {
 	protected String nome;
-	protected String preco;
+	protected double preco;
 	protected Status status;
 
 	public Item(String nome, double valor) {
 		this.nome = nome;
-		this.preco = String.valueOf(valor);
+		this.preco = valor;
 		this.status = Status.NAO_EMPRESTADO;
 	}
 
 	public void setStaus() {
 		status = verificaEmprestado() ? Status.NAO_EMPRESTADO : Status.EMPRESTADO;
 	}
-	public String getPreco(){
+	public double getPreco(){
 		return preco;
 	}
 
@@ -46,7 +46,7 @@ public abstract class Item implements Comparable<Item> {
 		this.nome = valor;
 	}
 
-	public void setPreco(String valor) {
+	public void setPreco(double valor) {
 		this.preco = valor;
 	}
 
