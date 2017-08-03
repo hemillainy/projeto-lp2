@@ -4,18 +4,20 @@ import easyaccept.EasyAccept;
 
 public class Facade {
 	public static void main(String[] args) {
-		args = new String[] { "principal.Facade", "acceptance_test/us1_test.txt", "acceptance_test/us2_test.txt"};
+		args = new String[] { "principal.Facade", "acceptance_test/us1_test.txt", "acceptance_test/us2_test.txt" };
 		EasyAccept.main(args);
 	}
 
 	private UserController sistema;
 
-	public void iniciarSistema() {
+	public Facade() {
 		sistema = new UserController();
 	}
 
+	public void iniciarSistema() {
+	}
+
 	public void fecharSistema() {
-		sistema.fechaSistema();
 	}
 
 	public void cadastrarUsuario(String nome, String celular, String email) {
