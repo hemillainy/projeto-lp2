@@ -168,4 +168,9 @@ public class Usuario {
 		Collections.sort(itensOrdenados);
 		return itensOrdenados.toString();
 	}
+
+	public void adicionaBluRay(String nomeBluRayTemporada, int duracao) {
+		Serie serie = (Serie)(itens.get(nomeBluRayTemporada));
+		serie.adicionarBluRay(duracao);
+	}
 }
