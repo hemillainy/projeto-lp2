@@ -97,7 +97,6 @@ public class Controller {
 		}
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco);
-		inventario.add(us.getItem(nomeItem));
 	}
 
 	public String pesquisaDetalhesItem(String nome, String telefone, String item) {
