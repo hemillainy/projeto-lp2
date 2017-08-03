@@ -2,18 +2,23 @@ package principal;
 
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 public class Controller {
 	private Validacao validacao;
 	private Map<IdUsuario, Usuario> usuarios;
-	private List<Item> itens;
+	private List<Item> inventario;
+	private ComparadorValor comparadorValor;
 
 	public Controller() {
-		itens = new ArrayList<>();
-		usuarios = new HashMap<>();
-		validacao = new Validacao();
+		this.inventario = new ArrayList<>();
+		this.usuarios = new HashMap<>();
+		this.validacao = new Validacao();
+		this.comparadorValor = new ComparadorValor();
+		
 	}
 
 	private boolean hasUsuario(IdUsuario id) {
@@ -85,7 +90,7 @@ public class Controller {
 		}
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco, plataforma);
-		itens.add(us.getItem(nomeItem));
+		inventario.add(us.getItem(nomeItem));
 	}
 
 	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
@@ -94,7 +99,8 @@ public class Controller {
 		if (!hasUsuario(id)) {
 			validacao.usuarioInvalido();
 		}
-		usuarios.get(id).cadastraItem(nomeItem, preco);
+		Usuario us = usuarios.get(id);
+		us.cadastraItem(nomeItem, preco);
 	}
 
 	public String pesquisaDetalhesItem(String nome, String telefone, String item) {
@@ -122,6 +128,7 @@ public class Controller {
 			validacao.usuarioInvalido();
 		}
 		usuarios.get(id).removerItem(nomeItem);
+		
 	}
 
 	public void atualizarItem(String nome, String telefone, String nomeItem, String atributo, String valor) {
@@ -139,19 +146,43 @@ public class Controller {
 	public void cadastrarBluRayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
 			String genero, String classificacao, int lancamento) {
 		IdUsuario id = new IdUsuario(nome, telefone);
-		usuarios.get(id).cadastraItem(nomeItem, preco, duracao, genero, classificacao, lancamento);
+		Usuario us = usuarios.get(id);
+		us.cadastraItem(nomeItem, preco, duracao, genero, classificacao, lancamento);
+		inventario.add(us.getItem(nomeItem));
 	}
 
 	public void cadastrarBluRayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
 			int faixas, String artista, String classificacao) {
 		IdUsuario id = new IdUsuario(nome, telefone);
-		usuarios.get(id).cadastraBluRayShow(nomeItem, preco, duracao, classificacao, artista, faixas);
+		Usuario us = usuarios.get(id);
+		us.cadastraBluRayShow(nomeItem, preco, duracao, classificacao, artista, faixas);
+		inventario.add(us.getItem(nomeItem));
 	}
 
 	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
 			int duracao, String classificacao, String genero, int temporada) {
 		IdUsuario id = new IdUsuario(nome, telefone);
-		usuarios.get(id).cadastraItem(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
+		Usuario us = usuarios.get(id);
+		us.cadastraItem(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
+		inventario.add(us.getItem(nomeItem));
+	}
+
+	public String listarItensOrdenadosPorNome() {
+		Collections.sort(this.inventario);
+		String itens = "";
+		for (Item item : inventario) {
+			itens += item.toString() + "|";
+		}
+		return itens;
+	}
+
+	public String listarItensOrdenadosPorValor() {
+		Collections.sort(this.inventario, comparadorValor);
+		String itens = "";
+		for (Item item : inventario) {
+			itens += item.toString() + "|";
+		}
+		return itens;
 	}
 
 	

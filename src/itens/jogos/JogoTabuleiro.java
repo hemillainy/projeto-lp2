@@ -2,22 +2,22 @@ package itens.jogos;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import enums.*;
 import principal.Item;
 
 public class JogoTabuleiro extends Item {
 	private List<String> pecasPerdidas;
-	private Status statusCompleto;
+	private StatusCompleto statusCompleto;
 
 	public JogoTabuleiro(String nome, double valor) {
 		super(nome, valor);
 		this.pecasPerdidas = new ArrayList<>();
-		this.statusCompleto = Status.COMPLETO;
+		this.statusCompleto = StatusCompleto.COMPLETO;
 	}
 
 	public void adicionaPecaPerdida(String peca) {
 		this.pecasPerdidas.add(peca);
-		this.status = Status.INCOMPLETO;
+		this.statusCompleto = StatusCompleto.INCOMPLETO;
 	}
 	
 
@@ -54,8 +54,8 @@ public class JogoTabuleiro extends Item {
 
 	@Override
 	public String toString() {
-		return "JOGO DE TABULEIRO: " + this.nome + ", R$ " + this.preco +
-				status.getValor() + statusCompleto.getValor();
+		return "JOGO DE TABULEIRO: " + this.nome + ", R$ " + this.preco + " " + 
+				status.getValor() + " " + statusCompleto.getValor();
 	}
 
 }

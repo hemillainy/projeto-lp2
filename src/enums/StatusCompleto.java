@@ -1,14 +1,11 @@
-package itens.jogos;
+package enums;
 
-public enum Status {
-	EMPRESTADO("Emprestado"), 
-	NAO_EMPRESTADO("Nao emprestado"),
+public enum StatusCompleto {
 	COMPLETO("SEM PECAS PERDIDAS"),
 	INCOMPLETO("COM PECAS PERDIDAS");
-	
 	private final String valor;
 	
-	Status(String valor) {
+	private StatusCompleto(String valor) {
 		this.valor = valor;
 	}
 	
@@ -17,3 +14,6 @@ public enum Status {
 	}
 
 }
+
+
+

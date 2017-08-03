@@ -78,11 +78,12 @@ public class Facade {
 		sistema.atualizarItem(nome, telefone, nomeItem, atributo, valor);
 	}
 
-	public void listarItensOrdenadosPorNome() {
+	public String listarItensOrdenadosPorNome() {
+		return sistema.listarItensOrdenadosPorNome();
 	}
 
-	public void listarItensOrdenadosPorValor() {
-
+	public String listarItensOrdenadosPorValor() {
+		return sistema.listarItensOrdenadosPorValor();
 	}
 
 	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,

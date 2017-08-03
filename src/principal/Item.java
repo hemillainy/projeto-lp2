@@ -1,27 +1,27 @@
 package principal;
 
-import itens.jogos.Status;
+import enums.*;
 
 public abstract class Item implements Comparable<Item> {
 	protected String nome;
 	protected double preco;
-	protected Status status;
+	protected StatusEmprestado status;
 
 	public Item(String nome, double valor) {
 		this.nome = nome;
 		this.preco = valor;
-		this.status = Status.NAO_EMPRESTADO;
+		this.status = StatusEmprestado.NAO_EMPRESTADO;
 	}
 
 	public void setStaus() {
-		status = verificaEmprestado() ? Status.NAO_EMPRESTADO : Status.EMPRESTADO;
+		status = verificaEmprestado() ? StatusEmprestado.NAO_EMPRESTADO : StatusEmprestado.EMPRESTADO;
 	}
 	public double getPreco(){
 		return preco;
 	}
 
 	private boolean verificaEmprestado() {
-		if (status.equals(Status.EMPRESTADO)) {
+		if (status.equals(StatusEmprestado.EMPRESTADO)) {
 			return true;
 		}
 		return false;
