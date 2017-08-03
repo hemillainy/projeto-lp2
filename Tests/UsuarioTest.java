@@ -56,19 +56,36 @@ public class UsuarioTest {
 	}
 	
 	@Test
-	public void testGetItem() {
-		assertEquals(59.99, usuario1.getItem("The 100").getPreco(), 0.01);
-	}
-	
-	@Test
 	public void testExibeDetalhesItem() {
 		assertEquals("FILME: Liga da Justiça, R$ 14.0, Nao emprestado, 180 min, DEZESSEIS_ANOS, AÇÃO, 2017", usuario2.exibeDetalhesItem("Liga da Justiça"));
 	}
 	
 	@Test
-	public void testGetPreco() {
-		assertEquals("10.00", usuario2.getPrecoItem("Tetris"));
+	public void testGetPrecoItem() {
+		assertEquals("10.0", usuario3.getPrecoItem("Tetris"));
+	}
+	@Test
+	public void testGetNomeItem() {
+		assertEquals("The 100", usuario1.getNomeItem("The 100"));
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetPrecoItemInvalido() {
+		assertEquals("Item nao encontrado", usuario2.getPrecoItem("Naruto"));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetNomeItemInvalido() {
+		assertEquals("Item nao encontrado", usuario3.getNomeItem("Box GOT"));
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testRemoverItem() {
+		usuario1.removerItem("Damas");
+		assertEquals("Item nao encontrado", usuario1.getNomeItem("Damas"));
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testRemoverItemInvalido() {
+		assertEquals("Item nao encontrado", usuario3.getNomeItem("Box GOT"));
+	}
 	
 }
