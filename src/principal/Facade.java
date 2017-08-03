@@ -4,7 +4,7 @@ import easyaccept.EasyAccept;
 
 public class Facade {
 	public static void main(String[] args) {
-		args = new String[] { "principal.Facade", "acceptance_test/us1_test.txt" };
+		args = new String[] { "principal.Facade", "acceptance_test/us1_test.txt", "acceptance_test/us2_test.txt"};
 		EasyAccept.main(args);
 	}
 
@@ -35,15 +35,14 @@ public class Facade {
 	}
 
 	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
-
+		sistema.cadastrarEletronico(nome, telefone, nomeItem, preco, plataforma);
 	}
 
 	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
-
+		sistema.cadastrarJogoTabuleiro(nome, telefone, nomeItem, preco);
 	}
 
 	public void adicionarPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {
-
 	}
 
 	public void cadastrarBluRayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,

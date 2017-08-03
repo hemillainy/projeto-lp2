@@ -1,6 +1,9 @@
 package principal;
 
 import itens.Item;
+import itens.JogoEletronico;
+import itens.JogoTabuleiro;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,5 +66,15 @@ public class Usuario {
 		} else if (!telefone.equals(other.telefone))
 			return false;
 		return true;
+	}
+	public void cadastraEletronico(String nomeItem, double preco, String plataforma) {
+		itens.put(nomeItem, new JogoEletronico(nomeItem, preco, plataforma));
+	}
+	
+	public void cadastraJogoTabuleiro(String nomeItem, double preco) {
+		itens.put(nomeItem, new JogoTabuleiro(nomeItem, preco));
+	}
+	public String exibeDetalhesItem(String item) {
+		return itens.get(item).toString();
 	}
 }

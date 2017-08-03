@@ -79,5 +79,26 @@ public class UserController {
 	}
 
 	public String pesquisaDetalhesItem(String nome, String telefone, String item) {
+		IdUsuario id = new IdUsuario(nome, telefone);
+		if(!hasUsuario(id)){
+			validacao.usuarioInvalido();
+		}
+		return usuarios.get(id).exibeDetalhesItem(item);
+	}
+
+	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
+		IdUsuario id = new IdUsuario(nome, telefone);
+		if(!hasUsuario(id)){
+			validacao.usuarioInvalido();
+		}
+		usuarios.get(id).cadastraEletronico(nomeItem, preco, plataforma);
+	}
+
+	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
+		IdUsuario id = new IdUsuario(nome, telefone);
+		if(!hasUsuario(id)){
+			validacao.usuarioInvalido();
+		}
+		usuarios.get(id).cadastraJogoTabuleiro(nomeItem, preco);
 	}
 }
