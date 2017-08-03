@@ -116,5 +116,12 @@ public class UsuarioTest {
 		assertEquals("JOGO DE TABULEIRO: Damas, R$ 1.99, Nao emprestado, COM PECAS PERDIDAS",
 				usuario1.exibeDetalhesItem("Damas"));
 	}
+	
+	@Test
+	public void testEquals() {
+		Usuario usuario4 = new Usuario("Geovane", "1234567", "geovane.silva");
+		assertTrue(usuario2.equals(usuario4));
+		assertFalse(usuario3.equals(usuario4));
+	}
 
 }
