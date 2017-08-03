@@ -92,7 +92,9 @@ public class Usuario {
 		if(!hasItem(nomeItem)){
 			validacao.itemNaoEncontrado();
 		}
-		return itens.get(nomeItem).getPreco();
+		Item item = itens.get(nomeItem);
+		String valor = String.valueOf(item.getPreco());
+		return valor;
 	}
 
 	public String getNomeItem(String nomeItem) {
@@ -132,6 +134,6 @@ public class Usuario {
 		if (!hasItem(nomeItem)) {
 			validacao.itemNaoEncontrado();
 		}
-		itens.get(nomeItem).setPreco(valor);
+		itens.get(nomeItem).setPreco(Double.parseDouble(valor));
 	}
 }
