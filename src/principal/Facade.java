@@ -49,7 +49,6 @@ public class Facade {
 
 	public void cadastrarBluRayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
 			String genero, String classificacao, int lancamento) {
-
 	}
 
 	public void cadastrarBluRayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
@@ -66,16 +65,16 @@ public class Facade {
 
 	}
 
-	public void getInfoItem(String nome, String telefone, String nomeItem, String atributo) {
-
+	public String getInfoItem(String nome, String telefone, String nomeItem, String atributo) {
+		return sistema.getInfoItem(nome, telefone, nomeItem, atributo);
 	}
 
 	public void removerItem(String nome, String telefone, String nomeItem) {
-
+		sistema.removerItem(nome, telefone, nomeItem);
 	}
 
 	public void atualizarItem(String nome, String telefone, String nomeItem, String atributo, String valor) {
-
+		sistema.atualizarItem(nome, telefone, nomeItem, atributo, valor);
 	}
 
 	public void listarItensOrdenadosPorNome() {

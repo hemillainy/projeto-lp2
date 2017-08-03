@@ -15,4 +15,29 @@ public class Validacao {
 		}
 	}
 
+	public void itemNaoEncontrado() {
+		throw new IllegalArgumentException("Item nao encontrado");
+	}
+
+	public void itemInvalido(String nomeItem, double preco, String plataforma) {
+		if(nomeItem == null || nomeItem.trim().isEmpty()){
+			throw new IllegalArgumentException("Nome invalido");
+		}
+		if(preco <=0 ){
+			throw new IllegalArgumentException("Preco invalido");
+		}
+		if (plataforma == null || plataforma.trim().isEmpty()){
+			throw new IllegalArgumentException("Plataforma invalida");
+		}
+	}
+
+	public void itemInvalido(String nomeItem, double preco) {
+		if(nomeItem == null || nomeItem.trim().isEmpty()){
+			throw new IllegalArgumentException("Nome invalido");
+		}
+		if(preco <=0 ){
+			throw new IllegalArgumentException("Preco invalido");
+		}
+	}
+
 }

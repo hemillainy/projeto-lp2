@@ -74,25 +74,59 @@ public class UserController {
 
 	public String pesquisaDetalhesItem(String nome, String telefone, String item) {
 		IdUsuario id = new IdUsuario(nome, telefone);
-		if(!hasUsuario(id)){
+		if (!hasUsuario(id)) {
 			validacao.usuarioInvalido();
 		}
 		return usuarios.get(id).exibeDetalhesItem(item);
 	}
 
 	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
+		validacao.itemInvalido(nomeItem, preco, plataforma);
 		IdUsuario id = new IdUsuario(nome, telefone);
-		if(!hasUsuario(id)){
+		if (!hasUsuario(id)) {
 			validacao.usuarioInvalido();
 		}
 		usuarios.get(id).cadastraEletronico(nomeItem, preco, plataforma);
 	}
 
 	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
+		validacao.itemInvalido(nomeItem, preco);
 		IdUsuario id = new IdUsuario(nome, telefone);
-		if(!hasUsuario(id)){
+		if (!hasUsuario(id)) {
 			validacao.usuarioInvalido();
 		}
 		usuarios.get(id).cadastraJogoTabuleiro(nomeItem, preco);
 	}
+
+	public String getInfoItem(String nome, String telefone, String nomeItem, String atributo) {
+		String info = "";
+		IdUsuario id = new IdUsuario(nome, telefone);
+		if (atributo.equals("Preco")) {
+			info = usuarios.get(id).getPrecoItem(nomeItem);
+		} else if (atributo.equals("Nome")) {
+			info = usuarios.get(id).getNomeItem(nomeItem);
+		}
+		return info;
+	}
+
+	public void removerItem(String nome, String telefone, String nomeItem) {
+		IdUsuario id = new IdUsuario(nome, telefone);
+		if (!hasUsuario(id)) {
+			validacao.usuarioInvalido();
+		}
+		usuarios.get(id).removerItem(nomeItem);
+	}
+
+	public void atualizarItem(String nome, String telefone, String nomeItem, String atributo, String valor) {
+		IdUsuario id = new IdUsuario(nome, telefone);
+		if (!hasUsuario(id)) {
+			validacao.usuarioInvalido();
+		}
+		if (atributo.equals("Nome")) {
+			usuarios.get(id).atualizaNomeItem(nomeItem, valor);
+		} else if (atributo.equals("Preco")) {
+			usuarios.get(id).atualizaPrecoItem(nomeItem, valor);
+		}
+	}
+
 }

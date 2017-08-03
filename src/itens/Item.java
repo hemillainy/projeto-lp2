@@ -14,7 +14,7 @@ public abstract class Item implements Comparable<Item> {
 	public void setStaus() {
 		status = verificaEmprestado() ? Status.NAO_EMPRESTADO : Status.EMPRESTADO;
 	}
-	public String getValor(){
+	public String getPreco(){
 		return preco;
 	}
 
