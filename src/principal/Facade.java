@@ -61,7 +61,7 @@ public class Facade {
 	}
 
 	public void adicionarBluRay(String nome, String telefone, String nomeBluRayTemporada, int duracao) {
-
+		sistema.adicionarBluRay(nome, telefone, nomeBluRayTemporada, duracao);
 	}
 
 	public void adicionarPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {

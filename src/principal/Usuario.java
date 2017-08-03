@@ -162,4 +162,10 @@ public class Usuario {
 			String genero, int temporada) {
 		itens.put(nomeItem, new Serie(nomeItem, preco, duracao, classificacao, genero, temporada));
 	}
+
+
+	public void adicionaBluRay(String nomeBluRayTemporada, int duracao) {
+		Serie serie = (Serie)(itens.get(nomeBluRayTemporada));
+		serie.adicionarBluRay(duracao);
+	}
 }

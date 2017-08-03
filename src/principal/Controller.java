@@ -79,8 +79,6 @@ public class Controller {
 			setKey(nome, telefone, valor, usuario);
 		}
 	}
-
-
 	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
 		validacao.itemInvalido(nomeItem, preco, plataforma);
 		IdUsuario id = new IdUsuario(nome, telefone);
@@ -99,6 +97,7 @@ public class Controller {
 		}
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco);
+		inventario.add(us.getItem(nomeItem));
 	}
 
 	public String pesquisaDetalhesItem(String nome, String telefone, String item) {
@@ -190,6 +189,11 @@ public class Controller {
 			itens += item.toString() + "|";
 		}
 		return itens;
+	}
+
+	public void adicionarBluRay(String nome, String telefone, String nomeBluRayTemporada, int duracao) {
+		IdUsuario id = new IdUsuario(nome, telefone);
+		usuarios.get(id).adicionaBluRay(nomeBluRayTemporada, duracao);
 	}
 
 	
