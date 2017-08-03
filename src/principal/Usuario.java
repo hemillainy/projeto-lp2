@@ -136,6 +136,7 @@ public class Usuario {
 		}
 		Item item = itens.get(nomeItem);
 		itens.get(nomeItem).setNome(valor);
+		
 		setKeyItem(item);
 	}
 
