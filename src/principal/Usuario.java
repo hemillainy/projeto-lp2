@@ -151,6 +151,7 @@ public class Usuario {
 		return itensOrdenados.toString();
 	}
 
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -180,5 +181,10 @@ public class Usuario {
 		} else if (!telefone.equals(other.telefone))
 			return false;
 		return true;
+  }
+	public void adicionaBluRay(String nomeBluRayTemporada, int duracao) {
+		Serie serie = (Serie)(itens.get(nomeBluRayTemporada));
+		serie.adicionarBluRay(duracao);
+
 	}
 }
