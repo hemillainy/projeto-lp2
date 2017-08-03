@@ -1,16 +1,17 @@
 package principal;
 
 import java.util.Map;
-
-import itens.blurays.Show;
-
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class UserController {
+public class Controller {
 	private Validacao validacao;
 	private Map<IdUsuario, Usuario> usuarios;
+	private List<Item> itens;
 
-	public UserController() {
+	public Controller() {
+		itens = new ArrayList<>();
 		usuarios = new HashMap<>();
 		validacao = new Validacao();
 	}
@@ -75,13 +76,6 @@ public class UserController {
 		}
 	}
 
-	public String pesquisaDetalhesItem(String nome, String telefone, String item) {
-		IdUsuario id = new IdUsuario(nome, telefone);
-		if (!hasUsuario(id)) {
-			validacao.usuarioInvalido();
-		}
-		return usuarios.get(id).exibeDetalhesItem(item);
-	}
 
 	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
 		validacao.itemInvalido(nomeItem, preco, plataforma);
@@ -89,7 +83,9 @@ public class UserController {
 		if (!hasUsuario(id)) {
 			validacao.usuarioInvalido();
 		}
-		usuarios.get(id).cadastraEletronico(nomeItem, preco, plataforma);
+		Usuario us = usuarios.get(id);
+		us.cadastraItem(nomeItem, preco, plataforma);
+		itens.add(us.getItem(nomeItem));
 	}
 
 	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
@@ -98,7 +94,15 @@ public class UserController {
 		if (!hasUsuario(id)) {
 			validacao.usuarioInvalido();
 		}
-		usuarios.get(id).cadastraJogoTabuleiro(nomeItem, preco);
+		usuarios.get(id).cadastraItem(nomeItem, preco);
+	}
+
+	public String pesquisaDetalhesItem(String nome, String telefone, String item) {
+		IdUsuario id = new IdUsuario(nome, telefone);
+		if (!hasUsuario(id)) {
+			validacao.usuarioInvalido();
+		}
+		return usuarios.get(id).exibeDetalhesItem(item);
 	}
 
 	public String getInfoItem(String nome, String telefone, String nomeItem, String atributo) {
@@ -135,7 +139,7 @@ public class UserController {
 	public void cadastrarBluRayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
 			String genero, String classificacao, int lancamento) {
 		IdUsuario id = new IdUsuario(nome, telefone);
-		usuarios.get(id).cadatraBluRayFilme(nomeItem, preco, duracao, genero, classificacao, lancamento);
+		usuarios.get(id).cadastraItem(nomeItem, preco, duracao, genero, classificacao, lancamento);
 	}
 
 	public void cadastrarBluRayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
@@ -147,7 +151,8 @@ public class UserController {
 	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
 			int duracao, String classificacao, String genero, int temporada) {
 		IdUsuario id = new IdUsuario(nome, telefone);
-		usuarios.get(id).cadastraBluRaySerie(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
+		usuarios.get(id).cadastraItem(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
 	}
 
+	
 }

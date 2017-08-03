@@ -1,19 +1,20 @@
 package principal;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import itens.blurays.Filme;
-import itens.blurays.Serie;
-import itens.blurays.Show;
-import itens.jogos.JogoEletronico;
-import itens.jogos.JogoTabuleiro;
+import itens.blurays.*;
+import principal.Item;
+import itens.jogos.*;
 
 public class Usuario {
 	private String nome;
 	private String email;
 	private String telefone;
 	private Validacao validacao;
+	private ArrayList<Item> itensOrdenados;
 	private Map<String, Item> itens;
 
 	public Usuario(String nome, String celular, String email) {
@@ -78,12 +79,15 @@ public class Usuario {
 			return false;
 		return true;
 	}
-
-	public void cadastraEletronico(String nomeItem, double preco, String plataforma) {
+	public Item getItem(String nomeItem){
+		return itens.get(nomeItem);
+	}
+	
+	public void cadastraItem(String nomeItem, double preco, String plataforma) {
 		itens.put(nomeItem, new JogoEletronico(nomeItem, preco, plataforma));
 	}
 
-	public void cadastraJogoTabuleiro(String nomeItem, double preco) {
+	public void cadastraItem(String nomeItem, double preco) {
 		itens.put(nomeItem, new JogoTabuleiro(nomeItem, preco));
 	}
 
@@ -92,7 +96,7 @@ public class Usuario {
 	}
 
 	public String getPrecoItem(String nomeItem) {
-		if(!hasItem(nomeItem)){
+		if (!hasItem(nomeItem)) {
 			validacao.itemNaoEncontrado();
 		}
 		Item item = itens.get(nomeItem);
@@ -101,7 +105,7 @@ public class Usuario {
 	}
 
 	public String getNomeItem(String nomeItem) {
-		if(!hasItem(nomeItem)){
+		if (!hasItem(nomeItem)) {
 			validacao.itemNaoEncontrado();
 		}
 		return itens.get(nomeItem).getNome();
@@ -120,10 +124,12 @@ public class Usuario {
 		}
 		return false;
 	}
-	private void setKeyItem(Item item){
+
+	private void setKeyItem(Item item) {
 		itens.remove(item);
 		itens.put(item.getNome(), item);
 	}
+
 	public void atualizaNomeItem(String nomeItem, String valor) {
 		if (!hasItem(nomeItem)) {
 			validacao.itemNaoEncontrado();
@@ -140,7 +146,7 @@ public class Usuario {
 		itens.get(nomeItem).setPreco(Double.parseDouble(valor));
 	}
 
-	public void cadatraBluRayFilme(String nomeItem, double preco, int duracao, String genero, String classificacao,
+	public void cadastraItem(String nomeItem, double preco, int duracao, String genero, String classificacao,
 			int lancamento) {
 		itens.put(nomeItem, new Filme(nomeItem, preco, duracao, classificacao, genero, lancamento));
 	}
@@ -150,9 +156,15 @@ public class Usuario {
 		itens.put(nomeItem, new Show(nomeItem, preco, duracao, classificacao, artista, faixas));
 	}
 
-	public void cadastraBluRaySerie(String nomeItem, double preco, String descricao, int duracao, String classificacao,
+	public void cadastraItem(String nomeItem, double preco, String descricao, int duracao, String classificacao,
 			String genero, int temporada) {
-		itens.put(nomeItem, new Serie(nomeItem, preco, duracao, classificacao, genero, temporada)
-				);
+		itens.put(nomeItem, new Serie(nomeItem, preco, duracao, classificacao, genero, temporada));
+	}
+
+	public String listaItensOrdenadosPorNome() {
+		this.itensOrdenados = new ArrayList<>(itens.values());
+		System.out.println(itens.values());
+		Collections.sort(itensOrdenados);
+		return itensOrdenados.toString();
 	}
 }
