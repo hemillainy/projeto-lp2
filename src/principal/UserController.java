@@ -1,6 +1,9 @@
 package principal;
 
 import java.util.Map;
+
+import itens.blurays.Show;
+
 import java.util.HashMap;
 
 public class UserController {
@@ -127,6 +130,24 @@ public class UserController {
 		} else if (atributo.equals("Preco")) {
 			usuarios.get(id).atualizaPrecoItem(nomeItem, valor);
 		}
+	}
+
+	public void cadastrarBluRayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
+			String genero, String classificacao, int lancamento) {
+		IdUsuario id = new IdUsuario(nome, telefone);
+		usuarios.get(id).cadatraBluRayFilme(nomeItem, preco, duracao, genero, classificacao, lancamento);
+	}
+
+	public void cadastrarBluRayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
+			int faixas, String artista, String classificacao) {
+		IdUsuario id = new IdUsuario(nome, telefone);
+		usuarios.get(id).cadastraBluRayShow(nomeItem, preco, duracao, classificacao, artista, faixas);
+	}
+
+	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
+			int duracao, String classificacao, String genero, int temporada) {
+		IdUsuario id = new IdUsuario(nome, telefone);
+		usuarios.get(id).cadastraBluRaySerie(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
 	}
 
 }

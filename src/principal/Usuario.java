@@ -3,6 +3,9 @@ package principal;
 import java.util.HashMap;
 import java.util.Map;
 
+import itens.blurays.Filme;
+import itens.blurays.Serie;
+import itens.blurays.Show;
 import itens.jogos.JogoEletronico;
 import itens.jogos.JogoTabuleiro;
 
@@ -135,5 +138,21 @@ public class Usuario {
 			validacao.itemNaoEncontrado();
 		}
 		itens.get(nomeItem).setPreco(Double.parseDouble(valor));
+	}
+
+	public void cadatraBluRayFilme(String nomeItem, double preco, int duracao, String genero, String classificacao,
+			int lancamento) {
+		itens.put(nomeItem, new Filme(nomeItem, preco, duracao, classificacao, genero, lancamento));
+	}
+
+	public void cadastraBluRayShow(String nomeItem, double preco, int duracao, String classificacao, String artista,
+			int faixas) {
+		itens.put(nomeItem, new Show(nomeItem, preco, duracao, classificacao, artista, faixas));
+	}
+
+	public void cadastraBluRaySerie(String nomeItem, double preco, String descricao, int duracao, String classificacao,
+			String genero, int temporada) {
+		itens.put(nomeItem, new Serie(nomeItem, preco, duracao, classificacao, genero, temporada)
+				);
 	}
 }

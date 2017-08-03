@@ -44,27 +44,28 @@ public class Facade {
 		sistema.cadastrarJogoTabuleiro(nome, telefone, nomeItem, preco);
 	}
 
-	public void adicionarPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {
-	}
 
 	public void cadastrarBluRayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
 			String genero, String classificacao, int lancamento) {
+		sistema.cadastrarBluRayFilme(nome, telefone, nomeItem, preco, duracao, genero, classificacao, lancamento);
 	}
 
 	public void cadastrarBluRayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
 			int faixas, String artista, String classificacao) {
-
+		sistema.cadastrarBluRayShow(nome, telefone, nomeItem, preco, duracao, faixas, artista, classificacao);
 	}
 
 	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
 			int duracao, String classificacao, String genero, int temporada) {
-
+		sistema.cadastrarBluRaySerie(nome, telefone, nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
 	}
 
 	public void adicionarBluRay(String nome, String telefone, String nomeBluRayTemporada, int duracao) {
 
 	}
 
+	public void adicionarPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {
+	}
 	public String getInfoItem(String nome, String telefone, String nomeItem, String atributo) {
 		return sistema.getInfoItem(nome, telefone, nomeItem, atributo);
 	}
