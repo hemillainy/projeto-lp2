@@ -4,7 +4,7 @@ public enum Status {
 	EMPRESTADO("Emprestado"), 
 	NAO_EMPRESTADO("Nao emprestado"),
 	COMPLETO("SEM PECAS PERDIDAS"),
-	INCOMPLETO("COM PECAS PERDIDAS");
+	INCOMPLETO(" PECAS PERDIDAS");
 	
 	private final String valor;
 	
