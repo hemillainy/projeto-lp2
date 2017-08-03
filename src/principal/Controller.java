@@ -1,20 +1,19 @@
 package principal;
 
-import java.util.Map;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class Controller {
 	private Validacao validacao;
 	private Map<IdUsuario, Usuario> usuarios;
-	private List<Item> inventario;
 	private ComparadorValor comparadorValor;
 
 	public Controller() {
-		this.inventario = new ArrayList<>();
 		this.usuarios = new HashMap<>();
 		this.validacao = new Validacao();
 		this.comparadorValor = new ComparadorValor();
@@ -88,7 +87,6 @@ public class Controller {
 		}
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco, plataforma);
-		inventario.add(us.getItem(nomeItem));
 	}
 
 	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
@@ -147,7 +145,6 @@ public class Controller {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco, duracao, genero, classificacao, lancamento);
-		inventario.add(us.getItem(nomeItem));
 	}
 
 	public void cadastrarBluRayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
@@ -155,7 +152,6 @@ public class Controller {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		Usuario us = usuarios.get(id);
 		us.cadastraBluRayShow(nomeItem, preco, duracao, classificacao, artista, faixas);
-		inventario.add(us.getItem(nomeItem));
 	}
 
 	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
@@ -163,11 +159,16 @@ public class Controller {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
-		inventario.add(us.getItem(nomeItem));
 	}
 
 	public String listarItensOrdenadosPorNome() {
-		Collections.sort(this.inventario);
+		Set<Item> it = new HashSet<>();
+		for (Usuario us : usuarios.values()) {
+			it.addAll(us.getItens());
+		}
+		List<Item> inventario = new ArrayList<>(it);
+		
+		Collections.sort(inventario);
 		String itens = "";
 		for (Item item : inventario) {
 			itens += item.toString() + "|";
@@ -176,7 +177,13 @@ public class Controller {
 	}
 
 	public String listarItensOrdenadosPorValor() {
-		Collections.sort(this.inventario, comparadorValor);
+		Set<Item> it = new HashSet<>();
+		for (Usuario us : usuarios.values()) {
+			it.addAll(us.getItens());
+		}
+		List<Item> inventario = new ArrayList<>(it);
+		
+		Collections.sort(inventario, comparadorValor);
 		String itens = "";
 		for (Item item : inventario) {
 			itens += item.toString() + "|";

@@ -54,8 +54,7 @@ public class JogoTabuleiro extends Item {
 
 	@Override
 	public String toString() {
-		return "JOGO DE TABULEIRO: " + this.nome + ", R$ " + this.preco + " " + 
-				status.getValor() + " " + statusCompleto.getValor();
+		return "JOGO DE TABULEIRO: " + this.nome + ", R$ " + this.preco + ", " + status.getValor() + ", " + statusCompleto.getValor();
 	}
 
 }
