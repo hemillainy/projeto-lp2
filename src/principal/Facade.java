@@ -65,6 +65,7 @@ public class Facade {
 	}
 
 	public void adicionarPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {
+		sistema.adicionarPecaPerdida(nome, telefone, nomeItem, nomePeca);
 	}
 	public String getInfoItem(String nome, String telefone, String nomeItem, String atributo) {
 		return sistema.getInfoItem(nome, telefone, nomeItem, atributo);

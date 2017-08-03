@@ -195,5 +195,10 @@ public class Controller {
 		usuarios.get(id).adicionaBluRay(nomeBluRayTemporada, duracao);
 	}
 
+	public void adicionarPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {
+		IdUsuario id = new IdUsuario(nome, telefone);
+		usuarios.get(id).adicionarPecaPerdida(nomeItem, nomePeca);
+	}
+
 	
 }
