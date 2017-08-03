@@ -168,4 +168,9 @@ public class Usuario {
 		Serie serie = (Serie)(itens.get(nomeBluRayTemporada));
 		serie.adicionarBluRay(duracao);
 	}
+
+	public void adicionarPecaPerdida(String nomeItem, String nomePeca) {
+		JogoTabuleiro jogo = (JogoTabuleiro) (itens.get(nomeItem));
+		jogo.adicionaPecaPerdida(nomePeca);
+	}
 }
