@@ -1,4 +1,6 @@
-package itens;
+package itens.blurays;
+
+import principal.Item;
 
 public abstract class BluRay extends Item {
 	

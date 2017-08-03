@@ -1,4 +1,4 @@
-package itens;
+package itens.jogos;
 
 public enum Status {
 	EMPRESTADO("Emprestado"), 

@@ -1,11 +1,10 @@
 package principal;
 
-import itens.Item;
-import itens.JogoEletronico;
-import itens.JogoTabuleiro;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import itens.jogos.JogoEletronico;
+import itens.jogos.JogoTabuleiro;
 
 public class Usuario {
 	private String nome;

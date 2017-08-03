@@ -1,7 +1,9 @@
-package itens;
+package itens.jogos;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import principal.Item;
 
 public class JogoTabuleiro extends Item {
 	private List<String> pecasPerdidas;

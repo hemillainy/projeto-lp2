@@ -1,4 +1,4 @@
-package itens;
+package itens.blurays;
 
 public class Show extends BluRay {
 	

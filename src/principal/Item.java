@@ -1,4 +1,6 @@
-package itens;
+package principal;
+
+import itens.jogos.Status;
 
 public abstract class Item implements Comparable<Item> {
 	protected String nome;

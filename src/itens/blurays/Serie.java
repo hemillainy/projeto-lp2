@@ -1,4 +1,4 @@
-package itens;
+package itens.blurays;
 
 import java.util.ArrayList;
 import java.util.List;
