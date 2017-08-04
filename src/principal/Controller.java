@@ -17,14 +17,7 @@ public class Controller {
 		this.usuarios = new HashMap<>();
 		this.validacao = new Validacao();
 		this.comparadorValor = new ComparadorValor();
-		
-	}
 
-	private boolean hasUsuario(IdUsuario id) {
-		if (usuarios.containsKey(id)) {
-			return true;
-		}
-		return false;
 	}
 
 	public void cadastraUsuario(String nome, String telefone, String email) {
@@ -55,16 +48,12 @@ public class Controller {
 			info += usuarios.get(id).getEmail();
 		} else if (atributo.equals("Nome")) {
 			info = usuarios.get(id).getNome();
+		} else if (atributo.equals("Telefone")) {
+			info += usuarios.get(id).getTelefone();
 		}
 		return info;
 	}
 
-	private void setKey(String nome, String telefone, String valor, Usuario usuario) {
-		IdUsuario id = new IdUsuario(nome, telefone);
-		usuarios.remove(id);
-		IdUsuario novoId = new IdUsuario(nome, valor);
-		usuarios.put(novoId, usuario);
-	}
 
 	public void atualizaUsuario(String nome, String telefone, String atributo, String valor) {
 		IdUsuario id = new IdUsuario(nome, telefone);
@@ -79,6 +68,17 @@ public class Controller {
 			setKey(nome, telefone, valor, usuario);
 		}
 	}
+
+	public void adicionarBluRay(String nome, String telefone, String nomeBluRayTemporada, int duracao) {
+		IdUsuario id = new IdUsuario(nome, telefone);
+		usuarios.get(id).adicionaBluRay(nomeBluRayTemporada, duracao);
+	}
+
+	public void adicionarPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {
+		IdUsuario id = new IdUsuario(nome, telefone);
+		usuarios.get(id).adicionarPecaPerdida(nomeItem, nomePeca);
+	}
+
 	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
 		validacao.itemInvalido(nomeItem, preco, plataforma);
 		IdUsuario id = new IdUsuario(nome, telefone);
@@ -97,6 +97,26 @@ public class Controller {
 		}
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco);
+	}
+	public void cadastrarBluRayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
+			String genero, String classificacao, int lancamento) {
+		IdUsuario id = new IdUsuario(nome, telefone);
+		Usuario us = usuarios.get(id);
+		us.cadastraItem(nomeItem, preco, duracao, genero, classificacao, lancamento);
+	}
+	
+	public void cadastrarBluRayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
+			int faixas, String artista, String classificacao) {
+		IdUsuario id = new IdUsuario(nome, telefone);
+		Usuario us = usuarios.get(id);
+		us.cadastraBluRayShow(nomeItem, preco, duracao, classificacao, artista, faixas);
+	}
+	
+	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
+			int duracao, String classificacao, String genero, int temporada) {
+		IdUsuario id = new IdUsuario(nome, telefone);
+		Usuario us = usuarios.get(id);
+		us.cadastraItem(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
 	}
 
 	public String pesquisaDetalhesItem(String nome, String telefone, String item) {
@@ -124,7 +144,7 @@ public class Controller {
 			validacao.usuarioInvalido();
 		}
 		usuarios.get(id).removerItem(nomeItem);
-		
+
 	}
 
 	public void atualizarItem(String nome, String telefone, String nomeItem, String atributo, String valor) {
@@ -139,26 +159,6 @@ public class Controller {
 		}
 	}
 
-	public void cadastrarBluRayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
-			String genero, String classificacao, int lancamento) {
-		IdUsuario id = new IdUsuario(nome, telefone);
-		Usuario us = usuarios.get(id);
-		us.cadastraItem(nomeItem, preco, duracao, genero, classificacao, lancamento);
-	}
-
-	public void cadastrarBluRayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
-			int faixas, String artista, String classificacao) {
-		IdUsuario id = new IdUsuario(nome, telefone);
-		Usuario us = usuarios.get(id);
-		us.cadastraBluRayShow(nomeItem, preco, duracao, classificacao, artista, faixas);
-	}
-
-	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
-			int duracao, String classificacao, String genero, int temporada) {
-		IdUsuario id = new IdUsuario(nome, telefone);
-		Usuario us = usuarios.get(id);
-		us.cadastraItem(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
-	}
 
 	public String listarItensOrdenadosPorNome() {
 		Set<Item> it = new HashSet<>();
@@ -166,7 +166,7 @@ public class Controller {
 			it.addAll(us.getItens());
 		}
 		List<Item> inventario = new ArrayList<>(it);
-		
+
 		Collections.sort(inventario);
 		String itens = "";
 		for (Item item : inventario) {
@@ -181,7 +181,7 @@ public class Controller {
 			it.addAll(us.getItens());
 		}
 		List<Item> inventario = new ArrayList<>(it);
-		
+
 		Collections.sort(inventario, comparadorValor);
 		String itens = "";
 		for (Item item : inventario) {
@@ -190,15 +190,17 @@ public class Controller {
 		return itens;
 	}
 
-	public void adicionarBluRay(String nome, String telefone, String nomeBluRayTemporada, int duracao) {
-		IdUsuario id = new IdUsuario(nome, telefone);
-		usuarios.get(id).adicionaBluRay(nomeBluRayTemporada, duracao);
-	}
 
-	public void adicionarPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {
+	private void setKey(String nome, String telefone, String valor, Usuario usuario) {
 		IdUsuario id = new IdUsuario(nome, telefone);
-		usuarios.get(id).adicionarPecaPerdida(nomeItem, nomePeca);
+		usuarios.remove(id);
+		IdUsuario novoId = new IdUsuario(nome, valor);
+		usuarios.put(novoId, usuario);
 	}
-
-	
+	private boolean hasUsuario(IdUsuario id) {
+		if (usuarios.containsKey(id)) {
+			return true;
+		}
+		return false;
+	}
 }
