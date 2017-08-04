@@ -32,10 +32,7 @@ public abstract class Item implements Comparable<Item> {
 		return this.nome.compareTo(item.nome);
 	}
 
-	public abstract int hashCode();
-
-	public abstract boolean equals(Object obj);
-
+	@Override
 	public abstract String toString();
 
 	public String getNome() {
