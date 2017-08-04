@@ -61,6 +61,14 @@ public class UsuarioTest {
 				usuario2.exibeDetalhesItem("Liga da Justiça"));
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void testExibeDetalhesItemInvallido() {
+		usuario3.exibeDetalhesItem(null);
+		usuario2.exibeDetalhesItem("");
+		usuario1.exibeDetalhesItem("   ");
+		usuario3.exibeDetalhesItem("Cubo mágico");
+	}
+
 	@Test
 	public void testGetPrecoItem() {
 		assertEquals("10.0", usuario3.getPrecoItem("Tetris"));
@@ -73,23 +81,23 @@ public class UsuarioTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetPrecoItemInvalido() {
-		assertEquals("Item nao encontrado", usuario2.getPrecoItem("Naruto"));
+		usuario2.getPrecoItem("Naruto");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetNomeItemInvalido() {
-		assertEquals("Item nao encontrado", usuario3.getNomeItem("Box GOT"));
+		usuario3.getNomeItem("Box GOT");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testRemoverItem() {
 		usuario1.removerItem("Damas");
-		assertEquals("Item nao encontrado", usuario1.getNomeItem("Damas"));
+		usuario1.getNomeItem("Damas");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testRemoverItemInvalido() {
-		assertEquals("Item nao encontrado", usuario3.getNomeItem("Box GOT"));
+		usuario3.getNomeItem("Box GOT");
 	}
 
 	@Test
@@ -101,7 +109,7 @@ public class UsuarioTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testAlteraNomeItemInvalido() {
 		usuario1.atualizaNomeItem("Jogos Vorazes", "X-men");
-		assertEquals("Item nao encontrado", usuario1.getNomeItem("X-men"));
+		usuario1.getNomeItem("X-men");
 	}
 
 	@Test
@@ -116,7 +124,7 @@ public class UsuarioTest {
 		assertEquals("JOGO DE TABULEIRO: Damas, R$ 1.99, Nao emprestado, COM PECAS PERDIDAS",
 				usuario1.exibeDetalhesItem("Damas"));
 	}
-	
+
 	@Test
 	public void testEquals() {
 		Usuario usuario4 = new Usuario("Geovane", "1234567", "geovane.silva");
