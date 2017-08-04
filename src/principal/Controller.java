@@ -195,6 +195,7 @@ public class Controller {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		usuarios.remove(id);
 		IdUsuario novoId = new IdUsuario(nome, valor);
+		
 		usuarios.put(novoId, usuario);
 	}
 	private boolean hasUsuario(IdUsuario id) {
