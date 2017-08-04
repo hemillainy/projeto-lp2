@@ -49,6 +49,88 @@ public class Usuario {
 		return this.nome + ", " + this.email + ", " + this.telefone;
 	}
 
+	public List<Item> getItens() {
+		List<Item> listItens = new ArrayList(itens.values());
+		return listItens;
+	}
+
+	public void cadastraItem(String nomeItem, double preco, String plataforma) {
+		itens.put(nomeItem, new JogoEletronico(nomeItem, preco, plataforma));
+	}
+
+	public void cadastraItem(String nomeItem, double preco) {
+		itens.put(nomeItem, new JogoTabuleiro(nomeItem, preco));
+	}
+
+	public void cadastraItem(String nomeItem, double preco, int duracao, String genero, String classificacao,
+			int lancamento) {
+		itens.put(nomeItem, new Filme(nomeItem, preco, duracao, classificacao, genero, lancamento));
+	}
+
+	public void cadastraBluRayShow(String nomeItem, double preco, int duracao, String classificacao, String artista,
+			int faixas) {
+		itens.put(nomeItem, new Show(nomeItem, preco, duracao, classificacao, artista, faixas));
+	}
+
+	public void cadastraItem(String nomeItem, double preco, String descricao, int duracao, String classificacao,
+			String genero, int temporada) {
+		itens.put(nomeItem, new Serie(nomeItem, preco, duracao, classificacao, genero, temporada));
+	}
+
+	public void adicionaBluRay(String nomeBluRayTemporada, int duracao) {
+		Serie serie = (Serie) (itens.get(nomeBluRayTemporada));
+		serie.adicionarBluRay(duracao);
+	}
+
+	public String exibeDetalhesItem(String item) {
+		return itens.get(item).toString();
+	}
+
+	public String getPrecoItem(String nomeItem) {
+		if (!hasItem(nomeItem)) {
+			validacao.itemNaoEncontrado();
+		}
+		Item item = itens.get(nomeItem);
+		String valor = String.valueOf(item.getPreco());
+		return valor;
+	}
+
+	public String getNomeItem(String nomeItem) {
+		if (!hasItem(nomeItem)) {
+			validacao.itemNaoEncontrado();
+		}
+		return itens.get(nomeItem).getNome();
+	}
+
+	public void removerItem(String nomeItem) {
+		if (!itens.containsKey(nomeItem)) {
+			validacao.itemNaoEncontrado();
+		}
+		itens.remove(nomeItem);
+	}
+
+	public void atualizaNomeItem(String nomeItem, String valor) {
+		if (!hasItem(nomeItem)) {
+			validacao.itemNaoEncontrado();
+		}
+		Item item = itens.get(nomeItem);
+		itens.get(nomeItem).setNome(valor);
+
+		setKeyItem(item);
+	}
+
+	public void atualizaPrecoItem(String nomeItem, String valor) {
+		if (!hasItem(nomeItem)) {
+			validacao.itemNaoEncontrado();
+		}
+		itens.get(nomeItem).setPreco(Double.parseDouble(valor));
+	}
+
+	public void adicionarPecaPerdida(String nomeItem, String nomePeca) {
+		JogoTabuleiro jogo = (JogoTabuleiro) (itens.get(nomeItem));
+		jogo.adicionaPecaPerdida(nomePeca);
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -79,45 +161,6 @@ public class Usuario {
 			return false;
 		return true;
 	}
-	public List<Item> getItens(){
-		List<Item> listItens = new ArrayList(itens.values());
-		return listItens;
-	}
-	
-	public void cadastraItem(String nomeItem, double preco, String plataforma) {
-		itens.put(nomeItem, new JogoEletronico(nomeItem, preco, plataforma));
-	}
-
-	public void cadastraItem(String nomeItem, double preco) {
-		itens.put(nomeItem, new JogoTabuleiro(nomeItem, preco));
-	}
-
-	public String exibeDetalhesItem(String item) {
-		return itens.get(item).toString();
-	}
-
-	public String getPrecoItem(String nomeItem) {
-		if (!hasItem(nomeItem)) {
-			validacao.itemNaoEncontrado();
-		}
-		Item item = itens.get(nomeItem);
-		String valor = String.valueOf(item.getPreco());
-		return valor;
-	}
-
-	public String getNomeItem(String nomeItem) {
-		if (!hasItem(nomeItem)) {
-			validacao.itemNaoEncontrado();
-		}
-		return itens.get(nomeItem).getNome();
-	}
-
-	public void removerItem(String nomeItem) {
-		if (!itens.containsKey(nomeItem)) {
-			validacao.itemNaoEncontrado();
-		}
-		itens.remove(nomeItem);
-	}
 
 	private boolean hasItem(String nomeItem) {
 		if (itens.containsKey(nomeItem)) {
@@ -129,48 +172,5 @@ public class Usuario {
 	private void setKeyItem(Item item) {
 		itens.remove(item);
 		itens.put(item.getNome(), item);
-	}
-
-	public void atualizaNomeItem(String nomeItem, String valor) {
-		if (!hasItem(nomeItem)) {
-			validacao.itemNaoEncontrado();
-		}
-		Item item = itens.get(nomeItem);
-		itens.get(nomeItem).setNome(valor);
-		
-		setKeyItem(item);
-	}
-
-	public void atualizaPrecoItem(String nomeItem, String valor) {
-		if (!hasItem(nomeItem)) {
-			validacao.itemNaoEncontrado();
-		}
-		itens.get(nomeItem).setPreco(Double.parseDouble(valor));
-	}
-
-	public void cadastraItem(String nomeItem, double preco, int duracao, String genero, String classificacao,
-			int lancamento) {
-		itens.put(nomeItem, new Filme(nomeItem, preco, duracao, classificacao, genero, lancamento));
-	}
-
-	public void cadastraBluRayShow(String nomeItem, double preco, int duracao, String classificacao, String artista,
-			int faixas) {
-		itens.put(nomeItem, new Show(nomeItem, preco, duracao, classificacao, artista, faixas));
-	}
-
-	public void cadastraItem(String nomeItem, double preco, String descricao, int duracao, String classificacao,
-			String genero, int temporada) {
-		itens.put(nomeItem, new Serie(nomeItem, preco, duracao, classificacao, genero, temporada));
-	}
-
-
-	public void adicionaBluRay(String nomeBluRayTemporada, int duracao) {
-		Serie serie = (Serie)(itens.get(nomeBluRayTemporada));
-		serie.adicionarBluRay(duracao);
-	}
-
-	public void adicionarPecaPerdida(String nomeItem, String nomePeca) {
-		JogoTabuleiro jogo = (JogoTabuleiro) (itens.get(nomeItem));
-		jogo.adicionaPecaPerdida(nomePeca);
 	}
 }
