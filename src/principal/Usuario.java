@@ -82,8 +82,11 @@ public class Usuario {
 		serie.adicionarBluRay(duracao);
 	}
 
-	public String exibeDetalhesItem(String item) {
-		return itens.get(item).toString();
+	public String exibeDetalhesItem(String nomeItem) {
+		if(!hasItem(nomeItem)){
+			validacao.itemNaoEncontrado();
+		}
+		return itens.get(nomeItem).toString();
 	}
 
 	public String getPrecoItem(String nomeItem) {
