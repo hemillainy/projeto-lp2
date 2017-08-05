@@ -71,5 +71,67 @@ public class ControllerTest {
 		ctrl.cadastrarEletronico("Geovane", "1234", "Clash Royale", 0, null);
 		ctrl.cadastrarEletronico(null, "1234", "Clash Royale", 0, "Celular");
 		ctrl.cadastrarEletronico("Geovane", null, "Clash Royale", 0, "Celular");
+		ctrl.cadastrarEletronico("", "1234", "Clash Royale", 23.97, "X-Box");
+		ctrl.cadastrarEletronico("Geovane", "", "Clash Royale", 23.97, "X-Box");
+		ctrl.cadastrarEletronico("Geovane", "1234", "Clash Royale", 23.97, "");
+	}
+	@Test
+	public void testCadastrarJogoTabuleiro() {
+		ctrl.cadastrarJogoTabuleiro("Cássio", "123", "Jogo da vida", 29);
+		assertEquals("JOGO DE TABULEIRO: Jogo da vida, R$ 29.0, Nao emprestado, COMPLETO", ctrl.pesquisaDetalhesItem("Cássio", "123", "Jogo da vida"));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testCadastrarJogoTabuleiroInvalido() {
+		ctrl.cadastrarJogoTabuleiro("Hemillainy", "12345", "", 23);
+		ctrl.cadastrarJogoTabuleiro("Hemillainy", "", "Banco imobiliário", 29);
+		ctrl.cadastrarJogoTabuleiro("", "12345", "Banco imobiliário", 29);
+		ctrl.cadastrarJogoTabuleiro("   ", "12345", "Banco imobiliário", 29);
+		ctrl.cadastrarJogoTabuleiro("Hemillainy", "   ", "Banco imobiliário", 29);
+		ctrl.cadastrarJogoTabuleiro("Hemillainy", "12345", "   ", 29);
+		ctrl.cadastrarJogoTabuleiro(null, "", "Banco imobiliário", 29);
+		ctrl.cadastrarJogoTabuleiro("Hemillainy", null, "Banco imobiliário", 29);
+		ctrl.cadastrarJogoTabuleiro("Hemillainy", "12345", null, 29);
+	}
+	@Test
+	public void testCadastrarBluRayFilme() {
+		ctrl.cadastrarBluRayFilme("Geovane", "1234", "Cyborg", 20, 180, "Ação", "LIVRE", 2018);
+		assertEquals("FILME: Cyborg, R$ 20.0, Nao emprestado, 180 min, LIVRE, Ação, 2018", ctrl.pesquisaDetalhesItem("Geovane", "1234", "Cyborg"));
+	}
+	@Test(expected = NullPointerException.class)
+	public void testCadastrarBluRayFilmeInvalido() {
+		ctrl.cadastrarBluRayFilme("Barry", "978", "De volta ao futuro", 999, 100000, "Comédia", "CEM_ANOS", 3027);
+	}
+	@Test
+	public void testCadastrarBluRayShow() {
+		ctrl.cadastrarBluRayShow("Hemillainy", "12345", "Carrossel", 0, 60, 5, "Carrossel", "LIVRE");
+		assertEquals("SHOW: Carrossel, R$ 0.0, Nao emprestado, 60 min, LIVRE, Carrossel, 5 faixas", ctrl.pesquisaDetalhesItem("Hemillainy", "12345", "Carrossel"));
+	}
+	@Test(expected = NullPointerException.class)
+	public void testCadastrarBluRayShowInvalido() {
+		ctrl.cadastrarBluRayShow("Barry", "978", "De volta ao futuro", 999, 100000, 88, "DC", "CEM_ANOS");
+	}
+	@Test
+	public void testCadastrarBluRaySerie() {
+		ctrl.cadastrarBluRaySerie("Cássio", "123", "Arrow", 19.90, "Nasce a lenda", 40, "QUATORZE_ANOS", "Ação", 1);
+		assertEquals("SERIE: Arrow, R$ 19.9, Nao emprestado, 40 min, QUATORZE_ANOS, Ação, Temporada 1", ctrl.pesquisaDetalhesItem("Cássio", "123", "Arrow"));
+	}
+	@Test(expected = NullPointerException.class)
+	public void testCadastrarBluRaySerieInvalido() {
+		ctrl.cadastrarBluRaySerie("cassio", "123", "Arrow", 19.90, "Nasce a lenda", 40, "QUATORZE_ANOS", "Ação", 1);
+	}
+	@Test
+	public void testPesquisaDetalhesItem() {
+		ctrl.cadastrarBluRaySerie("Cássio", "123", "The Flash", 19.90, "Nasce a lenda", 40, "QUATORZE_ANOS", "Ação", 1);
+		assertEquals("SERIE: The Flash, R$ 19.9, Nao emprestado, 40 min, QUATORZE_ANOS, Ação, Temporada 1", ctrl.pesquisaDetalhesItem("Cássio", "123", "The Flash"));
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testPesquisaDetalhesItemInvalido() {
+		ctrl.pesquisaDetalhesItem("Cássio", "123", "The Flash");
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testPesquisaDetalhesItemUsuarioInvalido() {
+		ctrl.cadastrarBluRaySerie("Cássio", "123", "The 100", 19.9, "Muita morte", 40, "LIVRE", "Aventura", 5);
+		ctrl.pesquisaDetalhesItem("cassio", "123", "The 100");
 	}
 }
