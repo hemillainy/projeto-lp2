@@ -134,4 +134,35 @@ public class ControllerTest {
 		ctrl.cadastrarBluRaySerie("Cássio", "123", "The 100", 19.9, "Muita morte", 40, "LIVRE", "Aventura", 5);
 		ctrl.pesquisaDetalhesItem("cassio", "123", "The 100");
 	}
+	@Test
+	public void testGetInfoItem() {
+		ctrl.cadastrarBluRaySerie("Cássio", "123", "The 100", 19.9, "Muita morte", 40, "LIVRE", "Aventura", 5);
+		assertEquals("The 100", ctrl.getInfoItem("Cássio", "123", "The 100", "Nome"));
+		assertEquals("19.9", ctrl.getInfoItem("Cássio", "123", "The 100", "Preco"));
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testGetInfoItemInvalido() {
+		ctrl.getInfoItem("Cássio", "123", "Lanterna verde", "Nome");
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testRemoveItem() {
+		ctrl.cadastrarBluRayFilme("Geovane", "1234", "Mulher Maravilha", 19.0, 130, "Ação", "LIVRE", 2017);
+		ctrl.removerItem("Geovane", "1234", "Mulher Maravilha");
+		ctrl.pesquisaDetalhesItem("Geovane", "1234", "Mulher Maravilha");
+		ctrl.removerItem("Diana", "7", "Laço");
+	}
+	@Test
+	public void testAtualizaItem() {
+		ctrl.cadastrarBluRayFilme("Geovane", "1234", "Mulher Maravilha", 19.0, 130, "Ação", "LIVRE", 2017);
+		ctrl.atualizarItem("Geovane", "1234", "Mulher Maravilha", "Nome", "Super Mulher Maravilha");
+		assertEquals("Super Mulher Maravilha", ctrl.getInfoItem("Geovane", "1234", "Super Mulher Maravilha", "Nome"));
+		ctrl.cadastrarBluRaySerie("Cássio", "123", "The 100", 19.9, "Muita morte", 40, "LIVRE", "Aventura", 5);
+		ctrl.atualizarItem("Cássio", "123", "The 100", "Preco", "29.9");
+		assertEquals("29.9", ctrl.getInfoItem("Cássio", "123", "The 100", "Preco"));
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testAtualizaItemInvalido() {
+		ctrl.atualizarItem("Felicity", "90", "Black Mirror", "Nome", "Blacklist");
+	}
+	
 }
