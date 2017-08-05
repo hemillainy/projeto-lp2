@@ -164,5 +164,12 @@ public class ControllerTest {
 	public void testAtualizaItemInvalido() {
 		ctrl.atualizarItem("Felicity", "90", "Black Mirror", "Nome", "Blacklist");
 	}
-	
+	@Test
+	public void testListarItensOrdenadosPorNome() {
+		assertEquals("FILME: Flashpoint, R$ 14.5, Nao emprestado, 180 min, LIVRE, Ação, 2018|SHOW: Galinha pintadinha, R$ 2.99, Nao emprestado, 90 min, LIVRE, Galinha, 20 faixas|JOGO ELETRONICO: Guitar Hero, R$ 99.99, Nao emprestado, X-Box|SERIE: Naruto, R$ 45.0, Nao emprestado, 20 min, QUATORZE_ANOS, Anime, Temporada 6|JOGO DE TABULEIRO: Xadrez, R$ 89.63, Nao emprestado, COMPLETO|", ctrl.listarItensOrdenadosPorNome());
+	}
+	@Test
+	public void testListarItensOrdenadosPorValor() {
+		assertEquals("SHOW: Galinha pintadinha, R$ 2.99, Nao emprestado, 90 min, LIVRE, Galinha, 20 faixas|FILME: Flashpoint, R$ 14.5, Nao emprestado, 180 min, LIVRE, Ação, 2018|SERIE: Naruto, R$ 45.0, Nao emprestado, 20 min, QUATORZE_ANOS, Anime, Temporada 6|JOGO DE TABULEIRO: Xadrez, R$ 89.63, Nao emprestado, COMPLETO|JOGO ELETRONICO: Guitar Hero, R$ 99.99, Nao emprestado, X-Box|", ctrl.listarItensOrdenadosPorValor());
+	}
 }
