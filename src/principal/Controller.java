@@ -51,10 +51,6 @@ public class Controller {
 		}
 		if (atributo.equals("Email")) {
 			info += usuarios.get(id).getEmail();
-		} else if (atributo.equals("Nome")) {
-			info = usuarios.get(id).getNome();
-		} else if (atributo.equals("Telefone")) {
-			info += usuarios.get(id).getTelefone();
 		}
 		return info;
 	}
