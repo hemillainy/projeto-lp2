@@ -20,7 +20,7 @@ public abstract class Item implements Comparable<Item> {
 		return preco;
 	}
 
-	private boolean verificaEmprestado() {
+	public boolean verificaEmprestado() {
 		if (status.equals(StatusEmprestado.EMPRESTADO)) {
 			return true;
 		}

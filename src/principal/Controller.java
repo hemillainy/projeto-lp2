@@ -1,5 +1,7 @@
 package principal;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,10 +13,12 @@ import java.util.Set;
 public class Controller {
 	private Validacao validacao;
 	private Map<IdUsuario, Usuario> usuarios;
+	private Map<IdEmprestimo, Emprestimo> emprestimos;
 	private ComparadorValor comparadorValor;
 
 	public Controller() {
 		this.usuarios = new HashMap<>();
+		this.emprestimos = new HashMap<>();
 		this.validacao = new Validacao();
 		this.comparadorValor = new ComparadorValor();
 
@@ -203,4 +207,53 @@ public class Controller {
 		}
 		return false;
 	}
+	
+	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
+			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) throws ParseException {
+		IdUsuario idDono = new IdUsuario(nomeDono, telefoneDono);
+		IdUsuario idRequerente = new IdUsuario(nomeRequerente, telefoneRequerente);
+		validacao.validaUsuariosEmprestimo(usuarios.containsKey(idDono), usuarios.containsKey(idRequerente));
+		Usuario dono = usuarios.get(idDono);
+		Usuario requerente = usuarios.get(idRequerente);
+		validacao.validaItemEmprestimo(dono.getItem(nomeItem));
+		Item itemEmprestar = dono.getItem(nomeItem);
+		
+		if (itemEmprestar.verificaEmprestado()) {
+			validacao.ItemJaEmprestado();
+		}
+		
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		java.util.Date data = formato.parse(dataEmprestimo);
+		
+		Emprestimo e = new Emprestimo(dono, requerente, itemEmprestar, data, periodo);
+		IdEmprestimo ie = new IdEmprestimo(dono, requerente, itemEmprestar, data);
+		emprestimos.put(ie, e);
+		dono.addEmprestimo(e);
+		requerente.addEmprestimo(e);
+		itemEmprestar.setStaus();
+		
+	}
+
+	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
+			String nomeItem, String dataEmprestimo, String dataDevolucao) throws ParseException {
+		IdUsuario idDono = new IdUsuario(nomeDono, telefoneDono);
+		IdUsuario idRequerente = new IdUsuario(nomeRequerente, telefoneRequerente);
+		validacao.validaUsuariosEmprestimo(usuarios.containsKey(idDono), usuarios.containsKey(idRequerente));
+		Usuario dono = usuarios.get(idDono);
+		Usuario requerente = usuarios.get(idRequerente);
+		validacao.validaItemEmprestimo(dono.getItem(nomeItem));
+		Item itemDevolver = dono.getItem(nomeItem);
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		java.util.Date data = formato.parse(dataEmprestimo);
+		java.util.Date dataDev = formato.parse(dataDevolucao);
+		
+		IdEmprestimo ie = new IdEmprestimo(dono, requerente, itemDevolver, data);
+		if (!emprestimos.containsKey(ie)) {
+			validacao.emprestimoNaoEncontrado();
+		}
+		emprestimos.get(ie).devolverItem(dataDev);
+		itemDevolver.setStaus();
+		
+		
+}
 }

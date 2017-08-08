@@ -1,5 +1,7 @@
 package principal;
 
+import java.text.ParseException;
+
 import easyaccept.EasyAccept;
 
 public class Facade {
@@ -91,12 +93,14 @@ public class Facade {
 	}
 
 	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
-			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) {
+			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) throws ParseException {
+		sistema.registrarEmprestimo(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem, dataEmprestimo, periodo);
 
 	}
 
 	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
-			String nomeItem, String dataEmprestimo, String dataDevolucao) {
+			String nomeItem, String dataEmprestimo, String dataDevolucao) throws ParseException {
+		sistema.devolverItem(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem, dataEmprestimo, dataDevolucao);
 
 	}
 }
