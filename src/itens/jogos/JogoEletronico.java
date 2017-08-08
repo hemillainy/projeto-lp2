@@ -2,15 +2,34 @@ package itens.jogos;
 
 import principal.Item;
 
+/**
+ * Classe que representa um jogo eletronico.
+ * 
+ * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
+ * 
+ * @author Cassio Cordeiro - 116210038
+ * 		   Geovane Silva - 116211149
+ * 		   Hemillainy Santos - 116210802
+ *
+ */
 public class JogoEletronico extends Item {
 
 	private String plataforma;
-
+	
+	/**
+	 * Construtor de jogo eletronico.
+	 * @param nome
+	 * @param valor
+	 * @param plataforma
+	 */
 	public JogoEletronico(String nome, double valor, String plataforma) {
 		super(nome, valor);
 		this.plataforma = plataforma;
 	}
 	
+	/**
+	 * HashCode que se baseia no nome e na plataforma do jogo eletronico.
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -19,7 +38,10 @@ public class JogoEletronico extends Item {
 		result = prime * result + ((plataforma == null) ? 0 : plataforma.hashCode());
 		return result;
 	}
-
+	
+	/**
+	 * Equals que se baseia no nome e na plataforma do jogo eletronico.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -41,7 +63,10 @@ public class JogoEletronico extends Item {
 			return false;
 		return true;
 	}
-
+	
+	/**
+	 * Metodo que gera a representacao toString de jogo eletronico.
+	 */
 	@Override
 	public String toString() {
 		return "JOGO ELETRONICO: " + this.nome + ", R$ " + this.preco + ", " + status.getValor() + ", " + this.plataforma;

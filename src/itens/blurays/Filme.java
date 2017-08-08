@@ -30,7 +30,7 @@ public class Filme extends BluRay {
 		this.lancamento = lancamento;
 	}
 	 /**
-	  * Metodo que gera a representacao toString do filme.
+	  * Metodo que gera a representacao toString de filme.
 	  */
 	public String toString() {
 		return "FILME: " + this.nome + ", R$ " + this.preco + ", " + status.getValor() + ", " + this.duracao + " min" + ", " + 
