@@ -7,7 +7,7 @@ import principal.*;
 /**
  * Testes da classe Controller
  * 
- * Projeto de Laboratório de Progamação 2 - 2017.1 (TT - Tracking things)
+ * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
  * 
  * @author Cassio Cordeiro - 116210038
  * 		   Geovane Silva - 116211149
@@ -19,7 +19,7 @@ public class ControllerTest {
 	Controller controller;
 
 	/**
-	 * Inicail
+	 * Inicailiza controller e faz cadastros basicos para uso nos testes. 
 	 */
 	@Before
 	public void criaController() {
@@ -35,11 +35,11 @@ public class ControllerTest {
 		controller.cadastrarBluRayShow("Cássio", "123", "Galinha pintadinha", 2.99, 90, 20, "Galinha", "LIVRE");
 	}
 
+	
 	@Test(expected = IllegalArgumentException.class)
 	public void testRemoveUsuario() {
 		controller.removeUsuario("Hemillainy", "12345");
 		controller.getInfoUsuario("Hemillainy", "12345", "Nome");
-		controller.removeUsuario("Sasuke", "90");
 	}
 
 	@Test
@@ -57,8 +57,6 @@ public class ControllerTest {
 	public void testAtualizaUsuario() {
 		controller.atualizaUsuario("Hemillainy", "12345", "Email", "hemi.suelen");
 		assertEquals("hemi.suelen", controller.getInfoUsuario("Hemillainy", "12345", "Email"));
-		controller.atualizaUsuario("Geovane", "1234", "Telefone", "4321");
-		assertEquals("4321", controller.getInfoUsuario("Geovane", "4321", "Telefone"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
