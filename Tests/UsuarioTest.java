@@ -131,5 +131,15 @@ public class UsuarioTest {
 		assertTrue(usuario2.equals(usuario4));
 		assertFalse(usuario3.equals(usuario4));
 	}
+	
+	@Test
+	public void testGetItem() {
+		assertEquals(14.0, usuario2.getItem("Liga da Justiça").getPreco(), 0.01);
+	}
+	
+	@Test
+	public void testGetItemInvalido() {
+		assertEquals(null, usuario3.getItem("Damas"));
+	}
 
 }
