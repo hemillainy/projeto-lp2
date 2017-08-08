@@ -6,7 +6,7 @@ import principal.*;
 
 /**
  * 
- * Projeto de Laboratório de Progamação 2 - 2017.1 (TT - Tracking things)
+ * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
  * 
  * @author Cassio Cordeiro - 116210038
  * 		   Geovane Silva - 116211149
