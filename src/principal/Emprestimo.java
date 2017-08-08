@@ -15,6 +15,7 @@ public class Emprestimo {
 		this.requerente = requerente;
 		this.emprestado = emprestado;
 		this.dataEmprestimo = dataEmprestimo;
+		this.dataDevolucao = null;
 		this.periodo = periodo;
 	}
 	
@@ -57,6 +58,11 @@ public class Emprestimo {
 		} else if (!requerente.equals(other.requerente))
 			return false;
 		return true;
+	}
+	
+	public String toString() {
+		return this.dono.getNome() + " - " + this.requerente.getNome() + " - " + this.emprestado.getNome() + " - " + this.periodo + " - " +
+				this.dataEmprestimo + " - " + this.dataDevolucao;
 	}
 
 
