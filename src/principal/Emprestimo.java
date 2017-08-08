@@ -2,12 +2,12 @@ package principal;
 
 
 public class Emprestimo {
-	Usuario dono;
-	Usuario requerente;
-	Item emprestado;
-	int periodo;
-	java.util.Date dataEmprestimo;
-	java.util.Date dataDevolucao;
+	private Usuario dono;
+	private Usuario requerente;
+	private Item emprestado;
+	private int periodo;
+	private java.util.Date dataEmprestimo;
+	private java.util.Date dataDevolucao;
 	
 	
 	public Emprestimo(Usuario dono, Usuario requerente, Item emprestado, java.util.Date dataEmprestimo, int periodo) {
