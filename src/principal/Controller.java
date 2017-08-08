@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -217,21 +218,24 @@ public class Controller {
 		Usuario requerente = usuarios.get(idRequerente);
 		validacao.validaItemEmprestimo(dono.getItem(nomeItem));
 		Item itemEmprestar = dono.getItem(nomeItem);
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		java.util.Date data = formato.parse(dataEmprestimo);
 		
 		if (itemEmprestar.verificaEmprestado()) {
 			validacao.ItemJaEmprestado();
 		}
+		alocarEmprestimos(dono, requerente, itemEmprestar, data, periodo);
 		
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		java.util.Date data = formato.parse(dataEmprestimo);
 		
+	}
+
+	private void alocarEmprestimos(Usuario dono, Usuario requerente, Item itemEmprestar, Date data, int periodo) {
 		Emprestimo e = new Emprestimo(dono, requerente, itemEmprestar, data, periodo);
 		IdEmprestimo ie = new IdEmprestimo(dono, requerente, itemEmprestar, data);
 		emprestimos.put(ie, e);
 		dono.addEmprestimo(e);
 		requerente.addEmprestimo(e);
 		itemEmprestar.setStaus();
-		
 	}
 
 	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
