@@ -39,5 +39,28 @@ public class Validacao {
 			throw new IllegalArgumentException("Preco invalido");
 		}
 	}
+	
+	public void ItemJaEmprestado() {
+		throw new IllegalArgumentException("Item emprestado no momento");
+		
+	}
+
+	public void emprestimoNaoEncontrado() {
+		throw new IllegalArgumentException("Emprestimo nao encontrado");
+	}
+
+	public void validaUsuariosEmprestimo(boolean containsKey, boolean containsKey2) {
+		if (!containsKey || !containsKey2) {
+			throw new IllegalArgumentException("Usuario invalido");
+		}
+		
+	}
+
+	public void validaItemEmprestimo(Item item) {
+		if (item == null) {
+			throw new IllegalArgumentException("Item nao encontrado");
+		}
+		
+}
 
 }

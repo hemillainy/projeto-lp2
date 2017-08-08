@@ -2,8 +2,10 @@ package principal;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import itens.blurays.*;
 import principal.Item;
@@ -15,13 +17,15 @@ public class Usuario {
 	private String telefone;
 	private Validacao validacao;
 	private Map<String, Item> itens;
+	private Set<Emprestimo> emprestimos;
 
 	public Usuario(String nome, String celular, String email) {
 		this.nome = nome;
 		this.telefone = celular;
 		this.email = email;
-		itens = new HashMap<>();
-		validacao = new Validacao();
+		this.itens = new HashMap<>();
+		this.emprestimos = new HashSet<>();
+		this.validacao = new Validacao();
 	}
 
 	public String getEmail() {
@@ -174,5 +178,14 @@ public class Usuario {
 	private void setKeyItem(Item item) {
 		itens.remove(item);
 		itens.put(item.getNome(), item);
+	}
+
+	public Item getItem(String nomeItem) {
+		return itens.get(nomeItem);
+	}
+
+	public void addEmprestimo(Emprestimo e) {
+		emprestimos.add(e);
+		
 	}
 }
