@@ -77,6 +77,9 @@ public class Controller {
 
 	public void adicionarPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {
 		IdUsuario id = new IdUsuario(nome, telefone);
+		if (!hasUsuario(id)) {
+			validacao.usuarioInvalido();
+		}
 		usuarios.get(id).adicionarPecaPerdida(nomeItem, nomePeca);
 	}
 

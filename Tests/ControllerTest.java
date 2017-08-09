@@ -5,13 +5,12 @@ import org.junit.Test;
 import principal.*;
 
 /**
- * Testes da classe Controller
+ * Testes de unidade da classe Controller
  * 
  * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
  * 
- * @author Cassio Cordeiro - 116210038
- * 		   Geovane Silva - 116211149
- * 		   Hemillainy Santos - 116210802
+ * @author Cassio Cordeiro - 116210038 Geovane Silva - 116211149 Hemillainy
+ *         Santos - 116210802
  *
  */
 public class ControllerTest {
@@ -19,7 +18,7 @@ public class ControllerTest {
 	Controller controller;
 
 	/**
-	 * Inicailiza controller e faz cadastros basicos para uso nos testes. 
+	 * Inicailiza controller e faz cadastros basicos para uso nos testes.
 	 */
 	@Before
 	public void criaController() {
@@ -30,40 +29,64 @@ public class ControllerTest {
 
 		controller.cadastrarEletronico("Cássio", "123", "Guitar Hero", 99.99, "X-Box");
 		controller.cadastrarJogoTabuleiro("Hemillainy", "12345", "Xadrez", 89.63);
-		controller.cadastrarBluRaySerie("Geovane", "1234", "Naruto", 45.00, "Shippuden", 20, "QUATORZE_ANOS", "Anime", 6);
+		controller.cadastrarBluRaySerie("Geovane", "1234", "Naruto", 45.00, "Shippuden", 20, "QUATORZE_ANOS", "Anime",
+				6);
 		controller.cadastrarBluRayFilme("Geovane", "1234", "Flashpoint", 14.50, 180, "Ação", "LIVRE", 2018);
 		controller.cadastrarBluRayShow("Cássio", "123", "Galinha pintadinha", 2.99, 90, 20, "Galinha", "LIVRE");
 	}
 
-	
+	/**
+	 * Teste com excecao do metodo removeUsuario. Apos a remocao de um usuario
+	 * cadastrado e esperado uma excecao ao se tentar verificar dados do mesmo
+	 * usuario.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testRemoveUsuario() {
 		controller.removeUsuario("Hemillainy", "12345");
 		controller.getInfoUsuario("Hemillainy", "12345", "Nome");
 	}
 
+	/**
+	 * Tetsa se a saida do metodo getInfoUsuario esta retornando o email
+	 * correto.
+	 */
 	@Test
 	public void testGetInfoUsuario() {
 		assertEquals("geovane.silva", controller.getInfoUsuario("Geovane", "1234", "Email"));
 	}
 
+	/**
+	 * Teste com excecao do metodo getInfoUsuario. Espera-se uma excecao ao
+	 * tentar pegar informacao de um usuario nao cadastrado.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetInfoUsuarioInvalido() {
 		controller.getInfoUsuario("Sasuke", "21", "Nome");
-		controller.getInfoUsuario("Cássio", "99", "Nome");
 	}
 
+	/**
+	 * Atualiza o email de um usuario e depois verifica se o email realmente foi
+	 * alterado.
+	 */
 	@Test
 	public void testAtualizaUsuario() {
 		controller.atualizaUsuario("Hemillainy", "12345", "Email", "hemi.suelen");
 		assertEquals("hemi.suelen", controller.getInfoUsuario("Hemillainy", "12345", "Email"));
 	}
 
+	/**
+	 * Teste com excecao do metodo alteraUsuario. Espera-se uma excecao ao
+	 * tentar alterar um usuario nao cadastrado.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAtualizaUsuarioInvalido() {
 		controller.atualizaUsuario("Sasuke", "171", "Telefone", "321");
 	}
 
+	/**
+	 * Apos adicionar uma peca perdida verifica-se se o estado do enum que
+	 * representa um jogo completo foi alterado.
+	 */
 	@Test
 	public void testAdicionaPecaPerdida() {
 		controller.adicionarPecaPerdida("Hemillainy", "12345", "Xadrez", "Torre");
@@ -71,7 +94,10 @@ public class ControllerTest {
 				controller.pesquisaDetalhesItem("Hemillainy", "12345", "Xadrez"));
 	}
 
-	@Test(expected = NullPointerException.class)
+	/**
+	 * Teste com excecao do metodo adicionaPecaPerdida
+	 */
+	@Test(expected = IllegalArgumentException.class)
 	public void testAdicionarPecaPerdidaUsuarioInvalido() {
 		controller.adicionarPecaPerdida("Hemillainy", "1234", "Xadrez", "Rainha");
 		controller.adicionarPecaPerdida("Hemillaini", "12345", "Xadrez", "Peão");
@@ -141,19 +167,22 @@ public class ControllerTest {
 
 	@Test
 	public void testCadastrarBluRaySerie() {
-		controller.cadastrarBluRaySerie("Cássio", "123", "Arrow", 19.90, "Nasce a lenda", 40, "QUATORZE_ANOS", "Ação", 1);
+		controller.cadastrarBluRaySerie("Cássio", "123", "Arrow", 19.90, "Nasce a lenda", 40, "QUATORZE_ANOS", "Ação",
+				1);
 		assertEquals("SERIE: Arrow, R$ 19.9, Nao emprestado, 40 min, QUATORZE_ANOS, Ação, Temporada 1",
 				controller.pesquisaDetalhesItem("Cássio", "123", "Arrow"));
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void testCadastrarBluRaySerieInvalido() {
-		controller.cadastrarBluRaySerie("cassio", "123", "Arrow", 19.90, "Nasce a lenda", 40, "QUATORZE_ANOS", "Ação", 1);
+		controller.cadastrarBluRaySerie("cassio", "123", "Arrow", 19.90, "Nasce a lenda", 40, "QUATORZE_ANOS", "Ação",
+				1);
 	}
 
 	@Test
 	public void testPesquisaDetalhesItem() {
-		controller.cadastrarBluRaySerie("Cássio", "123", "The Flash", 19.90, "Nasce a lenda", 40, "QUATORZE_ANOS", "Ação", 1);
+		controller.cadastrarBluRaySerie("Cássio", "123", "The Flash", 19.90, "Nasce a lenda", 40, "QUATORZE_ANOS",
+				"Ação", 1);
 		assertEquals("SERIE: The Flash, R$ 19.9, Nao emprestado, 40 min, QUATORZE_ANOS, Ação, Temporada 1",
 				controller.pesquisaDetalhesItem("Cássio", "123", "The Flash"));
 	}
@@ -193,7 +222,8 @@ public class ControllerTest {
 	public void testAtualizaItem() {
 		controller.cadastrarBluRayFilme("Geovane", "1234", "Mulher Maravilha", 19.0, 130, "Ação", "LIVRE", 2017);
 		controller.atualizarItem("Geovane", "1234", "Mulher Maravilha", "Nome", "Super Mulher Maravilha");
-		assertEquals("Super Mulher Maravilha", controller.getInfoItem("Geovane", "1234", "Super Mulher Maravilha", "Nome"));
+		assertEquals("Super Mulher Maravilha",
+				controller.getInfoItem("Geovane", "1234", "Super Mulher Maravilha", "Nome"));
 		controller.cadastrarBluRaySerie("Cássio", "123", "The 100", 19.9, "Muita morte", 40, "LIVRE", "Aventura", 5);
 		controller.atualizarItem("Cássio", "123", "The 100", "Preco", "29.9");
 		assertEquals("29.9", controller.getInfoItem("Cássio", "123", "The 100", "Preco"));
