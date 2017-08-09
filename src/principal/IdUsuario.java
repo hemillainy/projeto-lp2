@@ -1,17 +1,40 @@
 package principal;
 
+/**
+ * Classe que representa a identificacao de um usuario.
+ * 
+ * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
+ * 
+ * @author Cassio Cordeiro - 116210038
+ * 		   Geovane Silva - 116211149
+ * 		   Hemillainy Santos - 116210802
+ *
+ */
 public class IdUsuario {
+	
 	String nome;
 	String telefone;
-
+	/**
+	 * Construtor de idUsuario.
+	 * @param nome do usuario.
+	 * @param telefone do usuario.
+	 */
 	public IdUsuario(String nome, String telefone) {
 		this.nome = nome;
 		this.telefone = telefone;
 	}
-
+	
+	/**
+	 * Metodo que gera a representacao toString do idUsuario.
+	 * @return o toString do idUsuario.
+	 */
 	public String toString(){
 		return this.nome + " " + this.telefone;
 	}
+	
+	/**
+	 * HashCode que se baseia no nome e no telefone do usuario.
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -20,7 +43,10 @@ public class IdUsuario {
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
 		return result;
 	}
-
+	
+	/**
+	 * Equals que se baseia no nome e no telefone do usuario.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
