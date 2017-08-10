@@ -111,13 +111,37 @@ public class ControllerTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testCadastrarEletronicoInvalido() {
+	public void testCadastrarEletronicoInvalidoNomeItemInvalido() {
 		controller.cadastrarEletronico("Geovane", "1234", null, 23.97, "X-Box");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testCadastrarEletronicoInvalidoPlataformaInvalida() {
 		controller.cadastrarEletronico("Geovane", "1234", "Clash Royale", 0, null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testCadastrarEletronicoInvalidoNomeUsuarioInvalido() {
 		controller.cadastrarEletronico(null, "1234", "Clash Royale", 0, "Celular");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testCadastrarEletronicoInvalidoTelefoneUsuarioInvalido() {
 		controller.cadastrarEletronico("Geovane", null, "Clash Royale", 0, "Celular");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testCadastrarEletronicoInvalidoNomeUsuarioVazio() {
 		controller.cadastrarEletronico("", "1234", "Clash Royale", 23.97, "X-Box");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testCadastrarEletronicoInvalidoTelefoneVazio() {
 		controller.cadastrarEletronico("Geovane", "", "Clash Royale", 23.97, "X-Box");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testCadastrarEletronicoInvalidoPlataformaVazia() {
 		controller.cadastrarEletronico("Geovane", "1234", "Clash Royale", 23.97, "");
 	}
 
