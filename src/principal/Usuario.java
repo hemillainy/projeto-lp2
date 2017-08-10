@@ -374,7 +374,7 @@ public class Usuario {
 	 *            item que sera removido e adicionado.
 	 */
 	private void setKeyItem(Item item) {
-		itens.remove(item);
+		itens.remove(item.getNome());
 		itens.put(item.getNome(), item);
 	}
 

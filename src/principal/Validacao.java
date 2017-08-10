@@ -115,4 +115,9 @@ public class Validacao {
 
 	}
 
+	public void dataInvalida() {
+		throw new IllegalArgumentException("Data Invalida");
+		
+	}
+
 }

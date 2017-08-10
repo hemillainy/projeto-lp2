@@ -19,11 +19,17 @@ public class FilmeTest {
 	
 	Filme filme;
 	
+	/**
+	 * Inicializa um filme para os testes. 
+	 */
 	@Before
 	public void criaFilme() {
 		filme = new Filme("Guardioes da Galaxia", 12, 120, "DOZE_ANOS", "Acao", 2017);
 	}
 	
+	/**
+	 * Testa se a saida de toString de filme esta conforme o esperado. 
+	 */
 	@Test
 	public void testToString() {
 		assertEquals("FILME: Guardioes da Galaxia, R$ 12.0, Nao emprestado, 120 min, DOZE_ANOS, Acao, 2017", filme.toString());
