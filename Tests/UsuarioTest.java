@@ -62,8 +62,7 @@ public class UsuarioTest {
 
 	/**
 	 * Testa o metodo setEmail. Primeiro o metodo e invocado e depois com
-	 * auxilio de getEmail eh verificado se o email realmente foi
-	 * alterado.
+	 * auxilio de getEmail eh verificado se o email realmente foi alterado.
 	 */
 	@Test
 	public void testSetEmail() {
@@ -83,7 +82,7 @@ public class UsuarioTest {
 	}
 
 	/**
-	 * Testa se a saida do toString para o usuario3 esta conforme o esperado. 
+	 * Testa se a saida do toString para o usuario3 esta conforme o esperado.
 	 */
 	@Test
 	public void testToString() {
@@ -91,7 +90,8 @@ public class UsuarioTest {
 	}
 
 	/**
-	 * Testa o metodo que exibe detalhes de um item para um item cadastrado no usuario 2. 
+	 * Testa o metodo que exibe detalhes de um item para um item cadastrado no
+	 * usuario 2.
 	 */
 	@Test
 	public void testExibeDetalhesItem() {
@@ -108,7 +108,7 @@ public class UsuarioTest {
 	}
 
 	/**
-	 * Testa o metodo getPrecoItem em um item cadastrado no usuario3. 
+	 * Testa o metodo getPrecoItem em um item cadastrado no usuario3.
 	 */
 	@Test
 	public void testGetPrecoItem() {
@@ -116,7 +116,7 @@ public class UsuarioTest {
 	}
 
 	/**
-	 * Testa o metodo getNomeItem em um item cadastrado no usuario1. 
+	 * Testa o metodo getNomeItem em um item cadastrado no usuario1.
 	 */
 	@Test
 	public void testGetNomeItem() {
@@ -124,7 +124,8 @@ public class UsuarioTest {
 	}
 
 	/**
-	 * Testa o metodo getPrecoItem para um item nao cadastrado. Uma excecao eh esperada. 
+	 * Testa o metodo getPrecoItem para um item nao cadastrado. Uma excecao eh
+	 * esperada.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetPrecoItemInvalido() {
@@ -132,7 +133,8 @@ public class UsuarioTest {
 	}
 
 	/**
-	 * Testa o metodo getNomeItem para um item nao cadastrado. Uma excecao eh esperada. 
+	 * Testa o metodo getNomeItem para um item nao cadastrado. Uma excecao eh
+	 * esperada.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetNomeItemInvalido() {
@@ -140,7 +142,9 @@ public class UsuarioTest {
 	}
 
 	/**
-	 * Testa o metodo que remove o item de um usuario. Primeiro o i
+	 * Testa o metodo que remove o item de um usuario. Primeiro o item eh
+	 * removido do usuario1 e depois tenta-se pegar o nome do item removido. Uma
+	 * excecao eh esperada.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testRemoverItem() {
@@ -148,11 +152,18 @@ public class UsuarioTest {
 		usuario1.getNomeItem("Damas");
 	}
 
+	/**
+	 * Testa o metodo que remove o item de um usuario para um item naon
+	 * cadastrado no usuario. Uma excecao eh esperada.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testRemoverItemInvalido() {
 		usuario3.getNomeItem("Box GOT");
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testAlteraNomeItem() {
 		usuario2.atualizaNomeItem("Liga da Justiça", "Flashpoint");
