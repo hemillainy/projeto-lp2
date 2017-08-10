@@ -95,14 +95,25 @@ public class ControllerTest {
 	}
 
 	/**
-	 * Teste com excecao do metodo adicionaPecaPerdida
+	 * Teste com excecao do metodo adicionarPecaPerdida
 	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void testAdicionarPecaPerdidaUsuarioInvalido() {
+	public void testAdicionarPecaPerdidaTelefoneUsuarioInvalido() {
 		controller.adicionarPecaPerdida("Hemillainy", "1234", "Xadrez", "Rainha");
+	}
+
+	/**
+	 * Teste com excecao do metodo adicionarPecaPerdida com nome de usuario
+	 * invalido
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testAdicionarPecaPerdidaNomeUsuarioInvalido() {
 		controller.adicionarPecaPerdida("Hemillaini", "12345", "Xadrez", "Peão");
 	}
 
+	/**
+	 * Teste de metodo cadastrarEletronico
+	 */
 	@Test
 	public void testCadastrarEletronico() {
 		controller.cadastrarEletronico("Cássio", "123", "Point blank", 29.90, "X-Box");
@@ -110,41 +121,67 @@ public class ControllerTest {
 				controller.pesquisaDetalhesItem("Cássio", "123", "Point blank"));
 	}
 
+	/**
+	 * Teste com excecao do metodo cadastrarEletronico com nome do item null
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastrarEletronicoInvalidoNomeItemInvalido() {
 		controller.cadastrarEletronico("Geovane", "1234", null, 23.97, "X-Box");
 	}
 
+	/**
+	 * Teste com excecao do metodo cadastrarEletronico com plataforma null
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastrarEletronicoInvalidoPlataformaInvalida() {
 		controller.cadastrarEletronico("Geovane", "1234", "Clash Royale", 0, null);
 	}
 
+	/**
+	 * Teste com excecao do metodo cadastrarEletronico com nome do usuario null
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastrarEletronicoInvalidoNomeUsuarioInvalido() {
 		controller.cadastrarEletronico(null, "1234", "Clash Royale", 0, "Celular");
 	}
 
+	/**
+	 * Teste com excecao do metodo cadastrarEletronico com telefone do usuario
+	 * null
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastrarEletronicoInvalidoTelefoneUsuarioInvalido() {
 		controller.cadastrarEletronico("Geovane", null, "Clash Royale", 0, "Celular");
 	}
 
+	/**
+	 * Teste com excecao do metodo cadastrarEletronico com nome do usuario vazio
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastrarEletronicoInvalidoNomeUsuarioVazio() {
 		controller.cadastrarEletronico("", "1234", "Clash Royale", 23.97, "X-Box");
 	}
 
+	/**
+	 * Teste com excecao do metodo cadastrarEletronico com telefone do usuario
+	 * vazio
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastrarEletronicoInvalidoTelefoneVazio() {
 		controller.cadastrarEletronico("Geovane", "", "Clash Royale", 23.97, "X-Box");
 	}
 
+	/**
+	 * Teste com excecao do metodo cadastrarEletronico com plataforma vazia
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastrarEletronicoInvalidoPlataformaVazia() {
 		controller.cadastrarEletronico("Geovane", "1234", "Clash Royale", 23.97, "");
 	}
 
+	/**
+	 * Teste do metodo cadastrarJogoTabuleiro
+	 */
 	@Test
 	public void testCadastrarJogoTabuleiro() {
 		controller.cadastrarJogoTabuleiro("Cássio", "123", "Jogo da vida", 29);
@@ -152,19 +189,88 @@ public class ControllerTest {
 				controller.pesquisaDetalhesItem("Cássio", "123", "Jogo da vida"));
 	}
 
+	/**
+	 * Teste com excecao do metodo cadastrarJogoTabuleiro com plataforma vazia
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCadastrarJogoTabuleiroInvalidoNomeItemVazio() {
+		controller.cadastrarJogoTabuleiro("Hemillainy", "12345", "", 23);
+	}
+
+	/**
+	 * Teste com excecao do metodo cadastrarJogoTabuleiro com telefone do
+	 * usuario vazio
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCadastrarJogoTabuleiroInvalidoTelefoneUsuarioVazio() {
+		controller.cadastrarJogoTabuleiro("Hemillainy", "", "Banco imobiliário", 29);
+	}
+
+	/**
+	 * Teste com excecao do metodo cadastrarJogoTabuleiro com nome do usuario
+	 * vazio
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCadastrarJogoTabuleiroInvalidoNomeUsuarioVazio() {
+		controller.cadastrarJogoTabuleiro("", "12345", "Banco imobiliário", 29);
+	}
+
+	/**
+	 * Teste com excecao do metodo cadastrarJogoTabuleiro com nome do usuario
+	 * composto por espacos
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCadastrarJogoTabuleiroInvalidoNomeUsuarioEspacos() {
+		controller.cadastrarJogoTabuleiro("   ", "12345", "Banco imobiliário", 29);
+	}
+
+	/**
+	 * Teste com excecao do metodo cadastrarJogoTabuleiro com telefone do
+	 * usuario composto por espacos
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCadastrarJogoTabuleiroInvalidoTelefoneUsuarioEspacos() {
+		controller.cadastrarJogoTabuleiro("Hemillainy", "   ", "Banco imobiliário", 29);
+	}
+
+	/**
+	 * Teste com excecao do metodo cadastrarJogoTabuleiro com plataforma
+	 * composta por espacos
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCadastrarJogoTabuleiroInvalidoNomeItemEspacos() {
+		controller.cadastrarJogoTabuleiro("Hemillainy", "12345", "   ", 29);
+	}
+
+	/**
+	 * Teste com excecao do metodo cadastrarJogoTabuleiro com nome do usuario
+	 * null
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCadastrarJogoTabuleiroInvalidoNomeUsuarioNull() {
+		controller.cadastrarJogoTabuleiro(null, "12345", "Banco imobiliário", 29);
+	}
+
+	/**
+	 * Teste com excecao do metodo cadastrarJogoTabuleiro com telefone do
+	 * usuario null
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testCadastrarJogoTabuleiroInvalidoTelefoneNull() {
+		controller.cadastrarJogoTabuleiro("Hemillainy", null, "Banco imobiliário", 29);
+	}
+
+	/**
+	 * Teste com excecao do metodo cadastrarJogoTabuleiro com plataforma null
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testCadastrarJogoTabuleiroInvalido() {
-		controller.cadastrarJogoTabuleiro("Hemillainy", "12345", "", 23);
-		controller.cadastrarJogoTabuleiro("Hemillainy", "", "Banco imobiliário", 29);
-		controller.cadastrarJogoTabuleiro("", "12345", "Banco imobiliário", 29);
-		controller.cadastrarJogoTabuleiro("   ", "12345", "Banco imobiliário", 29);
-		controller.cadastrarJogoTabuleiro("Hemillainy", "   ", "Banco imobiliário", 29);
-		controller.cadastrarJogoTabuleiro("Hemillainy", "12345", "   ", 29);
-		controller.cadastrarJogoTabuleiro(null, "", "Banco imobiliário", 29);
-		controller.cadastrarJogoTabuleiro("Hemillainy", null, "Banco imobiliário", 29);
 		controller.cadastrarJogoTabuleiro("Hemillainy", "12345", null, 29);
 	}
 
+	/**
+	 * Teste do metodo cadastrarBluRayFilme
+	 */
 	@Test
 	public void testCadastrarBluRayFilme() {
 		controller.cadastrarBluRayFilme("Geovane", "1234", "Cyborg", 20, 180, "Ação", "LIVRE", 2018);
@@ -172,11 +278,18 @@ public class ControllerTest {
 				controller.pesquisaDetalhesItem("Geovane", "1234", "Cyborg"));
 	}
 
+	/**
+	 * Teste com excecao do metodo cadastrarBluRayFilme com ususario nao
+	 * cadastrado
+	 */
 	@Test(expected = NullPointerException.class)
 	public void testCadastrarBluRayFilmeInvalido() {
 		controller.cadastrarBluRayFilme("Barry", "978", "De volta ao futuro", 999, 100000, "Comédia", "CEM_ANOS", 3027);
 	}
 
+	/**
+	 * Teste do metodo cadastrarBlurayShow
+	 */
 	@Test
 	public void testCadastrarBluRayShow() {
 		controller.cadastrarBluRayShow("Hemillainy", "12345", "Carrossel", 0, 60, 5, "Carrossel", "LIVRE");
@@ -184,11 +297,18 @@ public class ControllerTest {
 				controller.pesquisaDetalhesItem("Hemillainy", "12345", "Carrossel"));
 	}
 
+	/**
+	 * Teste com excecao do metodo cadastrarBluRayShow com usuario nao
+	 * cadastrado
+	 */
 	@Test(expected = NullPointerException.class)
 	public void testCadastrarBluRayShowInvalido() {
 		controller.cadastrarBluRayShow("Barry", "978", "De volta ao futuro", 999, 100000, 88, "DC", "CEM_ANOS");
 	}
 
+	/**
+	 * Teste do metodo cadastrarBluRaySerie
+	 */
 	@Test
 	public void testCadastrarBluRaySerie() {
 		controller.cadastrarBluRaySerie("Cássio", "123", "Arrow", 19.90, "Nasce a lenda", 40, "QUATORZE_ANOS", "Ação",
@@ -197,12 +317,18 @@ public class ControllerTest {
 				controller.pesquisaDetalhesItem("Cássio", "123", "Arrow"));
 	}
 
+	/**
+	 * Teste do metodo cadastrarBluRaySerie com excecao
+	 */
 	@Test(expected = NullPointerException.class)
 	public void testCadastrarBluRaySerieInvalido() {
 		controller.cadastrarBluRaySerie("cassio", "123", "Arrow", 19.90, "Nasce a lenda", 40, "QUATORZE_ANOS", "Ação",
 				1);
 	}
 
+	/**
+	 * Teste do metodo pesquisaDetalhesItem
+	 */
 	@Test
 	public void testPesquisaDetalhesItem() {
 		controller.cadastrarBluRaySerie("Cássio", "123", "The Flash", 19.90, "Nasce a lenda", 40, "QUATORZE_ANOS",
@@ -211,17 +337,26 @@ public class ControllerTest {
 				controller.pesquisaDetalhesItem("Cássio", "123", "The Flash"));
 	}
 
+	/**
+	 * Teste do metodo pesquisaDetalhesItem com excecao, item nao cadastrado
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testPesquisaDetalhesItemInvalido() {
 		controller.pesquisaDetalhesItem("Cássio", "123", "The Flash");
 	}
 
+	/**
+	 * Teste do metodo pesquisaDetalhesItem com excecao, usuario invalido
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testPesquisaDetalhesItemUsuarioInvalido() {
 		controller.cadastrarBluRaySerie("Cássio", "123", "The 100", 19.9, "Muita morte", 40, "LIVRE", "Aventura", 5);
 		controller.pesquisaDetalhesItem("cassio", "123", "The 100");
 	}
 
+	/**
+	 * Teste do metodo getInfoItem
+	 */
 	@Test
 	public void testGetInfoItem() {
 		controller.cadastrarBluRaySerie("Cássio", "123", "The 100", 19.9, "Muita morte", 40, "LIVRE", "Aventura", 5);
@@ -229,19 +364,27 @@ public class ControllerTest {
 		assertEquals("19.9", controller.getInfoItem("Cássio", "123", "The 100", "Preco"));
 	}
 
+	/**
+	 * Teste do metodo pesquisaDetalhesItem com excecao, item nao cadastrado
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetInfoItemInvalido() {
 		controller.getInfoItem("Cássio", "123", "Lanterna verde", "Nome");
 	}
 
+	/**
+	 * Teste do metodo removeItem com excecao, item removido
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testRemoveItem() {
 		controller.cadastrarBluRayFilme("Geovane", "1234", "Mulher Maravilha", 19.0, 130, "Ação", "LIVRE", 2017);
 		controller.removerItem("Geovane", "1234", "Mulher Maravilha");
 		controller.pesquisaDetalhesItem("Geovane", "1234", "Mulher Maravilha");
-		controller.removerItem("Diana", "7", "Laço");
 	}
 
+	/**
+	 * Teste do metodoAtualizaItem
+	 */
 	@Test
 	public void testAtualizaItem() {
 		controller.cadastrarBluRayFilme("Geovane", "1234", "Mulher Maravilha", 19.0, 130, "Ação", "LIVRE", 2017);
@@ -253,11 +396,25 @@ public class ControllerTest {
 		assertEquals("29.9", controller.getInfoItem("Cássio", "123", "The 100", "Preco"));
 	}
 
+	/**
+	 * Teste do metodoAtualizaItem com excecao, usuario nao cadastrado
+	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void testAtualizaItemInvalido() {
+	public void testAtualizaItemUsuarioInvalido() {
 		controller.atualizarItem("Felicity", "90", "Black Mirror", "Nome", "Blacklist");
 	}
 
+	/**
+	 * Teste do metodoAtualizaItem com excecao, item nao cadastrado
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testAtualizaItemInvalido() {
+		controller.atualizarItem("Cássio", "123", "Black Mirror", "Nome", "Blacklist");
+	}
+
+	/**
+	 * Teste do metodo listarItensOrdenadosPorNome
+	 */
 	@Test
 	public void testListarItensOrdenadosPorNome() {
 		assertEquals(
@@ -265,6 +422,9 @@ public class ControllerTest {
 				controller.listarItensOrdenadosPorNome());
 	}
 
+	/**
+	 * Teste do metodo ListarItensOrdenadosPorValor
+	 */
 	@Test
 	public void testListarItensOrdenadosPorValor() {
 		assertEquals(
