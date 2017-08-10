@@ -165,8 +165,8 @@ public class Controller {
 	 *            do usuario.
 	 * @param nomeItem
 	 *            a ser cadastrado.
-	 * @param 
-	 *            do jogo eletronico.
+	 * @param do
+	 *            jogo eletronico.
 	 * @param plataforma
 	 *            do jogo eletronico.
 	 */
@@ -437,8 +437,7 @@ public class Controller {
 	 * 
 	 * @param id
 	 *            id do usuario no mapa de usuarios.
-	 * @return true caso o usuario ja esteja cadastrado ou false caso nao
-	 *         esteja.
+	 * @return true caso o usuario ja esteja cadastrado ou false caso nao esteja.
 	 */
 	private boolean hasUsuario(IdUsuario id) {
 		if (usuarios.containsKey(id)) {
@@ -467,22 +466,46 @@ public class Controller {
 	 * @throws ParseException
 	 */
 	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
-			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) throws ParseException {
-		IdUsuario idDono = new IdUsuario(nomeDono, telefoneDono);
-		IdUsuario idRequerente = new IdUsuario(nomeRequerente, telefoneRequerente);
-		validacao.validaUsuariosEmprestimo(usuarios.containsKey(idDono), usuarios.containsKey(idRequerente));
-		Usuario dono = usuarios.get(idDono);
-		Usuario requerente = usuarios.get(idRequerente);
+			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) {
+
+		Usuario dono = criaUsuario(nomeDono, telefoneDono);
+		Usuario requerente = criaUsuario(nomeRequerente, telefoneRequerente);
+
 		validacao.validaItemEmprestimo(dono.getItem(nomeItem));
 		Item itemEmprestar = dono.getItem(nomeItem);
+
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		java.util.Date data = formato.parse(dataEmprestimo);
+		java.util.Date data = null;
+		try {
+			data = formato.parse(dataEmprestimo);
+		} catch (Exception e) {
+			validacao.dataInvalida();
+		}
 
 		if (itemEmprestar.verificaEmprestado()) {
 			validacao.ItemJaEmprestado();
 		}
+
 		alocarEmprestimos(dono, requerente, itemEmprestar, data, periodo);
 
+	}
+
+	/**
+	 * Pega um usuario do mapa a partir do nome e telefone.
+	 * 
+	 * @param nomeUsuario
+	 *            o nome do usuario.
+	 * @param telefoneUsuario
+	 *            o telefone do usuario.
+	 * @return o Usuario.
+	 */
+	private Usuario criaUsuario(String nomeUsuario, String telefoneUsuario) {
+		IdUsuario idUser = new IdUsuario(nomeUsuario, telefoneUsuario);
+		if (!hasUsuario(idUser)) {
+			validacao.usuarioInvalido();
+		}
+		Usuario user = usuarios.get(idUser);
+		return user;
 	}
 
 	/**
@@ -529,24 +552,26 @@ public class Controller {
 	 * @throws ParseException
 	 */
 	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
-			String nomeItem, String dataEmprestimo, String dataDevolucao) throws ParseException {
-		IdUsuario idDono = new IdUsuario(nomeDono, telefoneDono);
-		IdUsuario idRequerente = new IdUsuario(nomeRequerente, telefoneRequerente);
-		validacao.validaUsuariosEmprestimo(usuarios.containsKey(idDono), usuarios.containsKey(idRequerente));
-		Usuario dono = usuarios.get(idDono);
-		Usuario requerente = usuarios.get(idRequerente);
+			String nomeItem, String dataEmprestimo, String dataDevolucao) {
+
+		Usuario dono = criaUsuario(nomeDono, telefoneDono);
+		Usuario requerente = criaUsuario(nomeRequerente, telefoneRequerente);
 		validacao.validaItemEmprestimo(dono.getItem(nomeItem));
 		Item itemDevolver = dono.getItem(nomeItem);
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		java.util.Date data = formato.parse(dataEmprestimo);
-		java.util.Date dataDev = formato.parse(dataDevolucao);
+		try {
+			java.util.Date data = formato.parse(dataEmprestimo);
+			java.util.Date dataDev = formato.parse(dataDevolucao);
 
-		IdEmprestimo ie = new IdEmprestimo(dono, requerente, itemDevolver, data);
-		if (!emprestimos.containsKey(ie)) {
-			validacao.emprestimoNaoEncontrado();
+			IdEmprestimo ie = new IdEmprestimo(dono, requerente, itemDevolver, data);
+			if (!emprestimos.containsKey(ie)) {
+				validacao.emprestimoNaoEncontrado();
+			}
+			emprestimos.get(ie).devolverItem(dataDev);
+			itemDevolver.setStaus();
+		} catch (ParseException e) {
+			validacao.dataInvalida();
 		}
-		emprestimos.get(ie).devolverItem(dataDev);
-		itemDevolver.setStaus();
 
 	}
 }

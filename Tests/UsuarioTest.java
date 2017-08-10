@@ -228,7 +228,9 @@ public class UsuarioTest {
 		usuario1.adicionarPecaPerdida("Damas", "1 peça preta");
 		assertEquals("JOGO DE TABULEIRO: Damas, R$ 1.99, Nao emprestado, COM PECAS PERDIDAS",
 				usuario1.exibeDetalhesItem("Damas"));
-	}
+	}/**
+	 * Testa o equals de jogoTabuleiro 
+	 */
 
 	/**
 	 * Testa o equals verificando se dois usuarios realmente sao iguais ou nao.

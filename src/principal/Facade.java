@@ -87,7 +87,7 @@ public class Facade {
 	 * 
 	 * @param nome
 	 *            do usuario.
-	 * @param telefone
+nulo	 * @param telefone
 	 *            do usuario.
 	 * @param atributo
 	 *            a ser alterado.
@@ -201,7 +201,7 @@ public class Facade {
 	 *            indicativa da serie.
 	 * @param genero
 	 *            da serie.
-	 * @param temporada
+nulo	 * @param temporada
 	 *            da serie.
 	 */
 	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
@@ -369,7 +369,7 @@ public class Facade {
 	 * @throws ParseException
 	 */
 	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
-			String nomeItem, String dataEmprestimo, String dataDevolucao) throws ParseException {
+			String nomeItem, String dataEmprestimo, String dataDevolucao) {
 		sistema.devolverItem(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem, dataEmprestimo,
 				dataDevolucao);
 	}
