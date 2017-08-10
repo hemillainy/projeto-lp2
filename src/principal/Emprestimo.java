@@ -1,6 +1,15 @@
 package principal;
 
-
+/**
+ * 
+ * Representação de um emprestimo.
+ * 
+ * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
+ * 
+ * @author Cassio Cordeiro - 116210038 Geovane Silva - 116211149 Hemillainy
+ *         Santos - 116210802
+ *
+ */
 public class Emprestimo {
 	private Usuario dono;
 	private Usuario requerente;
@@ -8,8 +17,22 @@ public class Emprestimo {
 	private int periodo;
 	private java.util.Date dataEmprestimo;
 	private java.util.Date dataDevolucao;
-	
-	
+
+	/**
+	 * Constroi um emprestimo a partir de um dono, um requerente, um item, uma
+	 * data e um periodo.
+	 * 
+	 * @param dono
+	 *            dono do item que sera emprestado.
+	 * @param requerente
+	 *            pessoa que esta pegando o item emprestado.
+	 * @param emprestado
+	 *            item emprestado.
+	 * @param dataEmprestimo
+	 *            data em que o emprestimo foi feito.
+	 * @param periodo
+	 *            periodo no qual o requerente deve ficar com o item emprestado.
+	 */
 	public Emprestimo(Usuario dono, Usuario requerente, Item emprestado, java.util.Date dataEmprestimo, int periodo) {
 		this.dono = dono;
 		this.requerente = requerente;
@@ -18,11 +41,20 @@ public class Emprestimo {
 		this.dataDevolucao = null;
 		this.periodo = periodo;
 	}
-	
-	public void devolverItem(java.util.Date  dataDevolucao) {
+
+	/**
+	 * Devolve um item.
+	 * 
+	 * @param dataDevolucao
+	 *            data em que o item foi devolvido.
+	 */
+	public void devolverItem(java.util.Date dataDevolucao) {
 		this.dataDevolucao = dataDevolucao;
 	}
 
+	/**
+	 * Gera uma representacao numerica para um emprestimo.
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -33,6 +65,9 @@ public class Emprestimo {
 		return result;
 	}
 
+	/**
+	 * Verifica se dois emprestimos sao iguais.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -59,11 +94,15 @@ public class Emprestimo {
 			return false;
 		return true;
 	}
-	
-	public String toString() {
-		return this.dono.getNome() + " - " + this.requerente.getNome() + " - " + this.emprestado.getNome() + " - " + this.periodo + " - " +
-				this.dataEmprestimo + " - " + this.dataDevolucao;
-	}
 
+	/**
+	 * Gera a representacao em String de um emprestimo. A representacao segue o
+	 * formato: DONO DO ITEM - REQUERENTE - ITEM EMPRESTADO - DATA DO EMPRESTIMO
+	 * - DATA DA DEVOLUCAO.
+	 */
+	public String toString() {
+		return this.dono.getNome() + " - " + this.requerente.getNome() + " - " + this.emprestado.getNome() + " - "
+				+ this.periodo + " - " + this.dataEmprestimo + " - " + this.dataDevolucao;
+	}
 
 }
