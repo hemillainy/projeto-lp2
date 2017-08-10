@@ -2,12 +2,35 @@ package principal;
 
 import java.util.Date;
 
+/**
+ * 
+ * Representacao de um id de um emprestimo.
+ * 
+ * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
+ * 
+ * @author Cassio Cordeiro - 116210038 Geovane Silva - 116211149 Hemillainy
+ *         Santos - 116210802
+ *
+ */
 public class IdEmprestimo {
 	Usuario dono;
 	Usuario requerente;
 	Item itemEmprestado;
 	java.util.Date dataEmprestimo;
-	
+
+	/**
+	 * Constroi um idEmprestimo a partir de um dono, de um requerente, de um
+	 * item e de uma data de emprestimo.
+	 * 
+	 * @param dono
+	 *            dono do item emprestado.
+	 * @param requerente
+	 *            usuario que esta pegando o item emprestado.
+	 * @param itemEmprestado
+	 *            item emprestado.
+	 * @param dataEmprestimo
+	 *            data em que foi feito o emprestimo.
+	 */
 	public IdEmprestimo(Usuario dono, Usuario requerente, Item itemEmprestado, Date dataEmprestimo) {
 		this.dono = dono;
 		this.requerente = requerente;
@@ -26,6 +49,10 @@ public class IdEmprestimo {
 		return result;
 	}
 
+	/**
+	 * Compara dois id's. Dois id's sao iguais quando possuem os mesmos donos,
+	 * iten emprestado, data de emprestimo e requerente.
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -57,8 +84,5 @@ public class IdEmprestimo {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 }

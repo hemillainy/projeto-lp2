@@ -52,9 +52,6 @@ public class Emprestimo {
 		this.dataDevolucao = dataDevolucao;
 	}
 
-	/**
-	 * Gera uma representacao numerica para um emprestimo.
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -66,7 +63,8 @@ public class Emprestimo {
 	}
 
 	/**
-	 * Verifica se dois emprestimos sao iguais.
+	 * Verifica se dois emprestimos sao iguais. Dois emprestimos sao iguais se
+	 * possuirem o mesmo dono, requerente e data de emprestimo.
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -99,6 +97,8 @@ public class Emprestimo {
 	 * Gera a representacao em String de um emprestimo. A representacao segue o
 	 * formato: DONO DO ITEM - REQUERENTE - ITEM EMPRESTADO - DATA DO EMPRESTIMO
 	 * - DATA DA DEVOLUCAO.
+	 * 
+	 * @return a representacao em String de um emprestimo.
 	 */
 	public String toString() {
 		return this.dono.getNome() + " - " + this.requerente.getNome() + " - " + this.emprestado.getNome() + " - "
