@@ -6,11 +6,20 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import org.junit.Test;
-
+/**
+ * Testes da classe IdEmprestimo.
+ * 
+ * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
+ * 
+ * @author Cassio Cordeiro - 116210038
+ * 		   Geovane Silva - 116211149
+ * 		   Hemillainy Santos - 116210802
+ *
+ */
 public class IdEmprestimoTest {
 	
 	/**
-	 * Teste do metodo equals 
+	 * Teste do metodo equals.
 	 * @throws ParseException
 	 */
 	@Test
