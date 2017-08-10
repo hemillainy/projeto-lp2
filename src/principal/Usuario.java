@@ -386,6 +386,9 @@ public class Usuario {
 	 * @return o item pego.
 	 */
 	public Item getItem(String nomeItem) {
+		if (!hasItem(nomeItem)) {
+			validacao.itemNaoEncontrado();
+		}
 		return itens.get(nomeItem);
 	}
 

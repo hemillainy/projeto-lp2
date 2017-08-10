@@ -99,11 +99,39 @@ public class UsuarioTest {
 				usuario2.exibeDetalhesItem("Liga da Justiça"));
 	}
 
+	/**
+	 * Testa o metodo exibe detalhes de um item para um item com nome nulo. Uma
+	 * excecao eh esperada.
+	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void testExibeDetalhesItemInvallido() {
+	public void testExibeDetalhesItemNulo() {
 		usuario3.exibeDetalhesItem(null);
+	}
+
+	/**
+	 * Testa o metodo exibe detalhes de um item para um item com nome Invalido
+	 * (vazio). Uma excecao eh esperada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testExibeDetalhesItemInvalido() {
 		usuario2.exibeDetalhesItem("");
+	}
+
+	/**
+	 * Testa o metodo exibe detalhes de um item para um item com nome composto
+	 * de espacos. Uma excecao eh esperada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testExibeDetalhesItemEspacos() {
 		usuario1.exibeDetalhesItem("   ");
+	}
+
+	/**
+	 * Testa o metodo exibe detalhes de um item para um item inexistente. Uma
+	 * excecao eh esperada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testExibeDetalhesItemInexistente() {
 		usuario3.exibeDetalhesItem("Cubo mágico");
 	}
 
@@ -162,7 +190,8 @@ public class UsuarioTest {
 	}
 
 	/**
-	 * 
+	 * Testa o metodo de alterar o nome de um item. Primeiro eh alterado o nome
+	 * do item e depois eh verificado com o auxilio do metodo getNomeItem
 	 */
 	@Test
 	public void testAlteraNomeItem() {
@@ -170,18 +199,30 @@ public class UsuarioTest {
 		assertEquals("Flashpoint", usuario2.getNomeItem("Flashpoint"));
 	}
 
+	/**
+	 * Testa o metodo de alterar nome de um item. Eh esperada uma excecao pois o
+	 * item que tenta atualizar nao existe.
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAlteraNomeItemInvalido() {
 		usuario1.atualizaNomeItem("Jogos Vorazes", "X-men");
 		usuario1.getNomeItem("X-men");
 	}
 
+	/**
+	 * Testa o metodo de atualizar que atualiza o preco de um item. Primeiro eh
+	 * feita a atualizacao, depois a verificacao com auxilio do getPrecoItem.
+	 */
 	@Test
 	public void testAtualizaPrecoItem() {
 		usuario3.atualizaPrecoItem("Tetris", "50.00");
 		assertEquals("50.0", usuario3.getPrecoItem("Tetris"));
 	}
 
+	/**
+	 * Testa o metodo de adiconar pecas perdidas em um jogo de tabuleiro. A
+	 * verificacao eh feita com auxilio do metodo ecibeDetalhesItem.
+	 */
 	@Test
 	public void testAdicionaPecaPerdida() {
 		usuario1.adicionarPecaPerdida("Damas", "1 peça preta");
@@ -189,6 +230,9 @@ public class UsuarioTest {
 				usuario1.exibeDetalhesItem("Damas"));
 	}
 
+	/**
+	 * Testa o equals verificando se dois usuarios realmente sao iguais ou nao.
+	 */
 	@Test
 	public void testEquals() {
 		Usuario usuario4 = new Usuario("Geovane", "1234567", "geovane.silva");
@@ -196,12 +240,19 @@ public class UsuarioTest {
 		assertFalse(usuario3.equals(usuario4));
 	}
 
+	/**
+	 * Testa o metodo getItem para um item cadastrado no usuario2.
+	 */
 	@Test
 	public void testGetItem() {
 		assertEquals(14.0, usuario2.getItem("Liga da Justiça").getPreco(), 0.01);
 	}
 
-	@Test
+	/**
+	 * Testa o metodo getItem para um item nao cadastradao. Uma excecao eh
+	 * esperada.
+	 */
+	@Test(expected = IllegalArgumentException.class)
 	public void testGetItemInvalido() {
 		assertEquals(null, usuario3.getItem("Damas"));
 	}
