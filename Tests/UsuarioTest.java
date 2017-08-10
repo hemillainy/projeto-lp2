@@ -4,12 +4,25 @@ import org.junit.Before;
 import org.junit.Test;
 import principal.*;
 
+/**
+ * Testes da classe Usuario.
+ * 
+ * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
+ * 
+ * @author Cassio Cordeiro - 116210038 Geovane Silva - 116211149 Hemillainy
+ *         Santos - 116210802
+ * 
+ */
 public class UsuarioTest {
 
 	Usuario usuario1;
 	Usuario usuario2;
 	Usuario usuario3;
 
+	/**
+	 * Inicializaco de 3 usuarios basicos para auxilio nos testes. Alguns itens
+	 * tambem sao cadastrados.
+	 */
 	@Before
 	public void CriaUsuario() {
 		usuario1 = new Usuario("Cássio", "123456", "cassio.cordeiro");
@@ -23,38 +36,63 @@ public class UsuarioTest {
 		usuario2.cadastraBluRayShow("Mares", 500, 120, "QUATORZE_ANOS", "Bruno Mars", 11);
 	}
 
+	/**
+	 * Testa se a saida do getEmail esta conforme o esperado.
+	 */
 	@Test
 	public void testGetEmail() {
 		assertEquals("cassio.cordeiro", usuario1.getEmail());
 	}
 
+	/**
+	 * Testa se a saida do getNome esta conforme o esperado.
+	 */
 	@Test
 	public void testGetNome() {
 		assertEquals("Geovane", usuario2.getNome());
 	}
 
+	/**
+	 * Testa se a saida do getTelefone esta conforme o esperado.
+	 */
 	@Test
 	public void testGetTelefone() {
 		assertEquals("12345678", usuario3.getTelefone());
 	}
 
+	/**
+	 * Testa o metodo setEmail. Primeiro o metodo e invocado e depois com
+	 * auxilio de getEmail eh verificado se o email realmente foi
+	 * alterado.
+	 */
 	@Test
 	public void testSetEmail() {
 		usuario1.setEmail("cassio.eduardo");
 		assertEquals("cassio.eduardo", usuario1.getEmail());
 	}
 
+	/**
+	 * Testa o metodo setTelefone. Primeiro o metodo e invocado e depois com
+	 * auxilio de getTelefone eh verificado se o telefone realmente foi
+	 * alterado.
+	 */
 	@Test
 	public void testSetTelefone() {
 		usuario2.setTelefone("147");
 		assertEquals("147", usuario2.getTelefone());
 	}
 
+	/**
+	 * Testa se a saida do toString para o usuario3 esta conforme o esperado. 
+	 */
 	@Test
 	public void testToString() {
 		assertEquals("Hemillainy, hemillainy.santos, 12345678", usuario3.toString());
 	}
 
+	/**
+	 * Testa o metodo que exibe detalhes de um item para um item cadastrado no usuario 2. 
+	 */
 	@Test
 	public void testExibeDetalhesItem() {
 		assertEquals("FILME: Liga da Justiça, R$ 14.0, Nao emprestado, 180 min, DEZESSEIS_ANOS, AÇÃO, 2017",
@@ -69,26 +107,41 @@ public class UsuarioTest {
 		usuario3.exibeDetalhesItem("Cubo mágico");
 	}
 
+	/**
+	 * Testa o metodo getPrecoItem em um item cadastrado no usuario3. 
+	 */
 	@Test
 	public void testGetPrecoItem() {
 		assertEquals("10.0", usuario3.getPrecoItem("Tetris"));
 	}
 
+	/**
+	 * Testa o metodo getNomeItem em um item cadastrado no usuario1. 
+	 */
 	@Test
 	public void testGetNomeItem() {
 		assertEquals("The 100", usuario1.getNomeItem("The 100"));
 	}
 
+	/**
+	 * Testa o metodo getPrecoItem para um item nao cadastrado. Uma excecao eh esperada. 
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetPrecoItemInvalido() {
 		usuario2.getPrecoItem("Naruto");
 	}
 
+	/**
+	 * Testa o metodo getNomeItem para um item nao cadastrado. Uma excecao eh esperada. 
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetNomeItemInvalido() {
 		usuario3.getNomeItem("Box GOT");
 	}
 
+	/**
+	 * Testa o metodo que remove o item de um usuario. Primeiro o i
+	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testRemoverItem() {
 		usuario1.removerItem("Damas");
@@ -131,12 +184,12 @@ public class UsuarioTest {
 		assertTrue(usuario2.equals(usuario4));
 		assertFalse(usuario3.equals(usuario4));
 	}
-	
+
 	@Test
 	public void testGetItem() {
 		assertEquals(14.0, usuario2.getItem("Liga da Justiça").getPreco(), 0.01);
 	}
-	
+
 	@Test
 	public void testGetItemInvalido() {
 		assertEquals(null, usuario3.getItem("Damas"));
