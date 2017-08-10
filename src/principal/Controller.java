@@ -11,6 +11,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Representação de um Controller.
+ * 
+ * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
+ * 
+ * @author Cassio Cordeiro - 116210038 Geovane Silva - 116211149 Hemillainy
+ *         Santos - 116210802
+ *
+ */
 public class Controller {
 	private Validacao validacao;
 	private Map<IdUsuario, Usuario> usuarios;
@@ -25,6 +34,16 @@ public class Controller {
 
 	}
 
+	/**
+	 * Metodo que cadastra um usuario no sistema.
+	 * 
+	 * @param nome
+	 *            do usuario.
+	 * @param telefone
+	 *            do usuario.
+	 * @param email
+	 *            do usuario.
+	 */
 	public void cadastraUsuario(String nome, String telefone, String email) {
 		validacao.dadoUsuarioInvalido(nome, telefone, email);
 		IdUsuario id = new IdUsuario(nome, telefone);
@@ -35,6 +54,14 @@ public class Controller {
 		usuarios.put(id, usuario);
 	}
 
+	/**
+	 * Metodo que remove um usuario do sistema.
+	 * 
+	 * @param nome
+	 *            do usuario.
+	 * @param telefone
+	 *            do usuario.
+	 */
 	public void removeUsuario(String nome, String telefone) {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		if (!hasUsuario(id)) {
@@ -43,6 +70,17 @@ public class Controller {
 		usuarios.remove(id);
 	}
 
+	/**
+	 * Metodo que retorna um atributo de um usuario.
+	 * 
+	 * @param nome
+	 *            do usuario.
+	 * @param telefone
+	 *            do usuario.
+	 * @param atributo
+	 *            que se deseja.
+	 * @return o atributo desejado.
+	 */
 	public String getInfoUsuario(String nome, String telefone, String atributo) {
 		String info = "";
 		IdUsuario id = new IdUsuario(nome, telefone);
@@ -55,7 +93,18 @@ public class Controller {
 		return info;
 	}
 
-
+	/**
+	 * Metodo que atualiza um atributo de um usuario.
+	 * 
+	 * @param nome
+	 *            do usuario.
+	 * @param telefone
+	 *            do usuario.
+	 * @param atributo
+	 *            a ser alterado.
+	 * @param valor
+	 *            para substituir o valor antigo do atributo.
+	 */
 	public void atualizaUsuario(String nome, String telefone, String atributo, String valor) {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		if (!hasUsuario(id)) {
@@ -70,11 +119,35 @@ public class Controller {
 		}
 	}
 
+	/**
+	 * Metodo que adiciona um BluRay a uma serie.
+	 * 
+	 * @param nome
+	 *            do usuario.
+	 * @param telefone
+	 *            do usuario.
+	 * @param nomeBluRayTemporada
+	 *            a ser cadastrado o BluRay.
+	 * @param duracao
+	 *            do episodio.
+	 */
 	public void adicionarBluRay(String nome, String telefone, String nomeBluRayTemporada, int duracao) {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		usuarios.get(id).adicionaBluRay(nomeBluRayTemporada, duracao);
 	}
 
+	/**
+	 * Metodo que adiciona uma peca perida a um jogo de tabuleiro.
+	 * 
+	 * @param nome
+	 *            do usuario.
+	 * @param telefone
+	 *            do usuario.
+	 * @param nomeItem
+	 *            a ser adicionada a peca.
+	 * @param nomePeca
+	 *            a ser adicionada como perdida.
+	 */
 	public void adicionarPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		if (!hasUsuario(id)) {
@@ -83,6 +156,20 @@ public class Controller {
 		usuarios.get(id).adicionarPecaPerdida(nomeItem, nomePeca);
 	}
 
+	/**
+	 * Metodo que cadastra um jogo eletronico.
+	 * 
+	 * @param nome
+	 *            do usuario.
+	 * @param telefone
+	 *            do usuario.
+	 * @param nomeItem
+	 *            a ser cadastrado.
+	 * @param preco
+	 *            do jogo eletronico.
+	 * @param plataforma
+	 *            do jogo eletronico.
+	 */
 	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
 		validacao.itemInvalido(nomeItem, preco, plataforma);
 		IdUsuario id = new IdUsuario(nome, telefone);
@@ -93,6 +180,18 @@ public class Controller {
 		us.cadastraItem(nomeItem, preco, plataforma);
 	}
 
+	/**
+	 * Metodo que cadastra um jogo de tabuleiro.
+	 * 
+	 * @param nome
+	 *            do usuario.
+	 * @param telefone
+	 *            do usuario.
+	 * @param nomeItem
+	 *            a ser cadastrado.
+	 * @param preco
+	 *            do item.
+	 */
 	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
 		validacao.itemInvalido(nomeItem, preco);
 		IdUsuario id = new IdUsuario(nome, telefone);
@@ -102,20 +201,83 @@ public class Controller {
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco);
 	}
+
+	/**
+	 * Metodo que cadastra um filme.
+	 * 
+	 * @param nome
+	 *            do usuario.
+	 * @param telefone
+	 *            do usuario.
+	 * @param nomeItem
+	 *            a ser cadastrado.
+	 * @param preco
+	 *            do item.
+	 * @param duracao
+	 *            do filme.
+	 * @param genero
+	 *            do filme.
+	 * @param classificacao
+	 *            indicativa do filme.
+	 * @param lancamento
+	 *            do filme.
+	 */
 	public void cadastrarBluRayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
 			String genero, String classificacao, int lancamento) {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco, duracao, genero, classificacao, lancamento);
 	}
-	
+
+	/**
+	 * Metodo que cadastra um show.
+	 * 
+	 * @param nome
+	 *            do usuario.
+	 * @param telefone
+	 *            do usuario.
+	 * @param nomeItem
+	 *            a ser cadastrado.
+	 * @param preco
+	 *            do item.
+	 * @param duracao
+	 *            do show.
+	 * @param faixas
+	 *            do show.
+	 * @param artista
+	 *            que realizou o show.
+	 * @param classificacao
+	 *            indicativa do show.
+	 */
 	public void cadastrarBluRayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
 			int faixas, String artista, String classificacao) {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		Usuario us = usuarios.get(id);
 		us.cadastraBluRayShow(nomeItem, preco, duracao, classificacao, artista, faixas);
 	}
-	
+
+	/**
+	 * Metodo que cadastra uma serie.
+	 * 
+	 * @param nome
+	 *            do usuario.
+	 * @param telefone
+	 *            do usuario.
+	 * @param nomeItem
+	 *            a ser cadastrado.
+	 * @param preco
+	 *            do item.
+	 * @param descricao
+	 *            da serie.
+	 * @param duracao
+	 *            da serie.
+	 * @param classificacao
+	 *            indicativa da serie.
+	 * @param genero
+	 *            da serie.
+	 * @param temporada
+	 *            da serie.
+	 */
 	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
 			int duracao, String classificacao, String genero, int temporada) {
 		IdUsuario id = new IdUsuario(nome, telefone);
@@ -123,6 +285,17 @@ public class Controller {
 		us.cadastraItem(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
 	}
 
+	/**
+	 * Metodo que retorna a representacao de um item.
+	 * 
+	 * @param nome
+	 *            do usuario.
+	 * @param telefone
+	 *            do usuario.
+	 * @param nomeItem
+	 *            a ser pesquisado.
+	 * @return a representacao do item.
+	 */
 	public String pesquisaDetalhesItem(String nome, String telefone, String item) {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		if (!hasUsuario(id)) {
@@ -131,6 +304,19 @@ public class Controller {
 		return usuarios.get(id).exibeDetalhesItem(item);
 	}
 
+	/**
+	 * Metodo que retorna uma informacao de um item.
+	 * 
+	 * @param nome
+	 *            do usuario.
+	 * @param telefone
+	 *            do usuario.
+	 * @param nomeItem
+	 *            que se deseja pegar a informacao.
+	 * @param atributo
+	 *            que se deseja visualizar.
+	 * @return a informacao correspondente ao atributo desejado.
+	 */
 	public String getInfoItem(String nome, String telefone, String nomeItem, String atributo) {
 		String info = "";
 		IdUsuario id = new IdUsuario(nome, telefone);
@@ -142,6 +328,16 @@ public class Controller {
 		return info;
 	}
 
+	/**
+	 * Metodo que remove um item.
+	 * 
+	 * @param nome
+	 *            do usuario.
+	 * @param telefone
+	 *            do usuario.
+	 * @param nomeItem
+	 *            a ser removido.
+	 */
 	public void removerItem(String nome, String telefone, String nomeItem) {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		if (!hasUsuario(id)) {
@@ -151,6 +347,20 @@ public class Controller {
 
 	}
 
+	/**
+	 * Metodo que atualiza uma informacao de um item.
+	 * 
+	 * @param nome
+	 *            do usuario.
+	 * @param telefone
+	 *            do usuario.
+	 * @param nomeItem
+	 *            a ser alterado.
+	 * @param atributo
+	 *            que se deseja alterar.
+	 * @param valor
+	 *            para substituir o valor antigo do atributo.
+	 */
 	public void atualizarItem(String nome, String telefone, String nomeItem, String atributo, String valor) {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		if (!hasUsuario(id)) {
@@ -163,7 +373,11 @@ public class Controller {
 		}
 	}
 
-
+	/**
+	 * Metodo que lista todos os itens em ordem lexicografica.
+	 * 
+	 * @return a listagem de todos os itens em ordem lexicografica.
+	 */
 	public String listarItensOrdenadosPorNome() {
 		Set<Item> it = new HashSet<>();
 		for (Usuario us : usuarios.values()) {
@@ -179,6 +393,11 @@ public class Controller {
 		return itens;
 	}
 
+	/**
+	 * Metodo que lista todos os itens em ordem crescente de valor.
+	 * 
+	 * @return a listagem de todos os itens em ordem crecente de valor.
+	 */
 	public String listarItensOrdenadosPorValor() {
 		Set<Item> it = new HashSet<>();
 		for (Usuario us : usuarios.values()) {
@@ -194,20 +413,59 @@ public class Controller {
 		return itens;
 	}
 
-
+	/**
+	 * Remove um usuario do mapa para adicioná-lo novamento com uma nova key.
+	 * 
+	 * @param nome
+	 *            nome do usuario.
+	 * @param telefone
+	 *            telefone do usuario.
+	 * @param valor
+	 *            novo telefone do ususario.
+	 * @param usuario
+	 *            usuario.
+	 */
 	private void setKey(String nome, String telefone, String valor, Usuario usuario) {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		usuarios.remove(id);
 		IdUsuario novoId = new IdUsuario(nome, valor);
 		usuarios.put(novoId, usuario);
 	}
+
+	/**
+	 * Verifica se o usuario ja esta cadastrado.
+	 * 
+	 * @param id
+	 *            id do usuario no mapa de usuarios.
+	 * @return true caso o usuario ja esteja cadastrado ou false caso nao
+	 *         esteja.
+	 */
 	private boolean hasUsuario(IdUsuario id) {
 		if (usuarios.containsKey(id)) {
 			return true;
 		}
 		return false;
 	}
-	
+
+	/**
+	 * Metodo que realiza um emprestimo.
+	 * 
+	 * @param nomeDono
+	 *            do item.
+	 * @param telefoneDono
+	 *            do item.
+	 * @param nomeRequerente
+	 *            do emprestimo.
+	 * @param telefoneRequerente
+	 *            do emprestimo.
+	 * @param nomeItem
+	 *            a ser emprestado.
+	 * @param dataEmprestimo
+	 *            que houve o emprestimo.
+	 * @param periodo
+	 *            de emprestimo.
+	 * @throws ParseException
+	 */
 	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
 			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) throws ParseException {
 		IdUsuario idDono = new IdUsuario(nomeDono, telefoneDono);
@@ -219,13 +477,12 @@ public class Controller {
 		Item itemEmprestar = dono.getItem(nomeItem);
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		java.util.Date data = formato.parse(dataEmprestimo);
-		
+
 		if (itemEmprestar.verificaEmprestado()) {
 			validacao.ItemJaEmprestado();
 		}
 		alocarEmprestimos(dono, requerente, itemEmprestar, data, periodo);
-		
-		
+
 	}
 
 	private void alocarEmprestimos(Usuario dono, Usuario requerente, Item itemEmprestar, Date data, int periodo) {
@@ -237,6 +494,25 @@ public class Controller {
 		itemEmprestar.setStaus();
 	}
 
+	/**
+	 * Metodo que devolve um item.
+	 * 
+	 * @param nomeDono
+	 *            do item.
+	 * @param telefoneDono
+	 *            do item.
+	 * @param nomeRequerente
+	 *            do emprestimo.
+	 * @param telefoneRequerente
+	 *            do emprestimo.
+	 * @param nomeItem
+	 *            a ser devolvido.
+	 * @param dataEmprestimo
+	 *            que aconteceu o emprestimo.
+	 * @param dataDevolucao
+	 *            do item.
+	 * @throws ParseException
+	 */
 	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
 			String nomeItem, String dataEmprestimo, String dataDevolucao) throws ParseException {
 		IdUsuario idDono = new IdUsuario(nomeDono, telefoneDono);
@@ -249,14 +525,13 @@ public class Controller {
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		java.util.Date data = formato.parse(dataEmprestimo);
 		java.util.Date dataDev = formato.parse(dataDevolucao);
-		
+
 		IdEmprestimo ie = new IdEmprestimo(dono, requerente, itemDevolver, data);
 		if (!emprestimos.containsKey(ie)) {
 			validacao.emprestimoNaoEncontrado();
 		}
 		emprestimos.get(ie).devolverItem(dataDev);
 		itemDevolver.setStaus();
-		
-		
-}
+
+	}
 }
