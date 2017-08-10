@@ -165,7 +165,7 @@ public class Controller {
 	 *            do usuario.
 	 * @param nomeItem
 	 *            a ser cadastrado.
-	 * @param preco
+	 * @param 
 	 *            do jogo eletronico.
 	 * @param plataforma
 	 *            do jogo eletronico.
@@ -485,6 +485,21 @@ public class Controller {
 
 	}
 
+	/**
+	 * Cria um emprestimo e um idEmprestimo. Adiciona o emprestimo no map de
+	 * emprestimos e passa-o para o dono e o requerente.
+	 * 
+	 * @param dono
+	 *            dono do item emprestado.
+	 * @param requerente
+	 *            usuario que ira pegar o item emprestado.
+	 * @param itemEmprestar
+	 *            item que sera emprestado.
+	 * @param data
+	 *            data em que foi realizado o emprestimo.
+	 * @param periodo
+	 *            periodo em que o requerente deve ficar com o item.
+	 */
 	private void alocarEmprestimos(Usuario dono, Usuario requerente, Item itemEmprestar, Date data, int periodo) {
 		Emprestimo e = new Emprestimo(dono, requerente, itemEmprestar, data, periodo);
 		IdEmprestimo ie = new IdEmprestimo(dono, requerente, itemEmprestar, data);
