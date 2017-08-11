@@ -1,5 +1,7 @@
 package itens.blurays;
 
+import enums.Genero;
+
 /**
  * Classe que representa um Filme.
  * 
@@ -12,7 +14,7 @@ package itens.blurays;
  */
 public class Filme extends BluRay {
 	
-	private String genero;
+	private Genero genero;
 	private int lancamento;
 	
 	/**
@@ -26,7 +28,7 @@ public class Filme extends BluRay {
 	 */
 	public Filme (String nome, double valor, int duracao, String classificacao, String genero, int lancamento) {
 		super(nome, valor, duracao, classificacao);
-		this.genero = genero;
+		this.genero = Genero.valueOf(genero);
 		this.lancamento = lancamento;
 	}
 	 /**
@@ -34,7 +36,7 @@ public class Filme extends BluRay {
 	  */
 	public String toString() {
 		return "FILME: " + this.nome + ", R$ " + this.preco + ", " + status.getValor() + ", " + this.duracao + " min" + ", " + 
-				this.classificacao + ", " + this.genero + ", " + this.lancamento;
+				this.classificacao.getValor() + ", " + this.genero + ", " + this.lancamento;
 	}
 
 }
