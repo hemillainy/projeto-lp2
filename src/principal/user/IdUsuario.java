@@ -11,8 +11,8 @@ package principal.user;
  */
 public class IdUsuario {
 
-	String nome;
-	String telefone;
+	private String nome;
+	private String telefone;
 
 	/**
 	 * Construtor de idUsuario.
