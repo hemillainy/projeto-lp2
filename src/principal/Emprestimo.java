@@ -102,7 +102,7 @@ public class Emprestimo {
 	 */
 	public String toString() {
 		return this.dono.getNome() + " - " + this.requerente.getNome() + " - " + this.emprestado.getNome() + " - "
-				+ this.periodo + " - " + this.dataEmprestimo + " - " + this.dataDevolucao;
+				+ this.periodo + " - " + this.dataEmprestimo;
 	}
 
 }
