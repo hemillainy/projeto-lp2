@@ -3,6 +3,8 @@ package principal.item.blurays;
 import java.util.ArrayList;
 import java.util.List;
 
+import enums.Genero;
+
 /**
  * Classe que representa uma serie.
  * 
@@ -15,7 +17,7 @@ import java.util.List;
  */
 public class Serie extends BluRay {
 
-	private String genero;
+	private Genero genero;
 	private int temporada;
 	private List<Integer> episodios;
 	
@@ -30,7 +32,7 @@ public class Serie extends BluRay {
 	 */
 	public Serie(String nome, double valor, int duracao, String classificacao, String genero, int temporada) {
 		super(nome, valor, duracao, classificacao);
-		this.genero = genero;
+		this.genero = Genero.valueOf(genero);
 		this.temporada = temporada;
 		this.episodios = new ArrayList<>();
 	}
@@ -48,6 +50,6 @@ public class Serie extends BluRay {
 	 */
 	public String toString() {
 		return "SERIE: " + this.nome + ", R$ " + this.preco + ", " + status.getValor() + ", " + this.duracao + " min" + ", "
-				+ this.classificacao.getValor() + ", " + this.genero + ", Temporada " + this.temporada;
+				+ this.classificacao.getValor() + ", " + this.genero.getValor() + ", Temporada " + this.temporada;
 	}
 }
