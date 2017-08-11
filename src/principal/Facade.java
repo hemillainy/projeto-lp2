@@ -16,7 +16,7 @@ import easyaccept.EasyAccept;
 public class Facade {
 	public static void main(String[] args) {
 		args = new String[] { "principal.Facade", "acceptance_test/us1_test.txt", "acceptance_test/us2_test.txt",
-				"acceptance_test/us3_test.txt", "acceptance_test/us4_test.txt" };
+				"acceptance_test/us3_test.txt", "acceptance_test/us4_test.txt", "acceptance_test/us5_test.txt" };
 		EasyAccept.main(args);
 	}
 
@@ -373,4 +373,67 @@ nulo	 * @param temporada
 		sistema.devolverItem(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem, dataEmprestimo,
 				dataDevolucao);
 	}
+	
+	// ###################################  US5  ###################################
+	
+	/**
+	 * Metodo que lista os emprestimos realizados por um usuario.
+	 * @param nome do usuario.
+	 * @param telefone do usuario.
+	 * @return a listagem dos emprestimos feitos pelo usuario.
+	 */
+	public String listarEmprestimosUsuarioEmprestando(String nome, String telefone) {
+		
+		return null;
+	}
+	
+	/**
+	 * Metodo que lista os emprestimos concedidos a um ususario.
+	 * @param nome do ususario.
+	 * @param telefone do usuario.
+	 * @return a listagem do emprestimos concedidos a um usuario.
+	 */
+	public String listarEmprestimosUsuarioPegandoEmprestado(String nome, String telefone) {
+		
+		return null;
+	}
+	
+	/**
+	 * Metodo que lista os emprestimos que realizados com o item.
+	 * @param nomeItem nome do item.
+	 * @return a listagem com os emprestimos que o item participou.
+	 */
+	public String listarEmprestimosItem(String nomeItem) {
+		
+		return null;
+	}
+	
+	/**
+	 * Metodo que lista os itens cadastrados nao emprestados.
+	 * @return a listagem dos itens nao cadastrados.
+	 */
+	public String listarItensNaoEmprestados() {
+		
+		return null;
+	}
+	
+	/**
+	 * Metodo que lista os itens cadastrados nao emprestados.
+	 * @return a listagem com os itens emprestados.
+	 */
+	public String listarItensEmprestados() {
+		
+		return null;
+	}
+	
+	/**
+	 * Metodo que lista os 10 itens mais emprestados.
+	 * @return a listagem com os 10 itens mais emprestados.
+	 */
+	public String listarTop10Itens() {
+		
+		return null;
+	}
+	
+	// ###################################  US6  ###################################
 }
