@@ -1,5 +1,6 @@
 package itens.jogos;
 
+import enums.Plataforma;
 import principal.Item;
 
 /**
@@ -14,7 +15,7 @@ import principal.Item;
  */
 public class JogoEletronico extends Item {
 
-	private String plataforma;
+	private Plataforma plataforma;
 	
 	/**
 	 * Construtor de jogo eletronico.
@@ -24,7 +25,7 @@ public class JogoEletronico extends Item {
 	 */
 	public JogoEletronico(String nome, double valor, String plataforma) {
 		super(nome, valor);
-		this.plataforma = plataforma;
+		this.plataforma = Plataforma.valueOf(plataforma);
 	}
 	
 	/**

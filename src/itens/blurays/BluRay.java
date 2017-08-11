@@ -1,5 +1,6 @@
 package itens.blurays;
 
+import enums.Classificacao;
 import principal.Item;
 
 /**
@@ -15,7 +16,7 @@ import principal.Item;
 public abstract class BluRay extends Item {
 	
 
-	protected String classificacao;
+	protected Classificacao classificacao;
 	protected int duracao;
 	
 	/**
@@ -27,7 +28,7 @@ public abstract class BluRay extends Item {
 	 */
 	public BluRay(String nome, double valor, int duracao, String classificacao) {
 		super(nome, valor);
-		this.classificacao = classificacao;
+		this.classificacao = Classificacao.valueOf(classificacao);
 		this.duracao = duracao;
 	}
 	

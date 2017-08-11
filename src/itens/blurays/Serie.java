@@ -48,6 +48,6 @@ public class Serie extends BluRay {
 	 */
 	public String toString() {
 		return "SERIE: " + this.nome + ", R$ " + this.preco + ", " + status.getValor() + ", " + this.duracao + " min" + ", "
-				+ this.classificacao + ", " + this.genero + ", Temporada " + this.temporada;
+				+ this.classificacao.getValor() + ", " + this.genero + ", Temporada " + this.temporada;
 	}
 }

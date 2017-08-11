@@ -1,7 +1,7 @@
 package enums;
 
 /**
- * Enum responsável pelo estado de empréstimo de um item.
+ * Enum responsavel pelo estado de emprestimo de um item.
  * 
  * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
  * 
@@ -11,8 +11,7 @@ package enums;
  *
  */
 public enum StatusEmprestado {
-	EMPRESTADO("Emprestado"), 
-	NAO_EMPRESTADO("Nao emprestado");
+	EMPRESTADO("Emprestado"), NAO_EMPRESTADO("Nao emprestado");
 	
 	private final String valor;
 	
