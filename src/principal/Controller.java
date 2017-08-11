@@ -1,10 +1,10 @@
 package principal;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -444,7 +444,8 @@ public class Controller {
 	 * 
 	 * @param id
 	 *            id do usuario no mapa de usuarios.
-	 * @return true caso o usuario ja esteja cadastrado ou false caso nao esteja.
+	 * @return true caso o usuario ja esteja cadastrado ou false caso nao
+	 *         esteja.
 	 */
 	private boolean hasUsuario(IdUsuario id) {
 		if (usuarios.containsKey(id)) {
@@ -481,13 +482,8 @@ public class Controller {
 		validacao.validaItemEmprestimo(dono.getItem(nomeItem));
 		Item itemEmprestar = dono.getItem(nomeItem);
 
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		java.util.Date data = null;
-		try {
-			data = formato.parse(dataEmprestimo);
-		} catch (Exception e) {
-			validacao.dataInvalida();
-		}
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate data = LocalDate.parse(dataEmprestimo, dtf);
 
 		if (itemEmprestar.verificaEmprestado()) {
 			validacao.ItemJaEmprestado();
@@ -530,7 +526,7 @@ public class Controller {
 	 * @param periodo
 	 *            periodo em que o requerente deve ficar com o item.
 	 */
-	private void alocarEmprestimos(Usuario dono, Usuario requerente, Item itemEmprestar, Date data, int periodo) {
+	private void alocarEmprestimos(Usuario dono, Usuario requerente, Item itemEmprestar, LocalDate data, int periodo) {
 		Emprestimo e = new Emprestimo(dono, requerente, itemEmprestar, data, periodo);
 		IdEmprestimo ie = new IdEmprestimo(dono, requerente, itemEmprestar, data);
 		emprestimos.put(ie, e);
@@ -565,20 +561,15 @@ public class Controller {
 		Usuario requerente = criaUsuario(nomeRequerente, telefoneRequerente);
 		validacao.validaItemEmprestimo(dono.getItem(nomeItem));
 		Item itemDevolver = dono.getItem(nomeItem);
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		try {
-			java.util.Date data = formato.parse(dataEmprestimo);
-			java.util.Date dataDev = formato.parse(dataDevolucao);
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate dataE = LocalDate.parse(dataEmprestimo, dtf);
+		LocalDate dataD = LocalDate.parse(dataEmprestimo, dtf);
 
-			IdEmprestimo ie = new IdEmprestimo(dono, requerente, itemDevolver, data);
-			if (!emprestimos.containsKey(ie)) {
-				validacao.emprestimoNaoEncontrado();
-			}
-			emprestimos.get(ie).devolverItem(dataDev);
-			itemDevolver.setStaus();
-		} catch (ParseException e) {
-			validacao.dataInvalida();
+		IdEmprestimo ie = new IdEmprestimo(dono, requerente, itemDevolver, dataE);
+		if (!emprestimos.containsKey(ie)) {
+			validacao.emprestimoNaoEncontrado();
 		}
-
+		emprestimos.get(ie).devolverItem(dataD);
+		itemDevolver.setStaus();
 	}
 }

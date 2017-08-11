@@ -2,8 +2,8 @@
 
 import static org.junit.Assert.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,16 +30,16 @@ public class EmprestimoTest {
 	Emprestimo emprestimo2;
 	Emprestimo emprestimo3;
 
-	java.util.Date data1;
-	java.util.Date data2;
-	java.util.Date data3;
+	LocalDate data1;
+	LocalDate data2;
+	LocalDate data3;
 	
 	/**
 	 * Cria os objetos necessarios para os testes
 	 * @throws ParseException
 	 */
 	@Before
-	public void criaEmprestimo() throws ParseException  {
+	public void criaEmprestimo() {
 		user1 = new Usuario("Cássio", "123", "cassio.cordeiro");
 		user2 = new Usuario("Geovane", "1234", "geovane.nascimento");
 		
@@ -47,10 +47,10 @@ public class EmprestimoTest {
 		user2.cadastraItem("Cubo mágico", 29.99);
 		
 		
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		data1 = formato.parse("11/08/2017");
-		data2 = formato.parse("08/08/2017");
-		data3 = formato.parse("13/08/2017");
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		data1 = LocalDate.parse("11/08/2017", formato);
+		data2 = LocalDate.parse("08/08/2017", formato);
+		data3 = LocalDate.parse("13/08/2017", formato);
 		
 		emprestimo = new Emprestimo(user1, user2, user1.getItem("Xadrez"), data1, 7);
 		emprestimo2 = new Emprestimo(user2, user1, user2.getItem("Cubo mágico"), data2, 5);
@@ -71,7 +71,9 @@ public class EmprestimoTest {
 	 */
 	@Test
 	public void testToString() {
-		assertEquals("Cássio - Geovane - Xadrez - 7 - Fri Aug 11 00:00:00 BRT 2017", emprestimo.toString());
+		LocalDate data = LocalDate.of(2017, 8, 16);
+		emprestimo.devolverItem(data);
+		assertEquals("EMPRESTIMO - De: Cássio, Para: Geovane, Xadrez, 11/08/2017, 7 dias, ENTREGA: 16/08/2017", emprestimo.toString());
 	}
 
 }

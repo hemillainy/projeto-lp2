@@ -2,7 +2,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import principal.*;
 import principal.user.Usuario;
 
 /**
@@ -32,9 +31,9 @@ public class UsuarioTest {
 		usuario3 = new Usuario("Hemillainy", "12345678", "hemillainy.santos");
 
 		usuario1.cadastraItem("Damas", 1.99);
-		usuario2.cadastraItem("Liga da Justiça", 14.00, 180, "AÇÃO", "DEZESSEIS_ANOS", 2017);
-		usuario3.cadastraItem("Tetris", 10.00, "Mini Game");
-		usuario1.cadastraItem("The 100", 59.99, "Octavia linda", 43, "DEZESSEIS_ANOS", "Drama", 1);
+		usuario2.cadastraItem("Liga da Justiça", 14.00, 180, "ACAO", "DEZESSEIS_ANOS", 2017);
+		usuario3.cadastraItem("Tetris", 10.00, "OUTRO");
+		usuario1.cadastraItem("The 100", 59.99, "Octavia linda", 43, "DEZESSEIS_ANOS", "DRAMA", 1);
 		usuario2.cadastraBluRayShow("Mares", 500, 120, "QUATORZE_ANOS", "Bruno Mars", 11);
 	}
 
@@ -97,7 +96,7 @@ public class UsuarioTest {
 	 */
 	@Test
 	public void testExibeDetalhesItem() {
-		assertEquals("FILME: Liga da Justiça, R$ 14.0, Nao emprestado, 180 min, DEZESSEIS_ANOS, AÇÃO, 2017",
+		assertEquals("FILME: Liga da Justiça, R$ 14.0, Nao emprestado, 180 min, DEZESSEIS_ANOS, ACAO, 2017",
 				usuario2.exibeDetalhesItem("Liga da Justiça"));
 	}
 

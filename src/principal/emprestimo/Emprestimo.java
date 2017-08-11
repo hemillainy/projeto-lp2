@@ -1,5 +1,7 @@
 package principal.emprestimo;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import principal.item.Item;
 import principal.user.Usuario;
 
@@ -18,8 +20,8 @@ public class Emprestimo {
 	private Usuario requerente;
 	private Item emprestado;
 	private int periodo;
-	private java.util.Date dataEmprestimo;
-	private java.util.Date dataDevolucao;
+	private LocalDate dataEmprestimo;
+	private LocalDate dataDevolucao;
 
 	/**
 	 * Constroi um emprestimo a partir de um dono, um requerente, um item, uma
@@ -36,7 +38,7 @@ public class Emprestimo {
 	 * @param periodo
 	 *            periodo no qual o requerente deve ficar com o item emprestado.
 	 */
-	public Emprestimo(Usuario dono, Usuario requerente, Item emprestado, java.util.Date dataEmprestimo, int periodo) {
+	public Emprestimo(Usuario dono, Usuario requerente, Item emprestado, LocalDate dataEmprestimo, int periodo) {
 		this.dono = dono;
 		this.requerente = requerente;
 		this.emprestado = emprestado;
@@ -51,7 +53,7 @@ public class Emprestimo {
 	 * @param dataDevolucao
 	 *            data em que o item foi devolvido.
 	 */
-	public void devolverItem(java.util.Date dataDevolucao) {
+	public void devolverItem(LocalDate dataDevolucao) {
 		this.dataDevolucao = dataDevolucao;
 	}
 
@@ -95,6 +97,11 @@ public class Emprestimo {
 			return false;
 		return true;
 	}
+	
+	private String dataString(LocalDate date) {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		return date.format(dtf);
+	}
 
 	/**
 	 * Gera a representacao em String de um emprestimo. A representacao segue o
@@ -104,8 +111,7 @@ public class Emprestimo {
 	 * @return a representacao em String de um emprestimo.
 	 */
 	public String toString() {
-		return this.dono.getNome() + " - " + this.requerente.getNome() + " - " + this.emprestado.getNome() + " - "
-				+ this.periodo + " - " + this.dataEmprestimo;
+		return "EMPRESTIMO - De: " +this.dono.getNome() + ", Para: " + this.requerente.getNome() + ", " + this.emprestado.getNome() + ", "
+				  + dataString(dataEmprestimo) + ", " + this.periodo + " dias, ENTREGA: " + dataString(dataDevolucao);
 	}
-
 }

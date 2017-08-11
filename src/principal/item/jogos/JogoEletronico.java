@@ -72,5 +72,10 @@ public class JogoEletronico extends Item {
 	public String toString() {
 		return "JOGO ELETRONICO: " + this.nome + ", R$ " + this.preco + ", " + status.getValor() + ", " + this.plataforma;
 	}
+	
+	public static void main(String[] args) {
+		JogoEletronico je = new JogoEletronico("bb", 10, "PS4");
+		System.out.println(je);
+	}
 
 }

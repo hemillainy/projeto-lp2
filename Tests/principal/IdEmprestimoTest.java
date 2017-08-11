@@ -1,10 +1,12 @@
 package principal;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import principal.emprestimo.IdEmprestimo;
@@ -21,12 +23,24 @@ import principal.user.Usuario;
  */
 public class IdEmprestimoTest {
 	
+	LocalDate data1;
+	LocalDate data2;
+	LocalDate data3;
+	
+	@Before
+	public void inicializa() {
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		data1 = LocalDate.parse("11/08/2017", formato);
+		data2 = LocalDate.parse("08/08/2017", formato);
+		data3 = LocalDate.parse("08/08/2017", formato);
+	}
+	
 	/**
 	 * Teste do metodo equals.
 	 * @throws ParseException
 	 */
 	@Test
-	public void testEqualsObject() throws ParseException {
+	public void testEqualsObject() {
 		Usuario user1 = new Usuario("Cássio", "123", "cassio.cordeiro");
 		Usuario user2 = new Usuario("Geovane", "1234", "geovane.nascimento");
 		
@@ -34,10 +48,7 @@ public class IdEmprestimoTest {
 		user2.cadastraItem("Cubo mágico", 29.99);
 		
 		
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		java.util.Date data1 = formato.parse("11/08/2017");
-		java.util.Date data2 = formato.parse("08/08/2017");
-		java.util.Date data3 = formato.parse("08/08/2017");
+		
 		
 		IdEmprestimo id1 = new IdEmprestimo(user1, user2, user1.getItem("Xadrez"), data1);
 		IdEmprestimo id2 = new IdEmprestimo(user2, user1, user2.getItem("Cubo mágico"), data2);
