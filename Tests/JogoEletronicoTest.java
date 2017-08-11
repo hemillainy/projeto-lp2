@@ -24,7 +24,7 @@ public class JogoEletronicoTest {
 	 */
 	@Before
 	public void criaJogoEletronico() {
-		jogo = new JogoEletronico("GTA", 99.80, "X-Box");
+		jogo = new JogoEletronico("GTA", 99.80, "XBOX360");
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class JogoEletronicoTest {
 	 */
 	@Test
 	public void testToString() {
-		assertEquals("JOGO ELETRONICO: GTA, R$ 99.8, Nao emprestado, X-Box", jogo.toString());
+		assertEquals("JOGO ELETRONICO: GTA, R$ 99.8, Nao emprestado, XBOX360", jogo.toString());
 	}
 
 	/**
@@ -41,9 +41,9 @@ public class JogoEletronicoTest {
 	 */
 	@Test
 	public void testEquals() {
-		JogoEletronico jogo2 = new JogoEletronico("GTA", 50.99, "X-Box");
+		JogoEletronico jogo2 = new JogoEletronico("GTA", 50.99, "XBOX360");
 		assertTrue(jogo.equals(jogo2));
-		JogoEletronico jogo3 = new JogoEletronico("Mario", 0.00, "X-Box");
+		JogoEletronico jogo3 = new JogoEletronico("Mario", 0.00, "XBOX360");
 		assertFalse(jogo.equals(jogo3));
 	}
 }

@@ -24,7 +24,7 @@ public class FilmeTest {
 	 */
 	@Before
 	public void criaFilme() {
-		filme = new Filme("Guardioes da Galaxia", 12, 120, "DOZE_ANOS", "Acao", 2017);
+		filme = new Filme("Guardioes da Galaxia", 12, 120, "DOZE_ANOS", "ACAO", 2017);
 	}
 	
 	/**
@@ -32,6 +32,6 @@ public class FilmeTest {
 	 */
 	@Test
 	public void testToString() {
-		assertEquals("FILME: Guardioes da Galaxia, R$ 12.0, Nao emprestado, 120 min, DOZE_ANOS, Acao, 2017", filme.toString());
+		assertEquals("FILME: Guardioes da Galaxia, R$ 12.0, Nao emprestado, 120 min, DOZE_ANOS, ACAO, 2017", filme.toString());
 	}
 }

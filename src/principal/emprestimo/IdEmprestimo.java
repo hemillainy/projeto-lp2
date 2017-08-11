@@ -1,6 +1,7 @@
 package principal.emprestimo;
 
-import java.util.Date;
+
+import java.time.LocalDate;
 
 import principal.item.Item;
 import principal.user.Usuario;
@@ -19,7 +20,7 @@ public class IdEmprestimo {
 	Usuario dono;
 	Usuario requerente;
 	Item itemEmprestado;
-	java.util.Date dataEmprestimo;
+	LocalDate dataEmprestimo;
 
 	/**
 	 * Constroi um idEmprestimo a partir de um dono, de um requerente, de um
@@ -34,7 +35,7 @@ public class IdEmprestimo {
 	 * @param dataEmprestimo
 	 *            data em que foi feito o emprestimo.
 	 */
-	public IdEmprestimo(Usuario dono, Usuario requerente, Item itemEmprestado, Date dataEmprestimo) {
+	public IdEmprestimo(Usuario dono, Usuario requerente, Item itemEmprestado, LocalDate dataEmprestimo) {
 		this.dono = dono;
 		this.requerente = requerente;
 		this.itemEmprestado = itemEmprestado;
