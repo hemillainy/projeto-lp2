@@ -3,7 +3,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import itens.jogos.JogoEletronico;
+import principal.item.jogos.JogoEletronico;
 
 /**
  * Testes da classe JogoEletronico. 

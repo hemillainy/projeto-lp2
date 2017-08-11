@@ -1,6 +1,9 @@
-package principal;
+package principal.emprestimo;
 
 import java.util.Date;
+
+import principal.item.Item;
+import principal.user.Usuario;
 
 /**
  * 

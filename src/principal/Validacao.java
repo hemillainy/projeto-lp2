@@ -1,5 +1,7 @@
 package principal;
 
+import principal.item.Item;
+
 /**
  * Classe responsavel pela verificacao de dados invalidos. Quando for passado um
  * dado invalido sera lancado um IllegalArgumentException.

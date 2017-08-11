@@ -8,8 +8,8 @@ import java.text.SimpleDateFormat;
 import org.junit.Before;
 import org.junit.Test;
 
-import principal.Emprestimo;
-import principal.Usuario;
+import principal.emprestimo.Emprestimo;
+import principal.user.Usuario;
 
 /**
  * 

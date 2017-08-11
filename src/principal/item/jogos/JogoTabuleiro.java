@@ -1,9 +1,9 @@
-package itens.jogos;
+package principal.item.jogos;
 
 import java.util.ArrayList;
 import java.util.List;
 import enums.*;
-import principal.Item;
+import principal.item.Item;
 
 /**
  * Classe que representa um jogo de tabuleiro.

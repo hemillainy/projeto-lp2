@@ -1,7 +1,7 @@
-package itens.jogos;
+package principal.item.jogos;
 
 import enums.Plataforma;
-import principal.Item;
+import principal.item.Item;
 
 /**
  * Classe que representa um jogo eletronico.

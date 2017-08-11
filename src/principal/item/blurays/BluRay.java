@@ -1,7 +1,7 @@
-package itens.blurays;
+package principal.item.blurays;
 
 import enums.Classificacao;
-import principal.Item;
+import principal.item.Item;
 
 /**
  * Classe base para um BluRay.

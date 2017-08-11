@@ -11,6 +11,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import principal.comparator.ComparadorValor;
+import principal.emprestimo.Emprestimo;
+import principal.emprestimo.IdEmprestimo;
+import principal.item.Item;
+import principal.user.IdUsuario;
+import principal.user.Usuario;
+
 /**
  * Representação de um Controller.
  * 

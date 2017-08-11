@@ -1,4 +1,4 @@
-package principal;
+package principal.user;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import itens.blurays.*;
-import principal.Item;
-import itens.jogos.*;
+import principal.Validacao;
+import principal.emprestimo.Emprestimo;
+import principal.item.Item;
+import principal.item.blurays.*;
+import principal.item.jogos.*;
 
 /**
  *

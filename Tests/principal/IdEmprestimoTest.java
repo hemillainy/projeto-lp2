@@ -6,6 +6,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import org.junit.Test;
+
+import principal.emprestimo.IdEmprestimo;
+import principal.user.Usuario;
 /**
  * Testes da classe IdEmprestimo.
  * 
