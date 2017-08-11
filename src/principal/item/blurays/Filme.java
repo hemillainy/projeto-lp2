@@ -1,4 +1,4 @@
-package itens.blurays;
+package principal.item.blurays;
 
 import enums.Genero;
 

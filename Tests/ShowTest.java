@@ -3,7 +3,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import itens.blurays.Show;
+import principal.item.blurays.Show;
 
 /**
  * Testes para a classe Show.

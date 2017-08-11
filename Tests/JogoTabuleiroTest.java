@@ -2,7 +2,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import itens.jogos.JogoTabuleiro;
+
+import principal.item.jogos.JogoTabuleiro;
 
 /**
  * Testes da classe JogoTabuleiro.

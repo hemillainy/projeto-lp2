@@ -1,4 +1,4 @@
-package principal;
+package principal.user;
 
 /**
  * Classe que representa a identificacao de um usuario.

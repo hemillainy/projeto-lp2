@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import principal.*;
+import principal.user.Usuario;
 
 /**
  * Testes da classe Usuario.

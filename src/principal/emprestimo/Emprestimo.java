@@ -1,4 +1,7 @@
-package principal;
+package principal.emprestimo;
+
+import principal.item.Item;
+import principal.user.Usuario;
 
 /**
  * 
