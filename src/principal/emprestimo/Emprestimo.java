@@ -114,4 +114,20 @@ public class Emprestimo {
 		return "EMPRESTIMO - De: " +this.dono.getNome() + ", Para: " + this.requerente.getNome() + ", " + this.emprestado.getNome() + ", "
 				  + dataString(dataEmprestimo) + ", " + this.periodo + " dias, ENTREGA: " + dataString(dataDevolucao);
 	}
+	
+	/**
+	 * Metodo que retorna o dono do item emprestado.
+	 * @return o usuario dono do item emprestado.
+	 */
+	public Usuario getDono() {
+		return this.dono;
+	}
+	
+	/**
+	 * Metodo que retorna o requerente do item emprestado.
+	 * @return o usuario dono do item emprestado.
+	 */
+	public Usuario getRequerente() {
+		return this.requerente;
+	}
 }

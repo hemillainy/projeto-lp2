@@ -404,4 +404,10 @@ public class Usuario {
 		emprestimos.add(e);
 
 	}
+	
+	// ###################################  US5  ###################################
+	
+	public Set<Emprestimo> getEmprestimos() {
+		return this.emprestimos;
+	}
 }

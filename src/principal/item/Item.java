@@ -29,6 +29,14 @@ public abstract class Item implements Comparable<Item> {
 	}
 	
 	/**
+	 * Metodo que retorna o status do item.
+	 * @return o status do item.
+	 */
+	public String getStatus() {
+		return this.status.getValor();
+	}
+	
+	/**
 	 * Metodo que altera o status de um item.
 	 */
 	public void setStaus() {
