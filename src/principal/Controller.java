@@ -32,13 +32,14 @@ public class Controller {
 	private Map<IdUsuario, Usuario> usuarios;
 	private Map<IdEmprestimo, Emprestimo> emprestimos;
 	private ComparadorValor comparadorValor;
+	private ComparadorNomeItem comparadorNomeItem;
 
 	public Controller() {
 		this.usuarios = new HashMap<>();
 		this.emprestimos = new HashMap<>();
 		this.validacao = new Validacao();
 		this.comparadorValor = new ComparadorValor();
-
+		this.comparadorNomeItem = new ComparadorNomeItem();
 	}
 
 	/**
@@ -572,4 +573,98 @@ public class Controller {
 		emprestimos.get(ie).devolverItem(dataD);
 		itemDevolver.setStaus();
 	}
+	// ###################################  US5  ###################################
+	
+	/**
+	 * Metodo que lista todos os itens que um usuario emprestou.
+	 * @param nome do usuario.
+	 * @param telefone do usuario.
+	 * @return a lista com os emprestimos feitos pelo usuario.
+	 */
+	public String listarEmprestimosUsuarioEmprestando(String nome, String telefone) {
+		Usuario dono = criaUsuario(nome, telefone);
+		String retorno = "";
+		
+		List<Emprestimo> empres = new ArrayList<Emprestimo>(dono.getEmprestimos());
+		
+		for(Emprestimo emprestimo : empres) {
+			if (emprestimo.getDono().equals(dono)) {
+				retorno += emprestimo.toString();
+			}
+		}
+		if (retorno.equals("")) {
+			return "Nenhum item emprestado";
+		}
+		return retorno;
+	}
+	
+	/**
+	 * Metodo que lista os itens cadastrados nao emprestados.
+	 * @return a listagem dos itens nao cadastrados.
+	 */
+	public String listarItensNaoEmprestados() {
+		Set<Item> it = new HashSet<>();
+		for (Usuario us : usuarios.values()) {
+			it.addAll(us.getItens());
+		}
+		List<Item> inventario = new ArrayList<>(it);
+		
+		Collections.sort(inventario, comparadorNomeItem);
+		String itens = "";
+		
+		for (Item item : inventario) {
+			if (item.getStatus().equals("Nao emprestado")) {
+				itens += item.toString() + "|";
+			}
+		}
+		return itens;
+	}
+	
+	/**
+	 * Metodo que lista os itens cadastrados nao emprestados.
+	 * @return a listagem com os itens emprestados.
+	 */
+	public String listarItensEmprestados() {
+		Set<Item> it = new HashSet<>();
+		for (Usuario us : usuarios.values()) {
+			it.addAll(us.getItens());
+		}
+		String itens = "";
+		for (Item item : it) {
+			if (item.getStatus().equals("Emprestado")) {
+				itens += "Dono do item: " +  ", Nome do item emprestado: " + item.getNome() + "|";
+			}
+		}
+		return itens;
+	}
+	
+	/**
+	 * Metodo que lista os emprestimos concedidos a um ususario.
+	 * @param nome do ususario.
+	 * @param telefone do usuario.
+	 * @return a listagem do emprestimos concedidos a um usuario.
+	 */
+	public String listarEmprestimosUsuarioPegandoEmprestado(String nome, String telefone) {
+		Usuario requerente = criaUsuario(nome, telefone);
+		String retorno = "";
+		for(Emprestimo emprestimo : requerente.getEmprestimos()) {
+			if (emprestimo.getRequerente().equals(requerente)) {
+				retorno += emprestimo.toString();
+			}
+		}
+		if (retorno.equals("")) {
+			return "Nenhum item pego emprestado";
+		}
+		return retorno;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

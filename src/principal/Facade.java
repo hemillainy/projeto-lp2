@@ -383,8 +383,7 @@ nulo	 * @param temporada
 	 * @return a listagem dos emprestimos feitos pelo usuario.
 	 */
 	public String listarEmprestimosUsuarioEmprestando(String nome, String telefone) {
-		
-		return null;
+		return sistema.listarEmprestimosUsuarioEmprestando(nome, telefone);
 	}
 	
 	/**
@@ -394,8 +393,7 @@ nulo	 * @param temporada
 	 * @return a listagem do emprestimos concedidos a um usuario.
 	 */
 	public String listarEmprestimosUsuarioPegandoEmprestado(String nome, String telefone) {
-		
-		return null;
+		return sistema.listarEmprestimosUsuarioPegandoEmprestado(nome, telefone);
 	}
 	
 	/**
@@ -413,8 +411,7 @@ nulo	 * @param temporada
 	 * @return a listagem dos itens nao cadastrados.
 	 */
 	public String listarItensNaoEmprestados() {
-		
-		return null;
+		return sistema.listarItensNaoEmprestados();
 	}
 	
 	/**
@@ -422,8 +419,7 @@ nulo	 * @param temporada
 	 * @return a listagem com os itens emprestados.
 	 */
 	public String listarItensEmprestados() {
-		
-		return null;
+		return sistema.listarItensEmprestados();
 	}
 	
 	/**
