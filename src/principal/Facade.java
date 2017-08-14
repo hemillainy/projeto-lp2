@@ -402,8 +402,7 @@ nulo	 * @param temporada
 	 * @return a listagem com os emprestimos que o item participou.
 	 */
 	public String listarEmprestimosItem(String nomeItem) {
-		
-		return null;
+		return sistema.listarEmprestimosItem(nomeItem);
 	}
 	
 	/**
