@@ -99,7 +99,7 @@ public class Emprestimo {
 	}
 	
 	private String dataString(LocalDate date) {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/M/yyyy");
 		return date.format(dtf);
 	}
 
@@ -112,7 +112,7 @@ public class Emprestimo {
 	 */
 	public String toString() {
 		return "EMPRESTIMO - De: " +this.dono.getNome() + ", Para: " + this.requerente.getNome() + ", " + this.emprestado.getNome() + ", "
-				  + dataString(dataEmprestimo) + ", " + this.periodo + " dias, ENTREGA: " + dataString(dataDevolucao);
+				  + dataString(dataEmprestimo) + ", " + this.periodo + " dias, ENTREGA: " + dataString(this.dataDevolucao);
 	}
 	
 	/**
@@ -129,5 +129,13 @@ public class Emprestimo {
 	 */
 	public Usuario getRequerente() {
 		return this.requerente;
+	}
+
+	/**
+	 * Metodo que retorna o item emprestado.
+	 * @return o item do emprestimo.
+	 */
+	public Item getItem() {
+		return this.emprestado;
 	}
 }

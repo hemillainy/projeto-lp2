@@ -564,7 +564,7 @@ public class Controller {
 		Item itemDevolver = dono.getItem(nomeItem);
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		LocalDate dataE = LocalDate.parse(dataEmprestimo, dtf);
-		LocalDate dataD = LocalDate.parse(dataEmprestimo, dtf);
+		LocalDate dataD = LocalDate.parse(dataDevolucao, dtf);
 
 		IdEmprestimo ie = new IdEmprestimo(dono, requerente, itemDevolver, dataE);
 		if (!emprestimos.containsKey(ie)) {
@@ -582,17 +582,17 @@ public class Controller {
 	 * @return a lista com os emprestimos feitos pelo usuario.
 	 */
 	public String listarEmprestimosUsuarioEmprestando(String nome, String telefone) {
-		Usuario dono = criaUsuario(nome, telefone);
-		String retorno = "";
-		
+		IdUsuario id = new IdUsuario(nome, telefone);
+		String retorno = "Emprestimos: ";
+		Usuario dono = usuarios.get(id);
 		List<Emprestimo> empres = new ArrayList<Emprestimo>(dono.getEmprestimos());
 		
 		for(Emprestimo emprestimo : empres) {
 			if (emprestimo.getDono().equals(dono)) {
-				retorno += emprestimo.toString();
+				retorno += emprestimo.toString() + "|";
 			}
 		}
-		if (retorno.equals("")) {
+		if (retorno.equals("Emprestimos: ")) {
 			return "Nenhum item emprestado";
 		}
 		return retorno;
@@ -646,19 +646,31 @@ public class Controller {
 	 */
 	public String listarEmprestimosUsuarioPegandoEmprestado(String nome, String telefone) {
 		Usuario requerente = criaUsuario(nome, telefone);
-		String retorno = "";
+		String retorno = "Emprestimos pegos: ";
+		
 		for(Emprestimo emprestimo : requerente.getEmprestimos()) {
 			if (emprestimo.getRequerente().equals(requerente)) {
-				retorno += emprestimo.toString();
+				retorno += emprestimo.toString() + "|";
 			}
 		}
-		if (retorno.equals("")) {
+		if (retorno.equals("Emprestimos pegos: ")) {
 			return "Nenhum item pego emprestado";
 		}
 		return retorno;
 	}
-	
-	
+
+	public String listarEmprestimosItem(String nome) {
+		String retorno = "Emprestimos associados ao item: ";
+		for (Emprestimo emprestimo : emprestimos.values()) {
+			if (emprestimo.getItem().getNome().equals(nome)) {
+				retorno += emprestimo.toString();
+			}
+		}
+		if (retorno.equals("Emprestimos associados ao item: ")) {
+			return "Nenhum mprestimos associados ao item";
+		}
+		return retorno;
+	}
 	
 	
 	
