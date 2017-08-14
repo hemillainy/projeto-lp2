@@ -56,7 +56,6 @@ public class Emprestimo {
 	public void devolverItem(LocalDate dataDevolucao) {
 		this.dataDevolucao = dataDevolucao;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -99,10 +98,12 @@ public class Emprestimo {
 	}
 	
 	private String dataString(LocalDate date) {
+		if (date == null){
+			return "Emprestimo em andamento";
+		}
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/M/yyyy");
 		return date.format(dtf);
 	}
-
 	/**
 	 * Gera a representacao em String de um emprestimo. A representacao segue o
 	 * formato: DONO DO ITEM - REQUERENTE - ITEM EMPRESTADO - DATA DO EMPRESTIMO
