@@ -56,6 +56,7 @@ public class Emprestimo {
 	public void devolverItem(LocalDate dataDevolucao) {
 		this.dataDevolucao = dataDevolucao;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -96,14 +97,15 @@ public class Emprestimo {
 			return false;
 		return true;
 	}
-	
+
 	private String dataString(LocalDate date) {
-		if (date == null){
+		if (date == null) {
 			return "Emprestimo em andamento";
 		}
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/M/yyyy");
 		return date.format(dtf);
 	}
+
 	/**
 	 * Gera a representacao em String de um emprestimo. A representacao segue o
 	 * formato: DONO DO ITEM - REQUERENTE - ITEM EMPRESTADO - DATA DO EMPRESTIMO
@@ -112,20 +114,23 @@ public class Emprestimo {
 	 * @return a representacao em String de um emprestimo.
 	 */
 	public String toString() {
-		return "EMPRESTIMO - De: " +this.dono.getNome() + ", Para: " + this.requerente.getNome() + ", " + this.emprestado.getNome() + ", "
-				  + dataString(dataEmprestimo) + ", " + this.periodo + " dias, ENTREGA: " + dataString(this.dataDevolucao);
+		return "EMPRESTIMO - De: " + this.dono.getNome() + ", Para: " + this.requerente.getNome() + ", "
+				+ this.emprestado.getNome() + ", " + dataString(dataEmprestimo) + ", " + this.periodo
+				+ " dias, ENTREGA: " + dataString(this.dataDevolucao);
 	}
-	
+
 	/**
 	 * Metodo que retorna o dono do item emprestado.
+	 * 
 	 * @return o usuario dono do item emprestado.
 	 */
 	public Usuario getDono() {
 		return this.dono;
 	}
-	
+
 	/**
 	 * Metodo que retorna o requerente do item emprestado.
+	 * 
 	 * @return o usuario dono do item emprestado.
 	 */
 	public Usuario getRequerente() {
@@ -134,6 +139,7 @@ public class Emprestimo {
 
 	/**
 	 * Metodo que retorna o item emprestado.
+	 * 
 	 * @return o item do emprestimo.
 	 */
 	public Item getItem() {
