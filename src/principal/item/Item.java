@@ -16,6 +16,7 @@ public abstract class Item implements Comparable<Item> {
 	protected String nome;
 	protected double preco;
 	protected StatusEmprestado status;
+	protected int numEmprestimos;
 	
 	/**
 	 * Construtor de item.
@@ -26,6 +27,7 @@ public abstract class Item implements Comparable<Item> {
 		this.nome = nome;
 		this.preco = valor;
 		this.status = StatusEmprestado.NAO_EMPRESTADO;
+		this.numEmprestimos = 0;
 	}
 	
 	/**
@@ -96,5 +98,19 @@ public abstract class Item implements Comparable<Item> {
 	public void setPreco(double valor) {
 		this.preco = valor;
 	}
-
+	
+	/**
+	 * Metodo que altera a quantidade de vezes que um item foi emprestado.
+	 */
+	public void addNumeroEmprestimo() {
+		this.numEmprestimos += 1;
+	}
+	
+	/**
+	 * Metodo que retorna o numero de vezes que o item foi emprestado.
+	 * @return o numero de vezes que o item foi emprestado.
+	 */
+	public int getNumEmprestimos() {
+		return this.numEmprestimos;
+	}
 }
