@@ -35,7 +35,7 @@ public class Controller {
 	private ComparadorValor comparadorValor;
 	private ComparadorNomeItem comparadorNomeItem;
 	private ComparadorNumeroEmprestimos comparadorNumeroEmprestimos;
-	
+
 	public Controller() {
 		this.usuarios = new HashMap<>();
 		this.emprestimos = new HashMap<>();
@@ -708,6 +708,7 @@ public class Controller {
 		}
 		return retorno;
 	}
+
 	public String listarTop10() {
 		Set<Item> it = new HashSet<>();
 		for (Usuario us : usuarios.values()) {
@@ -723,10 +724,10 @@ public class Controller {
 				break;
 			}
 			Item item = inventario.get(i);
-			itens += (i+1) + ") " + item.getNumEmprestimos() + " emprestimos - "  + item.toString() + "|";
+			itens += (i + 1) + ") " + item.getNumEmprestimos() + " emprestimos - " + item.toString() + "|";
 			i++;
 		}
 		return itens;
 	}
-	
+
 }
