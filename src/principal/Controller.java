@@ -452,8 +452,7 @@ public class Controller {
 	 * 
 	 * @param id
 	 *            id do usuario no mapa de usuarios.
-	 * @return true caso o usuario ja esteja cadastrado ou false caso nao
-	 *         esteja.
+	 * @return true caso o usuario ja esteja cadastrado ou false caso nao esteja.
 	 */
 	private boolean hasUsuario(IdUsuario id) {
 		if (usuarios.containsKey(id)) {
@@ -632,7 +631,7 @@ public class Controller {
 		}
 		return itens;
 	}
-
+	
 	/**
 	 * Metodo que lista os itens cadastrados nao emprestados.
 	 * 
@@ -640,10 +639,19 @@ public class Controller {
 	 */
 	public String listarItensEmprestados() {
 		String saida = "";
-		for (Emprestimo emprestimo : emprestimos.values()) {
+		List<Emprestimo> emp = new ArrayList<>(emprestimos.values());
+		Collections.reverse(emp);
+		
+		
+		
+		
+		for (Emprestimo emprestimo : emp) {
+			
 			saida += "Dono do item: " + emprestimo.getNomeDome() + ", Nome do item emprestado: "
 					+ emprestimo.getNomeItem() + "|";
+
 		}
+
 		return saida;
 	}
 
