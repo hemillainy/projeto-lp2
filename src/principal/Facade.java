@@ -427,7 +427,7 @@ nulo	 * @param temporada
 	 * @return a listagem com os 10 itens mais emprestados.
 	 */
 	public String listarTop10Itens() {
-		return sistema.listartop10();
+		return sistema.listarTop10();
 	}
 	
 	// ###################################  US6  ###################################
