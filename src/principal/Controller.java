@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import principal.comparator.ComparadorNumeroEmprestimos;
 import principal.comparator.ComparadorValor;
 import principal.emprestimo.Emprestimo;
 import principal.emprestimo.IdEmprestimo;
@@ -33,13 +34,15 @@ public class Controller {
 	private Map<IdEmprestimo, Emprestimo> emprestimos;
 	private ComparadorValor comparadorValor;
 	private ComparadorNomeItem comparadorNomeItem;
-
+	private ComparadorNumeroEmprestimos comparadorNumeroEmprestimos;
+	
 	public Controller() {
 		this.usuarios = new HashMap<>();
 		this.emprestimos = new HashMap<>();
 		this.validacao = new Validacao();
 		this.comparadorValor = new ComparadorValor();
 		this.comparadorNomeItem = new ComparadorNomeItem();
+		this.comparadorNumeroEmprestimos = new ComparadorNumeroEmprestimos();
 	}
 
 	/**
@@ -499,6 +502,7 @@ public class Controller {
 
 		alocarEmprestimos(dono, requerente, itemEmprestar, data, periodo);
 		dono.addReputacao(itemEmprestar.getPreco(), 0.05);
+		itemEmprestar.addNumeroEmprestimo();
 
 	}
 
@@ -704,4 +708,22 @@ public class Controller {
 		}
 		return retorno;
 	}
+	public String listartop10() {
+		Set<Item> it = new HashSet<>();
+		for (Usuario us : usuarios.values()) {
+			it.addAll(us.getItens());
+		}
+		List<Item> inventario = new ArrayList<>(it);
+		Collections.sort(inventario, comparadorNumeroEmprestimos);
+		String itens = "";
+
+		int i = 0;
+		while (i != 10 || i != inventario.size() || inventario.get(i).getNumEmprestimos() != 0) {
+			Item item = inventario.get(i);
+			itens += (i+1) + ") " + item.getNumEmprestimos() + " emprestimos - "  + item.toString() + "|";
+			i++;
+		}
+		return itens;
+	}
+	
 }
