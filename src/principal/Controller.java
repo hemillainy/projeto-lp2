@@ -93,10 +93,13 @@ public class Controller {
 		String info = "";
 		IdUsuario id = new IdUsuario(nome, telefone);
 		if (!hasUsuario(id)) {
-			return validacao.usuarioInvalido();
+			validacao.usuarioInvalido();
 		}
 		if (atributo.equals("Email")) {
 			info += usuarios.get(id).getEmail();
+		}
+		else if(atributo.equals("Reputacao")) {
+			info += usuarios.get(id).getReputacao(); 
 		}
 		return info;
 	}
@@ -186,6 +189,7 @@ public class Controller {
 		}
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco, plataforma);
+		us.addReputacao(preco, 0.05);
 	}
 
 	/**
@@ -208,6 +212,7 @@ public class Controller {
 		}
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco);
+		us.addReputacao(preco, 0.05);
 	}
 
 	/**
@@ -235,6 +240,7 @@ public class Controller {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco, duracao, genero, classificacao, lancamento);
+		us.addReputacao(preco, 0.05);
 	}
 
 	/**
@@ -262,6 +268,7 @@ public class Controller {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		Usuario us = usuarios.get(id);
 		us.cadastraBluRayShow(nomeItem, preco, duracao, classificacao, artista, faixas);
+		us.addReputacao(preco, 0.05);
 	}
 
 	/**
@@ -291,6 +298,7 @@ public class Controller {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
+		us.addReputacao(preco, 0.05);
 	}
 
 	/**
@@ -491,6 +499,7 @@ public class Controller {
 		}
 
 		alocarEmprestimos(dono, requerente, itemEmprestar, data, periodo);
+		dono.addReputacao(itemEmprestar.getPreco(), 0.05);
 
 	}
 

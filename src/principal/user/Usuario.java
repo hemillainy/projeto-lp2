@@ -29,6 +29,7 @@ public class Usuario {
 	private String email;
 	private String telefone;
 	private Validacao validacao;
+	private double reputacao;
 	private Map<String, Item> itens;
 	private Set<Emprestimo> emprestimos;
 
@@ -46,6 +47,7 @@ public class Usuario {
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
+		this.reputacao = 0;
 		this.itens = new HashMap<>();
 		this.emprestimos = new HashSet<>();
 		this.validacao = new Validacao();
@@ -67,6 +69,14 @@ public class Usuario {
 	 */
 	public String getNome() {
 		return this.nome;
+	}
+	
+	/**
+	 * Metodo que retorna a reputacao do usuario.
+	 * @return a reputacao do usuario.
+	 */
+	public double getReputacao() {
+		return this.reputacao;
 	}
 
 	/**
@@ -409,5 +419,9 @@ public class Usuario {
 	
 	public Set<Emprestimo> getEmprestimos() {
 		return this.emprestimos;
+	}
+	
+	public void addReputacao(double valor, double taxa) {
+		this.reputacao += valor * taxa;
 	}
 }
