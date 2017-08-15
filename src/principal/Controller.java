@@ -97,9 +97,8 @@ public class Controller {
 		}
 		if (atributo.equals("Email")) {
 			info += usuarios.get(id).getEmail();
-		}
-		else if(atributo.equals("Reputacao")) {
-			info += usuarios.get(id).getReputacao(); 
+		} else if (atributo.equals("Reputacao")) {
+			info += usuarios.get(id).getReputacao();
 		}
 		return info;
 	}
@@ -582,12 +581,16 @@ public class Controller {
 		emprestimos.get(ie).devolverItem(dataD);
 		itemDevolver.setStaus();
 	}
-	// ###################################  US5  ###################################
-	
+	// ################################### US5
+	// ###################################
+
 	/**
 	 * Metodo que lista todos os itens que um usuario emprestou.
-	 * @param nome do usuario.
-	 * @param telefone do usuario.
+	 * 
+	 * @param nome
+	 *            do usuario.
+	 * @param telefone
+	 *            do usuario.
 	 * @return a lista com os emprestimos feitos pelo usuario.
 	 */
 	public String listarEmprestimosUsuarioEmprestando(String nome, String telefone) {
@@ -595,8 +598,8 @@ public class Controller {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		String retorno = "Emprestimos: ";
 		List<Emprestimo> empres = new ArrayList<Emprestimo>(dono.getEmprestimos());
-		
-		for(Emprestimo emprestimo : empres) {
+
+		for (Emprestimo emprestimo : empres) {
 			if (emprestimo.getDono().equals(dono)) {
 				retorno += emprestimo.toString() + "|";
 			}
@@ -606,9 +609,10 @@ public class Controller {
 		}
 		return retorno;
 	}
-	
+
 	/**
 	 * Metodo que lista os itens cadastrados nao emprestados.
+	 * 
 	 * @return a listagem dos itens nao cadastrados.
 	 */
 	public String listarItensNaoEmprestados() {
@@ -617,10 +621,10 @@ public class Controller {
 			it.addAll(us.getItens());
 		}
 		List<Item> inventario = new ArrayList<>(it);
-		
+
 		Collections.sort(inventario, comparadorNomeItem);
 		String itens = "";
-		
+
 		for (Item item : inventario) {
 			if (item.getStatus().equals("Nao emprestado")) {
 				itens += item.toString() + "|";
@@ -628,31 +632,35 @@ public class Controller {
 		}
 		return itens;
 	}
-	
+
 	/**
 	 * Metodo que lista os itens cadastrados nao emprestados.
+	 * 
 	 * @return a listagem com os itens emprestados.
 	 */
 	public String listarItensEmprestados() {
 		String saida = "";
-		IdUsuario id = new IdUsuario("Joao", "98888-8888");
 		for (Emprestimo emprestimo : emprestimos.values()) {
-			saida += "Dono do item: " + emprestimo.getNomeDome() + ", Nome do item emprestado: " + emprestimo.getNomeItem() + "|";
+			saida += "Dono do item: " + emprestimo.getNomeDome() + ", Nome do item emprestado: "
+					+ emprestimo.getNomeItem() + "|";
 		}
 		return saida;
 	}
-	
+
 	/**
 	 * Metodo que lista os emprestimos concedidos a um ususario.
-	 * @param nome do ususario.
-	 * @param telefone do usuario.
+	 * 
+	 * @param nome
+	 *            do ususario.
+	 * @param telefone
+	 *            do usuario.
 	 * @return a listagem do emprestimos concedidos a um usuario.
 	 */
 	public String listarEmprestimosUsuarioPegandoEmprestado(String nome, String telefone) {
 		Usuario requerente = criaUsuario(nome, telefone);
 		String retorno = "Emprestimos pegos: ";
-		
-		for(Emprestimo emprestimo : requerente.getEmprestimos()) {
+
+		for (Emprestimo emprestimo : requerente.getEmprestimos()) {
 			if (emprestimo.getRequerente().equals(requerente)) {
 				retorno += emprestimo.toString() + "|";
 			}
@@ -675,12 +683,4 @@ public class Controller {
 		}
 		return retorno;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 }
