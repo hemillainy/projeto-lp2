@@ -708,7 +708,7 @@ public class Controller {
 		}
 		return retorno;
 	}
-	public String listartop10() {
+	public String listarTop10() {
 		Set<Item> it = new HashSet<>();
 		for (Usuario us : usuarios.values()) {
 			it.addAll(us.getItens());
@@ -718,7 +718,10 @@ public class Controller {
 		String itens = "";
 
 		int i = 0;
-		while (i != 10 || i != inventario.size() || inventario.get(i).getNumEmprestimos() != 0) {
+		while (true) {
+			if (i == 10 || i == inventario.size() || inventario.get(i).getNumEmprestimos() == 0) {
+				break;
+			}
 			Item item = inventario.get(i);
 			itens += (i+1) + ") " + item.getNumEmprestimos() + " emprestimos - "  + item.toString() + "|";
 			i++;
