@@ -129,6 +129,15 @@ public class Emprestimo {
 	}
 
 	/**
+	 * Retorna o nome do dono do item emprestado.
+	 * 
+	 * @return nome do dono item emprestado.
+	 */
+	public String getNomeDome() {
+		return this.dono.getNome();
+	}
+
+	/**
 	 * Metodo que retorna o requerente do item emprestado.
 	 * 
 	 * @return o usuario dono do item emprestado.
@@ -144,5 +153,14 @@ public class Emprestimo {
 	 */
 	public Item getItem() {
 		return this.emprestado;
+	}
+
+	/**
+	 * Retorna o nome do item emprestado.
+	 * 
+	 * @return o nome do item emprestado.
+	 */
+	public String getNomeItem() {
+		return this.emprestado.getNome();
 	}
 }
