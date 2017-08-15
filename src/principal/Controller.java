@@ -35,7 +35,7 @@ public class Controller {
 	private ComparadorValor comparadorValor;
 	private ComparadorNomeItem comparadorNomeItem;
 	private ComparadorNumeroEmprestimos comparadorNumeroEmprestimos;
-	
+
 	public Controller() {
 		this.usuarios = new HashMap<>();
 		this.emprestimos = new HashMap<>();
@@ -713,6 +713,8 @@ public class Controller {
 		}
 		return retorno;
 	}
+
+
 	
 	/**
 	 * Metodo que lista os 10 itens mais emprestados.
@@ -733,10 +735,10 @@ public class Controller {
 				break;
 			}
 			Item item = inventario.get(i);
-			itens += (i+1) + ") " + item.getNumEmprestimos() + " emprestimos - "  + item.toString() + "|";
+			itens += (i + 1) + ") " + item.getNumEmprestimos() + " emprestimos - " + item.toString() + "|";
 			i++;
 		}
 		return itens;
 	}
-	
+
 }
