@@ -625,17 +625,12 @@ public class Controller {
 	 * @return a listagem com os itens emprestados.
 	 */
 	public String listarItensEmprestados() {
-		Set<Item> it = new HashSet<>();
-		for (Usuario us : usuarios.values()) {
-			it.addAll(us.getItens());
+		String saida = "";
+		IdUsuario id = new IdUsuario("Joao", "98888-8888");
+		for (Emprestimo emprestimo : emprestimos.values()) {
+			saida += "Dono do item: " + emprestimo.getNomeDome() + ", Nome do item emprestado: " + emprestimo.getNomeItem() + "|";
 		}
-		String itens = "";
-		for (Item item : it) {
-			if (item.getStatus().equals("Emprestado")) {
-				itens += "Dono do item: " +  ", Nome do item emprestado: " + item.getNome() + "|";
-			}
-		}
-		return itens;
+		return saida;
 	}
 	
 	/**
