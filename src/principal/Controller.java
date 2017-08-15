@@ -452,7 +452,8 @@ public class Controller {
 	 * 
 	 * @param id
 	 *            id do usuario no mapa de usuarios.
-	 * @return true caso o usuario ja esteja cadastrado ou false caso nao esteja.
+	 * @return true caso o usuario ja esteja cadastrado ou false caso nao
+	 *         esteja.
 	 */
 	private boolean hasUsuario(IdUsuario id) {
 		if (usuarios.containsKey(id)) {
@@ -631,7 +632,25 @@ public class Controller {
 		}
 		return itens;
 	}
-	
+
+	/**
+	 * Remove os intens repetidos do List de emprestimos.
+	 * 
+	 * @param emp
+	 *            List de emprestimos.
+	 */
+	private void removeRepetidos(List<Emprestimo> emp) {
+		for (int i = 0; i < emp.size(); i++) {
+			Emprestimo emp1 = emp.get(i);
+			for (int j = i + 1; j < emp.size(); j++) {
+				Emprestimo emp2 = emp.get(j);
+				if (emp1.getItem().equals(emp2.getItem())) {
+					emp.remove(i);
+				}
+			}
+		}
+	}
+
 	/**
 	 * Metodo que lista os itens cadastrados nao emprestados.
 	 * 
@@ -641,17 +660,11 @@ public class Controller {
 		String saida = "";
 		List<Emprestimo> emp = new ArrayList<>(emprestimos.values());
 		Collections.reverse(emp);
-		
-		
-		
-		
+		removeRepetidos(emp);
 		for (Emprestimo emprestimo : emp) {
-			
 			saida += "Dono do item: " + emprestimo.getNomeDome() + ", Nome do item emprestado: "
 					+ emprestimo.getNomeItem() + "|";
-
 		}
-
 		return saida;
 	}
 
