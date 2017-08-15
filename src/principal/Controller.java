@@ -696,6 +696,11 @@ public class Controller {
 		return retorno;
 	}
 
+	/**
+	 * Metodo que lista os associados a um item.
+	 * @param nome do item.
+	 * @return a lista com todos os emprestimos relacionados a um item.
+	 */
 	public String listarEmprestimosItem(String nome) {
 		String retorno = "Emprestimos associados ao item: ";
 		for (Emprestimo emprestimo : emprestimos.values()) {
@@ -708,6 +713,11 @@ public class Controller {
 		}
 		return retorno;
 	}
+	
+	/**
+	 * Metodo que lista os 10 itens mais emprestados.
+	 * @return a listagem dos 10 itens mais emprestados.
+	 */
 	public String listarTop10() {
 		Set<Item> it = new HashSet<>();
 		for (Usuario us : usuarios.values()) {
