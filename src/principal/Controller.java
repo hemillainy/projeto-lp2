@@ -709,7 +709,7 @@ public class Controller {
 			}
 		}
 		if (retorno.equals("Emprestimos associados ao item: ")) {
-			return "Nenhum mprestimos associados ao item";
+			return "Nenhum emprestimo associado ao item";
 		}
 		return retorno;
 	}
