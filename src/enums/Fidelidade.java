@@ -1,7 +1,7 @@
 package enums;
 
 /**
- * Enum responsavel pelo Status de reputacao de um usuario. 
+ * Enum responsavel pelo Status de fidelidade de um usuario. 
  *
  * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
  * 
@@ -10,7 +10,7 @@ package enums;
  * 		   Hemillainy Santos - 116210802
  *
  */
-public enum StatusReputacao {
+public enum Fidelidade {
 	NOOB("Noob"), CALOTEIRO("Caloteiro"), BOM_AMIGO("BomAmigo"), FREE_RYDER("FreeRyder");
 
 	private String valor;
@@ -19,16 +19,16 @@ public enum StatusReputacao {
 	 * Construtor do Enum.
 	 * 
 	 * @param valor
-	 *            que representa o status de reputacao de um usuario.
+	 *            que representa o status de fidelidade de um usuario.
 	 */
-	private StatusReputacao(String valor) {
+	private Fidelidade(String valor) {
 		this.valor = valor;
 	}
 	
 	/**
 	 * Metodo que retorna o valor do enum. 
 	 * 
-	 * @return A String que representa o status de reputacao de um usuario.
+	 * @return A String que representa o status de fidelidade de um usuario.
 	 */
 	public String getValor() {
 		return valor;
