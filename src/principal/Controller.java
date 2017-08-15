@@ -582,9 +582,9 @@ public class Controller {
 	 * @return a lista com os emprestimos feitos pelo usuario.
 	 */
 	public String listarEmprestimosUsuarioEmprestando(String nome, String telefone) {
+		Usuario dono = criaUsuario(nome, telefone);
 		IdUsuario id = new IdUsuario(nome, telefone);
 		String retorno = "Emprestimos: ";
-		Usuario dono = usuarios.get(id);
 		List<Emprestimo> empres = new ArrayList<Emprestimo>(dono.getEmprestimos());
 		
 		for(Emprestimo emprestimo : empres) {
@@ -663,7 +663,7 @@ public class Controller {
 		String retorno = "Emprestimos associados ao item: ";
 		for (Emprestimo emprestimo : emprestimos.values()) {
 			if (emprestimo.getItem().getNome().equals(nome)) {
-				retorno += emprestimo.toString();
+				retorno += emprestimo.toString() + "|";
 			}
 		}
 		if (retorno.equals("Emprestimos associados ao item: ")) {
