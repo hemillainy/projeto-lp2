@@ -1,10 +1,10 @@
 package principal.user.reputacao;
 
-public class Noob extends CartaoFidelidade {
+public class Caloteiro extends CartaoFidelidade {
 	
-	public Noob() {
-		this.podePegarEmprestado = true;
-		this.periodo = 7;
+	public Caloteiro() {
+		this.podePegarEmprestado = false;
+		this.periodo = 0;
 	}
 	
 	public int getPeriodo() {
@@ -13,5 +13,4 @@ public class Noob extends CartaoFidelidade {
 	public void setPeriodo(int periodo) {
 		this.periodo = periodo;
 	}
-	
 }

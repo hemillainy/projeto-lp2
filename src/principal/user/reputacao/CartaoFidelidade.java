@@ -5,6 +5,7 @@ import enums.Fidelidade;
 public abstract class CartaoFidelidade {
 	protected Fidelidade fidelidade;
 	protected boolean podePegarEmprestado;
+	protected int periodo;
 	
 
 	public CartaoFidelidade() {
@@ -14,6 +15,10 @@ public abstract class CartaoFidelidade {
 	
 	public String getReputacao() {
 		return fidelidade.getValor();
+	}
+	
+	public boolean podePegarEmprestado() {
+		return podePegarEmprestado;
 	}
 	
 
