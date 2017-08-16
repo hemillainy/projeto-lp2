@@ -416,12 +416,12 @@ public class Controller {
 	 * 
 	 * @return set com todos os itens.
 	 */
-	private Set<Item> pegaTodosOsItens() {
+	private List<Item> pegaTodosOsItens() {
 		Set<Item> it = new HashSet<>();
 		for (Usuario us : usuarios.values()) {
 			it.addAll(us.getItens());
 		}
-		return it;
+		return new ArrayList<>(it);
 	}
 
 	/**
@@ -430,15 +430,14 @@ public class Controller {
 	 * @return a listagem de todos os itens em ordem crecente de valor.
 	 */
 	public String listarItensOrdenadosPorValor() {
-		Set<Item> it = pegaTodosOsItens();
-		List<Item> inventario = new ArrayList<>(it);
+		List<Item> itens = pegaTodosOsItens();
 
-		Collections.sort(inventario, comparadorValor);
-		String itens = "";
-		for (Item item : inventario) {
-			itens += item.toString() + "|";
+		Collections.sort(itens, comparadorValor);
+		String saida = "";
+		for (Item item : itens) {
+			saida += item.toString() + "|";
 		}
-		return itens;
+		return saida;
 	}
 
 	/**
@@ -662,20 +661,8 @@ public class Controller {
 	 * @return a listagem dos 10 itens mais emprestados.
 	 */
 	public String listarTop10() {
-		Set<Item> it = pegaTodosOsItens();
-		List<Item> inventario = new ArrayList<>(it);
+		List<Item> inventario = pegaTodosOsItens();
 		Collections.sort(inventario, comparadorNumeroEmprestimos);
-		String itens = "";
-
-		int i = 0;
-		while (true) {
-			if (i == 10 || i == inventario.size() || inventario.get(i).getNumEmprestimos() == 0) {
-				break;
-			}
-			Item item = inventario.get(i);
-			itens += (i + 1) + ") " + item.getNumEmprestimos() + " emprestimos - " + item.toString() + "|";
-			i++;
-		}
-		return itens;
+		return listador.listaTopDez(inventario);
 	}
 }

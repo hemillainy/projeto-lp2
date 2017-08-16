@@ -134,4 +134,24 @@ public class Listador {
 		return retorno;
 	}
 
+	/**
+	 * Metodo que lista os 10 itens mais emprestados.
+	 * 
+	 * @return a listagem dos 10 itens mais emprestados.
+	 */
+	public String listaTopDez(List<Item> inventario) {
+		String itens = "";
+
+		int i = 0;
+		while (true) {
+			if (i == 10 || i == inventario.size() || inventario.get(i).getNumEmprestimos() == 0) {
+				break;
+			}
+			Item item = inventario.get(i);
+			itens += (i + 1) + ") " + item.getNumEmprestimos() + " emprestimos - " + item.toString() + "|";
+			i++;
+		}
+		return itens;
+	}
+
 }
