@@ -31,14 +31,12 @@ import principal.user.Usuario;
 public class Controller {
 	private Validacao validacao;
 	private Map<IdUsuario, Usuario> usuarios;
-	private Map<IdEmprestimo, Emprestimo> emprestimos;
 	private ComparadorValor comparadorValor;
 	private ComparadorNomeItem comparadorNomeItem;
 	private ComparadorNumeroEmprestimos comparadorNumeroEmprestimos;
 
 	public Controller() {
 		this.usuarios = new HashMap<>();
-		this.emprestimos = new HashMap<>();
 		this.validacao = new Validacao();
 		this.comparadorValor = new ComparadorValor();
 		this.comparadorNomeItem = new ComparadorNomeItem();
