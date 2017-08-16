@@ -154,4 +154,17 @@ public class Listador {
 		return itens;
 	}
 
+	/**
+	 * Metodo que lista todos os itens em ordem crescente de valor.
+	 * 
+	 * @return a listagem de todos os itens em ordem crecente de valor.
+	 */
+	public String listaItensOrdenadosPorValor(List<Item> itens) {
+		String saida = "";
+		for (Item item : itens) {
+			saida += item.toString() + "|";
+		}
+		return saida;
+	}
+
 }
