@@ -33,7 +33,6 @@ public class Controller {
 	private Validacao validacao;
 	private ComparadorValor comparadorValor;
 	private Map<IdUsuario, Usuario> usuarios;
-	private ComparadorNomeItem comparadorNomeItem;
 	private Map<IdEmprestimo, Emprestimo> emprestimos;
 	private ComparadorNumeroEmprestimos comparadorNumeroEmprestimos;
 
@@ -43,7 +42,6 @@ public class Controller {
 		this.validacao = new Validacao();
 		this.emprestimos = new HashMap<>();
 		this.comparadorValor = new ComparadorValor();
-		this.comparadorNomeItem = new ComparadorNomeItem();
 		this.comparadorNumeroEmprestimos = new ComparadorNumeroEmprestimos();
 	}
 
@@ -586,9 +584,8 @@ public class Controller {
 		emprestimos.get(ie).devolverItem(dataD);
 		itemDevolver.setStaus();
 	}
-	// ################################### US5
-	// ###################################
-
+	// ################################### US5 ###################################
+	
 	/**
 	 * Metodo que lista todos os itens que um usuario emprestou.
 	 * 
@@ -610,27 +607,7 @@ public class Controller {
 	 */
 	public String listarItensNaoEmprestados() {
 		List<Usuario> users = new ArrayList<>(usuarios.values());
-		
 		return listador.listaItensNaoEmprestados(users);
-		
-	}
-
-	/**
-	 * Remove os intens repetidos do List de emprestimos.
-	 * 
-	 * @param emp
-	 *            List de emprestimos.
-	 */
-	private void removeRepetidos(List<Emprestimo> emp) {
-		for (int i = 0; i < emp.size(); i++) {
-			Emprestimo emp1 = emp.get(i);
-			for (int j = i + 1; j < emp.size(); j++) {
-				Emprestimo emp2 = emp.get(j);
-				if (emp1.getItem().equals(emp2.getItem())) {
-					emp.remove(i);
-				}
-			}
-		}
 	}
 
 	/**
@@ -641,13 +618,7 @@ public class Controller {
 	public String listarItensEmprestados() {
 		String saida = "";
 		List<Emprestimo> emp = new ArrayList<>(emprestimos.values());
-		Collections.reverse(emp);
-		removeRepetidos(emp);
-		for (Emprestimo emprestimo : emp) {
-			saida += "Dono do item: " + emprestimo.getNomeDome() + ", Nome do item emprestado: "
-					+ emprestimo.getNomeItem() + "|";
-		}
-		return saida;
+		return listador.listaItensEmprestados(emp);
 	}
 
 	/**
