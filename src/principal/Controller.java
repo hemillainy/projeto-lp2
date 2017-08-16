@@ -33,11 +33,13 @@ public class Controller {
 	private Map<IdUsuario, Usuario> usuarios;
 	private ComparadorValor comparadorValor;
 	private ComparadorNomeItem comparadorNomeItem;
+	private Map<IdEmprestimo, Emprestimo> emprestimos;
 	private ComparadorNumeroEmprestimos comparadorNumeroEmprestimos;
 
 	public Controller() {
 		this.usuarios = new HashMap<>();
 		this.validacao = new Validacao();
+		this.emprestimos = new HashMap<>();
 		this.comparadorValor = new ComparadorValor();
 		this.comparadorNomeItem = new ComparadorNomeItem();
 		this.comparadorNumeroEmprestimos = new ComparadorNumeroEmprestimos();
@@ -453,8 +455,7 @@ public class Controller {
 	 * 
 	 * @param id
 	 *            id do usuario no mapa de usuarios.
-	 * @return true caso o usuario ja esteja cadastrado ou false caso nao
-	 *         esteja.
+	 * @return true caso o usuario ja esteja cadastrado ou false caso nao esteja.
 	 */
 	private boolean hasUsuario(IdUsuario id) {
 		if (usuarios.containsKey(id)) {
@@ -696,7 +697,9 @@ public class Controller {
 
 	/**
 	 * Metodo que lista os associados a um item.
-	 * @param nome do item.
+	 * 
+	 * @param nome
+	 *            do item.
 	 * @return a lista com todos os emprestimos relacionados a um item.
 	 */
 	public String listarEmprestimosItem(String nome) {
@@ -712,10 +715,9 @@ public class Controller {
 		return retorno;
 	}
 
-
-	
 	/**
 	 * Metodo que lista os 10 itens mais emprestados.
+	 * 
 	 * @return a listagem dos 10 itens mais emprestados.
 	 */
 	public String listarTop10() {
