@@ -91,4 +91,26 @@ public class Listador {
 		return saida;
 	}
 
+	/**
+	 * Metodo que lista os emprestimos concedidos a um ususario.
+	 * 
+	 * @param nome
+	 *            do ususario.
+	 * @param telefone
+	 *            do usuario.
+	 * @return a listagem do emprestimos concedidos a um usuario.
+	 */
+	public String listaEmprestimosUsuarioPegandoEmprestado(Usuario requerente) {
+		String retorno = "Emprestimos pegos: ";
+		for (Emprestimo emprestimo : requerente.getEmprestimos()) {
+			if (emprestimo.getRequerente().equals(requerente)) {
+				retorno += emprestimo.toString() + "|";
+			}
+		}
+		if (retorno.equals("Emprestimos pegos: ")) {
+			return "Nenhum item pego emprestado";
+		}
+		return retorno;
+	}
+
 }
