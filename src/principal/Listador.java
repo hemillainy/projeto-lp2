@@ -1,6 +1,7 @@
 package principal;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -109,6 +110,26 @@ public class Listador {
 		}
 		if (retorno.equals("Emprestimos pegos: ")) {
 			return "Nenhum item pego emprestado";
+		}
+		return retorno;
+	}
+
+	/**
+	 * Metodo que lista os associados a um item.
+	 * 
+	 * @param nome
+	 *            do item.
+	 * @return a lista com todos os emprestimos relacionados a um item.
+	 */
+	public String listaEmprestimosItem(Collection<Emprestimo> emprestimos, String nome) {
+		String retorno = "Emprestimos associados ao item: ";
+		for (Emprestimo emprestimo : emprestimos) {
+			if (emprestimo.getItem().getNome().equals(nome)) {
+				retorno += emprestimo.toString() + "|";
+			}
+		}
+		if (retorno.equals("Emprestimos associados ao item: ")) {
+			return "Nenhum emprestimo associado ao item";
 		}
 		return retorno;
 	}
