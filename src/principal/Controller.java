@@ -31,20 +31,19 @@ import principal.user.Usuario;
 public class Controller {
 	private Validacao validacao;
 	private Map<IdUsuario, Usuario> usuarios;
-	private ComparadorValor comparadorValor;
-	private ComparadorNomeItem comparadorNomeItem;
-	private Map<IdEmprestimo, Emprestimo> emprestimos;
-	private ComparadorNumeroEmprestimos comparadorNumeroEmprestimos;
-
-	public Controller() {
-		this.usuarios = new HashMap<>();
-		this.validacao = new Validacao();
-		this.emprestimos = new HashMap<>();
-		this.comparadorValor = new ComparadorValor();
-		this.comparadorNomeItem = new ComparadorNomeItem();
-		this.comparadorNumeroEmprestimos = new ComparadorNumeroEmprestimos();
-	}
-
+  	private ComparadorValor comparadorValor;
+  	private ComparadorNomeItem comparadorNomeItem;
+ 	private Map<IdEmprestimo, Emprestimo> emprestimos;
+  	private ComparadorNumeroEmprestimos comparadorNumeroEmprestimos;
+  
+  	public Controller() {
+  		this.usuarios = new HashMap<>();
+  		this.validacao = new Validacao();
+ 		this.emprestimos = new HashMap<>();
+  		this.comparadorValor = new ComparadorValor();
+  		this.comparadorNomeItem = new ComparadorNomeItem();
+  		this.comparadorNumeroEmprestimos = new ComparadorNumeroEmprestimos();
+  	}
 	/**
 	 * Metodo que cadastra um usuario no sistema.
 	 * 
@@ -455,7 +454,8 @@ public class Controller {
 	 * 
 	 * @param id
 	 *            id do usuario no mapa de usuarios.
-	 * @return true caso o usuario ja esteja cadastrado ou false caso nao esteja.
+	 * @return true caso o usuario ja esteja cadastrado ou false caso nao
+	 *         esteja.
 	 */
 	private boolean hasUsuario(IdUsuario id) {
 		if (usuarios.containsKey(id)) {
@@ -598,19 +598,7 @@ public class Controller {
 	 */
 	public String listarEmprestimosUsuarioEmprestando(String nome, String telefone) {
 		Usuario dono = criaUsuario(nome, telefone);
-		IdUsuario id = new IdUsuario(nome, telefone);
-		String retorno = "Emprestimos: ";
-		List<Emprestimo> empres = new ArrayList<Emprestimo>(dono.getEmprestimos());
-
-		for (Emprestimo emprestimo : empres) {
-			if (emprestimo.getDono().equals(dono)) {
-				retorno += emprestimo.toString() + "|";
-			}
-		}
-		if (retorno.equals("Emprestimos: ")) {
-			return "Nenhum item emprestado";
-		}
-		return retorno;
+		return dono.listarEmprestimosUsuarioEmprestando(dono);
 	}
 
 	/**
@@ -697,9 +685,7 @@ public class Controller {
 
 	/**
 	 * Metodo que lista os associados a um item.
-	 * 
-	 * @param nome
-	 *            do item.
+	 * @param nome do item.
 	 * @return a lista com todos os emprestimos relacionados a um item.
 	 */
 	public String listarEmprestimosItem(String nome) {
@@ -715,9 +701,10 @@ public class Controller {
 		return retorno;
 	}
 
+
+	
 	/**
 	 * Metodo que lista os 10 itens mais emprestados.
-	 * 
 	 * @return a listagem dos 10 itens mais emprestados.
 	 */
 	public String listarTop10() {

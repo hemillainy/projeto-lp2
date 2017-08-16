@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import principal.Listador;
 import principal.Validacao;
 import principal.emprestimo.Emprestimo;
 import principal.item.Item;
@@ -30,6 +31,7 @@ public class Usuario {
 	private String telefone;
 	private Validacao validacao;
 	private double reputacao;
+	private Listador listador;
 	private Map<String, Item> itens;
 	private Set<Emprestimo> emprestimos;
 
@@ -49,6 +51,7 @@ public class Usuario {
 		this.email = email;
 		this.reputacao = 0;
 		this.itens = new HashMap<>();
+		this.listador = new Listador();
 		this.emprestimos = new HashSet<>();
 		this.validacao = new Validacao();
 	}
@@ -416,6 +419,9 @@ public class Usuario {
 	}
 	
 	// ###################################  US5  ###################################
+	public String listarEmprestimosUsuarioEmprestando(Usuario dono) {
+		return listador.listaEmprestimosUsuarioEmprestando(emprestimos, dono);
+	}
 	
 	public Set<Emprestimo> getEmprestimos() {
 		return this.emprestimos;
