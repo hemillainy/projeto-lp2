@@ -431,13 +431,8 @@ public class Controller {
 	 */
 	public String listarItensOrdenadosPorValor() {
 		List<Item> itens = pegaTodosOsItens();
-
 		Collections.sort(itens, comparadorValor);
-		String saida = "";
-		for (Item item : itens) {
-			saida += item.toString() + "|";
-		}
-		return saida;
+		return listador.listaItensOrdenadosPorValor(itens);
 	}
 
 	/**
