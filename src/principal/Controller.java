@@ -643,16 +643,7 @@ public class Controller {
 	 * @return a lista com todos os emprestimos relacionados a um item.
 	 */
 	public String listarEmprestimosItem(String nome) {
-		String retorno = "Emprestimos associados ao item: ";
-		for (Emprestimo emprestimo : emprestimos.values()) {
-			if (emprestimo.getItem().getNome().equals(nome)) {
-				retorno += emprestimo.toString() + "|";
-			}
-		}
-		if (retorno.equals("Emprestimos associados ao item: ")) {
-			return "Nenhum emprestimo associado ao item";
-		}
-		return retorno;
+		return listador.listaEmprestimosItem(emprestimos.values(), nome);
 	}
 
 	/**
