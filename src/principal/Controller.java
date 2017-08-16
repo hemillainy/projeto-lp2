@@ -632,17 +632,7 @@ public class Controller {
 	 */
 	public String listarEmprestimosUsuarioPegandoEmprestado(String nome, String telefone) {
 		Usuario requerente = criaUsuario(nome, telefone);
-		String retorno = "Emprestimos pegos: ";
-
-		for (Emprestimo emprestimo : requerente.getEmprestimos()) {
-			if (emprestimo.getRequerente().equals(requerente)) {
-				retorno += emprestimo.toString() + "|";
-			}
-		}
-		if (retorno.equals("Emprestimos pegos: ")) {
-			return "Nenhum item pego emprestado";
-		}
-		return retorno;
+		return listador.listaEmprestimosUsuarioPegandoEmprestado(requerente);
 	}
 
 	/**
