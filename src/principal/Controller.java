@@ -93,17 +93,12 @@ public class Controller {
 	 * @return o atributo desejado.
 	 */
 	public String getInfoUsuario(String nome, String telefone, String atributo) {
-		String info = "";
 		IdUsuario id = new IdUsuario(nome, telefone);
 		if (!hasUsuario(id)) {
 			validacao.usuarioInvalido();
 		}
-		if (atributo.equals("Email")) {
-			info += usuarios.get(id).getEmail();
-		} else if (atributo.equals("Reputacao")) {
-			info += usuarios.get(id).getReputacao();
-		}
-		return info;
+		Usuario usuario = usuarios.get(id);
+		return listador.getInfoUsuario(usuario, atributo);
 	}
 
 	/**
@@ -336,14 +331,9 @@ public class Controller {
 	 * @return a informacao correspondente ao atributo desejado.
 	 */
 	public String getInfoItem(String nome, String telefone, String nomeItem, String atributo) {
-		String info = "";
 		IdUsuario id = new IdUsuario(nome, telefone);
-		if (atributo.equals("Preco")) {
-			info = usuarios.get(id).getPrecoItem(nomeItem);
-		} else if (atributo.equals("Nome")) {
-			info = usuarios.get(id).getNomeItem(nomeItem);
-		}
-		return info;
+		Usuario usuario = usuarios.get(id);
+		return listador.getInfoItem(usuario, nomeItem, atributo);
 	}
 
 	/**
@@ -392,26 +382,6 @@ public class Controller {
 	}
 
 	/**
-	 * Metodo que lista todos os itens em ordem lexicografica.
-	 * 
-	 * @return a listagem de todos os itens em ordem lexicografica.
-	 */
-	public String listarItensOrdenadosPorNome() {
-		Set<Item> it = new HashSet<>();
-		for (Usuario us : usuarios.values()) {
-			it.addAll(us.getItens());
-		}
-		List<Item> inventario = new ArrayList<>(it);
-
-		Collections.sort(inventario);
-		String itens = "";
-		for (Item item : inventario) {
-			itens += item.toString() + "|";
-		}
-		return itens;
-	}
-
-	/**
 	 * Pega todos os itens de todos os usuarios.
 	 * 
 	 * @return set com todos os itens.
@@ -422,6 +392,17 @@ public class Controller {
 			it.addAll(us.getItens());
 		}
 		return new ArrayList<>(it);
+	}
+
+	/**
+	 * Metodo que lista todos os itens em ordem lexicografica.
+	 * 
+	 * @return a listagem de todos os itens em ordem lexicografica.
+	 */
+	public String listarItensOrdenadosPorNome() {
+		List<Item> inventario = pegaTodosOsItens();
+		Collections.sort(inventario);
+		return listador.listaItensOrdenadosPorNome(inventario);
 	}
 
 	/**
@@ -620,7 +601,6 @@ public class Controller {
 	 * @return a listagem com os itens emprestados.
 	 */
 	public String listarItensEmprestados() {
-		String saida = "";
 		List<Emprestimo> emp = new ArrayList<>(emprestimos.values());
 		return listador.listaItensEmprestados(emp);
 	}

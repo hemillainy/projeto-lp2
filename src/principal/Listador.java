@@ -167,4 +167,56 @@ public class Listador {
 		return saida;
 	}
 
+	/**
+	 * Metodo que lista todos os itens em ordem lexicografica.
+	 * 
+	 * @return a listagem de todos os itens em ordem lexicografica.
+	 */
+	public String listaItensOrdenadosPorNome(List<Item> inventario) {
+		String itens = "";
+		for (Item item : inventario) {
+			itens += item.toString() + "|";
+		}
+		return itens;
+	}
+
+	/**
+	 * Metodo que retorna um atributo de um usuario.
+	 * 
+	 * @param usuario
+	 *            usuario que tera uma info exibida.
+	 * @param atributo
+	 *            que se deseja.
+	 * @return o atributo desejado.
+	 */
+	public String getInfoUsuario(Usuario usuario, String atributo) {
+		String info = "";
+		if (atributo.equals("Email")) {
+			info += usuario.getEmail();
+		} else if (atributo.equals("Reputacao")) {
+			info += usuario.getReputacao();
+		}
+		return info;
+	}
+
+	/**
+	 * Metodo que retorna uma informacao de um item.
+	 * 
+	 * @param usuario
+	 *            o dono do item que tera uma info exibida.
+	 * @param nomeItem
+	 *            que se deseja pegar a informacao.
+	 * @param atributo
+	 *            que se deseja visualizar.
+	 * @return a informacao correspondente ao atributo desejado.
+	 */
+	public String getInfoItem(Usuario usuario, String nomeItem, String atributo) {
+		String info = "";
+		if (atributo.equals("Preco")) {
+			info = usuario.getPrecoItem(nomeItem);
+		} else if (atributo.equals("Nome")) {
+			info = usuario.getNomeItem(nomeItem);
+		}
+		return info;
+	}
 }
