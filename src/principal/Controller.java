@@ -29,21 +29,24 @@ import principal.user.Usuario;
  *
  */
 public class Controller {
+	private Listador listador;
 	private Validacao validacao;
+	private ComparadorValor comparadorValor;
 	private Map<IdUsuario, Usuario> usuarios;
-  	private ComparadorValor comparadorValor;
-  	private ComparadorNomeItem comparadorNomeItem;
- 	private Map<IdEmprestimo, Emprestimo> emprestimos;
-  	private ComparadorNumeroEmprestimos comparadorNumeroEmprestimos;
-  
-  	public Controller() {
-  		this.usuarios = new HashMap<>();
-  		this.validacao = new Validacao();
- 		this.emprestimos = new HashMap<>();
-  		this.comparadorValor = new ComparadorValor();
-  		this.comparadorNomeItem = new ComparadorNomeItem();
-  		this.comparadorNumeroEmprestimos = new ComparadorNumeroEmprestimos();
-  	}
+	private ComparadorNomeItem comparadorNomeItem;
+	private Map<IdEmprestimo, Emprestimo> emprestimos;
+	private ComparadorNumeroEmprestimos comparadorNumeroEmprestimos;
+
+	public Controller() {
+		this.listador = new Listador();
+		this.usuarios = new HashMap<>();
+		this.validacao = new Validacao();
+		this.emprestimos = new HashMap<>();
+		this.comparadorValor = new ComparadorValor();
+		this.comparadorNomeItem = new ComparadorNomeItem();
+		this.comparadorNumeroEmprestimos = new ComparadorNumeroEmprestimos();
+	}
+
 	/**
 	 * Metodo que cadastra um usuario no sistema.
 	 * 
@@ -454,8 +457,7 @@ public class Controller {
 	 * 
 	 * @param id
 	 *            id do usuario no mapa de usuarios.
-	 * @return true caso o usuario ja esteja cadastrado ou false caso nao
-	 *         esteja.
+	 * @return true caso o usuario ja esteja cadastrado ou false caso nao esteja.
 	 */
 	private boolean hasUsuario(IdUsuario id) {
 		if (usuarios.containsKey(id)) {
@@ -607,21 +609,10 @@ public class Controller {
 	 * @return a listagem dos itens nao cadastrados.
 	 */
 	public String listarItensNaoEmprestados() {
-		Set<Item> it = new HashSet<>();
-		for (Usuario us : usuarios.values()) {
-			it.addAll(us.getItens());
-		}
-		List<Item> inventario = new ArrayList<>(it);
-
-		Collections.sort(inventario, comparadorNomeItem);
-		String itens = "";
-
-		for (Item item : inventario) {
-			if (item.getStatus().equals("Nao emprestado")) {
-				itens += item.toString() + "|";
-			}
-		}
-		return itens;
+		List<Usuario> users = new ArrayList<>(usuarios.values());
+		
+		return listador.listaItensNaoEmprestados(users);
+		
 	}
 
 	/**
@@ -685,7 +676,9 @@ public class Controller {
 
 	/**
 	 * Metodo que lista os associados a um item.
-	 * @param nome do item.
+	 * 
+	 * @param nome
+	 *            do item.
 	 * @return a lista com todos os emprestimos relacionados a um item.
 	 */
 	public String listarEmprestimosItem(String nome) {
@@ -701,10 +694,9 @@ public class Controller {
 		return retorno;
 	}
 
-
-	
 	/**
 	 * Metodo que lista os 10 itens mais emprestados.
+	 * 
 	 * @return a listagem dos 10 itens mais emprestados.
 	 */
 	public String listarTop10() {
@@ -727,5 +719,4 @@ public class Controller {
 		}
 		return itens;
 	}
-
 }
