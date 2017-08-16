@@ -663,17 +663,6 @@ public class Controller {
 	public String listarTop10() {
 		List<Item> inventario = pegaTodosOsItens();
 		Collections.sort(inventario, comparadorNumeroEmprestimos);
-		String itens = "";
-
-		int i = 0;
-		while (true) {
-			if (i == 10 || i == inventario.size() || inventario.get(i).getNumEmprestimos() == 0) {
-				break;
-			}
-			Item item = inventario.get(i);
-			itens += (i + 1) + ") " + item.getNumEmprestimos() + " emprestimos - " + item.toString() + "|";
-			i++;
-		}
-		return itens;
+		return listador.listaTopDez(inventario);
 	}
 }
