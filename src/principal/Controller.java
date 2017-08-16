@@ -412,15 +412,25 @@ public class Controller {
 	}
 
 	/**
+	 * Pega todos os itens de todos os usuarios.
+	 * 
+	 * @return set com todos os itens.
+	 */
+	private Set<Item> pegaTodosOsItens() {
+		Set<Item> it = new HashSet<>();
+		for (Usuario us : usuarios.values()) {
+			it.addAll(us.getItens());
+		}
+		return it;
+	}
+
+	/**
 	 * Metodo que lista todos os itens em ordem crescente de valor.
 	 * 
 	 * @return a listagem de todos os itens em ordem crecente de valor.
 	 */
 	public String listarItensOrdenadosPorValor() {
-		Set<Item> it = new HashSet<>();
-		for (Usuario us : usuarios.values()) {
-			it.addAll(us.getItens());
-		}
+		Set<Item> it = pegaTodosOsItens();
 		List<Item> inventario = new ArrayList<>(it);
 
 		Collections.sort(inventario, comparadorValor);
@@ -585,7 +595,7 @@ public class Controller {
 		itemDevolver.setStaus();
 	}
 	// ################################### US5 ###################################
-	
+
 	/**
 	 * Metodo que lista todos os itens que um usuario emprestou.
 	 * 
@@ -652,10 +662,7 @@ public class Controller {
 	 * @return a listagem dos 10 itens mais emprestados.
 	 */
 	public String listarTop10() {
-		Set<Item> it = new HashSet<>();
-		for (Usuario us : usuarios.values()) {
-			it.addAll(us.getItens());
-		}
+		Set<Item> it = pegaTodosOsItens();
 		List<Item> inventario = new ArrayList<>(it);
 		Collections.sort(inventario, comparadorNumeroEmprestimos);
 		String itens = "";
