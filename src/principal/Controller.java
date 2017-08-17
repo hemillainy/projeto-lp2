@@ -2,7 +2,9 @@ package principal;
 
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -10,6 +12,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.xml.crypto.Data;
 
 import principal.comparator.ComparadorNumeroEmprestimos;
 import principal.comparator.ComparadorValor;
@@ -485,7 +489,7 @@ public class Controller {
 		}
 
 		alocarEmprestimos(dono, requerente, itemEmprestar, data, periodo);
-		dono.addReputacao(itemEmprestar.getPreco(), 0.05);
+		dono.addReputacao(itemEmprestar.getPreco(), 0.1);
 		itemEmprestar.addNumeroEmprestimo();
 
 	}
@@ -552,7 +556,7 @@ public class Controller {
 	 * @throws ParseException
 	 */
 	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
-			String nomeItem, String dataEmprestimo, String dataDevolucao) {
+		String nomeItem, String dataEmprestimo, String dataDevolucao) {
 
 		Usuario dono = criaUsuario(nomeDono, telefoneDono);
 		Usuario requerente = criaUsuario(nomeRequerente, telefoneRequerente);
@@ -568,6 +572,19 @@ public class Controller {
 		}
 		emprestimos.get(ie).devolverItem(dataD);
 		itemDevolver.setStaus();
+		if (emprestimoAtrasado(dataE, dataD) <= 7) {
+			requerente.addReputacao(itemDevolver.getPreco(), 0.05);
+		}
+		else {
+			double taxa = (emprestimoAtrasado(dataE, dataD) - 7) / 100.00;
+			requerente.addReputacao(-itemDevolver.getPreco(), taxa);
+		}
+		
+	}
+	
+	private long emprestimoAtrasado(LocalDate dataEmprestimo, LocalDate dataDevolucao) {
+		long periodo = dataEmprestimo.until(dataDevolucao, ChronoUnit.DAYS);
+		return periodo;
 	}
 	// ################################### US5 ###################################
 
