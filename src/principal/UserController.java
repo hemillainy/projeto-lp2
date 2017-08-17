@@ -1,16 +1,10 @@
 package principal;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import principal.item.Item;
-import principal.user.IdUsuario;
-import principal.user.Usuario;
+import principal.user.*;
 
 /**
  * Representação de um Controller.
@@ -21,13 +15,13 @@ import principal.user.Usuario;
  *         Santos - 116210802
  *
  */
-public class Controller {
+public class UserController {
 	private Listador listador;
 	private Validacao validacao;
 	private EmprestimoController emprestimoController;
 	private Map<IdUsuario, Usuario> usuarios;
 
-	public Controller() {
+	public UserController() {
 		this.listador = new Listador();
 		this.usuarios = new HashMap<>();
 		this.validacao = new Validacao();

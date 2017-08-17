@@ -21,16 +21,16 @@ public class Facade {
 
 		EasyAccept.main(args);
 	}
-
-	private Controller sistema;
+	private ItemController itemController;
+	private UserController userController;
 	private EmprestimoController emprestimoController;
 
 	/**
 	 * Construtor de facade.
 	 */
 	public Facade() {
-		sistema = new Controller();
-		emprestimoController = sistema.getEmprestimoController();
+		userController = new UserController();
+		emprestimoController = userController.getEmprestimoController();
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class Facade {
 	 *            do usuario.
 	 */
 	public void cadastrarUsuario(String nome, String telefone, String email) {
-		sistema.cadastraUsuario(nome, telefone, email);
+		userController.cadastraUsuario(nome, telefone, email);
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class Facade {
 	 *            do usuario.
 	 */
 	public void removerUsuario(String nome, String telefone) {
-		sistema.removeUsuario(nome, telefone);
+		userController.removeUsuario(nome, telefone);
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class Facade {
 	 * @return o atributo desejado.
 	 */
 	public String getInfoUsuario(String nome, String telefone, String atributo) {
-		return sistema.getInfoUsuario(nome, telefone, atributo);
+		return userController.getInfoUsuario(nome, telefone, atributo);
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class Facade {
 	 *            para substituir o valor antigo do atributo.
 	 */
 	public void atualizarUsuario(String nome, String telefone, String atributo, String valor) {
-		sistema.atualizaUsuario(nome, telefone, atributo, valor);
+		userController.atualizaUsuario(nome, telefone, atributo, valor);
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class Facade {
 	 *            do jogo eletronico.
 	 */
 	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
-		sistema.cadastrarEletronico(nome, telefone, nomeItem, preco, plataforma);
+		itemController.cadastrarEletronico(nome, telefone, nomeItem, preco, plataforma);
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class Facade {
 	 *            do item.
 	 */
 	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
-		sistema.cadastrarJogoTabuleiro(nome, telefone, nomeItem, preco);
+		userController.cadastrarJogoTabuleiro(nome, telefone, nomeItem, preco);
 	}
 
 	/**
@@ -156,7 +156,7 @@ public class Facade {
 	 */
 	public void cadastrarBluRayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
 			String genero, String classificacao, int lancamento) {
-		sistema.cadastrarBluRayFilme(nome, telefone, nomeItem, preco, duracao, genero, classificacao, lancamento);
+		userController.cadastrarBluRayFilme(nome, telefone, nomeItem, preco, duracao, genero, classificacao, lancamento);
 	}
 
 	/**
@@ -181,7 +181,7 @@ public class Facade {
 	 */
 	public void cadastrarBluRayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
 			int faixas, String artista, String classificacao) {
-		sistema.cadastrarBluRayShow(nome, telefone, nomeItem, preco, duracao, faixas, artista, classificacao);
+		userController.cadastrarBluRayShow(nome, telefone, nomeItem, preco, duracao, faixas, artista, classificacao);
 	}
 
 	/**
@@ -206,7 +206,7 @@ public class Facade {
 	 */
 	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
 			int duracao, String classificacao, String genero, int temporada) {
-		sistema.cadastrarBluRaySerie(nome, telefone, nomeItem, preco, descricao, duracao, classificacao, genero,
+		userController.cadastrarBluRaySerie(nome, telefone, nomeItem, preco, descricao, duracao, classificacao, genero,
 				temporada);
 	}
 
@@ -223,7 +223,7 @@ public class Facade {
 	 *            do episodio.
 	 */
 	public void adicionarBluRay(String nome, String telefone, String nomeBluRayTemporada, int duracao) {
-		sistema.adicionarBluRay(nome, telefone, nomeBluRayTemporada, duracao);
+		userController.adicionarBluRay(nome, telefone, nomeBluRayTemporada, duracao);
 	}
 
 	/**
@@ -239,7 +239,7 @@ public class Facade {
 	 *            a ser adicionada como perdida.
 	 */
 	public void adicionarPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {
-		sistema.adicionarPecaPerdida(nome, telefone, nomeItem, nomePeca);
+		userController.adicionarPecaPerdida(nome, telefone, nomeItem, nomePeca);
 	}
 
 	/**
@@ -256,7 +256,7 @@ public class Facade {
 	 * @return a informacao correspondente ao atributo desejado.
 	 */
 	public String getInfoItem(String nome, String telefone, String nomeItem, String atributo) {
-		return sistema.getInfoItem(nome, telefone, nomeItem, atributo);
+		return userController.getInfoItem(nome, telefone, nomeItem, atributo);
 	}
 
 	/**
@@ -270,7 +270,7 @@ public class Facade {
 	 *            a ser removido.
 	 */
 	public void removerItem(String nome, String telefone, String nomeItem) {
-		sistema.removerItem(nome, telefone, nomeItem);
+		userController.removerItem(nome, telefone, nomeItem);
 	}
 
 	/**
@@ -288,7 +288,7 @@ public class Facade {
 	 *            para substituir o valor antigo do atributo.
 	 */
 	public void atualizarItem(String nome, String telefone, String nomeItem, String atributo, String valor) {
-		sistema.atualizarItem(nome, telefone, nomeItem, atributo, valor);
+		userController.atualizarItem(nome, telefone, nomeItem, atributo, valor);
 	}
 
 	/**
@@ -297,7 +297,7 @@ public class Facade {
 	 * @return a listagem de todos os itens em ordem lexicografica.
 	 */
 	public String listarItensOrdenadosPorNome() {
-		return sistema.listarItensOrdenadosPorNome();
+		return userController.listarItensOrdenadosPorNome();
 	}
 
 	/**
@@ -306,7 +306,7 @@ public class Facade {
 	 * @return a listagem de todos os itens em ordem crecente de valor.
 	 */
 	public String listarItensOrdenadosPorValor() {
-		return sistema.listarItensOrdenadosPorValor();
+		return userController.listarItensOrdenadosPorValor();
 	}
 
 	/**
@@ -321,7 +321,7 @@ public class Facade {
 	 * @return a representacao do item.
 	 */
 	public String pesquisarDetalhesItem(String nome, String telefone, String nomeItem) {
-		return sistema.pesquisaDetalhesItem(nome, telefone, nomeItem);
+		return userController.pesquisaDetalhesItem(nome, telefone, nomeItem);
 	}
 
 	/**
@@ -345,7 +345,7 @@ public class Facade {
 	 */
 	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
 			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) throws ParseException {
-		sistema.registrarEmprestimo(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem,
+		userController.registrarEmprestimo(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem,
 				dataEmprestimo, periodo);
 	}
 
@@ -370,7 +370,7 @@ public class Facade {
 	 */
 	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
 			String nomeItem, String dataEmprestimo, String dataDevolucao) {
-		sistema.devolverItem(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem, dataEmprestimo,
+		userController.devolverItem(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem, dataEmprestimo,
 				dataDevolucao);
 	}
 
@@ -384,7 +384,7 @@ public class Facade {
 	 * @return a listagem dos emprestimos feitos pelo usuario.
 	 */
 	public String listarEmprestimosUsuarioEmprestando(String nome, String telefone) {
-		return sistema.listarEmprestimosUsuarioEmprestando(nome, telefone);
+		return userController.listarEmprestimosUsuarioEmprestando(nome, telefone);
 	}
 
 	/**
@@ -397,7 +397,7 @@ public class Facade {
 	 * @return a listagem do emprestimos concedidos a um usuario.
 	 */
 	public String listarEmprestimosUsuarioPegandoEmprestado(String nome, String telefone) {
-		return sistema.listarEmprestimosUsuarioPegandoEmprestado(nome, telefone);
+		return userController.listarEmprestimosUsuarioPegandoEmprestado(nome, telefone);
 	}
 
 	/**
@@ -417,7 +417,7 @@ public class Facade {
 	 * @return a listagem dos itens nao cadastrados.
 	 */
 	public String listarItensNaoEmprestados() {
-		return sistema.listarItensNaoEmprestados();
+		return userController.listarItensNaoEmprestados();
 	}
 
 	/**
@@ -426,7 +426,7 @@ public class Facade {
 	 * @return a listagem com os itens emprestados.
 	 */
 	public String listarItensEmprestados() {
-		return sistema.listarItensEmprestados();
+		return userController.listarItensEmprestados();
 	}
 
 	/**
@@ -435,7 +435,7 @@ public class Facade {
 	 * @return a listagem com os 10 itens mais emprestados.
 	 */
 	public String listarTop10Itens() {
-		return sistema.listarTop10();
+		return userController.listarTop10();
 	}
 	
 	/**
@@ -443,7 +443,7 @@ public class Facade {
 	 * @return a listagem com os usuario com reputacao menor que 0.
 	 */
 	public String listarCaloteiros() {
-		return sistema.listarCaloteiros();
+		return userController.listarCaloteiros();
 	}
 	
 	/**
@@ -451,7 +451,7 @@ public class Facade {
 	 * @return a listagem com os 10 usuarios com melhor reputacao.
 	 */
 	public String listarTop10MelhoresUsuarios() {
-		return sistema.listarTop10MelhoresUsuario();
+		return userController.listarTop10MelhoresUsuario();
 	}
 	
 	/**
@@ -459,6 +459,6 @@ public class Facade {
 	 * @return a listagem com os 10 usuarios com menor reputacao.
 	 */
 	public String listarTop10PioresUsuarios() {
-		return sistema.listarTop10PioresUsuario();
+		return userController.listarTop10PioresUsuario();
 	}
 }
