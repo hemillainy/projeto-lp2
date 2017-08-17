@@ -13,6 +13,7 @@ import principal.emprestimo.Emprestimo;
 import principal.item.Item;
 import principal.item.blurays.*;
 import principal.item.jogos.*;
+import principal.user.reputacao.CartaoFidelidade;
 
 /**
  *
@@ -30,7 +31,7 @@ public class Usuario {
 	private String email;
 	private String telefone;
 	private Validacao validacao;
-	private double reputacao;
+	private CartaoFidelidade cartaoFidelidade;
 	private Listador listador;
 	private Map<String, Item> itens;
 	private Set<Emprestimo> emprestimos;
@@ -49,7 +50,7 @@ public class Usuario {
 		this.nome = nome;
 		this.telefone = telefone;
 		this.email = email;
-		this.reputacao = 0;
+		this.cartaoFidelidade = new CartaoFidelidade();
 		this.itens = new HashMap<>();
 		this.listador = new Listador();
 		this.emprestimos = new HashSet<>();
@@ -79,7 +80,7 @@ public class Usuario {
 	 * @return a reputacao do usuario.
 	 */
 	public double getReputacao() {
-		return this.reputacao;
+		return this.cartaoFidelidade.getReputacao();
 	}
 
 	/**
@@ -141,6 +142,8 @@ public class Usuario {
 	 */
 	public void cadastraItem(String nomeItem, double preco, String plataforma) {
 		itens.put(nomeItem, new JogoEletronico(nomeItem, preco, plataforma));
+		cartaoFidelidade.addItem();
+		addReputacao(preco, 0.05);
 	}
 
 	/**
@@ -153,6 +156,8 @@ public class Usuario {
 	 */
 	public void cadastraItem(String nomeItem, double preco) {
 		itens.put(nomeItem, new JogoTabuleiro(nomeItem, preco));
+		cartaoFidelidade.addItem();
+		addReputacao(preco, 0.05);
 	}
 
 	/**
@@ -174,6 +179,8 @@ public class Usuario {
 	public void cadastraItem(String nomeItem, double preco, int duracao, String genero, String classificacao,
 			int lancamento) {
 		itens.put(nomeItem, new Filme(nomeItem, preco, duracao, classificacao, genero, lancamento));
+		cartaoFidelidade.addItem();
+		addReputacao(preco, 0.05);
 	}
 
 	/**
@@ -195,6 +202,8 @@ public class Usuario {
 	public void cadastraBluRayShow(String nomeItem, double preco, int duracao, String classificacao, String artista,
 			int faixas) {
 		itens.put(nomeItem, new Show(nomeItem, preco, duracao, classificacao, artista, faixas));
+		cartaoFidelidade.addItem();
+		addReputacao(preco, 0.05);
 	}
 
 	/**
@@ -216,6 +225,8 @@ public class Usuario {
 	public void cadastraItem(String nomeItem, double preco, String descricao, int duracao, String classificacao,
 			String genero, int temporada) {
 		itens.put(nomeItem, new Serie(nomeItem, preco, duracao, classificacao, genero, temporada));
+		cartaoFidelidade.addItem();
+		addReputacao(preco, 0.05);
 	}
 
 	/**
@@ -284,6 +295,7 @@ public class Usuario {
 		if (!itens.containsKey(nomeItem)) {
 			validacao.itemNaoEncontrado();
 		}
+		cartaoFidelidade.tiraItem();
 		itens.remove(nomeItem);
 	}
 
@@ -415,19 +427,57 @@ public class Usuario {
 	 */
 	public void addEmprestimo(Emprestimo e) {
 		emprestimos.add(e);
-
 	}
 	
 	// ###################################  US5  ###################################
+	
+	/**
+	 * Lista os emprestimos de itens que o usuario emprestou. 
+	 * @param dono o dono do emprestimo. 
+	 * @return a lista de emprestimos em que o usuario emprestou os itens. 
+	 */
 	public String listarEmprestimosUsuarioEmprestando(Usuario dono) {
 		return listador.listaEmprestimosUsuarioEmprestando(emprestimos, dono);
 	}
 	
+	/**
+	 * Retorna os emprestimos de um usuario. 
+	 * @return o conjunto de emprestimos do usuario. 
+	 */
 	public Set<Emprestimo> getEmprestimos() {
 		return this.emprestimos;
 	}
 	
+	/**
+	 * Adiciona valor a reputacao do usuario. 
+	 * @param valor o valor do item. 
+	 * @param taxa a taxa que sera tirada do valor do item. 
+	 */
 	public void addReputacao(double valor, double taxa) {
-		this.reputacao += valor * taxa;
+		this.cartaoFidelidade.setReputacao(valor * taxa);
 	}
+
+	/**
+	 * 
+	 * @return o status da fidelidade do usuario. 
+	 */
+	public String getFidelidade() {
+		return cartaoFidelidade.getFidelidade();
+	}
+	
+	/**
+	 * Diz se um usuario pode ou nao pegar itens emprestados. 
+	 * @return true se o usuario pode pegar itens emprestados ou false em caso contrario. 
+	 */
+	public boolean podePegarEmprestado() {
+		return cartaoFidelidade.podePegarEmprestado();
+	}
+
+	/**
+	 * 
+	 * @return o periodo que o usuario pode pegar itens emprestados.
+	 */
+	public int getPeriodo() {
+		return cartaoFidelidade.getPeriodo();
+}
 }

@@ -22,8 +22,7 @@ public class Validacao {
 	}
 
 	/**
-	 * Excecao lancada quando tentar cadastrar um usuario que ja esta
-	 * cadastrado.
+	 * Excecao lancada quando tentar cadastrar um usuario que ja esta cadastrado.
 	 */
 	public void usuarioJaCadastrado() {
 		throw new IllegalArgumentException("Usuario ja cadastrado");
@@ -87,8 +86,8 @@ public class Validacao {
 	}
 
 	/**
-	 * Excecao lancada quando tentarem fazer um emprestimo de um item que ja
-	 * esta emprestado.
+	 * Excecao lancada quando tentarem fazer um emprestimo de um item que ja esta
+	 * emprestado.
 	 */
 	public void ItemJaEmprestado() {
 		throw new IllegalArgumentException("Item emprestado no momento");
@@ -96,8 +95,7 @@ public class Validacao {
 	}
 
 	/**
-	 * Excecao lancada quando for solicitado um emprestimo que nao foi
-	 * cadastrado.
+	 * Excecao lancada quando for solicitado um emprestimo que nao foi cadastrado.
 	 */
 	public void emprestimoNaoEncontrado() {
 		throw new IllegalArgumentException("Emprestimo nao encontrado");
@@ -110,6 +108,12 @@ public class Validacao {
 
 	}
 
+	/**
+	 * Verifica nulidade de um item. Se o item for nulo uma excecao e lancada.
+	 * 
+	 * @param item
+	 *            o item a ser verificado.
+	 */
 	public void validaItemEmprestimo(Item item) {
 		if (item == null) {
 			throw new IllegalArgumentException("Item nao encontrado");
@@ -117,9 +121,19 @@ public class Validacao {
 
 	}
 
-	public void dataInvalida() {
-		throw new IllegalArgumentException("Data Invalida");
-		
+	/**
+	 * Lanca excecao se o usuario nao pode pegar um item emprestado .
+	 */
+	public void naoPodePegarEmprestado() {
+		throw new IllegalArgumentException("Usuario nao pode pegar nenhum item emprestado");
+	}
+
+	/**
+	 * Excecao lancada quando um emprestimos com periodo alem do permitido para o
+	 * requerente eh solicitado.
+	 */
+	public void periodoInvalido() {
+		throw new IllegalArgumentException("Usuario impossiblitado de pegar emprestado por esse periodo");
 	}
 
 }
