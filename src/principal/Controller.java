@@ -51,9 +51,8 @@ public class Controller {
 	public void cadastraUsuario(String nome, String telefone, String email) {
 		validacao.dadoUsuarioInvalido(nome, telefone, email);
 		IdUsuario id = new IdUsuario(nome, telefone);
-		if (hasUsuario(id)) {
-			validacao.usuarioJaCadastrado();
-		}
+		validacao.usuarioJaCadastrado(hasUsuario(id));
+
 		Usuario usuario = new Usuario(nome, telefone, email);
 		usuarios.put(id, usuario);
 	}
@@ -68,9 +67,7 @@ public class Controller {
 	 */
 	public void removeUsuario(String nome, String telefone) {
 		IdUsuario id = new IdUsuario(nome, telefone);
-		if (!hasUsuario(id)) {
-			validacao.usuarioInvalido();
-		}
+		validacao.usuarioInvalido(!hasUsuario(id));
 		usuarios.remove(id);
 	}
 
@@ -87,9 +84,7 @@ public class Controller {
 	 */
 	public String getInfoUsuario(String nome, String telefone, String atributo) {
 		IdUsuario id = new IdUsuario(nome, telefone);
-		if (!hasUsuario(id)) {
-			validacao.usuarioInvalido();
-		}
+		validacao.usuarioInvalido(!hasUsuario(id));
 		Usuario usuario = usuarios.get(id);
 		return listador.getInfoUsuario(usuario, atributo);
 	}
@@ -108,9 +103,7 @@ public class Controller {
 	 */
 	public void atualizaUsuario(String nome, String telefone, String atributo, String valor) {
 		IdUsuario id = new IdUsuario(nome, telefone);
-		if (!hasUsuario(id)) {
-			validacao.usuarioInvalido();
-		}
+		validacao.usuarioInvalido(!hasUsuario(id));
 		if (atributo.equals("Email")) {
 			usuarios.get(id).setEmail(valor);
 		} else if (atributo.equals("Telefone")) {
@@ -151,9 +144,7 @@ public class Controller {
 	 */
 	public void adicionarPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {
 		IdUsuario id = new IdUsuario(nome, telefone);
-		if (!hasUsuario(id)) {
-			validacao.usuarioInvalido();
-		}
+		validacao.usuarioInvalido(!hasUsuario(id));
 		usuarios.get(id).adicionarPecaPerdida(nomeItem, nomePeca);
 	}
 
@@ -174,9 +165,7 @@ public class Controller {
 	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
 		validacao.itemInvalido(nomeItem, preco, plataforma);
 		IdUsuario id = new IdUsuario(nome, telefone);
-		if (!hasUsuario(id)) {
-			validacao.usuarioInvalido();
-		}
+		validacao.usuarioInvalido(!hasUsuario(id));
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco, plataforma);
 	}
@@ -196,9 +185,7 @@ public class Controller {
 	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
 		validacao.itemInvalido(nomeItem, preco);
 		IdUsuario id = new IdUsuario(nome, telefone);
-		if (!hasUsuario(id)) {
-			validacao.usuarioInvalido();
-		}
+		validacao.usuarioInvalido(!hasUsuario(id));
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco);
 	}
@@ -299,9 +286,7 @@ public class Controller {
 	 */
 	public String pesquisaDetalhesItem(String nome, String telefone, String item) {
 		IdUsuario id = new IdUsuario(nome, telefone);
-		if (!hasUsuario(id)) {
-			validacao.usuarioInvalido();
-		}
+		validacao.usuarioInvalido(!hasUsuario(id));
 		return usuarios.get(id).exibeDetalhesItem(item);
 	}
 
@@ -336,9 +321,7 @@ public class Controller {
 	 */
 	public void removerItem(String nome, String telefone, String nomeItem) {
 		IdUsuario id = new IdUsuario(nome, telefone);
-		if (!hasUsuario(id)) {
-			validacao.usuarioInvalido();
-		}
+		validacao.usuarioInvalido(!hasUsuario(id));
 		usuarios.get(id).removerItem(nomeItem);
 
 	}
@@ -359,9 +342,7 @@ public class Controller {
 	 */
 	public void atualizarItem(String nome, String telefone, String nomeItem, String atributo, String valor) {
 		IdUsuario id = new IdUsuario(nome, telefone);
-		if (!hasUsuario(id)) {
-			validacao.usuarioInvalido();
-		}
+		validacao.usuarioInvalido(!hasUsuario(id));
 		if (atributo.equals("Nome")) {
 			usuarios.get(id).atualizaNomeItem(nomeItem, valor);
 		} else if (atributo.equals("Preco")) {
@@ -460,12 +441,9 @@ public class Controller {
 
 		Usuario dono = criaUsuario(nomeDono, telefoneDono);
 		Usuario requerente = criaUsuario(nomeRequerente, telefoneRequerente);
-		if (!requerente.podePegarEmprestado()) {
-			validacao.naoPodePegarEmprestado();
-		}
-		if (periodo > requerente.getPeriodo()) {
-			validacao.periodoInvalido();
-		}
+		validacao.naoPodePegarEmprestado(requerente.podePegarEmprestado());
+		validacao.periodoInvalido(periodo, requerente.getPeriodo());
+		
 		emprestimoController.registraEmprestimo(dono, requerente, nomeItem, dataEmprestimo, periodo);
 	}
 
@@ -479,11 +457,9 @@ public class Controller {
 	 * @return o Usuario.
 	 */
 	private Usuario criaUsuario(String nomeUsuario, String telefoneUsuario) {
-		IdUsuario idUser = new IdUsuario(nomeUsuario, telefoneUsuario);
-		if (!hasUsuario(idUser)) {
-			validacao.usuarioInvalido();
-		}
-		Usuario user = usuarios.get(idUser);
+		IdUsuario id = new IdUsuario(nomeUsuario, telefoneUsuario);
+		validacao.usuarioInvalido(!hasUsuario(id));
+		Usuario user = usuarios.get(id);
 		return user;
 	}
 
