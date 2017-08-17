@@ -5,13 +5,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 
 import principal.comparator.ComparadorNumeroEmprestimos;
 import principal.comparator.ComparadorValor;
@@ -33,18 +31,14 @@ import principal.user.Usuario;
 public class Controller {
 	private Listador listador;
 	private Validacao validacao;
-	private ComparadorValor comparadorValor;
 	private Map<IdUsuario, Usuario> usuarios;
 	private Map<IdEmprestimo, Emprestimo> emprestimos;
-	private ComparadorNumeroEmprestimos comparadorNumeroEmprestimos;
 
 	public Controller() {
 		this.listador = new Listador();
 		this.usuarios = new HashMap<>();
 		this.validacao = new Validacao();
 		this.emprestimos = new HashMap<>();
-		this.comparadorValor = new ComparadorValor();
-		this.comparadorNumeroEmprestimos = new ComparadorNumeroEmprestimos();
 	}
 
 	/**
@@ -403,7 +397,6 @@ public class Controller {
 	 */
 	public String listarItensOrdenadosPorNome() {
 		List<Item> inventario = pegaTodosOsItens();
-		Collections.sort(inventario);
 		return listador.listaItensOrdenadosPorNome(inventario);
 	}
 
@@ -414,7 +407,6 @@ public class Controller {
 	 */
 	public String listarItensOrdenadosPorValor() {
 		List<Item> itens = pegaTodosOsItens();
-		Collections.sort(itens, comparadorValor);
 		return listador.listaItensOrdenadosPorValor(itens);
 	}
 
@@ -442,7 +434,8 @@ public class Controller {
 	 * 
 	 * @param id
 	 *            id do usuario no mapa de usuarios.
-	 * @return true caso o usuario ja esteja cadastrado ou false caso nao esteja.
+	 * @return true caso o usuario ja esteja cadastrado ou false caso nao
+	 *         esteja.
 	 */
 	private boolean hasUsuario(IdUsuario id) {
 		if (usuarios.containsKey(id)) {
@@ -554,7 +547,7 @@ public class Controller {
 	 * @throws ParseException
 	 */
 	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
-		String nomeItem, String dataEmprestimo, String dataDevolucao) {
+			String nomeItem, String dataEmprestimo, String dataDevolucao) {
 
 		Usuario dono = criaUsuario(nomeDono, telefoneDono);
 		Usuario requerente = criaUsuario(nomeRequerente, telefoneRequerente);
@@ -572,25 +565,28 @@ public class Controller {
 		itemDevolver.setStaus();
 		if (emprestimoAtrasado(dataE, dataD) <= 7) {
 			requerente.addReputacao(itemDevolver.getPreco(), 0.05);
-		}
-		else {
+		} else {
 			double taxa = (emprestimoAtrasado(dataE, dataD) - 7) / 100.00;
 			requerente.addReputacao(-itemDevolver.getPreco(), taxa);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Verifica se um emprestimo esta atrasado.
-	 * @param dataEmprestimo em que foi emprestado o item.
-	 * @param dataDevolucao que foi devolvido o item.
+	 * 
+	 * @param dataEmprestimo
+	 *            em que foi emprestado o item.
+	 * @param dataDevolucao
+	 *            que foi devolvido o item.
 	 * @return o periodo que o requerente ficou com o item.
 	 */
 	private long emprestimoAtrasado(LocalDate dataEmprestimo, LocalDate dataDevolucao) {
 		long periodo = dataEmprestimo.until(dataDevolucao, ChronoUnit.DAYS);
 		return periodo;
 	}
-	// ################################### US5 ###################################
+	// ################################### US5
+	// ###################################
 
 	/**
 	 * Metodo que lista todos os itens que um usuario emprestou.
@@ -658,7 +654,6 @@ public class Controller {
 	 */
 	public String listarTop10() {
 		List<Item> inventario = pegaTodosOsItens();
-		Collections.sort(inventario, comparadorNumeroEmprestimos);
 		return listador.listaTopDez(inventario);
 	}
 }

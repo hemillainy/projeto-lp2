@@ -7,11 +7,20 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import principal.comparator.ComparadorNumeroEmprestimos;
+import principal.comparator.ComparadorValor;
 import principal.emprestimo.Emprestimo;
 import principal.item.Item;
 import principal.user.Usuario;
 
 public class Listador {
+	private ComparadorValor comparadorValor;
+	private ComparadorNumeroEmprestimos comparadorNumeroEmprestimos;
+	
+	public Listador() {
+		this.comparadorValor = new ComparadorValor();
+		this.comparadorNumeroEmprestimos = new ComparadorNumeroEmprestimos();
+	}
 
 	/**
 	 * Metodo que lista todos os itens que um usuario emprestou.
@@ -140,6 +149,7 @@ public class Listador {
 	 * @return a listagem dos 10 itens mais emprestados.
 	 */
 	public String listaTopDez(List<Item> inventario) {
+		Collections.sort(inventario, comparadorNumeroEmprestimos);
 		String itens = "";
 
 		int i = 0;
@@ -160,6 +170,7 @@ public class Listador {
 	 * @return a listagem de todos os itens em ordem crecente de valor.
 	 */
 	public String listaItensOrdenadosPorValor(List<Item> itens) {
+		Collections.sort(itens, comparadorValor);
 		String saida = "";
 		for (Item item : itens) {
 			saida += item.toString() + "|";
@@ -173,6 +184,7 @@ public class Listador {
 	 * @return a listagem de todos os itens em ordem lexicografica.
 	 */
 	public String listaItensOrdenadosPorNome(List<Item> inventario) {
+		Collections.sort(inventario);
 		String itens = "";
 		for (Item item : inventario) {
 			itens += item.toString() + "|";
