@@ -211,7 +211,7 @@ public class UserController {
 	 *            do filme.
 	 */
 	public void cadastrarBluRayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
-			String genero, String classificacao, int lancamento) {
+		String genero, String classificacao, int lancamento) {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco, duracao, genero, classificacao, lancamento);
@@ -558,11 +558,19 @@ public class UserController {
 		return listador.listarCaloteiros(users);
 	}
 	
+	/**
+	 * Metodo que lista os 10 usuarios com melhor reputacao.
+	 * @return a lista com os 10 usuarios com melhor reputacao.
+	 */
 	public String listarTop10MelhoresUsuario() {
 		List<Usuario> users = new ArrayList<>(usuarios.values());
 		return listador.listarTop10MelhoresUsuarios(users);
 	}
 	
+	/**
+	 * Metodo que lista os 10 usuarios com mmenor reputacao.
+	 * @return a lista com os 10 usuarios com menor reputacao.
+	 */
 	public String listarTop10PioresUsuario() {
 		List<Usuario> users = new ArrayList<>(usuarios.values());
 		return listador.listarTop10PioresUsuarios(users);

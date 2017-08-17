@@ -5,9 +5,9 @@ read -p "Branch: " branch
 
 function enviar() {
 	git add .
-	git commit -m $comentario
+	git commit -m "$comentario"
 	git push origin $branch
 }
 
-enviar $comentario $branch
+enviar
 
