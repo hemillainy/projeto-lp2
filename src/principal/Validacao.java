@@ -17,15 +17,19 @@ public class Validacao {
 	 * Excecao lancada quando for passado um usuario que nao esta cadastrado no
 	 * sistema.
 	 */
-	public String usuarioInvalido() {
-		throw new IllegalArgumentException("Usuario invalido");
+	public void usuarioInvalido(boolean hasUsuario) {
+		if (hasUsuario) {
+			throw new IllegalArgumentException("Usuario invalido");
+		}
 	}
 
 	/**
 	 * Excecao lancada quando tentar cadastrar um usuario que ja esta cadastrado.
 	 */
-	public void usuarioJaCadastrado() {
-		throw new IllegalArgumentException("Usuario ja cadastrado");
+	public void usuarioJaCadastrado(boolean hasUsuario) {
+		if (hasUsuario) {
+			throw new IllegalArgumentException("Usuario ja cadastrado");
+		}
 	}
 
 	/**
@@ -124,16 +128,20 @@ public class Validacao {
 	/**
 	 * Lanca excecao se o usuario nao pode pegar um item emprestado .
 	 */
-	public void naoPodePegarEmprestado() {
-		throw new IllegalArgumentException("Usuario nao pode pegar nenhum item emprestado");
+	public void naoPodePegarEmprestado(boolean podePegarEmprestado) {
+		if (!podePegarEmprestado) {
+			throw new IllegalArgumentException("Usuario nao pode pegar nenhum item emprestado");
+		}
 	}
 
 	/**
 	 * Excecao lancada quando um emprestimos com periodo alem do permitido para o
 	 * requerente eh solicitado.
 	 */
-	public void periodoInvalido() {
-		throw new IllegalArgumentException("Usuario impossiblitado de pegar emprestado por esse periodo");
+	public void periodoInvalido(int periodo, int periodoUser) {
+		if (periodo > periodoUser) {
+			throw new IllegalArgumentException("Usuario impossiblitado de pegar emprestado por esse periodo");
+		}
 	}
 
 }
