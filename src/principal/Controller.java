@@ -1,9 +1,6 @@
 package principal;
 
 import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,10 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import principal.comparator.ComparadorNumeroEmprestimos;
-import principal.comparator.ComparadorValor;
-import principal.emprestimo.Emprestimo;
-import principal.emprestimo.IdEmprestimo;
 import principal.item.Item;
 import principal.user.IdUsuario;
 import principal.user.Usuario;
@@ -31,14 +24,18 @@ import principal.user.Usuario;
 public class Controller {
 	private Listador listador;
 	private Validacao validacao;
+	private EmprestimoController emprestimoController;
 	private Map<IdUsuario, Usuario> usuarios;
-	private Map<IdEmprestimo, Emprestimo> emprestimos;
 
 	public Controller() {
 		this.listador = new Listador();
 		this.usuarios = new HashMap<>();
 		this.validacao = new Validacao();
-		this.emprestimos = new HashMap<>();
+		this.emprestimoController = new EmprestimoController();
+	}
+
+	public EmprestimoController getEmprestimoController() {
+		return this.emprestimoController;
 	}
 
 	/**
@@ -382,7 +379,7 @@ public class Controller {
 	 * 
 	 * @return set com todos os itens.
 	 */
-	private List<Item> pegaTodosOsItens() {
+	private List<Item> getItens() {
 		Set<Item> it = new HashSet<>();
 		for (Usuario us : usuarios.values()) {
 			it.addAll(us.getItens());
@@ -396,7 +393,7 @@ public class Controller {
 	 * @return a listagem de todos os itens em ordem lexicografica.
 	 */
 	public String listarItensOrdenadosPorNome() {
-		List<Item> inventario = pegaTodosOsItens();
+		List<Item> inventario = getItens();
 		return listador.listaItensOrdenadosPorNome(inventario);
 	}
 
@@ -406,7 +403,7 @@ public class Controller {
 	 * @return a listagem de todos os itens em ordem crecente de valor.
 	 */
 	public String listarItensOrdenadosPorValor() {
-		List<Item> itens = pegaTodosOsItens();
+		List<Item> itens = getItens();
 		return listador.listaItensOrdenadosPorValor(itens);
 	}
 
@@ -468,21 +465,7 @@ public class Controller {
 
 		Usuario dono = criaUsuario(nomeDono, telefoneDono);
 		Usuario requerente = criaUsuario(nomeRequerente, telefoneRequerente);
-
-		validacao.validaItemEmprestimo(dono.getItem(nomeItem));
-		Item itemEmprestar = dono.getItem(nomeItem);
-
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate data = LocalDate.parse(dataEmprestimo, dtf);
-
-		if (itemEmprestar.verificaEmprestado()) {
-			validacao.ItemJaEmprestado();
-		}
-
-		alocarEmprestimos(dono, requerente, itemEmprestar, data, periodo);
-		dono.addReputacao(itemEmprestar.getPreco(), 0.1);
-		itemEmprestar.addNumeroEmprestimo();
-
+		emprestimoController.registraEmprestimo(dono, requerente, nomeItem, dataEmprestimo, periodo);
 	}
 
 	/**
@@ -501,30 +484,6 @@ public class Controller {
 		}
 		Usuario user = usuarios.get(idUser);
 		return user;
-	}
-
-	/**
-	 * Cria um emprestimo e um idEmprestimo. Adiciona o emprestimo no map de
-	 * emprestimos e passa-o para o dono e o requerente.
-	 * 
-	 * @param dono
-	 *            dono do item emprestado.
-	 * @param requerente
-	 *            usuario que ira pegar o item emprestado.
-	 * @param itemEmprestar
-	 *            item que sera emprestado.
-	 * @param data
-	 *            data em que foi realizado o emprestimo.
-	 * @param periodo
-	 *            periodo em que o requerente deve ficar com o item.
-	 */
-	private void alocarEmprestimos(Usuario dono, Usuario requerente, Item itemEmprestar, LocalDate data, int periodo) {
-		Emprestimo e = new Emprestimo(dono, requerente, itemEmprestar, data, periodo);
-		IdEmprestimo ie = new IdEmprestimo(dono, requerente, itemEmprestar, data);
-		emprestimos.put(ie, e);
-		dono.addEmprestimo(e);
-		requerente.addEmprestimo(e);
-		itemEmprestar.setStaus();
 	}
 
 	/**
@@ -551,39 +510,7 @@ public class Controller {
 
 		Usuario dono = criaUsuario(nomeDono, telefoneDono);
 		Usuario requerente = criaUsuario(nomeRequerente, telefoneRequerente);
-		validacao.validaItemEmprestimo(dono.getItem(nomeItem));
-		Item itemDevolver = dono.getItem(nomeItem);
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate dataE = LocalDate.parse(dataEmprestimo, dtf);
-		LocalDate dataD = LocalDate.parse(dataDevolucao, dtf);
-
-		IdEmprestimo ie = new IdEmprestimo(dono, requerente, itemDevolver, dataE);
-		if (!emprestimos.containsKey(ie)) {
-			validacao.emprestimoNaoEncontrado();
-		}
-		emprestimos.get(ie).devolverItem(dataD);
-		itemDevolver.setStaus();
-		if (emprestimoAtrasado(dataE, dataD) <= 7) {
-			requerente.addReputacao(itemDevolver.getPreco(), 0.05);
-		} else {
-			double taxa = (emprestimoAtrasado(dataE, dataD) - 7) / 100.00;
-			requerente.addReputacao(-itemDevolver.getPreco(), taxa);
-		}
-
-	}
-
-	/**
-	 * Verifica se um emprestimo esta atrasado.
-	 * 
-	 * @param dataEmprestimo
-	 *            em que foi emprestado o item.
-	 * @param dataDevolucao
-	 *            que foi devolvido o item.
-	 * @return o periodo que o requerente ficou com o item.
-	 */
-	private long emprestimoAtrasado(LocalDate dataEmprestimo, LocalDate dataDevolucao) {
-		long periodo = dataEmprestimo.until(dataDevolucao, ChronoUnit.DAYS);
-		return periodo;
+		emprestimoController.devolveItem(dono, requerente, nomeItem, dataEmprestimo, dataDevolucao);
 	}
 	// ################################### US5
 	// ###################################
@@ -618,8 +545,7 @@ public class Controller {
 	 * @return a listagem com os itens emprestados.
 	 */
 	public String listarItensEmprestados() {
-		List<Emprestimo> emp = new ArrayList<>(emprestimos.values());
-		return listador.listaItensEmprestados(emp);
+		return emprestimoController.listaItensEmprestados();
 	}
 
 	/**
@@ -637,23 +563,12 @@ public class Controller {
 	}
 
 	/**
-	 * Metodo que lista os associados a um item.
-	 * 
-	 * @param nome
-	 *            do item.
-	 * @return a lista com todos os emprestimos relacionados a um item.
-	 */
-	public String listarEmprestimosItem(String nome) {
-		return listador.listaEmprestimosItem(emprestimos.values(), nome);
-	}
-
-	/**
 	 * Metodo que lista os 10 itens mais emprestados.
 	 * 
 	 * @return a listagem dos 10 itens mais emprestados.
 	 */
 	public String listarTop10() {
-		List<Item> inventario = pegaTodosOsItens();
+		List<Item> inventario = getItens();
 		return listador.listaTopDez(inventario);
 	}
 }

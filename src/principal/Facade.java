@@ -17,17 +17,19 @@ public class Facade {
 	public static void main(String[] args) {
 		args = new String[] { "principal.Facade", "acceptance_test/us1_test.txt", "acceptance_test/us2_test.txt",
 				"acceptance_test/us3_test.txt", "acceptance_test/us4_test.txt", "acceptance_test/us5_test.txt",
-				"acceptance_test/us6_test.txt"};
+				"acceptance_test/us6_test.txt" };
 		EasyAccept.main(args);
 	}
 
 	private Controller sistema;
+	private EmprestimoController emprestimoController;
 
 	/**
 	 * Construtor de facade.
 	 */
 	public Facade() {
 		sistema = new Controller();
+		emprestimoController = sistema.getEmprestimoController();
 	}
 
 	/**
@@ -87,9 +89,7 @@ public class Facade {
 	 * Metodo que atualiza um atributo de um usuario.
 	 * 
 	 * @param nome
-	 *            do usuario.
-nulo	 * @param telefone
-	 *            do usuario.
+	 *            do usuario. nulo * @param telefone do usuario.
 	 * @param atributo
 	 *            a ser alterado.
 	 * @param valor
@@ -201,9 +201,7 @@ nulo	 * @param telefone
 	 * @param classificacao
 	 *            indicativa da serie.
 	 * @param genero
-	 *            da serie.
-nulo	 * @param temporada
-	 *            da serie.
+	 *            da serie. nulo * @param temporada da serie.
 	 */
 	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
 			int duracao, String classificacao, String genero, int temporada) {
@@ -374,61 +372,74 @@ nulo	 * @param temporada
 		sistema.devolverItem(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem, dataEmprestimo,
 				dataDevolucao);
 	}
-	
-	// ###################################  US5  ###################################
-	
+
+	// ################################### US5
+	// ###################################
+
 	/**
 	 * Metodo que lista os emprestimos realizados por um usuario.
-	 * @param nome do usuario.
-	 * @param telefone do usuario.
+	 * 
+	 * @param nome
+	 *            do usuario.
+	 * @param telefone
+	 *            do usuario.
 	 * @return a listagem dos emprestimos feitos pelo usuario.
 	 */
 	public String listarEmprestimosUsuarioEmprestando(String nome, String telefone) {
 		return sistema.listarEmprestimosUsuarioEmprestando(nome, telefone);
 	}
-	
+
 	/**
 	 * Metodo que lista os emprestimos concedidos a um ususario.
-	 * @param nome do ususario.
-	 * @param telefone do usuario.
+	 * 
+	 * @param nome
+	 *            do ususario.
+	 * @param telefone
+	 *            do usuario.
 	 * @return a listagem do emprestimos concedidos a um usuario.
 	 */
 	public String listarEmprestimosUsuarioPegandoEmprestado(String nome, String telefone) {
 		return sistema.listarEmprestimosUsuarioPegandoEmprestado(nome, telefone);
 	}
-	
+
 	/**
 	 * Metodo que lista os emprestimos que realizados com o item.
-	 * @param nomeItem nome do item.
+	 * 
+	 * @param nomeItem
+	 *            nome do item.
 	 * @return a listagem com os emprestimos que o item participou.
 	 */
 	public String listarEmprestimosItem(String nomeItem) {
-		return sistema.listarEmprestimosItem(nomeItem);
+		return emprestimoController.listarEmprestimosItem(nomeItem);
 	}
-	
+
 	/**
 	 * Metodo que lista os itens cadastrados nao emprestados.
+	 * 
 	 * @return a listagem dos itens nao cadastrados.
 	 */
 	public String listarItensNaoEmprestados() {
 		return sistema.listarItensNaoEmprestados();
 	}
-	
+
 	/**
 	 * Metodo que lista os itens cadastrados nao emprestados.
+	 * 
 	 * @return a listagem com os itens emprestados.
 	 */
 	public String listarItensEmprestados() {
 		return sistema.listarItensEmprestados();
 	}
-	
+
 	/**
 	 * Metodo que lista os 10 itens mais emprestados.
+	 * 
 	 * @return a listagem com os 10 itens mais emprestados.
 	 */
 	public String listarTop10Itens() {
 		return sistema.listarTop10();
 	}
-	
-	// ###################################  US6  ###################################
+
+	// ################################### US6
+	// ###################################
 }
