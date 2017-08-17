@@ -62,7 +62,7 @@ public class Listador {
 		Collections.sort(inventario, new ComparadorNomeItem());
 
 		String saida = "";
-		for (Item item : itens) {
+		for (Item item : inventario) {
 			if (item.getStatus().equals("Nao emprestado")) {
 				saida += item.toString() + "|";
 			}
@@ -141,7 +141,7 @@ public class Listador {
 			}
 		}
 		if (retorno.equals("Emprestimos associados ao item: ")) {
-			return "Nenhum emprestimo associado ao item";
+			return "Nenhum emprestimos associados ao item";
 		}
 		return retorno;
 	}

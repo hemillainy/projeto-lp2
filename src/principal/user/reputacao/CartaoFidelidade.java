@@ -19,7 +19,7 @@ public class CartaoFidelidade {
 	 * eh sempre inicialmente como Noob
 	 */
 	public CartaoFidelidade() {
-		this.fidelidade = new Noob(0);
+		this.fidelidade = new FreeRyder(0);
 		this.reputacao = 0;
 		this.quantidadeItens = 0;
 	}
