@@ -259,5 +259,13 @@ public class UsuarioTest {
 	public void testGetItemInvalido() {
 		assertEquals(null, usuario3.getItem("Damas"));
 	}
+	
+	/**
+	 * Testa o metodo getReputacao.
+	 */
+	@Test
+	public void testGetReputacao() {
+		assertEquals(3.099, usuario1.getReputacao(), 0.01);
+	}
 
 }

@@ -432,4 +432,5 @@ public class ControllerTest {
 				"SHOW: Galinha pintadinha, R$ 2.99, Nao emprestado, 90 min, LIVRE, Galinha, 20 faixas|FILME: Flashpoint, R$ 14.5, Nao emprestado, 180 min, LIVRE, ACAO, 2018|SERIE: Naruto, R$ 45.0, Nao emprestado, 20 min, QUATORZE_ANOS, OUTRO, Temporada 6|JOGO DE TABULEIRO: Xadrez, R$ 89.63, Nao emprestado, COMPLETO|JOGO ELETRONICO: Guitar Hero, R$ 99.99, Nao emprestado, XBOX360|",
 				controller.listarItensOrdenadosPorValor());
 	}
+	
 }

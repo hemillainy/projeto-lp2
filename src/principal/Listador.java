@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import principal.comparator.ComparadorNumeroEmprestimos;
+import principal.comparator.ComparadorReputacao;
 import principal.comparator.ComparadorValor;
 import principal.emprestimo.Emprestimo;
 import principal.item.Item;
@@ -16,10 +17,12 @@ import principal.user.Usuario;
 public class Listador {
 	private ComparadorValor comparadorValor;
 	private ComparadorNumeroEmprestimos comparadorNumeroEmprestimos;
+	private ComparadorReputacao comparadorReputacao;
 	
 	public Listador() {
 		this.comparadorValor = new ComparadorValor();
 		this.comparadorNumeroEmprestimos = new ComparadorNumeroEmprestimos();
+		this.comparadorReputacao = new ComparadorReputacao;
 	}
 
 	/**
@@ -230,5 +233,13 @@ public class Listador {
 			info = usuario.getNomeItem(nomeItem);
 		}
 		return info;
+	}
+	
+	public String listarCaloteiros(List usuarios) {
+		Collections.sort(usuarios);
+		
+		for (Usuario usuario : usuarios) {
+			if (usuario.get)
+		}
 	}
 }
