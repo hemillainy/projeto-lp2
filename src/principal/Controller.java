@@ -179,7 +179,6 @@ public class Controller {
 		}
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco, plataforma);
-		us.addReputacao(preco, 0.05);
 	}
 
 	/**
@@ -202,7 +201,6 @@ public class Controller {
 		}
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco);
-		us.addReputacao(preco, 0.05);
 	}
 
 	/**
@@ -230,7 +228,6 @@ public class Controller {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco, duracao, genero, classificacao, lancamento);
-		us.addReputacao(preco, 0.05);
 	}
 
 	/**
@@ -258,7 +255,6 @@ public class Controller {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		Usuario us = usuarios.get(id);
 		us.cadastraBluRayShow(nomeItem, preco, duracao, classificacao, artista, faixas);
-		us.addReputacao(preco, 0.05);
 	}
 
 	/**
@@ -288,7 +284,6 @@ public class Controller {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		Usuario us = usuarios.get(id);
 		us.cadastraItem(nomeItem, preco, descricao, duracao, classificacao, genero, temporada);
-		us.addReputacao(preco, 0.05);
 	}
 
 	/**
@@ -465,6 +460,12 @@ public class Controller {
 
 		Usuario dono = criaUsuario(nomeDono, telefoneDono);
 		Usuario requerente = criaUsuario(nomeRequerente, telefoneRequerente);
+		if (!requerente.podePegarEmprestado()) {
+			validacao.naoPodePegarEmprestado();
+		}
+		if (periodo > requerente.getPeriodo()) {
+			validacao.periodoInvalido();
+		}
 		emprestimoController.registraEmprestimo(dono, requerente, nomeItem, dataEmprestimo, periodo);
 	}
 

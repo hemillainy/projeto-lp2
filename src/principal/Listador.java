@@ -207,6 +207,8 @@ public class Listador {
 			info += usuario.getEmail();
 		} else if (atributo.equals("Reputacao")) {
 			info += usuario.getReputacao();
+		} else if (atributo.equals("Cartao")) {
+			info += usuario.getFidelidade();
 		}
 		return info;
 	}
