@@ -22,14 +22,14 @@ public class Facade {
 		EasyAccept.main(args);
 	}
 
-	private Controller sistema;
+	private UserController sistema;
 	private EmprestimoController emprestimoController;
 
 	/**
 	 * Construtor de facade.
 	 */
 	public Facade() {
-		sistema = new Controller();
+		sistema = new UserController();
 		emprestimoController = sistema.getEmprestimoController();
 	}
 

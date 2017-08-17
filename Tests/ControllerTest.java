@@ -16,14 +16,14 @@ import principal.*;
  */
 public class ControllerTest {
 
-	Controller controller;
+	UserController controller;
 
 	/**
 	 * Inicailiza controller e faz cadastros basicos para uso nos testes.
 	 */
 	@Before
 	public void criaController() {
-		controller = new Controller();
+		controller = new UserController();
 		controller.cadastraUsuario("Cássio", "123", "cassio.cordeiro");
 		controller.cadastraUsuario("Geovane", "1234", "geovane.silva");
 		controller.cadastraUsuario("Hemillainy", "12345", "hemillainy.santos");

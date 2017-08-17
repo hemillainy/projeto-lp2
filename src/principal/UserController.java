@@ -21,13 +21,13 @@ import principal.user.Usuario;
  *         Santos - 116210802
  *
  */
-public class Controller {
+public class UserController {
 	private Listador listador;
 	private Validacao validacao;
 	private EmprestimoController emprestimoController;
 	private Map<IdUsuario, Usuario> usuarios;
 
-	public Controller() {
+	public UserController() {
 		this.listador = new Listador();
 		this.usuarios = new HashMap<>();
 		this.validacao = new Validacao();
