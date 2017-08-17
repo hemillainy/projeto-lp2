@@ -459,6 +459,6 @@ public class Facade {
 	 * @return a listagem com os 10 usuarios com menor reputacao.
 	 */
 	public String listarTop10PioresUsuarios() {
-		return null;
+		return sistema.listarTop10PioresUsuario();
 	}
 }

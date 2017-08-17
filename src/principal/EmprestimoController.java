@@ -126,7 +126,6 @@ public class EmprestimoController {
 		itemDevolver.setStaus();
 		if (emprestimoAtrasado(dataE, dataD) <= requerente.getPeriodo()) {
 			requerente.addReputacao(itemDevolver.getPreco(), 0.05);
-			System.out.println(requerente.getNome() + " " + emprestimoAtrasado(dataE, dataD) + requerente.getPeriodo());
 		} else {
 			double taxa = (emprestimoAtrasado(dataE, dataD) - requerente.getPeriodo()) / 100.00;
 			requerente.addReputacao(-itemDevolver.getPreco(), taxa);
