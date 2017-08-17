@@ -10,7 +10,7 @@ package enums;
  * 		   Hemillainy Santos - 116210802
  *
  */
-public enum Fidelidade {
+public enum StatusFidelidade {
 	NOOB("Noob"), CALOTEIRO("Caloteiro"), BOM_AMIGO("BomAmigo"), FREE_RYDER("FreeRyder");
 
 	private String valor;
@@ -21,7 +21,7 @@ public enum Fidelidade {
 	 * @param valor
 	 *            que representa o status de fidelidade de um usuario.
 	 */
-	private Fidelidade(String valor) {
+	private StatusFidelidade(String valor) {
 		this.valor = valor;
 	}
 	

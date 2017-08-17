@@ -55,7 +55,7 @@ public class EmprestimoController {
 	 * @param dono
 	 *            usuario dono do item.
 	 * @param requerente
-	 *            usuario que está pegando o item emprestado.
+	 *            usuario que estï¿½ pegando o item emprestado.
 	 * @param nomeItem
 	 *            a ser emprestado.
 	 * @param dataEmprestimo
@@ -102,7 +102,7 @@ public class EmprestimoController {
 	 * @param dono
 	 *            dono do item.
 	 * @param requerente
-	 *            usuario que está pegando o item emprestado.
+	 *            usuario que estï¿½ pegando o item emprestado.
 	 * @param nomeItem
 	 *            a ser devolvido.
 	 * @param dataEmprestimo
@@ -140,7 +140,6 @@ public class EmprestimoController {
 	 * @return a lista com todos os emprestimos relacionados a um item.
 	 */
 	public String listarEmprestimosItem(String nome) {
-		System.out.println(emprestimos.values());
 		return listador.listaEmprestimosItem(emprestimos.values(), nome);
 	}
 
