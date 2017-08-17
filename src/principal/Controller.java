@@ -586,4 +586,9 @@ public class Controller {
 		List<Usuario> users = new ArrayList<>(usuarios.values());
 		return listador.listarTop10MelhoresUsuarios(users);
 	}
+	
+	public String listarTop10PioresUsuario() {
+		List<Usuario> users = new ArrayList<>(usuarios.values());
+		return listador.listarTop10PioresUsuarios(users);
+	}
 }

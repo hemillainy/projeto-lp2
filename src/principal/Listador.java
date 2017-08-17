@@ -262,4 +262,18 @@ public class Listador {
 		}
 		return info;
 	}
+
+	public String listarTop10PioresUsuarios(List<Usuario> users) {
+		String info = "";
+		Collections.sort(users, comparadorReputacao);
+		
+		int i = users.size() - 1;
+		while (users.size() - 1 >= 10 && i >= 0) {
+			Usuario usuario = users.get(i);
+			String reputacao = String.format("%.2f", usuario.getReputacao());
+			info += i+1 + ": " + usuario.getNome() + " - Reputacao: " + reputacao + "|"; 
+			i--;
+		}
+		return info;
+	}
 }
