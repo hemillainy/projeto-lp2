@@ -55,8 +55,10 @@ public class Validacao {
 	 * Excecao lancada quando for solicitado algo sobre um item que nao foi
 	 * cadastrado.
 	 */
-	public void itemNaoEncontrado() {
-		throw new IllegalArgumentException("Item nao encontrado");
+	public void itemNaoEncontrado(boolean hasItem) {
+		if (!hasItem) {
+			throw new IllegalArgumentException("Item nao encontrado");
+		}
 	}
 
 	/**

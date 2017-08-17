@@ -250,9 +250,7 @@ public class Usuario implements Comparable<Usuario> {
 	 * @return a representacao do item.
 	 */
 	public String exibeDetalhesItem(String nomeItem) {
-		if (!hasItem(nomeItem)) {
-			validacao.itemNaoEncontrado();
-		}
+		validacao.itemNaoEncontrado(hasItem(nomeItem));
 		return itens.get(nomeItem).toString();
 	}
 
@@ -264,9 +262,7 @@ public class Usuario implements Comparable<Usuario> {
 	 * @return valor do item.
 	 */
 	public String getPrecoItem(String nomeItem) {
-		if (!hasItem(nomeItem)) {
-			validacao.itemNaoEncontrado();
-		}
+		validacao.itemNaoEncontrado(hasItem(nomeItem));
 		Item item = itens.get(nomeItem);
 		return String.valueOf(item.getPreco());
 	}
@@ -279,9 +275,7 @@ public class Usuario implements Comparable<Usuario> {
 	 * @return nome do item.
 	 */
 	public String getNomeItem(String nomeItem) {
-		if (!hasItem(nomeItem)) {
-			validacao.itemNaoEncontrado();
-		}
+		validacao.itemNaoEncontrado(hasItem(nomeItem));
 		return itens.get(nomeItem).getNome();
 	}
 
@@ -292,9 +286,7 @@ public class Usuario implements Comparable<Usuario> {
 	 *            a ser removido.
 	 */
 	public void removerItem(String nomeItem) {
-		if (!itens.containsKey(nomeItem)) {
-			validacao.itemNaoEncontrado();
-		}
+		validacao.itemNaoEncontrado(hasItem(nomeItem));
 		cartaoFidelidade.tiraItem();
 		itens.remove(nomeItem);
 	}
@@ -308,9 +300,7 @@ public class Usuario implements Comparable<Usuario> {
 	 *            novo nome do item.
 	 */
 	public void atualizaNomeItem(String nomeItem, String valor) {
-		if (!hasItem(nomeItem)) {
-			validacao.itemNaoEncontrado();
-		}
+		validacao.itemNaoEncontrado(hasItem(nomeItem));
 		Item item = itens.get(nomeItem);
 		itens.get(nomeItem).setNome(valor);
 
@@ -326,9 +316,7 @@ public class Usuario implements Comparable<Usuario> {
 	 *            novo preco do item.
 	 */
 	public void atualizaPrecoItem(String nomeItem, String valor) {
-		if (!hasItem(nomeItem)) {
-			validacao.itemNaoEncontrado();
-		}
+		validacao.itemNaoEncontrado(hasItem(nomeItem));
 		itens.get(nomeItem).setPreco(Double.parseDouble(valor));
 	}
 
@@ -413,9 +401,7 @@ public class Usuario implements Comparable<Usuario> {
 	 * @return o item pego.
 	 */
 	public Item getItem(String nomeItem) {
-		if (!hasItem(nomeItem)) {
-			validacao.itemNaoEncontrado();
-		}
+		validacao.itemNaoEncontrado(hasItem(nomeItem));
 		return itens.get(nomeItem);
 	}
 
