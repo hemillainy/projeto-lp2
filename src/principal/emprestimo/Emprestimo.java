@@ -102,7 +102,7 @@ public class Emprestimo {
 		if (date == null) {
 			return "Emprestimo em andamento";
 		}
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/M/yyyy");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		return date.format(dtf);
 	}
 
