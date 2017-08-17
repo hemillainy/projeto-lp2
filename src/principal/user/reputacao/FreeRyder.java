@@ -1,16 +1,26 @@
 package principal.user.reputacao;
 
-public class FreeRyder extends CartaoFidelidade {
+import enums.StatusFidelidade;
 
-	public FreeRyder() {
+/**
+ * Classe filha de fidelidade que representa um FreeRyder. . 
+ * 
+ * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
+ * 
+ * @author Cassio Cordeiro - 116210038 Geovane Silva - 116211149 Hemillainy
+ *         Santos - 116210802
+ *
+ */
+public class FreeRyder extends Fidelidade {
+
+	/**
+	 * Contrutor de FreeRyder. 
+	 * @param valor o valor atual de reputacao do usuario. 
+	 */
+	public FreeRyder(double valor) {
+		this.statusFidelidade = StatusFidelidade.FREE_RYDER;
 		this.podePegarEmprestado = true;
 		this.periodo = 5;
-	}
-	
-	public int getPeriodo() {
-		return periodo;
-	}
-	public void setPeriodo(int periodo) {
-		this.periodo = periodo;
+		this.reputacao = valor;
 	}
 }
