@@ -13,12 +13,13 @@ import principal.item.Item;
  *
  */
 public class Validacao {
+	
 	/**
 	 * Excecao lancada quando for passado um usuario que nao esta cadastrado no
 	 * sistema.
 	 */
 	public void usuarioInvalido(boolean hasUsuario) {
-		if (hasUsuario) {
+		if (!hasUsuario) {
 			throw new IllegalArgumentException("Usuario invalido");
 		}
 	}
@@ -93,16 +94,19 @@ public class Validacao {
 	 * Excecao lancada quando tentarem fazer um emprestimo de um item que ja esta
 	 * emprestado.
 	 */
-	public void ItemJaEmprestado() {
-		throw new IllegalArgumentException("Item emprestado no momento");
-
+	public void ItemJaEmprestado(boolean itemJaEmprestado) {
+		if (itemJaEmprestado) {
+			throw new IllegalArgumentException("Item emprestado no momento");
+		}
 	}
 
 	/**
 	 * Excecao lancada quando for solicitado um emprestimo que nao foi cadastrado.
 	 */
-	public void emprestimoNaoEncontrado() {
-		throw new IllegalArgumentException("Emprestimo nao encontrado");
+	public void emprestimoNaoEncontrado(boolean contemEmprestimo) {
+		if (!contemEmprestimo) {
+			throw new IllegalArgumentException("Emprestimo nao encontrado");
+		}
 	}
 
 	public void validaUsuariosEmprestimo(boolean containsKey, boolean containsKey2) {
