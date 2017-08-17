@@ -443,7 +443,7 @@ public class Facade {
 	 * @return a listagem com os usuario com reputacao menor que 0.
 	 */
 	public String listarCaloteiros() {
-		return null;
+		return sistema.listarCaloteiros();
 	}
 	
 	/**
@@ -451,7 +451,7 @@ public class Facade {
 	 * @return a listagem com os 10 usuarios com melhor reputacao.
 	 */
 	public String listarTop10MelhoresUsuarios() {
-		return null;
+		return sistema.listarTop10MelhoresUsuario();
 	}
 	
 	/**

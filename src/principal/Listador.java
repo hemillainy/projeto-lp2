@@ -22,7 +22,7 @@ public class Listador {
 	public Listador() {
 		this.comparadorValor = new ComparadorValor();
 		this.comparadorNumeroEmprestimos = new ComparadorNumeroEmprestimos();
-		this.comparadorReputacao = new ComparadorReputacao;
+		this.comparadorReputacao = new ComparadorReputacao();
 	}
 
 	/**
@@ -237,11 +237,29 @@ public class Listador {
 		return info;
 	}
 	
-	public String listarCaloteiros(List usuarios) {
-		Collections.sort(usuarios);
+	public String listarCaloteiros(List<Usuario> collection) {
+		String info = "Lista de usuarios com reputacao negativa: ";
+		Collections.sort(collection);
 		
-		for (Usuario usuario : usuarios) {
-			if (usuario.get)
+		for (Usuario usuario : collection) {
+			if (usuario.getFidelidade().equals("Caloteiro")) {
+				info += usuario + "|";
+			}
 		}
+		return info;
+	}
+
+	public String listarTop10MelhoresUsuarios(List<Usuario> users) {
+		String info = "";
+		Collections.sort(users, comparadorReputacao);
+		
+		int i = 0;
+		while (i < 10 && i <= users.size()) {
+			Usuario usuario = users.get(i);
+			String reputacao = String.format("%.2f", usuario.getReputacao());
+			info += i+1 + ": " + usuario.getNome() + " - Reputacao: " + reputacao + "|"; 
+			i++;
+		}
+		return info;
 	}
 }

@@ -26,7 +26,7 @@ import principal.user.reputacao.CartaoFidelidade;
  *         Santos - 116210802
  *
  */
-public class Usuario {
+public class Usuario implements Comparable<Usuario> {
 	private String nome;
 	private String email;
 	private String telefone;
@@ -480,4 +480,9 @@ public class Usuario {
 	public int getPeriodo() {
 		return cartaoFidelidade.getPeriodo();
 }
+
+	@Override
+	public int compareTo(Usuario o) {
+		return this.getNome().compareTo(o.getNome());
+	}
 }

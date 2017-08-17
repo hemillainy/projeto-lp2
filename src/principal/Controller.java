@@ -573,7 +573,17 @@ public class Controller {
 		return listador.listaTopDez(inventario);
 	}
 	
+	/**
+	 * Metodo que lista os usuarios com reputacao menor 0.
+	 * @return a listagem com os usuarios com reputacao menor  que 0.
+	 */
 	public String listarCaloteiros() {
-		return listador.listarCaloteiros(usuarios.values());
+		List<Usuario> users = new ArrayList<>(usuarios.values());
+		return listador.listarCaloteiros(users);
+	}
+	
+	public String listarTop10MelhoresUsuario() {
+		List<Usuario> users = new ArrayList<>(usuarios.values());
+		return listador.listarTop10MelhoresUsuarios(users);
 	}
 }
