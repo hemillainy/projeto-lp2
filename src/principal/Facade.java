@@ -17,7 +17,7 @@ public class Facade {
 	public static void main(String[] args) {
 		args = new String[] { "principal.Facade", "acceptance_test/us1_test.txt", "acceptance_test/us2_test.txt",
 				"acceptance_test/us3_test.txt", "acceptance_test/us4_test.txt", "acceptance_test/us5_test.txt",
-				"acceptance_test/us6_test.txt" };
+				"acceptance_test/us6_test.txt","acceptance_test/us8_test.txt" };
 		EasyAccept.main(args);
 	}
 
@@ -373,9 +373,6 @@ public class Facade {
 				dataDevolucao);
 	}
 
-	// ################################### US5
-	// ###################################
-
 	/**
 	 * Metodo que lista os emprestimos realizados por um usuario.
 	 * 
@@ -439,7 +436,28 @@ public class Facade {
 	public String listarTop10Itens() {
 		return sistema.listarTop10();
 	}
-
-	// ################################### US6
-	// ###################################
+	
+	/**
+	 * Metodo que lista os usuario com reputacao menor que 0.
+	 * @return a listagem com os usuario com reputacao menor que 0.
+	 */
+	public String listarCaloteiros() {
+		return null;
+	}
+	
+	/**
+	 * Metodo que lista os 10 usuarios com melhores reputaçoes.
+	 * @return a listagem com os 10 usuarios com melhor reputacao.
+	 */
+	public String listarTop10MelhoresUsuarios() {
+		return null;
+	}
+	
+	/**
+	 * Metodo que lista os 10 usuarios com pior reputacao.
+	 * @return a listagem com os 10 usuarios com menor reputacao.
+	 */
+	public String listarTop10PioresUsuarios() {
+		return null;
+	}
 }
