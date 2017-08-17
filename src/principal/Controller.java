@@ -572,4 +572,8 @@ public class Controller {
 		List<Item> inventario = getItens();
 		return listador.listaTopDez(inventario);
 	}
+	
+	public String listarCaloteiros() {
+		return listador.listarCaloteiros(usuarios.values());
+	}
 }
