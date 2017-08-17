@@ -2,7 +2,6 @@ package principal;
 
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -13,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.xml.crypto.Data;
 
 import principal.comparator.ComparadorNumeroEmprestimos;
 import principal.comparator.ComparadorValor;
@@ -582,6 +580,12 @@ public class Controller {
 		
 	}
 	
+	/**
+	 * Verifica se um emprestimo esta atrasado.
+	 * @param dataEmprestimo em que foi emprestado o item.
+	 * @param dataDevolucao que foi devolvido o item.
+	 * @return o periodo que o requerente ficou com o item.
+	 */
 	private long emprestimoAtrasado(LocalDate dataEmprestimo, LocalDate dataDevolucao) {
 		long periodo = dataEmprestimo.until(dataDevolucao, ChronoUnit.DAYS);
 		return periodo;
