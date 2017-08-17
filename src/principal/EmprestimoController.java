@@ -1,6 +1,5 @@
 package principal;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -62,23 +61,28 @@ public class EmprestimoController {
 	 *            que houve o emprestimo.
 	 * @param periodo
 	 *            de emprestimo.
-	 * @throws ParseException
 	 */
 	public void registraEmprestimo(Usuario dono, Usuario requerente, String nomeItem, String dataEmprestimo,
 			int periodo) {
 		validacao.validaItemEmprestimo(dono.getItem(nomeItem));
 		Item itemEmprestar = dono.getItem(nomeItem);
+		validacao.ItemJaEmprestado(itemEmprestar.verificaEmprestado());
 
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate data = LocalDate.parse(dataEmprestimo, dtf);
-
-		if (itemEmprestar.verificaEmprestado()) {
-			validacao.ItemJaEmprestado();
-		}
-
-		alocarEmprestimos(dono, requerente, itemEmprestar, data, periodo);
+		LocalDate dataE = createData(dataEmprestimo);
+		alocarEmprestimos(dono, requerente, itemEmprestar, dataE, periodo);
 		dono.addReputacao(itemEmprestar.getPreco(), 0.1);
 		itemEmprestar.addNumeroEmprestimo();
+	}
+	
+	/**
+	 * Cria um objeto LocalDate a partir de uma string. 
+	 * @param data a String da data.
+	 * @return uma LocalDate. 
+	 */
+	private LocalDate createData(String data) {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		return LocalDate.parse(data, dtf);
+	
 
 	}
 
@@ -113,17 +117,17 @@ public class EmprestimoController {
 	 */
 	public void devolveItem(Usuario dono, Usuario requerente, String nomeItem, String dataEmprestimo,
 			String dataDevolucao) {
+		
 		validacao.validaItemEmprestimo(dono.getItem(nomeItem));
 		Item itemDevolver = dono.getItem(nomeItem);
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate dataE = LocalDate.parse(dataEmprestimo, dtf);
-		LocalDate dataD = LocalDate.parse(dataDevolucao, dtf);
+		LocalDate dataE = createData(dataEmprestimo);
+		LocalDate dataD = createData(dataDevolucao);
 		IdEmprestimo ie = new IdEmprestimo(dono, requerente, itemDevolver, dataE);
-		if (!emprestimos.containsKey(ie)) {
-			validacao.emprestimoNaoEncontrado();
-		}
+		
+		validacao.emprestimoNaoEncontrado(emprestimos.containsKey(ie));
 		emprestimos.get(ie).devolverItem(dataD);
 		itemDevolver.setStaus();
+		
 		if (emprestimoAtrasado(dataE, dataD) <= requerente.getPeriodo()) {
 			requerente.addReputacao(itemDevolver.getPreco(), 0.05);
 		} else {
