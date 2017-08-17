@@ -9,5 +9,5 @@ function enviar() {
 	git push origin $branch
 }
 
-enviar
+enviar $comentario $branch
 
