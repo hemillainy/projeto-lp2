@@ -25,7 +25,8 @@ public class EmprestimoController {
 	private Map<IdEmprestimo, Emprestimo> emprestimos;
 
 	/**
-	 * Instancia os objetos listador e validacao e o map de Emprestimos.
+	 * Controi um EmprestimoController. Todo EmprestimoController tem um
+	 * listador, um validador de entradas e um Map de Emprestimos.
 	 */
 	public EmprestimoController() {
 		this.listador = new Listador();

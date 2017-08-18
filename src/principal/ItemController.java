@@ -13,20 +13,40 @@ import principal.item.jogos.JogoEletronico;
 import principal.item.jogos.JogoTabuleiro;
 import principal.user.Usuario;
 
+/**
+ * Classe facade do sistema.
+ * 
+ * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
+ * 
+ * @author Cassio Cordeiro - 116210038 Geovane Silva - 116211149 Hemillainy
+ *         Santos - 116210802
+ *
+ */
 public class ItemController {
 
 	private Listador listador;
 	private Validacao validacao;
 	private Map<String, Item> itens;
 
+	/**
+	 * Constroi um ItemController. Todos ItemController tem um Map de Item, um
+	 * listador e um validador de entradas.
+	 */
 	public ItemController() {
 		this.itens = new HashMap<>();
 		this.listador = new Listador();
 		this.validacao = new Validacao();
 	}
-	public List<Item> getItens(){
+
+	/**
+	 * Metodo que retorna os valores do Map de Item.
+	 * 
+	 * @return um List com os itens do Map de Item.
+	 */
+	public List<Item> getItens() {
 		return new ArrayList<>(itens.values());
 	}
+
 	/**
 	 * Metodo que verifica se o item esta cadastrado.
 	 * 
@@ -213,7 +233,6 @@ public class ItemController {
 	 *            a ser removido.
 	 */
 	public void removeItem(Usuario usuario, String nomeItem) {
-		// validacao.itemNaoEncontrado(hasItem(nomeItem));
 		itens.remove(nomeItem);
 		usuario.removerItem(nomeItem);
 	}
@@ -270,6 +289,7 @@ public class ItemController {
 		List<Item> listItens = new ArrayList<>(itens.values());
 		return listador.listaTopDez(listItens);
 	}
+
 	public String listarItensNaoEmprestados(List<Item> listItens) {
 		return listador.listaItensNaoEmprestados(listItens);
 	}
