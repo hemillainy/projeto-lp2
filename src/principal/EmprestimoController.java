@@ -169,9 +169,11 @@ public class EmprestimoController {
 	}
 
 	/**
+	 * Metodo que lista os emprestimos concedidos a um ususario.
 	 * 
 	 * @param usuario
-	 * @return
+	 *            o usuario que tera o que ele emprestou listado.
+	 * @return a listagem do emprestimos concedidos a um usuario.
 	 */
 	public String listarEmprestimosUsuarioEmprestando(Usuario usuario) {
 		return listador.listaEmprestimosUsuarioEmprestando(emprestimos, usuario);
