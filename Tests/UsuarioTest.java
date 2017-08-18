@@ -4,11 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import principal.item.Item;
-import principal.item.blurays.Filme;
-import principal.item.blurays.Serie;
-import principal.item.blurays.Show;
-import principal.item.jogos.JogoEletronico;
-import principal.item.jogos.JogoTabuleiro;
+import principal.item.blurays.*;
+import principal.item.jogos.*;
 import principal.user.Usuario;
 
 /**
