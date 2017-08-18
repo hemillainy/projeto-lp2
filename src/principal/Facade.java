@@ -422,6 +422,7 @@ public class Facade {
 	 * @param nomeItem
 	 *            nome do item.
 	 * @return a listagem com os emprestimos que o item participou.
+	 * 
 	 */
 	public String listarEmprestimosItem(String nomeItem) {
 		return emprestimoController.listarEmprestimosItem(nomeItem);
