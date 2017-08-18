@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.List;
 
 import easyaccept.EasyAccept;
+import principal.item.Item;
 import principal.user.Usuario;
 
 /**
@@ -432,8 +433,8 @@ public class Facade {
 	 * @return a listagem dos itens nao cadastrados.
 	 */
 	public String listarItensNaoEmprestados() {
-		List<Usuario> usuarios = userController.getUsuarios();
-		return emprestimoController.listarItensNaoEmprestados(usuarios);
+		List<Item> itens = itemController.getItens();
+		return itemController.listarItensNaoEmprestados(itens);
 	}
 
 	/**
