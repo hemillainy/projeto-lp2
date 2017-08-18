@@ -9,7 +9,7 @@ import principal.user.IdUsuario;
 import principal.user.Usuario;
 
 /**
- * Representação de um Controller.
+ * RepresentaÃ§Ã£o de um Controller.
  * 
  * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
  * 
@@ -141,7 +141,7 @@ public class UserController {
 	}
 
 	/**
-	 * Remove um usuario do mapa para adicioná-lo novamento com uma nova key.
+	 * Remove um usuario do mapa para adicionÃ¡-lo novamento com uma nova key.
 	 * 
 	 * @param nome
 	 *            nome do usuario.

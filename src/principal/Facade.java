@@ -464,7 +464,7 @@ public class Facade {
 	}
 
 	/**
-	 * Metodo que lista os 10 usuarios com melhores reputaçoes.
+	 * Metodo que lista os 10 usuarios com melhores reputaÃ§oes.
 	 * 
 	 * @return a listagem com os 10 usuarios com melhor reputacao.
 	 */
