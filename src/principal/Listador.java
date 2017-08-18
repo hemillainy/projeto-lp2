@@ -156,10 +156,8 @@ public class Listador {
 		String itens = "";
 
 		int i = 0;
-		while (true) {
-			if (i == 10 || i == inventario.size() || inventario.get(i).getNumEmprestimos() == 0) {
-				break;
-			}
+		while (i <= 10 && i <= inventario.size() && inventario.get(i).getNumEmprestimos() != 0) {
+
 			Item item = inventario.get(i);
 			itens += (i + 1) + ") " + item.getNumEmprestimos() + " emprestimos - " + item.toString() + "|";
 			i++;
@@ -268,7 +266,7 @@ public class Listador {
 		Collections.sort(users, comparadorReputacao);
 		int i = users.size() - 1;
 		int posicao = 0;
-		while (posicao != 10) {
+		while (posicao != 10 && posicao < users.size()) {
 			Usuario usuario = users.get(i);
 			String reputacao = String.format("%.2f", usuario.getReputacao());
 			info += posicao + 1 + ": " + usuario.getNome() + " - Reputacao: " + reputacao + "|"; 
