@@ -152,19 +152,6 @@ public class Usuario implements Comparable<Usuario> {
 	public void adicionaBluRay(Serie serie) {
 		serie.adicionarBluRay(serie.getDuracao());
 	}
-
-	/**
-	 * Metodo que retorna a representacao de um item. 
-	 * 
-	 * @param nomeItem
-	 *            a ser pesquisado.
-	 * @return a representacao do item.
-	 */
-	public String exibeDetalhesItem(String nomeItem) {
-		validacao.itemNaoEncontrado(hasItem(nomeItem));
-		return itens.get(nomeItem).toString();
-	}
-
 	/**
 	 * Retorna o valor de um item em String.
 	 * 
