@@ -1,5 +1,6 @@
 package principal;
 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -144,7 +145,8 @@ public class EmprestimoController {
 	 * @return a lista com todos os emprestimos relacionados a um item.
 	 */
 	public String listarEmprestimosItem(String nome) {
-		return listador.listaEmprestimosItem(emprestimos.values(), nome);
+		List<Emprestimo> empres = new ArrayList<>(emprestimos.values());
+		return listador.listaEmprestimosItem(empres, nome);
 	}
 
 	/**
@@ -156,4 +158,17 @@ public class EmprestimoController {
 		List<Emprestimo> emp = new ArrayList<>(emprestimos.values()); // stub
 		return listador.listaItensEmprestados(emp);
 	}
+
+	public String listarEmprestimosUsuarioEmprestando(Usuario usuario) {
+		return listador.listaEmprestimosUsuarioEmprestando(emprestimos, usuario);
+	}
+
+	public String listarEmprestimosUsuarioPegandoEmprestado(Usuario usuario) {
+		return listador.listaEmprestimosUsuarioPegandoEmprestado(usuario);
+	}
+
+	public String listarItensNaoEmprestados(List<Usuario> usuarios) {
+		return listador.listaItensNaoEmprestados(usuarios);
+	}
+
 }
