@@ -9,6 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import principal.emprestimo.Emprestimo;
+import principal.item.Item;
+import principal.item.jogos.JogoTabuleiro;
 import principal.user.Usuario;
 
 /**
@@ -43,8 +45,10 @@ public class EmprestimoTest {
 		user1 = new Usuario("Cássio", "123", "cassio.cordeiro");
 		user2 = new Usuario("Geovane", "1234", "geovane.nascimento");
 		
-		user1.cadastraItem("Xadrez", 59.99);
-		user2.cadastraItem("Cubo mágico", 29.99);
+		Item i1 = new JogoTabuleiro("Xadrez", 59.99);
+		user1.cadastraItem(i1);
+		Item i2 = new JogoTabuleiro("Cubo mágico", 29.99);
+		user2.cadastraItem(i2);
 		
 		
 		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -73,7 +77,8 @@ public class EmprestimoTest {
 	public void testToString() {
 		LocalDate data = LocalDate.of(2017, 8, 16);
 		emprestimo.devolverItem(data);
-		assertEquals("EMPRESTIMO - De: Cássio, Para: Geovane, Xadrez, 11/8/2017, 7 dias, ENTREGA: 16/8/2017", emprestimo.toString());
+		System.out.println(emprestimo.toString());
+		assertEquals("EMPRESTIMO - De: Cássio, Para: Geovane, Xadrez, 11/08/2017, 7 dias, ENTREGA: 16/08/2017", emprestimo.toString());
 	}
 
 }

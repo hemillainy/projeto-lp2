@@ -154,7 +154,7 @@ public class Usuario implements Comparable<Usuario> {
 	}
 
 	/**
-	 * Metodo que retorna a representacao de um item.
+	 * Metodo que retorna a representacao de um item. 
 	 * 
 	 * @param nomeItem
 	 *            a ser pesquisado.

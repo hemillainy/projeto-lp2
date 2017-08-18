@@ -2,6 +2,13 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import principal.item.Item;
+import principal.item.blurays.Filme;
+import principal.item.blurays.Serie;
+import principal.item.blurays.Show;
+import principal.item.jogos.JogoEletronico;
+import principal.item.jogos.JogoTabuleiro;
 import principal.user.Usuario;
 
 /**
@@ -19,7 +26,12 @@ public class UsuarioTest {
 	Usuario usuario1;
 	Usuario usuario2;
 	Usuario usuario3;
-
+	
+	Item i1;
+	Item i2;
+	Item i3;
+	Item i4;
+	Item i5;
 	/**
 	 * Inicializaco de 3 usuarios basicos para auxilio nos testes. Alguns itens
 	 * tambem sao cadastrados.
@@ -29,12 +41,18 @@ public class UsuarioTest {
 		usuario1 = new Usuario("Cássio", "123456", "cassio.cordeiro");
 		usuario2 = new Usuario("Geovane", "1234567", "geovane.silva");
 		usuario3 = new Usuario("Hemillainy", "12345678", "hemillainy.santos");
-
-		usuario1.cadastraItem("Damas", 1.99);
-		usuario2.cadastraItem("Liga da Justiça", 14.00, 180, "ACAO", "DEZESSEIS_ANOS", 2017);
-		usuario3.cadastraItem("Tetris", 10.00, "OUTRO");
-		usuario1.cadastraItem("The 100", 59.99, "Octavia linda", 43, "DEZESSEIS_ANOS", "DRAMA", 1);
-		usuario2.cadastraBluRayShow("Mares", 500, 120, "QUATORZE_ANOS", "Bruno Mars", 11);
+		
+		i1 = new JogoTabuleiro("Damas", 1.99);
+		i2 = new Filme("Liga da Justiça", 14.00, 180, "DEZESSEIS_ANOS", "ACAO", 2017);
+		i3 = new JogoEletronico("Tetris", 10.00, "OUTRO");
+		i4 = new Show("Mares", 500, 120, "QUATORZE_ANOS", "Bruno Mars", 11);
+		i5 = new Serie("The 100", 59.99, 43, "DEZESSEIS_ANOS", "DRAMA", 1);
+		
+		usuario1.cadastraItem(i1);
+		usuario2.cadastraItem(i2);
+		usuario3.cadastraItem(i3);
+		usuario1.cadastraItem(i4);
+		usuario2.cadastraItem(i5);
 	}
 
 	/**
@@ -149,7 +167,7 @@ public class UsuarioTest {
 	 */
 	@Test
 	public void testGetNomeItem() {
-		assertEquals("The 100", usuario1.getNomeItem("The 100"));
+		assertEquals("The 100", usuario2.getNomeItem("The 100"));
 	}
 
 	/**
@@ -182,7 +200,7 @@ public class UsuarioTest {
 	}
 
 	/**
-	 * Testa o metodo que remove o item de um usuario para um item naon
+	 * Testa o metodo que remove o item de um usuario para um item nao
 	 * cadastrado no usuario. Uma excecao eh esperada.
 	 */
 	@Test(expected = IllegalArgumentException.class)
@@ -265,7 +283,7 @@ public class UsuarioTest {
 	 */
 	@Test
 	public void testGetReputacao() {
-		assertEquals(3.099, usuario1.getReputacao(), 0.01);
+		assertEquals(25.09, usuario1.getReputacao(), 0.01);
 	}
 
 }

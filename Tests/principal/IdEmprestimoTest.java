@@ -10,6 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import principal.emprestimo.IdEmprestimo;
+import principal.item.Item;
+import principal.item.jogos.JogoTabuleiro;
 import principal.user.Usuario;
 /**
  * Testes da classe IdEmprestimo.
@@ -43,10 +45,10 @@ public class IdEmprestimoTest {
 	public void testEqualsObject() {
 		Usuario user1 = new Usuario("Cássio", "123", "cassio.cordeiro");
 		Usuario user2 = new Usuario("Geovane", "1234", "geovane.nascimento");
-		
-		user1.cadastraItem("Xadrez", 59.99);
-		user2.cadastraItem("Cubo mágico", 29.99);
-		
+		Item i1 = new JogoTabuleiro("Xadrez", 59.99);
+		Item i2 = new JogoTabuleiro("Cubo mágico", 29.99);
+		user1.cadastraItem(i1);
+		user2.cadastraItem(i2);
 		
 		
 		
