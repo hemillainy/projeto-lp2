@@ -10,11 +10,23 @@ import principal.emprestimo.*;
 import principal.item.Item;
 import principal.user.Usuario;
 
+/**
+ * Representacao de um Controller de Emprestimos.
+ * 
+ * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
+ * 
+ * @author Cassio Cordeiro - 116210038 Geovane Silva - 116211149 Hemillainy
+ *         Santos - 116210802
+ *
+ */
 public class EmprestimoController {
 	private Listador listador;
 	private Validacao validacao;
 	private Map<IdEmprestimo, Emprestimo> emprestimos;
 
+	/**
+	 * Instancia os objetos listador e validacao e o map de Emprestimos.
+	 */
 	public EmprestimoController() {
 		this.listador = new Listador();
 		this.validacao = new Validacao();
@@ -70,16 +82,17 @@ public class EmprestimoController {
 		dono.addReputacao(itemEmprestar.getPreco(), 0.1);
 		itemEmprestar.addNumeroEmprestimo();
 	}
-	
+
 	/**
-	 * Cria um objeto LocalDate a partir de uma string. 
-	 * @param data a String da data.
-	 * @return uma LocalDate. 
+	 * Cria um objeto LocalDate a partir de uma string.
+	 * 
+	 * @param data
+	 *            a String da data.
+	 * @return uma LocalDate.
 	 */
 	private LocalDate createData(String data) {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		return LocalDate.parse(data, dtf);
-	
 
 	}
 
@@ -114,17 +127,17 @@ public class EmprestimoController {
 	 */
 	public void devolveItem(Usuario dono, Usuario requerente, String nomeItem, String dataEmprestimo,
 			String dataDevolucao) {
-		
+
 		validacao.validaItemEmprestimo(dono.getItem(nomeItem));
 		Item itemDevolver = dono.getItem(nomeItem);
 		LocalDate dataE = createData(dataEmprestimo);
 		LocalDate dataD = createData(dataDevolucao);
 		IdEmprestimo ie = new IdEmprestimo(dono, requerente, itemDevolver, dataE);
-		
+
 		validacao.emprestimoNaoEncontrado(emprestimos.containsKey(ie));
 		emprestimos.get(ie).devolverItem(dataD);
 		itemDevolver.setStaus();
-		
+
 		if (emprestimoAtrasado(dataE, dataD) <= requerente.getPeriodo()) {
 			requerente.addReputacao(itemDevolver.getPreco(), 0.05);
 		} else {
@@ -155,16 +168,23 @@ public class EmprestimoController {
 		return listador.listaItensEmprestados(emp);
 	}
 
+	/**
+	 * 
+	 * @param usuario
+	 * @return
+	 */
 	public String listarEmprestimosUsuarioEmprestando(Usuario usuario) {
 		return listador.listaEmprestimosUsuarioEmprestando(emprestimos, usuario);
 	}
 
+	/**
+	 * Metodo que lista os emprestimos concedidos a um ususario.
+	 * 
+	 * @param usuario
+	 *            o usuario que tera seus emprestimos listados.
+	 * @return a listagem do emprestimos concedidos a um usuario.
+	 */
 	public String listarEmprestimosUsuarioPegandoEmprestado(Usuario usuario) {
 		return listador.listaEmprestimosUsuarioPegandoEmprestado(usuario);
 	}
-
-	public String listarItensNaoEmprestados(List<Usuario> usuarios) {
-		return listador.listaItensNaoEmprestados(usuarios);
-	}
-
 }

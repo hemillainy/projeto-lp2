@@ -56,16 +56,16 @@ public class Listador {
 	 * 
 	 * @return a listagem dos itens nao cadastrados.
 	 */
-	public String listaItensNaoEmprestados(List<Usuario> usuarios) {
-		Set<Item> itens = new HashSet<>();
-		for (Usuario us : usuarios) {
-			itens.addAll(us.getItens());
-		}
-		List<Item> inventario = new ArrayList<>(itens);
-		Collections.sort(inventario, new ComparadorNomeItem());
+	public String listaItensNaoEmprestados(List<Item> listItens) {
+////		Set<Item> itens = new HashSet<>();
+////		for (Usuario us : listItens) {
+////			itens.addAll(us.getItens());
+////		}
+//		List<Item> inventario = new ArrayList<>(itens);
+		Collections.sort(listItens, new ComparadorNomeItem());
 
 		String saida = "";
-		for (Item item : inventario) {
+		for (Item item : listItens) {
 			if (item.getStatus().equals("Nao emprestado")) {
 				saida += item.toString() + "|";
 			}

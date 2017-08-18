@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.List;
 
 import easyaccept.EasyAccept;
+import principal.item.Item;
 import principal.user.Usuario;
 
 /**
@@ -421,6 +422,7 @@ public class Facade {
 	 * @param nomeItem
 	 *            nome do item.
 	 * @return a listagem com os emprestimos que o item participou.
+	 * 
 	 */
 	public String listarEmprestimosItem(String nomeItem) {
 		return emprestimoController.listarEmprestimosItem(nomeItem);
@@ -432,8 +434,8 @@ public class Facade {
 	 * @return a listagem dos itens nao cadastrados.
 	 */
 	public String listarItensNaoEmprestados() {
-		List<Usuario> usuarios = userController.getUsuarios();
-		return emprestimoController.listarItensNaoEmprestados(usuarios);
+		List<Item> itens = itemController.getItens();
+		return itemController.listarItensNaoEmprestados(itens);
 	}
 
 	/**

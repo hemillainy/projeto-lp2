@@ -24,7 +24,9 @@ public class ItemController {
 		this.listador = new Listador();
 		this.validacao = new Validacao();
 	}
-
+	public List<Item> getItens(){
+		return new ArrayList<>(itens.values());
+	}
 	/**
 	 * Metodo que verifica se o item esta cadastrado.
 	 * 
@@ -268,4 +270,7 @@ public class ItemController {
 		List<Item> listItens = new ArrayList<>(itens.values());
 		return listador.listaTopDez(listItens);
 	}
-
+	public String listarItensNaoEmprestados(List<Item> listItens) {
+		return listador.listaItensNaoEmprestados(listItens);
+	}
+}
