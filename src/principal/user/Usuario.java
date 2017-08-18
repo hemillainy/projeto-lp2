@@ -7,12 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import principal.Listador;
 import principal.Validacao;
 import principal.emprestimo.Emprestimo;
 import principal.item.Item;
-import principal.item.blurays.*;
-import principal.item.jogos.*;
+import principal.item.blurays.Serie;
+import principal.item.jogos.JogoTabuleiro;
 import principal.user.reputacao.CartaoFidelidade;
 
 /**
@@ -32,7 +31,6 @@ public class Usuario implements Comparable<Usuario> {
 	private String telefone;
 	private Validacao validacao;
 	private CartaoFidelidade cartaoFidelidade;
-	private Listador listador;
 	private Map<String, Item> itens;
 	private Set<Emprestimo> emprestimos;
 
@@ -52,7 +50,6 @@ public class Usuario implements Comparable<Usuario> {
 		this.email = email;
 		this.cartaoFidelidade = new CartaoFidelidade();
 		this.itens = new HashMap<>();
-		this.listador = new Listador();
 		this.emprestimos = new HashSet<>();
 		this.validacao = new Validacao();
 	}
@@ -74,9 +71,10 @@ public class Usuario implements Comparable<Usuario> {
 	public String getNome() {
 		return this.nome;
 	}
-	
+
 	/**
 	 * Metodo que retorna a reputacao do usuario.
+	 * 
 	 * @return a reputacao do usuario.
 	 */
 	public double getReputacao() {
@@ -129,23 +127,6 @@ public class Usuario implements Comparable<Usuario> {
 		List<Item> listItens = new ArrayList<Item>(itens.values());
 		return listItens;
 	}
-
-	/**
-	 * Cadastra um jogo eletronico.
-	 * 
-	 * @param nomeItem
-	 *            a ser cadastrado.
-	 * @param preco
-	 *            do jogo eletronico.
-	 * @param plataforma
-	 *            do jogo eletronico.
-	 */
-	public void cadastraItem(String nomeItem, double preco, String plataforma) {
-		itens.put(nomeItem, new JogoEletronico(nomeItem, preco, plataforma));
-		cartaoFidelidade.addItem();
-		addReputacao(preco, 0.05);
-	}
-
 	/**
 	 * Metodo que cadastra um jogo de tabuleiro.
 	 * 
@@ -154,79 +135,10 @@ public class Usuario implements Comparable<Usuario> {
 	 * @param preco
 	 *            do item.
 	 */
-	public void cadastraItem(String nomeItem, double preco) {
-		itens.put(nomeItem, new JogoTabuleiro(nomeItem, preco));
+	public void cadastraItem(Item item) {
+		itens.put(item.getNome(), item);
 		cartaoFidelidade.addItem();
-		addReputacao(preco, 0.05);
-	}
-
-	/**
-	 * Metodo que cadastra um filme.
-	 * 
-	 * @param nomeItem
-	 *            a ser cadastrado.
-	 * @param preco
-	 *            do item.
-	 * @param duracao
-	 *            do filme.
-	 * @param genero
-	 *            do filme.
-	 * @param classificacao
-	 *            indicativa do filme.
-	 * @param lancamento
-	 *            do filme.
-	 */
-	public void cadastraItem(String nomeItem, double preco, int duracao, String genero, String classificacao,
-			int lancamento) {
-		itens.put(nomeItem, new Filme(nomeItem, preco, duracao, classificacao, genero, lancamento));
-		cartaoFidelidade.addItem();
-		addReputacao(preco, 0.05);
-	}
-
-	/**
-	 * Metodo que cadastra um show.
-	 * 
-	 * @param nomeItem
-	 *            a ser cadastrado.
-	 * @param preco
-	 *            do item.
-	 * @param duracao
-	 *            do show.
-	 * @param faixas
-	 *            do show.
-	 * @param artista
-	 *            que realizou o show.
-	 * @param classificacao
-	 *            indicativa do show.
-	 */
-	public void cadastraBluRayShow(String nomeItem, double preco, int duracao, String classificacao, String artista,
-			int faixas) {
-		itens.put(nomeItem, new Show(nomeItem, preco, duracao, classificacao, artista, faixas));
-		cartaoFidelidade.addItem();
-		addReputacao(preco, 0.05);
-	}
-
-	/**
-	 * Metodo que cadastra uma serie. * @param nomeItem a ser cadastrado.
-	 * 
-	 * @param preco
-	 *            do item.
-	 * @param descricao
-	 *            da serie.
-	 * @param duracao
-	 *            da serie.
-	 * @param classificacao
-	 *            indicativa da serie.
-	 * @param genero
-	 *            da serie.
-	 * @param temporada
-	 *            da serie.
-	 */
-	public void cadastraItem(String nomeItem, double preco, String descricao, int duracao, String classificacao,
-			String genero, int temporada) {
-		itens.put(nomeItem, new Serie(nomeItem, preco, duracao, classificacao, genero, temporada));
-		cartaoFidelidade.addItem();
-		addReputacao(preco, 0.05);
+		addReputacao(item.getPreco(), 0.05);
 	}
 
 	/**
@@ -237,9 +149,8 @@ public class Usuario implements Comparable<Usuario> {
 	 * @param duracao
 	 *            do episodio.
 	 */
-	public void adicionaBluRay(String nomeBluRayTemporada, int duracao) {
-		Serie serie = (Serie) (itens.get(nomeBluRayTemporada));
-		serie.adicionarBluRay(duracao);
+	public void adicionaBluRay(Serie serie) {
+		serie.adicionarBluRay(serie.getDuracao());
 	}
 
 	/**
@@ -414,30 +325,26 @@ public class Usuario implements Comparable<Usuario> {
 	public void addEmprestimo(Emprestimo e) {
 		emprestimos.add(e);
 	}
-	
-	// ###################################  US5  ###################################
-	
+
+	// ################################### US5
+	// ###################################
+
 	/**
-	 * Lista os emprestimos de itens que o usuario emprestou. 
-	 * @param dono o dono do emprestimo. 
-	 * @return a lista de emprestimos em que o usuario emprestou os itens. 
-	 */
-	public String listarEmprestimosUsuarioEmprestando(Usuario dono) {
-		return listador.listaEmprestimosUsuarioEmprestando(emprestimos, dono);
-	}
-	
-	/**
-	 * Retorna os emprestimos de um usuario. 
-	 * @return o conjunto de emprestimos do usuario. 
+	 * Retorna os emprestimos de um usuario.
+	 * 
+	 * @return o conjunto de emprestimos do usuario.
 	 */
 	public Set<Emprestimo> getEmprestimos() {
 		return this.emprestimos;
 	}
-	
+
 	/**
-	 * Adiciona valor a reputacao do usuario. 
-	 * @param valor o valor do item. 
-	 * @param taxa a taxa que sera tirada do valor do item. 
+	 * Adiciona valor a reputacao do usuario.
+	 * 
+	 * @param valor
+	 *            o valor do item.
+	 * @param taxa
+	 *            a taxa que sera tirada do valor do item.
 	 */
 	public void addReputacao(double valor, double taxa) {
 		this.cartaoFidelidade.setReputacao(valor * taxa);
@@ -445,15 +352,17 @@ public class Usuario implements Comparable<Usuario> {
 
 	/**
 	 * 
-	 * @return o status da fidelidade do usuario. 
+	 * @return o status da fidelidade do usuario.
 	 */
 	public String getFidelidade() {
 		return cartaoFidelidade.getFidelidade();
 	}
-	
+
 	/**
-	 * Diz se um usuario pode ou nao pegar itens emprestados. 
-	 * @return true se o usuario pode pegar itens emprestados ou false em caso contrario. 
+	 * Diz se um usuario pode ou nao pegar itens emprestados.
+	 * 
+	 * @return true se o usuario pode pegar itens emprestados ou false em caso
+	 *         contrario.
 	 */
 	public boolean podePegarEmprestado() {
 		return cartaoFidelidade.podePegarEmprestado();
@@ -465,7 +374,7 @@ public class Usuario implements Comparable<Usuario> {
 	 */
 	public int getPeriodo() {
 		return cartaoFidelidade.getPeriodo();
-}
+	}
 
 	@Override
 	public int compareTo(Usuario o) {

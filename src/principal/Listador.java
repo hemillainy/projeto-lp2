@@ -1,16 +1,17 @@
 package principal;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import principal.comparator.ComparadorNumeroEmprestimos;
 import principal.comparator.ComparadorReputacao;
 import principal.comparator.ComparadorValor;
 import principal.emprestimo.Emprestimo;
+import principal.emprestimo.IdEmprestimo;
 import principal.item.Item;
 import principal.user.Usuario;
 
@@ -34,10 +35,12 @@ public class Listador {
 	 *            do usuario.
 	 * @return a lista com os emprestimos feitos pelo usuario.
 	 */
-	public String listaEmprestimosUsuarioEmprestando(Set<Emprestimo> emprestimos, Usuario dono) {
+	public String listaEmprestimosUsuarioEmprestando(Map<IdEmprestimo, Emprestimo> emprestimos, Usuario dono) {
+		Set<Emprestimo> empres = new HashSet<>(emprestimos.values());
+		
 		String retorno = "Emprestimos: ";
 
-		for (Emprestimo emprestimo : emprestimos) {
+		for (Emprestimo emprestimo : empres) {
 			if (emprestimo.getDono().equals(dono)) {
 				retorno += emprestimo.toString() + "|";
 			}
@@ -133,8 +136,9 @@ public class Listador {
 	 *            do item.
 	 * @return a lista com todos os emprestimos relacionados a um item.
 	 */
-	public String listaEmprestimosItem(Collection<Emprestimo> emprestimos, String nome) {
+	public String listaEmprestimosItem(List<Emprestimo> emprestimos, String nome) {
 		String retorno = "Emprestimos associados ao item: ";
+		Collections.reverse(emprestimos);
 		for (Emprestimo emprestimo : emprestimos) {
 			if (emprestimo.getItem().getNome().equals(nome)) {
 				retorno += emprestimo.toString() + "|";
