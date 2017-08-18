@@ -14,7 +14,7 @@ import principal.item.jogos.JogoTabuleiro;
 import principal.user.Usuario;
 
 /**
- * Classe facade do sistema.
+ * Representacao de um Controller de Item.
  * 
  * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
  * 
@@ -275,21 +275,45 @@ public class ItemController {
 		return listador.listaItensOrdenadosPorNome(listItens());
 	}
 
+	/**
+	 * Metodo que lista todos os itens em ordem crescente de valor.
+	 * 
+	 * @return a listagem de todos os itens em ordem crecente de valor.
+	 */
 	public String listarItemOrdenadosPorValor() {
 		return listador.listaItensOrdenadosPorValor(listItens());
 	}
 
+	/**
+	 * Metodo que retorna a representacao de um item.
+	 * 
+	 * @param usuario
+	 *            o dono do item.
+	 * @param nomeItem
+	 *            a ser pesquisado.
+	 * @return a representacao do item.
+	 */
 	public String pesquisaDetalhesItens(Usuario usuario, String nomeItem) {
 		validacao.itemNaoEncontrado(hasItem(nomeItem));
 		usuario.getItem(nomeItem);
 		return itens.get(nomeItem).toString();
 	}
 
+	/**
+	 * Metodo que lista os 10 itens mais emprestados.
+	 * 
+	 * @return a listagem com os 10 itens mais emprestados.
+	 */
 	public String listarTop10Itens() {
 		List<Item> listItens = new ArrayList<>(itens.values());
 		return listador.listaTopDez(listItens);
 	}
 
+	/**
+	 * Metodo que lista os itens cadastrados nao emprestados.
+	 * 
+	 * @return a listagem dos itens nao cadastrados.
+	 */
 	public String listarItensNaoEmprestados(List<Item> listItens) {
 		return listador.listaItensNaoEmprestados(listItens);
 	}
