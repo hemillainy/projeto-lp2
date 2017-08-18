@@ -375,7 +375,7 @@ public class Usuario implements Comparable<Usuario> {
 	public int getPeriodo() {
 		return cartaoFidelidade.getPeriodo();
 	}
-
+	
 	@Override
 	public int compareTo(Usuario o) {
 		return this.getNome().compareTo(o.getNome());
