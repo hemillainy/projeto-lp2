@@ -255,12 +255,12 @@ public class Listador {
 		String info = "";
 		Collections.sort(users, comparadorReputacao);
 		
-		int i = 0;
-		while (i < 10 && i <= users.size()) {
-			Usuario usuario = users.get(i);
+		int posicao = 0;
+		while (posicao < 10 && posicao < users.size()) {
+			Usuario usuario = users.get(posicao);
 			String reputacao = String.format("%.2f", usuario.getReputacao());
-			info += i+1 + ": " + usuario.getNome() + " - Reputacao: " + reputacao + "|"; 
-			i++;
+			info += posicao+1 + ": " + usuario.getNome() + " - Reputacao: " + reputacao + "|"; 
+			posicao++;
 		}
 		return info;
 	}
@@ -268,13 +268,12 @@ public class Listador {
 	public String listarTop10PioresUsuarios(List<Usuario> users) {
 		String info = "";
 		Collections.sort(users, comparadorReputacao);
-		int i = users.size() - 1;
+		Collections.reverse(users);
 		int posicao = 0;
-		while (posicao != 10 && posicao < users.size()) {
-			Usuario usuario = users.get(i);
+		while (posicao < 10 && posicao < users.size()) {
+			Usuario usuario = users.get(posicao);
 			String reputacao = String.format("%.2f", usuario.getReputacao());
 			info += posicao + 1 + ": " + usuario.getNome() + " - Reputacao: " + reputacao + "|"; 
-			i--;
 			posicao++;
 		}
 		return info;
