@@ -42,7 +42,7 @@ public class Serie extends BluRay {
 		this.temporada = temporada;
 		this.episodios = new ArrayList<>();
 	}
-
+ 
 	/**
 	 * Metodo que adiciona um episodia a serie.
 	 * 
