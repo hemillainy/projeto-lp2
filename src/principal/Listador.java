@@ -1,16 +1,17 @@
 package principal;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import principal.comparator.ComparadorNumeroEmprestimos;
 import principal.comparator.ComparadorReputacao;
 import principal.comparator.ComparadorValor;
 import principal.emprestimo.Emprestimo;
+import principal.emprestimo.IdEmprestimo;
 import principal.item.Item;
 import principal.user.Usuario;
 
@@ -34,10 +35,12 @@ public class Listador {
 	 *            do usuario.
 	 * @return a lista com os emprestimos feitos pelo usuario.
 	 */
-	public String listaEmprestimosUsuarioEmprestando(Set<Emprestimo> emprestimos, Usuario dono) {
+	public String listaEmprestimosUsuarioEmprestando(Map<IdEmprestimo, Emprestimo> emprestimos, Usuario dono) {
+		Set<Emprestimo> empres = new HashSet<>(emprestimos.values());
+		
 		String retorno = "Emprestimos: ";
 
-		for (Emprestimo emprestimo : emprestimos) {
+		for (Emprestimo emprestimo : empres) {
 			if (emprestimo.getDono().equals(dono)) {
 				retorno += emprestimo.toString() + "|";
 			}
@@ -133,8 +136,9 @@ public class Listador {
 	 *            do item.
 	 * @return a lista com todos os emprestimos relacionados a um item.
 	 */
-	public String listaEmprestimosItem(Collection<Emprestimo> emprestimos, String nome) {
+	public String listaEmprestimosItem(List<Emprestimo> emprestimos, String nome) {
 		String retorno = "Emprestimos associados ao item: ";
+		Collections.reverse(emprestimos);
 		for (Emprestimo emprestimo : emprestimos) {
 			if (emprestimo.getItem().getNome().equals(nome)) {
 				retorno += emprestimo.toString() + "|";
@@ -156,10 +160,8 @@ public class Listador {
 		String itens = "";
 
 		int i = 0;
-		while (true) {
-			if (i == 10 || i == inventario.size() || inventario.get(i).getNumEmprestimos() == 0) {
-				break;
-			}
+		while (i <= 10 && i <= inventario.size() && inventario.get(i).getNumEmprestimos() != 0) {
+
 			Item item = inventario.get(i);
 			itens += (i + 1) + ") " + item.getNumEmprestimos() + " emprestimos - " + item.toString() + "|";
 			i++;
@@ -206,11 +208,11 @@ public class Listador {
 	 */
 	public String getInfoUsuario(Usuario usuario, String atributo) {
 		String info = "";
-		if (atributo.equals("Email")) {
+		if (atributo.toUpperCase().equals("EMAIL")) {
 			info += usuario.getEmail();
-		} else if (atributo.equals("Reputacao")) {
+		} else if (atributo.toUpperCase().equals("REPUTACAO")) {
 			info += usuario.getReputacao();
-		} else if (atributo.equals("Cartao")) {
+		} else if (atributo.toUpperCase().equals("CARTAO")) {
 			info += usuario.getFidelidade();
 		}
 		return info;
@@ -229,9 +231,9 @@ public class Listador {
 	 */
 	public String getInfoItem(Usuario usuario, String nomeItem, String atributo) {
 		String info = "";
-		if (atributo.equals("Preco")) {
+		if (atributo.toUpperCase().equals("PRECO")) {
 			info = usuario.getPrecoItem(nomeItem);
-		} else if (atributo.equals("Nome")) {
+		} else if (atributo.toUpperCase().equals("NOME")) {
 			info = usuario.getNomeItem(nomeItem);
 		}
 		return info;
@@ -253,12 +255,12 @@ public class Listador {
 		String info = "";
 		Collections.sort(users, comparadorReputacao);
 		
-		int i = 0;
-		while (i < 10 && i <= users.size()) {
-			Usuario usuario = users.get(i);
+		int posicao = 0;
+		while (posicao < 10 && posicao < users.size()) {
+			Usuario usuario = users.get(posicao);
 			String reputacao = String.format("%.2f", usuario.getReputacao());
-			info += i+1 + ": " + usuario.getNome() + " - Reputacao: " + reputacao + "|"; 
-			i++;
+			info += posicao+1 + ": " + usuario.getNome() + " - Reputacao: " + reputacao + "|"; 
+			posicao++;
 		}
 		return info;
 	}
@@ -266,13 +268,13 @@ public class Listador {
 	public String listarTop10PioresUsuarios(List<Usuario> users) {
 		String info = "";
 		Collections.sort(users, comparadorReputacao);
-		
-		int i = users.size() - 1;
-		while (users.size() - 1 >= 10 && i >= 0) {
-			Usuario usuario = users.get(i);
+		Collections.reverse(users);
+		int posicao = 0;
+		while (posicao < 10 && posicao < users.size()) {
+			Usuario usuario = users.get(posicao);
 			String reputacao = String.format("%.2f", usuario.getReputacao());
-			info += i+1 + ": " + usuario.getNome() + " - Reputacao: " + reputacao + "|"; 
-			i--;
+			info += posicao + 1 + ": " + usuario.getNome() + " - Reputacao: " + reputacao + "|"; 
+			posicao++;
 		}
 		return info;
 	}

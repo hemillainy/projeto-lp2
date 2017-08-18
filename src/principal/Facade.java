@@ -1,8 +1,10 @@
 package principal;
 
 import java.text.ParseException;
+import java.util.List;
 
 import easyaccept.EasyAccept;
+import principal.user.Usuario;
 
 /**
  * Classe facade do sistema.
@@ -21,16 +23,18 @@ public class Facade {
 
 		EasyAccept.main(args);
 	}
-	private ItemController itemController;
+
 	private UserController userController;
+	private ItemController itemController;
 	private EmprestimoController emprestimoController;
 
 	/**
 	 * Construtor de facade.
 	 */
 	public Facade() {
-		userController = new UserController();
-		emprestimoController = userController.getEmprestimoController();
+		this.userController = new UserController();
+		this.itemController = new ItemController();
+		this.emprestimoController = new EmprestimoController();
 	}
 
 	/**
@@ -100,6 +104,13 @@ public class Facade {
 		userController.atualizaUsuario(nome, telefone, atributo, valor);
 	}
 
+	private Usuario pegaUsuario(String nome, String telefone) {
+		return userController.getUsuario(nome, telefone);
+	}
+	private Usuario pegarEmprestado(String nome, String telefone, int periodo){
+		return userController.pegarEmprestado(nome, telefone, periodo);
+	}
+
 	/**
 	 * Metodo que cadastra um jogo eletronico.
 	 * 
@@ -115,7 +126,7 @@ public class Facade {
 	 *            do jogo eletronico.
 	 */
 	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
-		itemController.cadastrarEletronico(nome, telefone, nomeItem, preco, plataforma);
+		itemController.cadastrarEletronico(pegaUsuario(nome, telefone), nomeItem, preco, plataforma);
 	}
 
 	/**
@@ -131,7 +142,7 @@ public class Facade {
 	 *            do item.
 	 */
 	public void cadastrarJogoTabuleiro(String nome, String telefone, String nomeItem, double preco) {
-		userController.cadastrarJogoTabuleiro(nome, telefone, nomeItem, preco);
+		itemController.cadastrarJogoTabuleiro(pegaUsuario(nome, telefone), nomeItem, preco);
 	}
 
 	/**
@@ -156,7 +167,8 @@ public class Facade {
 	 */
 	public void cadastrarBluRayFilme(String nome, String telefone, String nomeItem, double preco, int duracao,
 			String genero, String classificacao, int lancamento) {
-		userController.cadastrarBluRayFilme(nome, telefone, nomeItem, preco, duracao, genero, classificacao, lancamento);
+		itemController.cadastraBluRayFilme(pegaUsuario(nome, telefone), nomeItem, preco, duracao, genero, classificacao,
+				lancamento);
 	}
 
 	/**
@@ -181,7 +193,8 @@ public class Facade {
 	 */
 	public void cadastrarBluRayShow(String nome, String telefone, String nomeItem, double preco, int duracao,
 			int faixas, String artista, String classificacao) {
-		userController.cadastrarBluRayShow(nome, telefone, nomeItem, preco, duracao, faixas, artista, classificacao);
+		itemController.cadastraBluRayShow(pegaUsuario(nome, telefone), nomeItem, preco, duracao, faixas, artista,
+				classificacao);
 	}
 
 	/**
@@ -206,8 +219,8 @@ public class Facade {
 	 */
 	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
 			int duracao, String classificacao, String genero, int temporada) {
-		userController.cadastrarBluRaySerie(nome, telefone, nomeItem, preco, descricao, duracao, classificacao, genero,
-				temporada);
+		itemController.cadastraBluRaySerie(pegaUsuario(nome, telefone), nomeItem, preco, descricao, duracao,
+				classificacao, genero, temporada);
 	}
 
 	/**
@@ -223,7 +236,7 @@ public class Facade {
 	 *            do episodio.
 	 */
 	public void adicionarBluRay(String nome, String telefone, String nomeBluRayTemporada, int duracao) {
-		userController.adicionarBluRay(nome, telefone, nomeBluRayTemporada, duracao);
+		itemController.adicionaBluRay(pegaUsuario(nome, telefone), nomeBluRayTemporada, duracao);
 	}
 
 	/**
@@ -239,7 +252,7 @@ public class Facade {
 	 *            a ser adicionada como perdida.
 	 */
 	public void adicionarPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {
-		userController.adicionarPecaPerdida(nome, telefone, nomeItem, nomePeca);
+		itemController.adicionaPecaPerdida(pegaUsuario(nome, telefone), nomeItem, nomePeca);
 	}
 
 	/**
@@ -256,7 +269,7 @@ public class Facade {
 	 * @return a informacao correspondente ao atributo desejado.
 	 */
 	public String getInfoItem(String nome, String telefone, String nomeItem, String atributo) {
-		return userController.getInfoItem(nome, telefone, nomeItem, atributo);
+		return itemController.getInfoItem(pegaUsuario(nome, telefone), nomeItem, atributo);
 	}
 
 	/**
@@ -270,7 +283,7 @@ public class Facade {
 	 *            a ser removido.
 	 */
 	public void removerItem(String nome, String telefone, String nomeItem) {
-		userController.removerItem(nome, telefone, nomeItem);
+		itemController.removeItem(pegaUsuario(nome, telefone), nomeItem);
 	}
 
 	/**
@@ -288,7 +301,7 @@ public class Facade {
 	 *            para substituir o valor antigo do atributo.
 	 */
 	public void atualizarItem(String nome, String telefone, String nomeItem, String atributo, String valor) {
-		userController.atualizarItem(nome, telefone, nomeItem, atributo, valor);
+		itemController.atualizaItem(pegaUsuario(nome, telefone), nomeItem, atributo, valor);
 	}
 
 	/**
@@ -297,7 +310,7 @@ public class Facade {
 	 * @return a listagem de todos os itens em ordem lexicografica.
 	 */
 	public String listarItensOrdenadosPorNome() {
-		return userController.listarItensOrdenadosPorNome();
+		return itemController.listarItemOrdenadosPorNome();
 	}
 
 	/**
@@ -306,7 +319,7 @@ public class Facade {
 	 * @return a listagem de todos os itens em ordem crecente de valor.
 	 */
 	public String listarItensOrdenadosPorValor() {
-		return userController.listarItensOrdenadosPorValor();
+		return itemController.listarItemOrdenadosPorValor();
 	}
 
 	/**
@@ -321,7 +334,8 @@ public class Facade {
 	 * @return a representacao do item.
 	 */
 	public String pesquisarDetalhesItem(String nome, String telefone, String nomeItem) {
-		return userController.pesquisaDetalhesItem(nome, telefone, nomeItem);
+		 return itemController.pesquisaDetalhesItens(pegaUsuario(nome,
+		 telefone), nomeItem);
 	}
 
 	/**
@@ -345,7 +359,7 @@ public class Facade {
 	 */
 	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
 			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) throws ParseException {
-		userController.registrarEmprestimo(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem,
+		emprestimoController.registraEmprestimo(pegaUsuario(nomeDono, telefoneDono), pegarEmprestado(nomeRequerente, telefoneRequerente, periodo), nomeItem,
 				dataEmprestimo, periodo);
 	}
 
@@ -368,10 +382,11 @@ public class Facade {
 	 *            do item.
 	 * @throws ParseException
 	 */
+
 	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
 			String nomeItem, String dataEmprestimo, String dataDevolucao) {
-		userController.devolverItem(nomeDono, telefoneDono, nomeRequerente, telefoneRequerente, nomeItem, dataEmprestimo,
-				dataDevolucao);
+		emprestimoController.devolveItem(pegaUsuario(nomeDono, telefoneDono),
+				pegaUsuario(nomeRequerente, telefoneRequerente), nomeItem, dataEmprestimo, dataDevolucao);
 	}
 
 	/**
@@ -384,7 +399,7 @@ public class Facade {
 	 * @return a listagem dos emprestimos feitos pelo usuario.
 	 */
 	public String listarEmprestimosUsuarioEmprestando(String nome, String telefone) {
-		return userController.listarEmprestimosUsuarioEmprestando(nome, telefone);
+		return emprestimoController.listarEmprestimosUsuarioEmprestando(pegaUsuario(nome, telefone));
 	}
 
 	/**
@@ -397,7 +412,7 @@ public class Facade {
 	 * @return a listagem do emprestimos concedidos a um usuario.
 	 */
 	public String listarEmprestimosUsuarioPegandoEmprestado(String nome, String telefone) {
-		return userController.listarEmprestimosUsuarioPegandoEmprestado(nome, telefone);
+		return emprestimoController.listarEmprestimosUsuarioPegandoEmprestado(pegaUsuario(nome, telefone));
 	}
 
 	/**
@@ -417,7 +432,8 @@ public class Facade {
 	 * @return a listagem dos itens nao cadastrados.
 	 */
 	public String listarItensNaoEmprestados() {
-		return userController.listarItensNaoEmprestados();
+		List<Usuario> usuarios = userController.getUsuarios();
+		return emprestimoController.listarItensNaoEmprestados(usuarios);
 	}
 
 	/**
@@ -426,7 +442,7 @@ public class Facade {
 	 * @return a listagem com os itens emprestados.
 	 */
 	public String listarItensEmprestados() {
-		return userController.listarItensEmprestados();
+		return emprestimoController.listaItensEmprestados();
 	}
 
 	/**
@@ -435,27 +451,30 @@ public class Facade {
 	 * @return a listagem com os 10 itens mais emprestados.
 	 */
 	public String listarTop10Itens() {
-		return userController.listarTop10();
+		return itemController.listarTop10Itens();
 	}
-	
+
 	/**
 	 * Metodo que lista os usuario com reputacao menor que 0.
+	 * 
 	 * @return a listagem com os usuario com reputacao menor que 0.
 	 */
 	public String listarCaloteiros() {
 		return userController.listarCaloteiros();
 	}
-	
+
 	/**
-	 * Metodo que lista os 10 usuarios com melhores reputaçoes.
+	 * Metodo que lista os 10 usuarios com melhores reputaÃ§oes.
+	 * 
 	 * @return a listagem com os 10 usuarios com melhor reputacao.
 	 */
 	public String listarTop10MelhoresUsuarios() {
 		return userController.listarTop10MelhoresUsuario();
 	}
-	
+
 	/**
 	 * Metodo que lista os 10 usuarios com pior reputacao.
+	 * 
 	 * @return a listagem com os 10 usuarios com menor reputacao.
 	 */
 	public String listarTop10PioresUsuarios() {
