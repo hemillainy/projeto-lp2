@@ -57,11 +57,6 @@ public class Listador {
 	 * @return a listagem dos itens nao cadastrados.
 	 */
 	public String listaItensNaoEmprestados(List<Item> listItens) {
-////		Set<Item> itens = new HashSet<>();
-////		for (Usuario us : listItens) {
-////			itens.addAll(us.getItens());
-////		}
-//		List<Item> inventario = new ArrayList<>(itens);
 		Collections.sort(listItens, new ComparadorNomeItem());
 
 		String saida = "";
