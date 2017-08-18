@@ -1,5 +1,8 @@
 package principal;
 
+import java.util.Arrays;
+import java.util.List;
+
 import principal.item.Item;
 
 /**
@@ -13,7 +16,7 @@ import principal.item.Item;
  *
  */
 public class Validacao {
-	
+
 	/**
 	 * Excecao lancada quando for passado um usuario que nao esta cadastrado no
 	 * sistema.
@@ -25,7 +28,8 @@ public class Validacao {
 	}
 
 	/**
-	 * Excecao lancada quando tentar cadastrar um usuario que ja esta cadastrado.
+	 * Excecao lancada quando tentar cadastrar um usuario que ja esta
+	 * cadastrado.
 	 */
 	public void usuarioJaCadastrado(boolean hasUsuario) {
 		if (hasUsuario) {
@@ -68,21 +72,9 @@ public class Validacao {
 	 *            nome do item.
 	 * @param preco
 	 *            preco do item.
-	 * @param plataforma
+	 * @param enumerate
 	 *            plataforma do item.
 	 */
-	public void itemInvalido(String nomeItem, double preco, String plataforma) {
-		if (nomeItem == null || nomeItem.trim().isEmpty()) {
-			throw new IllegalArgumentException("Nome invalido");
-		}
-		if (preco <= 0) {
-			throw new IllegalArgumentException("Preco invalido");
-		}
-		if (plataforma == null || plataforma.trim().isEmpty()) {
-			throw new IllegalArgumentException("Plataforma invalida");
-		}
-	}
-
 	public void itemInvalido(String nomeItem, double preco) {
 		if (nomeItem == null || nomeItem.trim().isEmpty()) {
 			throw new IllegalArgumentException("Nome invalido");
@@ -92,9 +84,34 @@ public class Validacao {
 		}
 	}
 
+	public void eletronicoInvalido(String nomeItem, double preco, String plataforma) {
+		List<String> plataformas = Arrays.asList("PC", "MAC", "PS3", "PS4", "BOX360", "XBOX_ONE", "NINTENDO_3DS",
+				"OUTRO");
+
+		if (plataforma == null || plataforma.trim().isEmpty()) {
+			throw new IllegalArgumentException("Plataforma invalida");
+		}
+		if (!plataformas.contains(plataforma)) {
+			throw new IllegalArgumentException("Plataforma nao cadastrada");
+		}
+
+		itemInvalido(nomeItem, preco);
+	}
+
+	public void blurayInvalido() {
+		List<String> classificacoes = Arrays.asList("LIVRE", "DEZ_ANOS", "DOZE_ANOS", "QUATORZE_ANOS", "DEZESSEIS_ANOS",
+				"DEZOITO_ANOS");
+	}
+
+	public void serieInvalida() {
+		List<String> generos = Arrays.asList("ACAO,", "ANIMACAO,", "AVENTURA,", "COMEDIA,", "DOCUMENTARIO,", "DRAMA,",
+				"EROTICO,", "FAROESTE,", "FICCAO,", "MUSICAL,", "POLICIAL,", "ROMANCE,", "SUSPENSE,", "TERROR,",
+				"OUTRO");
+	}
+
 	/**
-	 * Excecao lancada quando tentarem fazer um emprestimo de um item que ja esta
-	 * emprestado.
+	 * Excecao lancada quando tentarem fazer um emprestimo de um item que ja
+	 * esta emprestado.
 	 */
 	public void ItemJaEmprestado(boolean itemJaEmprestado) {
 		if (itemJaEmprestado) {
@@ -103,7 +120,8 @@ public class Validacao {
 	}
 
 	/**
-	 * Excecao lancada quando for solicitado um emprestimo que nao foi cadastrado.
+	 * Excecao lancada quando for solicitado um emprestimo que nao foi
+	 * cadastrado.
 	 */
 	public void emprestimoNaoEncontrado(boolean contemEmprestimo) {
 		if (!contemEmprestimo) {
@@ -141,8 +159,8 @@ public class Validacao {
 	}
 
 	/**
-	 * Excecao lancada quando um emprestimos com periodo alem do permitido para o
-	 * requerente eh solicitado.
+	 * Excecao lancada quando um emprestimos com periodo alem do permitido para
+	 * o requerente eh solicitado.
 	 */
 	public void periodoInvalido(int periodo, int periodoUser) {
 		if (periodo > periodoUser) {

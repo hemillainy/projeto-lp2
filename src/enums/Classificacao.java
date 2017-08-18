@@ -34,5 +34,4 @@ public enum Classificacao {
 	public String getValor() {
 		return this.valor;
 	}
-
 }

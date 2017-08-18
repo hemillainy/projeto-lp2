@@ -1,6 +1,5 @@
 package principal;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -104,9 +103,9 @@ public class UserController {
 	public void atualizaUsuario(String nome, String telefone, String atributo, String valor) {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		validacao.usuarioInvalido(hasUsuario(id));
-		if (atributo.equals("Email")) {
+		if (atributo.toUpperCase().equals("EMAIL")) {
 			usuarios.get(id).setEmail(valor);
-		} else if (atributo.equals("Telefone")) {
+		} else if (atributo.toUpperCase().equals("TELEFONE")) {
 			Usuario usuario = usuarios.get(id);
 			usuario.setTelefone(valor);
 			setKey(nome, telefone, valor, usuario);
@@ -163,7 +162,7 @@ public class UserController {
 	 *            do jogo eletronico.
 	 */
 	public void cadastrarEletronico(String nome, String telefone, String nomeItem, double preco, String plataforma) {
-		validacao.itemInvalido(nomeItem, preco, plataforma);
+		validacao.eletronicoInvalido(nomeItem, preco, plataforma);
 		IdUsuario id = new IdUsuario(nome, telefone);
 		validacao.usuarioInvalido(hasUsuario(id));
 		Usuario us = usuarios.get(id);
@@ -343,9 +342,9 @@ public class UserController {
 	public void atualizarItem(String nome, String telefone, String nomeItem, String atributo, String valor) {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		validacao.usuarioInvalido(hasUsuario(id));
-		if (atributo.equals("Nome")) {
+		if (atributo.toUpperCase().equals("NOME")) {
 			usuarios.get(id).atualizaNomeItem(nomeItem, valor);
-		} else if (atributo.equals("Preco")) {
+		} else if (atributo.toUpperCase().equals("PRECO")) {
 			usuarios.get(id).atualizaPrecoItem(nomeItem, valor);
 		}
 	}

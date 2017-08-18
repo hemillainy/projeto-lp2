@@ -206,11 +206,11 @@ public class Listador {
 	 */
 	public String getInfoUsuario(Usuario usuario, String atributo) {
 		String info = "";
-		if (atributo.equals("Email")) {
+		if (atributo.toUpperCase().equals("EMAIL")) {
 			info += usuario.getEmail();
-		} else if (atributo.equals("Reputacao")) {
+		} else if (atributo.toUpperCase().equals("REPUTACAO")) {
 			info += usuario.getReputacao();
-		} else if (atributo.equals("Cartao")) {
+		} else if (atributo.toUpperCase().equals("CARTAO")) {
 			info += usuario.getFidelidade();
 		}
 		return info;
@@ -229,9 +229,9 @@ public class Listador {
 	 */
 	public String getInfoItem(Usuario usuario, String nomeItem, String atributo) {
 		String info = "";
-		if (atributo.equals("Preco")) {
+		if (atributo.toUpperCase().equals("PRECO")) {
 			info = usuario.getPrecoItem(nomeItem);
-		} else if (atributo.equals("Nome")) {
+		} else if (atributo.toUpperCase().equals("NOME")) {
 			info = usuario.getNomeItem(nomeItem);
 		}
 		return info;
