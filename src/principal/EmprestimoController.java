@@ -25,7 +25,8 @@ public class EmprestimoController {
 	private Map<IdEmprestimo, Emprestimo> emprestimos;
 
 	/**
-	 * Instancia os objetos listador e validacao e o map de Emprestimos.
+	 * Controi um EmprestimoController. Todo EmprestimoController tem um
+	 * listador, um validador de entradas e um Map de Emprestimos.
 	 */
 	public EmprestimoController() {
 		this.listador = new Listador();
@@ -169,9 +170,11 @@ public class EmprestimoController {
 	}
 
 	/**
+	 * Metodo que lista os emprestimos concedidos a um ususario.
 	 * 
 	 * @param usuario
-	 * @return
+	 *            o usuario que tera o que ele emprestou listado.
+	 * @return a listagem do emprestimos concedidos a um usuario.
 	 */
 	public String listarEmprestimosUsuarioEmprestando(Usuario usuario) {
 		return listador.listaEmprestimosUsuarioEmprestando(emprestimos, usuario);

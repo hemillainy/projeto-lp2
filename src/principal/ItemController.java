@@ -13,20 +13,40 @@ import principal.item.jogos.JogoEletronico;
 import principal.item.jogos.JogoTabuleiro;
 import principal.user.Usuario;
 
+/**
+ * Representacao de um Controller de Item.
+ * 
+ * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
+ * 
+ * @author Cassio Cordeiro - 116210038 Geovane Silva - 116211149 Hemillainy
+ *         Santos - 116210802
+ *
+ */
 public class ItemController {
 
 	private Listador listador;
 	private Validacao validacao;
 	private Map<String, Item> itens;
 
+	/**
+	 * Constroi um ItemController. Todos ItemController tem um Map de Item, um
+	 * listador e um validador de entradas.
+	 */
 	public ItemController() {
 		this.itens = new HashMap<>();
 		this.listador = new Listador();
 		this.validacao = new Validacao();
 	}
-	public List<Item> getItens(){
+
+	/**
+	 * Metodo que retorna os valores do Map de Item.
+	 * 
+	 * @return um List com os itens do Map de Item.
+	 */
+	public List<Item> getItens() {
 		return new ArrayList<>(itens.values());
 	}
+
 	/**
 	 * Metodo que verifica se o item esta cadastrado.
 	 * 
@@ -199,7 +219,9 @@ public class ItemController {
 	 * @return a informacao correspondente ao atributo desejado.
 	 */
 	public String getInfoItem(Usuario usuario, String nomeItem, String atributo) {
-		return listador.getInfoItem(usuario, nomeItem, atributo);
+		validacao.itemNaoEncontrado((usuario.hasItem(nomeItem)));
+		Item item = itens.get(nomeItem);
+		return listador.getInfoItem(item, atributo);
 	}
 
 	/**
@@ -213,9 +235,14 @@ public class ItemController {
 	 *            a ser removido.
 	 */
 	public void removeItem(Usuario usuario, String nomeItem) {
-		// validacao.itemNaoEncontrado(hasItem(nomeItem));
+		validacao.itemNaoEncontrado(hasItem(nomeItem));
 		itens.remove(nomeItem);
 		usuario.removerItem(nomeItem);
+	}
+
+	private void setKeyItem(Item item, String nomeItem) {
+		itens.remove(nomeItem);
+		itens.put(item.getNome(), item);
 	}
 
 	/**
@@ -231,10 +258,14 @@ public class ItemController {
 	 *            para substituir o valor antigo do atributo.
 	 */
 	public void atualizaItem(Usuario usuario, String nomeItem, String atributo, String valor) {
+		validacao.itemNaoEncontrado(usuario.hasItem(nomeItem));
+		Item item = itens.get(nomeItem);
 		if (atributo.toUpperCase().equals("NOME")) {
-			usuario.atualizaNomeItem(nomeItem, valor);
+			item.setNome(valor);
+			usuario.setKeyItem(item);
+			setKeyItem(item, nomeItem);
 		} else if (atributo.toUpperCase().equals("PRECO")) {
-			usuario.atualizaPrecoItem(nomeItem, valor);
+			item.setPreco(Double.parseDouble(valor));
 		}
 	}
 
@@ -256,21 +287,47 @@ public class ItemController {
 		return listador.listaItensOrdenadosPorNome(listItens());
 	}
 
+	/**
+	 * Metodo que lista todos os itens em ordem crescente de valor.
+	 * 
+	 * @return a listagem de todos os itens em ordem crecente de valor.
+	 */
 	public String listarItemOrdenadosPorValor() {
 		return listador.listaItensOrdenadosPorValor(listItens());
 	}
 
+	/**
+	 * Metodo que retorna a representacao de um item.
+	 * 
+	 * @param usuario
+	 *            o dono do item.
+	 * @param nomeItem
+	 *            a ser pesquisado.
+	 * @return a representacao do item.
+	 */
 	public String pesquisaDetalhesItens(Usuario usuario, String nomeItem) {
 		validacao.itemNaoEncontrado(hasItem(nomeItem));
-		usuario.getItem(nomeItem);
+		validacao.itemNaoEncontrado(usuario.hasItem(nomeItem));
 		return itens.get(nomeItem).toString();
 	}
 
+	/**
+	 * Metodo que lista os 10 itens mais emprestados.
+	 * 
+	 * @return a listagem com os 10 itens mais emprestados.
+	 */
 	public String listarTop10Itens() {
 		List<Item> listItens = new ArrayList<>(itens.values());
 		return listador.listaTopDez(listItens);
 	}
-	public String listarItensNaoEmprestados(List<Item> listItens) {
+
+	/**
+	 * Metodo que lista os itens cadastrados nao emprestados.
+	 * 
+	 * @return a listagem dos itens nao cadastrados.
+	 */
+	public String listarItensNaoEmprestados() {
+		List<Item> listItens = new ArrayList<>(itens.values());
 		return listador.listaItensNaoEmprestados(listItens);
 	}
 }

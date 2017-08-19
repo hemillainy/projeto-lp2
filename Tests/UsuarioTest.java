@@ -109,144 +109,142 @@ public class UsuarioTest {
 	 * Testa o metodo que exibe detalhes de um item para um item cadastrado no
 	 * usuario 2.
 	 */
-	@Test
-	public void testExibeDetalhesItem() {
-		assertEquals("FILME: Liga da Justiça, R$ 14.0, Nao emprestado, 180 min, DEZESSEIS_ANOS, ACAO, 2017",
-				usuario2.exibeDetalhesItem("Liga da Justiça"));
-	}
-
-	/**
-	 * Testa o metodo exibe detalhes de um item para um item com nome nulo. Uma
-	 * excecao eh esperada.
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testExibeDetalhesItemNulo() {
-		usuario3.exibeDetalhesItem(null);
-	}
-
-	/**
-	 * Testa o metodo exibe detalhes de um item para um item com nome Invalido
-	 * (vazio). Uma excecao eh esperada.
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testExibeDetalhesItemInvalido() {
-		usuario2.exibeDetalhesItem("");
-	}
-
-	/**
-	 * Testa o metodo exibe detalhes de um item para um item com nome composto
-	 * de espacos. Uma excecao eh esperada.
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testExibeDetalhesItemEspacos() {
-		usuario1.exibeDetalhesItem("   ");
-	}
-
-	/**
-	 * Testa o metodo exibe detalhes de um item para um item inexistente. Uma
-	 * excecao eh esperada.
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testExibeDetalhesItemInexistente() {
-		usuario3.exibeDetalhesItem("Cubo mágico");
-	}
-
-	/**
-	 * Testa o metodo getPrecoItem em um item cadastrado no usuario3.
-	 */
-	@Test
-	public void testGetPrecoItem() {
-		assertEquals("10.0", usuario3.getPrecoItem("Tetris"));
-	}
-
-	/**
-	 * Testa o metodo getNomeItem em um item cadastrado no usuario1.
-	 */
-	@Test
-	public void testGetNomeItem() {
-		assertEquals("The 100", usuario2.getNomeItem("The 100"));
-	}
-
-	/**
-	 * Testa o metodo getPrecoItem para um item nao cadastrado. Uma excecao eh
-	 * esperada.
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testGetPrecoItemInvalido() {
-		usuario2.getPrecoItem("Naruto");
-	}
-
-	/**
-	 * Testa o metodo getNomeItem para um item nao cadastrado. Uma excecao eh
-	 * esperada.
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testGetNomeItemInvalido() {
-		usuario3.getNomeItem("Box GOT");
-	}
-
-	/**
-	 * Testa o metodo que remove o item de um usuario. Primeiro o item eh
-	 * removido do usuario1 e depois tenta-se pegar o nome do item removido. Uma
-	 * excecao eh esperada.
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testRemoverItem() {
-		usuario1.removerItem("Damas");
-		usuario1.getNomeItem("Damas");
-	}
-
-	/**
-	 * Testa o metodo que remove o item de um usuario para um item nao
-	 * cadastrado no usuario. Uma excecao eh esperada.
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testRemoverItemInvalido() {
-		usuario3.getNomeItem("Box GOT");
-	}
-
-	/**
-	 * Testa o metodo de alterar o nome de um item. Primeiro eh alterado o nome
-	 * do item e depois eh verificado com o auxilio do metodo getNomeItem
-	 */
-	@Test
-	public void testAlteraNomeItem() {
-		usuario2.atualizaNomeItem("Liga da Justiça", "Flashpoint");
-		assertEquals("Flashpoint", usuario2.getNomeItem("Flashpoint"));
-	}
-
-	/**
-	 * Testa o metodo de alterar nome de um item. Eh esperada uma excecao pois o
-	 * item que tenta atualizar nao existe.
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testAlteraNomeItemInvalido() {
-		usuario1.atualizaNomeItem("Jogos Vorazes", "X-men");
-		usuario1.getNomeItem("X-men");
-	}
-
-	/**
-	 * Testa o metodo de atualizar que atualiza o preco de um item. Primeiro eh
-	 * feita a atualizacao, depois a verificacao com auxilio do getPrecoItem.
-	 */
-	@Test
-	public void testAtualizaPrecoItem() {
-		usuario3.atualizaPrecoItem("Tetris", "50.00");
-		assertEquals("50.0", usuario3.getPrecoItem("Tetris"));
-	}
-
-	/**
-	 * Testa o metodo de adiconar pecas perdidas em um jogo de tabuleiro. A
-	 * verificacao eh feita com auxilio do metodo ecibeDetalhesItem.
-	 */
-	@Test
-	public void testAdicionaPecaPerdida() {
-		usuario1.adicionarPecaPerdida("Damas", "1 peça preta");
-		assertEquals("JOGO DE TABULEIRO: Damas, R$ 1.99, Nao emprestado, COM PECAS PERDIDAS",
-				usuario1.exibeDetalhesItem("Damas"));
-	}/**
-	 * Testa o equals de jogoTabuleiro 
-	 */
+//	@Test
+//	public void testExibeDetalhesItem() {
+//		assertEquals("FILME: Liga da Justiça, R$ 14.0, Nao emprestado, 180 min, DEZESSEIS_ANOS, ACAO, 2017",
+//				usuario2.exibeDetalhesItem("Liga da Justiça"));
+//	}
+//
+//	/**
+//	 * Testa o metodo exibe detalhes de um item para um item com nome nulo. Uma
+//	 * excecao eh esperada.
+//	 */
+//	@Test(expected = IllegalArgumentException.class)
+//	public void testExibeDetalhesItemNulo() {
+//		usuario3.exibeDetalhesItem(null);
+//	}
+//
+//	/**
+//	 * Testa o metodo exibe detalhes de um item para um item com nome Invalido
+//	 * (vazio). Uma excecao eh esperada.
+//	 */
+//	@Test(expected = IllegalArgumentException.class)
+//	public void testExibeDetalhesItemInvalido() {
+//		usuario2.exibeDetalhesItem("");
+//	}
+//
+//	/**
+//	 * Testa o metodo exibe detalhes de um item para um item com nome composto
+//	 * de espacos. Uma excecao eh esperada.
+//	 */
+//	@Test(expected = IllegalArgumentException.class)
+//	public void testExibeDetalhesItemEspacos() {
+//		usuario1.exibeDetalhesItem("   ");
+//	}
+//
+//	/**
+//	 * Testa o metodo exibe detalhes de um item para um item inexistente. Uma
+//	 * excecao eh esperada.
+//	 */
+//	@Test(expected = IllegalArgumentException.class)
+//	public void testExibeDetalhesItemInexistente() {
+//		usuario3.exibeDetalhesItem("Cubo mágico");
+//	}
+//
+//	/**
+//	 * Testa o metodo getPrecoItem em um item cadastrado no usuario3.
+//	 */
+//	@Test
+//	public void testGetPrecoItem() {
+//		assertEquals("10.0", usuario3.getPrecoItem("Tetris"));
+//	}
+//
+//	/**
+//	 * Testa o metodo getNomeItem em um item cadastrado no usuario1.
+//	 */
+//	@Test
+//	public void testGetNomeItem() {
+//		assertEquals("The 100", usuario2.getNomeItem("The 100"));
+//	}
+//
+//	/**
+//	 * Testa o metodo getPrecoItem para um item nao cadastrado. Uma excecao eh
+//	 * esperada.
+//	 */
+//	@Test(expected = IllegalArgumentException.class)
+//	public void testGetPrecoItemInvalido() {
+//		usuario2.getPrecoItem("Naruto");
+//	}
+//
+//	/**
+//	 * Testa o metodo getNomeItem para um item nao cadastrado. Uma excecao eh
+//	 * esperada.
+//	 */
+//	@Test(expected = IllegalArgumentException.class)
+//	public void testGetNomeItemInvalido() {
+//		usuario3.getNomeItem("Box GOT");
+//	}
+//
+//	/**
+//	 * Testa o metodo que remove o item de um usuario. Primeiro o item eh
+//	 * removido do usuario1 e depois tenta-se pegar o nome do item removido. Uma
+//	 * excecao eh esperada.
+//	 */
+//	@Test(expected = IllegalArgumentException.class)
+//	public void testRemoverItem() {
+//		usuario1.removerItem("Damas");
+//		usuario1.getNomeItem("Damas");
+//	}
+//
+//	/**
+//	 * Testa o metodo que remove o item de um usuario para um item nao
+//	 * cadastrado no usuario. Uma excecao eh esperada.
+//	 */
+//	@Test(expected = IllegalArgumentException.class)
+//	public void testRemoverItemInvalido() {
+//		usuario3.getNomeItem("Box GOT");
+//	}
+//
+//	/**
+//	 * Testa o metodo de alterar o nome de um item. Primeiro eh alterado o nome
+//	 * do item e depois eh verificado com o auxilio do metodo getNomeItem
+//	 */
+//	@Test
+//	public void testAlteraNomeItem() {
+//		usuario2.atualizaNomeItem("Liga da Justiça", "Flashpoint");
+//		assertEquals("Flashpoint", usuario2.getNomeItem("Flashpoint"));
+//	}
+//
+//	/**
+//	 * Testa o metodo de alterar nome de um item. Eh esperada uma excecao pois o
+//	 * item que tenta atualizar nao existe.
+//	 */
+//	@Test(expected = IllegalArgumentException.class)
+//	public void testAlteraNomeItemInvalido() {
+//		usuario1.atualizaNomeItem("Jogos Vorazes", "X-men");
+//		usuario1.getNomeItem("X-men");
+//	}
+//
+//	/**
+//	 * Testa o metodo de atualizar que atualiza o preco de um item. Primeiro eh
+//	 * feita a atualizacao, depois a verificacao com auxilio do getPrecoItem.
+//	 */
+//	@Test
+//	public void testAtualizaPrecoItem() {
+//		usuario3.atualizaPrecoItem("Tetris", "50.00");
+//		assertEquals("50.0", usuario3.getPrecoItem("Tetris"));
+//	}
+//
+//	/**
+//	 * Testa o metodo de adiconar pecas perdidas em um jogo de tabuleiro. A
+//	 * verificacao eh feita com auxilio do metodo ecibeDetalhesItem.
+//	 */
+//	@Test
+//	public void testAdicionaPecaPerdida() {
+//		usuario1.adicionarPecaPerdida("Damas", "1 peça preta");
+//		assertEquals("JOGO DE TABULEIRO: Damas, R$ 1.99, Nao emprestado, COM PECAS PERDIDAS",
+//				usuario1.exibeDetalhesItem("Damas"));
+//	}
 
 	/**
 	 * Testa o equals verificando se dois usuarios realmente sao iguais ou nao.

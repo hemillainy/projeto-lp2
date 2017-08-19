@@ -1,10 +1,8 @@
 package principal;
 
 import java.text.ParseException;
-import java.util.List;
 
 import easyaccept.EasyAccept;
-import principal.item.Item;
 import principal.user.Usuario;
 
 /**
@@ -105,10 +103,31 @@ public class Facade {
 		userController.atualizaUsuario(nome, telefone, atributo, valor);
 	}
 
+	/**
+	 * Pega o usuario de nome e telefone passados.
+	 * 
+	 * @param nome
+	 *            nome do usuario.
+	 * @param telefone
+	 *            telefone do usuario.
+	 * @return um usuario.
+	 */
 	private Usuario pegaUsuario(String nome, String telefone) {
 		return userController.getUsuario(nome, telefone);
 	}
-	private Usuario pegarEmprestado(String nome, String telefone, int periodo){
+
+	/**
+	 * Retorna um usuario caso o mesmo possa pegar um item emprestado.
+	 * 
+	 * @param nome
+	 *            nome do usuario.
+	 * @param telefone
+	 *            telefone do usuario.
+	 * @param periodo
+	 *            tempo o qual o usuario deseja ficar o item.
+	 * @return
+	 */
+	private Usuario pegarEmprestado(String nome, String telefone, int periodo) {
 		return userController.pegarEmprestado(nome, telefone, periodo);
 	}
 
@@ -335,8 +354,7 @@ public class Facade {
 	 * @return a representacao do item.
 	 */
 	public String pesquisarDetalhesItem(String nome, String telefone, String nomeItem) {
-		 return itemController.pesquisaDetalhesItens(pegaUsuario(nome,
-		 telefone), nomeItem);
+		return itemController.pesquisaDetalhesItens(pegaUsuario(nome, telefone), nomeItem);
 	}
 
 	/**
@@ -360,8 +378,8 @@ public class Facade {
 	 */
 	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
 			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) throws ParseException {
-		emprestimoController.registraEmprestimo(pegaUsuario(nomeDono, telefoneDono), pegarEmprestado(nomeRequerente, telefoneRequerente, periodo), nomeItem,
-				dataEmprestimo, periodo);
+		emprestimoController.registraEmprestimo(pegaUsuario(nomeDono, telefoneDono),
+				pegarEmprestado(nomeRequerente, telefoneRequerente, periodo), nomeItem, dataEmprestimo, periodo);
 	}
 
 	/**
@@ -422,7 +440,6 @@ public class Facade {
 	 * @param nomeItem
 	 *            nome do item.
 	 * @return a listagem com os emprestimos que o item participou.
-	 * 
 	 */
 	public String listarEmprestimosItem(String nomeItem) {
 		return emprestimoController.listarEmprestimosItem(nomeItem);
@@ -434,8 +451,7 @@ public class Facade {
 	 * @return a listagem dos itens nao cadastrados.
 	 */
 	public String listarItensNaoEmprestados() {
-		List<Item> itens = itemController.getItens();
-		return itemController.listarItensNaoEmprestados(itens);
+		return itemController.listarItensNaoEmprestados();
 	}
 
 	/**

@@ -1,25 +1,31 @@
 package principal;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-import principal.comparator.ComparadorNumeroEmprestimos;
-import principal.comparator.ComparadorReputacao;
-import principal.comparator.ComparadorValor;
-import principal.emprestimo.Emprestimo;
-import principal.emprestimo.IdEmprestimo;
+import principal.comparator.*;
+import principal.emprestimo.*;
 import principal.item.Item;
 import principal.user.Usuario;
 
+/**
+ * Classe que faz as listagens de informacoes solicitadas pelo usuario.
+ * 
+ * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
+ * 
+ * @author Cassio Cordeiro - 116210038 Geovane Silva - 116211149 Hemillainy
+ *         Santos - 116210802
+ *
+ */
 public class Listador {
 	private ComparadorValor comparadorValor;
 	private ComparadorNumeroEmprestimos comparadorNumeroEmprestimos;
 	private ComparadorReputacao comparadorReputacao;
-	
+
+	/**
+	 * Constroi um Listador. Todos listador possui um comparadorValor, um
+	 * comparadorNumeroEmprestimo e um comparadorReputacao; os tres servem para
+	 * ordenar as saida da forma desejada.
+	 */
 	public Listador() {
 		this.comparadorValor = new ComparadorValor();
 		this.comparadorNumeroEmprestimos = new ComparadorNumeroEmprestimos();
@@ -37,7 +43,7 @@ public class Listador {
 	 */
 	public String listaEmprestimosUsuarioEmprestando(Map<IdEmprestimo, Emprestimo> emprestimos, Usuario dono) {
 		Set<Emprestimo> empres = new HashSet<>(emprestimos.values());
-		
+
 		String retorno = "Emprestimos: ";
 
 		for (Emprestimo emprestimo : empres) {
@@ -54,14 +60,11 @@ public class Listador {
 	/**
 	 * Metodo que lista os itens cadastrados nao emprestados.
 	 * 
+	 * @param listItens
+	 *            List com todos os itens cadastrados do sistema.
 	 * @return a listagem dos itens nao cadastrados.
 	 */
 	public String listaItensNaoEmprestados(List<Item> listItens) {
-////		Set<Item> itens = new HashSet<>();
-////		for (Usuario us : listItens) {
-////			itens.addAll(us.getItens());
-////		}
-//		List<Item> inventario = new ArrayList<>(itens);
 		Collections.sort(listItens, new ComparadorNomeItem());
 
 		String saida = "";
@@ -94,6 +97,8 @@ public class Listador {
 	/**
 	 * Metodo que lista os itens cadastrados nao emprestados.
 	 * 
+	 * @param emp
+	 *            List com todos os emprestimos cadastrados no sistema.
 	 * @return a listagem com os itens emprestados.
 	 */
 	public String listaItensEmprestados(List<Emprestimo> emp) {
@@ -110,10 +115,8 @@ public class Listador {
 	/**
 	 * Metodo que lista os emprestimos concedidos a um ususario.
 	 * 
-	 * @param nome
-	 *            do ususario.
-	 * @param telefone
-	 *            do usuario.
+	 * @param requerente
+	 *            usuario que tera o que ele pegou emprestado listado.
 	 * @return a listagem do emprestimos concedidos a um usuario.
 	 */
 	public String listaEmprestimosUsuarioPegandoEmprestado(Usuario requerente) {
@@ -132,6 +135,8 @@ public class Listador {
 	/**
 	 * Metodo que lista os associados a um item.
 	 * 
+	 * @param emprestimos
+	 *            List com todos os emprestimos cadastrados no sistema.
 	 * @param nome
 	 *            do item.
 	 * @return a lista com todos os emprestimos relacionados a um item.
@@ -229,21 +234,28 @@ public class Listador {
 	 *            que se deseja visualizar.
 	 * @return a informacao correspondente ao atributo desejado.
 	 */
-	public String getInfoItem(Usuario usuario, String nomeItem, String atributo) {
+	public String getInfoItem(Item item, String atributo) {
 		String info = "";
 		if (atributo.toUpperCase().equals("PRECO")) {
-			info = usuario.getPrecoItem(nomeItem);
+			info = String.valueOf(item.getPreco());
 		} else if (atributo.toUpperCase().equals("NOME")) {
-			info = usuario.getNomeItem(nomeItem);
+			info = item.getNome();
 		}
 		return info;
 	}
-	
-	public String listarCaloteiros(List<Usuario> collection) {
+
+	/**
+	 * Metodo que lista os usuario com reputacao menor que 0.
+	 * 
+	 * @param usuarios
+	 *            List com todos os usuarios cadastrados no sistema.
+	 * @return a listagem com os usuario com reputacao menor que 0.
+	 */
+	public String listarCaloteiros(List<Usuario> usuarios) {
 		String info = "Lista de usuarios com reputacao negativa: ";
-		Collections.sort(collection);
-		
-		for (Usuario usuario : collection) {
+		Collections.sort(usuarios);
+
+		for (Usuario usuario : usuarios) {
 			if (usuario.getFidelidade().equals("Caloteiro")) {
 				info += usuario + "|";
 			}
@@ -251,29 +263,43 @@ public class Listador {
 		return info;
 	}
 
-	public String listarTop10MelhoresUsuarios(List<Usuario> users) {
+	/**
+	 * Metodo que lista os 10 usuarios com melhores reputaÃ§oes.
+	 * 
+	 * @param usuarios
+	 *            List com todos os usuarios cadastrados no sistema.
+	 * @return a listagem com os 10 usuarios com melhor reputacao.
+	 */
+	public String listarTop10MelhoresUsuarios(List<Usuario> usuarios) {
 		String info = "";
-		Collections.sort(users, comparadorReputacao);
-		
+		Collections.sort(usuarios, comparadorReputacao);
+
 		int posicao = 0;
-		while (posicao < 10 && posicao < users.size()) {
-			Usuario usuario = users.get(posicao);
+		while (posicao < 10 && posicao < usuarios.size()) {
+			Usuario usuario = usuarios.get(posicao);
 			String reputacao = String.format("%.2f", usuario.getReputacao());
-			info += posicao+1 + ": " + usuario.getNome() + " - Reputacao: " + reputacao + "|"; 
+			info += posicao + 1 + ": " + usuario.getNome() + " - Reputacao: " + reputacao + "|";
 			posicao++;
 		}
 		return info;
 	}
 
-	public String listarTop10PioresUsuarios(List<Usuario> users) {
+	/**
+	 * Metodo que lista os 10 usuarios com pior reputacao.
+	 * 
+	 * @param usuarios
+	 *            List com todos os usuarios cadastrados no sistema.
+	 * @return a listagem com os 10 usuarios com menor reputacao.
+	 */
+	public String listarTop10PioresUsuarios(List<Usuario> usuarios) {
 		String info = "";
-		Collections.sort(users, comparadorReputacao);
-		Collections.reverse(users);
+		Collections.sort(usuarios, comparadorReputacao);
+		Collections.reverse(usuarios);
 		int posicao = 0;
-		while (posicao < 10 && posicao < users.size()) {
-			Usuario usuario = users.get(posicao);
+		while (posicao < 10 && posicao < usuarios.size()) {
+			Usuario usuario = usuarios.get(posicao);
 			String reputacao = String.format("%.2f", usuario.getReputacao());
-			info += posicao + 1 + ": " + usuario.getNome() + " - Reputacao: " + reputacao + "|"; 
+			info += posicao + 1 + ": " + usuario.getNome() + " - Reputacao: " + reputacao + "|";
 			posicao++;
 		}
 		return info;

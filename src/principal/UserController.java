@@ -9,7 +9,7 @@ import principal.user.IdUsuario;
 import principal.user.Usuario;
 
 /**
- * RepresentaÃ§Ã£o de um Controller.
+ * Representacao de um Controller de Usuario.
  * 
  * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
  * 
@@ -22,18 +22,44 @@ public class UserController {
 	private Validacao validacao;
 	private Map<IdUsuario, Usuario> usuarios;
 
+	/**
+	 * Constroi um UserController. Todo UserController tem um listador, um Map
+	 * de Usuarios e uma validacao.
+	 */
 	public UserController() {
 		this.listador = new Listador();
 		this.usuarios = new HashMap<>();
 		this.validacao = new Validacao();
 	}
-	
-	public Usuario getUsuario(String nome, String telefone){
+
+	/**
+	 * Pega um usuario.
+	 * 
+	 * @param nome
+	 *            nome do usuario
+	 * @param telefone
+	 *            telefone do usuario
+	 * @return um usuario que possui o nome e o telefone passados.
+	 */
+	public Usuario getUsuario(String nome, String telefone) {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		validacao.usuarioInvalido(hasUsuario(id));
 		return usuarios.get(id);
 	}
-	public Usuario pegarEmprestado(String nome, String telefone, int periodo){
+
+	/**
+	 * Metodo que retorna um usuario caso o mesmo possa pegar um item
+	 * emprestado.
+	 * 
+	 * @param nome
+	 *            nome do usuario.
+	 * @param telefone
+	 *            telefon do usuario.
+	 * @param periodo
+	 *            periodo o qual o usuario deseja ficar com o item emprestado.
+	 * @return um usuario.
+	 */
+	public Usuario pegarEmprestado(String nome, String telefone, int periodo) {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		Usuario usuario = usuarios.get(id);
 		validacao.usuarioInvalido(hasUsuario(id));
@@ -41,7 +67,8 @@ public class UserController {
 		validacao.periodoInvalido(periodo, usuario.getPeriodo());
 		return usuario;
 	}
-	public List<Usuario> getUsuarios(){
+
+	public List<Usuario> getUsuarios() {
 		List<Usuario> users = new ArrayList<>(usuarios.values());
 		return users;
 	}
@@ -121,7 +148,6 @@ public class UserController {
 		}
 	}
 
-
 	/**
 	 * Metodo que adiciona uma peca perida a um jogo de tabuleiro.
 	 * 
@@ -176,24 +202,27 @@ public class UserController {
 
 	/**
 	 * Metodo que lista os usuarios com reputacao menor 0.
-	 * @return a listagem com os usuarios com reputacao menor  que 0.
+	 * 
+	 * @return a listagem com os usuarios com reputacao menor que 0.
 	 */
 	public String listarCaloteiros() {
 		List<Usuario> users = new ArrayList<>(usuarios.values());
 		return listador.listarCaloteiros(users);
 	}
-	
+
 	/**
 	 * Metodo que lista os 10 usuarios com melhor reputacao.
+	 * 
 	 * @return a lista com os 10 usuarios com melhor reputacao.
 	 */
 	public String listarTop10MelhoresUsuario() {
 		List<Usuario> users = new ArrayList<>(usuarios.values());
 		return listador.listarTop10MelhoresUsuarios(users);
 	}
-	
+
 	/**
 	 * Metodo que lista os 10 usuarios com mmenor reputacao.
+	 * 
 	 * @return a lista com os 10 usuarios com menor reputacao.
 	 */
 	public String listarTop10PioresUsuario() {

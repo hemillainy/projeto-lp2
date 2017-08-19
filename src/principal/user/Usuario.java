@@ -127,6 +127,7 @@ public class Usuario implements Comparable<Usuario> {
 		List<Item> listItens = new ArrayList<Item>(itens.values());
 		return listItens;
 	}
+
 	/**
 	 * Metodo que cadastra um jogo de tabuleiro.
 	 * 
@@ -154,81 +155,14 @@ public class Usuario implements Comparable<Usuario> {
 	}
 
 	/**
-	 * Metodo que retorna a representacao de um item. 
-	 * 
-	 * @param nomeItem
-	 *            a ser pesquisado.
-	 * @return a representacao do item.
-	 */
-	public String exibeDetalhesItem(String nomeItem) {
-		validacao.itemNaoEncontrado(hasItem(nomeItem));
-		return itens.get(nomeItem).toString();
-	}
-
-	/**
-	 * Retorna o valor de um item em String.
-	 * 
-	 * @param nomeItem
-	 *            item o qual sera exibido seu valor.
-	 * @return valor do item.
-	 */
-	public String getPrecoItem(String nomeItem) {
-		validacao.itemNaoEncontrado(hasItem(nomeItem));
-		Item item = itens.get(nomeItem);
-		return String.valueOf(item.getPreco());
-	}
-
-	/**
-	 * Retorna o nome de um item.
-	 * 
-	 * @param nomeItem
-	 *            item o qual tera seu nome exi
-	 * @return nome do item.
-	 */
-	public String getNomeItem(String nomeItem) {
-		validacao.itemNaoEncontrado(hasItem(nomeItem));
-		return itens.get(nomeItem).getNome();
-	}
-
-	/**
 	 * Metodo que remove um item.
 	 * 
 	 * @param nomeItem
 	 *            a ser removido.
 	 */
 	public void removerItem(String nomeItem) {
-		validacao.itemNaoEncontrado(hasItem(nomeItem));
 		cartaoFidelidade.tiraItem();
 		itens.remove(nomeItem);
-	}
-
-	/**
-	 * Metodo o nome de um item.
-	 * 
-	 * @param nomeItem
-	 *            item que tera seu nome alterado.
-	 * @param valor
-	 *            novo nome do item.
-	 */
-	public void atualizaNomeItem(String nomeItem, String valor) {
-		validacao.itemNaoEncontrado(hasItem(nomeItem));
-		Item item = itens.get(nomeItem);
-		itens.get(nomeItem).setNome(valor);
-
-		setKeyItem(item);
-	}
-
-	/**
-	 * Atualiza o preço de um item.
-	 * 
-	 * @param nomeItem
-	 *            item que tera seu preco alterado.
-	 * @param valor
-	 *            novo preco do item.
-	 */
-	public void atualizaPrecoItem(String nomeItem, String valor) {
-		validacao.itemNaoEncontrado(hasItem(nomeItem));
-		itens.get(nomeItem).setPreco(Double.parseDouble(valor));
 	}
 
 	/**
@@ -286,7 +220,7 @@ public class Usuario implements Comparable<Usuario> {
 	 *            item que sera verificado.
 	 * @return true caso esteja cadastrado ou false caso nao esteja.
 	 */
-	private boolean hasItem(String nomeItem) {
+	public boolean hasItem(String nomeItem) {
 		if (itens.containsKey(nomeItem)) {
 			return true;
 		}
@@ -299,7 +233,7 @@ public class Usuario implements Comparable<Usuario> {
 	 * @param item
 	 *            item que sera removido e adicionado.
 	 */
-	private void setKeyItem(Item item) {
+	public void setKeyItem(Item item) {
 		itens.remove(item.getNome());
 		itens.put(item.getNome(), item);
 	}
@@ -326,9 +260,6 @@ public class Usuario implements Comparable<Usuario> {
 		emprestimos.add(e);
 	}
 
-	// ################################### US5
-	// ###################################
-
 	/**
 	 * Retorna os emprestimos de um usuario.
 	 * 
@@ -351,7 +282,6 @@ public class Usuario implements Comparable<Usuario> {
 	}
 
 	/**
-	 * 
 	 * @return o status da fidelidade do usuario.
 	 */
 	public String getFidelidade() {
@@ -369,12 +299,12 @@ public class Usuario implements Comparable<Usuario> {
 	}
 
 	/**
-	 * 
 	 * @return o periodo que o usuario pode pegar itens emprestados.
 	 */
 	public int getPeriodo() {
 		return cartaoFidelidade.getPeriodo();
 	}
+
 	/**
 	 * Compara os nomes de dois usuarios.
 	 */

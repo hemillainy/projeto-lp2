@@ -1,4 +1,4 @@
-package principal;
+package principal.comparator;
 
 import java.util.Comparator;
 import principal.item.Item;;
