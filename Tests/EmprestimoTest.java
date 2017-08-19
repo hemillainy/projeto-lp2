@@ -77,7 +77,6 @@ public class EmprestimoTest {
 	public void testToString() {
 		LocalDate data = LocalDate.of(2017, 8, 16);
 		emprestimo.devolverItem(data);
-		System.out.println(emprestimo.toString());
 		assertEquals("EMPRESTIMO - De: Cássio, Para: Geovane, Xadrez, 11/08/2017, 7 dias, ENTREGA: 16/08/2017", emprestimo.toString());
 	}
 
