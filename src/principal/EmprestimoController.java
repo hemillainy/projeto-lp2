@@ -92,6 +92,7 @@ public class EmprestimoController {
 	 * @return uma LocalDate.
 	 */
 	private LocalDate createData(String data) {
+		validacao.atributoInvalido(data);
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		return LocalDate.parse(data, dtf);
 
@@ -139,6 +140,19 @@ public class EmprestimoController {
 		emprestimos.get(ie).devolverItem(dataD);
 		itemDevolver.setStaus();
 
+		reputacaoDevolucao(requerente, itemDevolver, dataE, dataD);
+	}
+
+	/**
+	 * Calcula qual valor sera adicionado ou retirado da reputacao do usuario
+	 * apos a entrega do item.
+	 * 
+	 * @param requerente o usuario que esta devolvendo. 
+	 * @param itemDevolver o item a ser devolvido. 
+	 * @param dataE a data do emprestimo. 
+	 * @param dataD a data de devolucao. 
+	 */
+	private void reputacaoDevolucao(Usuario requerente, Item itemDevolver, LocalDate dataE, LocalDate dataD) {
 		if (emprestimoAtrasado(dataE, dataD) <= requerente.getPeriodo()) {
 			requerente.addReputacao(itemDevolver.getPreco(), 0.05);
 		} else {
