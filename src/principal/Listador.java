@@ -234,12 +234,12 @@ public class Listador {
 	 *            que se deseja visualizar.
 	 * @return a informacao correspondente ao atributo desejado.
 	 */
-	public String getInfoItem(Usuario usuario, String nomeItem, String atributo) {
+	public String getInfoItem(Item item, String atributo) {
 		String info = "";
 		if (atributo.toUpperCase().equals("PRECO")) {
-			info = usuario.getPrecoItem(nomeItem);
+			info = String.valueOf(item.getPreco());
 		} else if (atributo.toUpperCase().equals("NOME")) {
-			info = usuario.getNomeItem(nomeItem);
+			info = item.getNome();
 		}
 		return info;
 	}

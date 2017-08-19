@@ -219,7 +219,9 @@ public class ItemController {
 	 * @return a informacao correspondente ao atributo desejado.
 	 */
 	public String getInfoItem(Usuario usuario, String nomeItem, String atributo) {
-		return listador.getInfoItem(usuario, nomeItem, atributo);
+		validacao.itemNaoEncontrado((usuario.hasItem(nomeItem)));
+		Item item = itens.get(nomeItem);
+		return listador.getInfoItem(item, atributo);
 	}
 
 	/**
@@ -233,8 +235,14 @@ public class ItemController {
 	 *            a ser removido.
 	 */
 	public void removeItem(Usuario usuario, String nomeItem) {
+		validacao.itemNaoEncontrado(hasItem(nomeItem));
 		itens.remove(nomeItem);
 		usuario.removerItem(nomeItem);
+	}
+
+	private void setKeyItem(Item item, String nomeItem) {
+		itens.remove(nomeItem);
+		itens.put(item.getNome(), item);
 	}
 
 	/**
@@ -250,10 +258,14 @@ public class ItemController {
 	 *            para substituir o valor antigo do atributo.
 	 */
 	public void atualizaItem(Usuario usuario, String nomeItem, String atributo, String valor) {
+		validacao.itemNaoEncontrado(usuario.hasItem(nomeItem));
+		Item item = itens.get(nomeItem);
 		if (atributo.toUpperCase().equals("NOME")) {
-			usuario.atualizaNomeItem(nomeItem, valor);
+			item.setNome(valor);
+			usuario.setKeyItem(item);
+			setKeyItem(item, nomeItem);
 		} else if (atributo.toUpperCase().equals("PRECO")) {
-			usuario.atualizaPrecoItem(nomeItem, valor);
+			item.setPreco(Double.parseDouble(valor));
 		}
 	}
 
@@ -295,7 +307,7 @@ public class ItemController {
 	 */
 	public String pesquisaDetalhesItens(Usuario usuario, String nomeItem) {
 		validacao.itemNaoEncontrado(hasItem(nomeItem));
-		usuario.getItem(nomeItem);
+		validacao.itemNaoEncontrado(usuario.hasItem(nomeItem));
 		return itens.get(nomeItem).toString();
 	}
 
@@ -314,7 +326,8 @@ public class ItemController {
 	 * 
 	 * @return a listagem dos itens nao cadastrados.
 	 */
-	public String listarItensNaoEmprestados(List<Item> listItens) {
+	public String listarItensNaoEmprestados() {
+		List<Item> listItens = new ArrayList<>(itens.values());
 		return listador.listaItensNaoEmprestados(listItens);
 	}
 }
