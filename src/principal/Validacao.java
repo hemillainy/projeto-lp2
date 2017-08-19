@@ -89,7 +89,7 @@ public class Validacao {
 		if (nomeItem == null || nomeItem.trim().isEmpty()) {
 			throw new IllegalArgumentException("Nome invalido");
 		}
-		if (preco <= 0) {
+		if (preco < 0) {
 			throw new IllegalArgumentException("Preco invalido");
 		}
 	}

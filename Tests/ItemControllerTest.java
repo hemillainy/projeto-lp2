@@ -124,7 +124,7 @@ public class ItemControllerTest {
 	 */
 	@Test
 	public void testCadastrarBluRayShow() {
-		ic.cadastraBluRayShow(usuario3, "Carrossel", 0, 60, 5, "Carrossel", "LIVRE");
+		ic.cadastraBluRayShow(usuario3, "Carrossel", 0.0, 60, 5, "Carrossel", "LIVRE");
 		assertEquals("SHOW: Carrossel, R$ 0.0, Nao emprestado, 60 min, LIVRE, Carrossel, 5 faixas",
 				ic.pesquisaDetalhesItens(usuario3, "Carrossel"));
 	}
