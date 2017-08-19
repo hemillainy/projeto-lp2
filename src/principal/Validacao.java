@@ -363,4 +363,10 @@ public class Validacao {
 		}		
 	}
 
+	public void atualizaUsuario(boolean hasUsuario, String atributo, String valor) {
+		usuarioInvalido(hasUsuario);
+		atributoInvalido(atributo);
+		atributoInvalido(valor);
+	}
+
 }

@@ -44,6 +44,7 @@ public class UserController {
 	public Usuario getUsuario(String nome, String telefone) {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		validacao.usuarioInvalido(hasUsuario(id));
+		validacao.atributoInvalido(telefone);
 		return usuarios.get(id);
 	}
 
@@ -61,8 +62,8 @@ public class UserController {
 	 */
 	public Usuario pegarEmprestado(String nome, String telefone, int periodo) {
 		IdUsuario id = new IdUsuario(nome, telefone);
-		Usuario usuario = usuarios.get(id);
 		validacao.usuarioInvalido(hasUsuario(id));
+		Usuario usuario = usuarios.get(id);
 		validacao.naoPodePegarEmprestado(usuario.podePegarEmprestado());
 		validacao.periodoInvalido(periodo, usuario.getPeriodo());
 		return usuario;
@@ -120,6 +121,7 @@ public class UserController {
 	public String getInfoUsuario(String nome, String telefone, String atributo) {
 		IdUsuario id = new IdUsuario(nome, telefone);
 		validacao.usuarioInvalido(hasUsuario(id));
+		validacao.atributoInvalido(atributo);
 		Usuario usuario = usuarios.get(id);
 		return listador.getInfoUsuario(usuario, atributo);
 	}
@@ -138,7 +140,7 @@ public class UserController {
 	 */
 	public void atualizaUsuario(String nome, String telefone, String atributo, String valor) {
 		IdUsuario id = new IdUsuario(nome, telefone);
-		validacao.usuarioInvalido(hasUsuario(id));
+		validacao.atualizaUsuario(hasUsuario(id), atributo, valor);
 		if (atributo.toUpperCase().equals("EMAIL")) {
 			usuarios.get(id).setEmail(valor);
 		} else if (atributo.toUpperCase().equals("TELEFONE")) {
@@ -148,23 +150,6 @@ public class UserController {
 		}
 	}
 
-	/**
-	 * Metodo que adiciona uma peca perida a um jogo de tabuleiro.
-	 * 
-	 * @param nome
-	 *            do usuario.
-	 * @param telefone
-	 *            do usuario.
-	 * @param nomeItem
-	 *            a ser adicionada a peca.
-	 * @param nomePeca
-	 *            a ser adicionada como perdida.
-	 */
-	public void adicionarPecaPerdida(String nome, String telefone, String nomeItem, String nomePeca) {
-		IdUsuario id = new IdUsuario(nome, telefone);
-		validacao.usuarioInvalido(hasUsuario(id));
-		usuarios.get(id).adicionarPecaPerdida(nomeItem, nomePeca);
-	}
 
 	/**
 	 * Remove um usuario do mapa para adicionÃ¡-lo novamento com uma nova key.
