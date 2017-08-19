@@ -89,7 +89,7 @@ public class ItemController {
 	 *            do item.
 	 */
 	public void cadastrarJogoTabuleiro(Usuario usuario, String nomeItem, double preco) {
-		validacao.itemInvalido(nomeItem, preco);
+		validacao.tabulerioInvalido(nomeItem, preco);
 		Item item = new JogoTabuleiro(nomeItem, preco);
 		itens.put(nomeItem, item);
 		usuario.cadastraItem(item);
@@ -115,6 +115,7 @@ public class ItemController {
 	 */
 	public void cadastraBluRayFilme(Usuario usuario, String nomeItem, double preco, int duracao, String genero,
 			String classificacao, int lancamento) {
+		validacao.filmeInvalido(nomeItem, preco, duracao, classificacao, genero, lancamento);
 		Item item = new Filme(nomeItem, preco, duracao, classificacao, genero, lancamento);
 		itens.put(nomeItem, item);
 		usuario.cadastraItem(item);
@@ -140,6 +141,7 @@ public class ItemController {
 	 */
 	public void cadastraBluRayShow(Usuario usuario, String nomeItem, double preco, int duracao, int faixas,
 			String artista, String classificacao) {
+		validacao.showInvalido(nomeItem, preco, duracao, classificacao, artista, faixas);
 		Item item = new Show(nomeItem, preco, duracao, classificacao, artista, faixas);
 		itens.put(nomeItem, item);
 		usuario.cadastraItem(item);
@@ -165,7 +167,7 @@ public class ItemController {
 	 */
 	public void cadastraBluRaySerie(Usuario usuario, String nomeItem, double preco, String descricao, int duracao,
 			String classificacao, String genero, int temporada) {
-		validacao.serieInvalida();
+		validacao.serieInvalida(nomeItem, preco, duracao, classificacao, genero, temporada);
 		Item item = new Serie(nomeItem, preco, duracao, classificacao, genero, temporada);
 		itens.put(nomeItem, item);
 		usuario.cadastraItem(item);
@@ -184,7 +186,7 @@ public class ItemController {
 	 *            do episodio.
 	 */
 	public void adicionaBluRay(Usuario usuario, String nomeBluRayTemporada, int duracao) {
-		validacao.serieInvalida();
+		validacao.addTemporadaInvalida(itens.containsKey(nomeBluRayTemporada), duracao);
 		Serie serie = (Serie) (itens.get(nomeBluRayTemporada));
 		serie.adicionarBluRay(duracao);
 	}
@@ -202,6 +204,7 @@ public class ItemController {
 	 *            a ser adicionada como perdida.
 	 */
 	public void adicionaPecaPerdida(Usuario usuario, String nomeItem, String nomePeca) {
+		validacao.pecaInvalida(itens.containsKey(nomeItem), nomePeca);
 		JogoTabuleiro jogo = (JogoTabuleiro) (itens.get(nomeItem));
 		jogo.adicionaPecaPerdida(nomePeca);
 		usuario.adicionarPecaPerdida(nomeItem, nomePeca);
@@ -219,7 +222,8 @@ public class ItemController {
 	 * @return a informacao correspondente ao atributo desejado.
 	 */
 	public String getInfoItem(Usuario usuario, String nomeItem, String atributo) {
-		validacao.itemNaoEncontrado((usuario.hasItem(nomeItem)));
+		validacao.itemNaoEncontrado(usuario.hasItem(nomeItem));
+		validacao.atributoInvalido(atributo);
 		Item item = itens.get(nomeItem);
 		return listador.getInfoItem(item, atributo);
 	}
@@ -240,6 +244,11 @@ public class ItemController {
 		usuario.removerItem(nomeItem);
 	}
 
+	/**
+	 * Alterar uma chave do mapa de itens. 
+	 * @param item o item que a chave sera alterada. 
+	 * @param nomeItem o novo nome do item. 
+	 */
 	private void setKeyItem(Item item, String nomeItem) {
 		itens.remove(nomeItem);
 		itens.put(item.getNome(), item);
@@ -259,12 +268,16 @@ public class ItemController {
 	 */
 	public void atualizaItem(Usuario usuario, String nomeItem, String atributo, String valor) {
 		validacao.itemNaoEncontrado(usuario.hasItem(nomeItem));
+		validacao.atributoInvalido(atributo);
+		
 		Item item = itens.get(nomeItem);
 		if (atributo.toUpperCase().equals("NOME")) {
+			validacao.atributoInvalido(valor);
 			item.setNome(valor);
 			usuario.setKeyItem(item);
 			setKeyItem(item, nomeItem);
 		} else if (atributo.toUpperCase().equals("PRECO")) {
+			validacao.valorInvalido(valor);
 			item.setPreco(Double.parseDouble(valor));
 		}
 	}
