@@ -3,7 +3,6 @@ package principal.item;
 import java.util.Collections;
 import java.util.List;
 
-import principal.comparator.ComparadorNomeItem;
 import principal.comparator.ComparadorNumeroEmprestimos;
 import principal.comparator.ComparadorValor;
 import principal.emprestimo.Emprestimo;
@@ -26,7 +25,7 @@ public class ItemListador {
 	 * @return a listagem dos itens nao cadastrados.
 	 */
 	public String listaItensNaoEmprestados(List<Item> listItens) {
-		Collections.sort(listItens, new ComparadorNomeItem());
+		Collections.sort(listItens);
 
 		String saida = "";
 		for (Item item : listItens) {
