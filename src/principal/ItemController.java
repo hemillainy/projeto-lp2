@@ -25,7 +25,7 @@ import principal.user.Usuario;
 public class ItemController {
 
 	private Listador listador;
-	private Validacao validacao;
+	private ItemValidacao validacao;
 	private Map<String, Item> itens;
 
 	/**
@@ -35,7 +35,7 @@ public class ItemController {
 	public ItemController() {
 		this.itens = new HashMap<>();
 		this.listador = new Listador();
-		this.validacao = new Validacao();
+		this.validacao = new ItemValidacao();
 	}
 
 	/**

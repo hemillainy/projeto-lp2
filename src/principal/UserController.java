@@ -19,7 +19,7 @@ import principal.user.Usuario;
  */
 public class UserController {
 	private Listador listador;
-	private Validacao validacao;
+	private UsuarioValidacao validacao;
 	private Map<IdUsuario, Usuario> usuarios;
 
 	/**
@@ -29,7 +29,7 @@ public class UserController {
 	public UserController() {
 		this.listador = new Listador();
 		this.usuarios = new HashMap<>();
-		this.validacao = new Validacao();
+		this.validacao = new UsuarioValidacao();
 	}
 
 	/**
