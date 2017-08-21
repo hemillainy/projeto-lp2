@@ -52,7 +52,7 @@ public class Listador {
 			}
 		}
 		if (retorno.equals("Emprestimos: ")) {
-			return "Nenhum item emprestado";
+			retorno = "Nenhum item emprestado";
 		}
 		return retorno;
 	}
@@ -127,7 +127,7 @@ public class Listador {
 			}
 		}
 		if (retorno.equals("Emprestimos pegos: ")) {
-			return "Nenhum item pego emprestado";
+			retorno = "Nenhum item pego emprestado";
 		}
 		return retorno;
 	}
