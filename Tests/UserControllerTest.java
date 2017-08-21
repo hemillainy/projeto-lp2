@@ -14,7 +14,7 @@ import principal.user.UserController;
  *         Santos - 116210802
  *
  */
-public class ControllerTest {
+public class UserControllerTest {
 
 	UserController controller;
 

@@ -282,21 +282,12 @@ public class ItemController {
 	}
 
 	/**
-	 * Metodo que retorna um ArrayList de itens.
-	 * 
-	 * @return um ArrayList de itens.
-	 */
-	private List<Item> listItens() {
-		return new ArrayList<>(itens.values());
-	}
-
-	/**
 	 * Metodo que lista todos os itens em ordem lexicografica.
 	 * 
 	 * @return a listagem de todos os itens em ordem lexicografica.
 	 */
 	public String listarItemOrdenadosPorNome() {
-		return listador.listaItensOrdenadosPorNome(listItens());
+		return listador.listaItensOrdenadosPorNome(getItens());
 	}
 
 	/**
@@ -305,7 +296,7 @@ public class ItemController {
 	 * @return a listagem de todos os itens em ordem crecente de valor.
 	 */
 	public String listarItemOrdenadosPorValor() {
-		return listador.listaItensOrdenadosPorValor(listItens());
+		return listador.listaItensOrdenadosPorValor(getItens());
 	}
 
 	/**
