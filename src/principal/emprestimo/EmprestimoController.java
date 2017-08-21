@@ -195,7 +195,7 @@ public class EmprestimoController {
 	 * @return a listagem do emprestimos concedidos a um usuario.
 	 */
 	public String listarEmprestimosUsuarioEmprestando(Usuario usuario) {
-		return listador.listaEmprestimosUsuarioEmprestando(emprestimos, usuario);
+		return listador.listaEmprestimosUsuarioEmprestando(usuario);
 	}
 
 	/**

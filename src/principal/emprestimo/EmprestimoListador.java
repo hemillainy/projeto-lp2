@@ -1,10 +1,7 @@
 package principal.emprestimo;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import principal.user.Usuario;
 
@@ -28,12 +25,10 @@ public class EmprestimoListador {
 	 *            do usuario.
 	 * @return a lista com os emprestimos feitos pelo usuario.
 	 */
-	public String listaEmprestimosUsuarioEmprestando(Map<IdEmprestimo, Emprestimo> emprestimos, Usuario dono) {
-		Set<Emprestimo> empres = new HashSet<>(emprestimos.values());
-
+	public String listaEmprestimosUsuarioEmprestando(Usuario dono) {
 		String retorno = "Emprestimos: ";
 
-		for (Emprestimo emprestimo : empres) {
+		for (Emprestimo emprestimo : dono.getEmprestimos()) {
 			if (emprestimo.getDono().equals(dono)) {
 				retorno += emprestimo.toString() + "|";
 			}
