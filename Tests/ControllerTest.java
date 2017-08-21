@@ -1,8 +1,9 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import principal.*;
+
+import principal.user.UserController;
 
 /**
  * Testes de unidade da classe Controller

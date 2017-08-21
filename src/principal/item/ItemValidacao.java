@@ -1,9 +1,7 @@
-package principal;
+package principal.item;
 
 import java.util.Arrays;
 import java.util.List;
-
-import principal.item.Item;
 
 public class ItemValidacao {
 

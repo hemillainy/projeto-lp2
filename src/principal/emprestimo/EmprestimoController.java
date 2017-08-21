@@ -1,4 +1,4 @@
-package principal;
+package principal.emprestimo;
 
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
+import principal.Listador;
 import principal.emprestimo.*;
 import principal.item.Item;
 import principal.user.Usuario;
@@ -75,6 +76,7 @@ public class EmprestimoController {
 	public void registraEmprestimo(Usuario dono, Usuario requerente, String nomeItem, String dataEmprestimo,
 			int periodo) {
 		validacao.validaItemEmprestimo(dono.getItem(nomeItem));
+		validacao.itemNaoEncontrado(dono.hasItem(nomeItem));
 		Item itemEmprestar = dono.getItem(nomeItem);
 		validacao.ItemJaEmprestado(itemEmprestar.verificaEmprestado());
 
@@ -129,8 +131,9 @@ public class EmprestimoController {
 	 */
 	public void devolveItem(Usuario dono, Usuario requerente, String nomeItem, String dataEmprestimo,
 			String dataDevolucao) {
-
+		
 		validacao.validaItemEmprestimo(dono.getItem(nomeItem));
+		validacao.itemNaoEncontrado(dono.hasItem(nomeItem));
 		Item itemDevolver = dono.getItem(nomeItem);
 		LocalDate dataE = createData(dataEmprestimo);
 		LocalDate dataD = createData(dataDevolucao);

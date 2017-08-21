@@ -1,11 +1,11 @@
-package principal;
+package principal.item;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import principal.item.Item;
+import principal.Listador;
 import principal.item.blurays.Filme;
 import principal.item.blurays.Serie;
 import principal.item.blurays.Show;

@@ -3,6 +3,9 @@ package principal;
 import java.text.ParseException;
 
 import easyaccept.EasyAccept;
+import principal.emprestimo.EmprestimoController;
+import principal.item.ItemController;
+import principal.user.UserController;
 import principal.user.Usuario;
 
 /**
