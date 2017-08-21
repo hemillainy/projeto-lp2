@@ -21,7 +21,7 @@ import principal.user.Usuario;
  *
  */
 public class EmprestimoController {
-	private Listador listador;
+	private EmprestimoListador listador;
 	private EmprestimoValidacao validacao;
 	private Map<IdEmprestimo, Emprestimo> emprestimos;
 
@@ -30,7 +30,7 @@ public class EmprestimoController {
 	 * listador, um validador de entradas e um Map de Emprestimos.
 	 */
 	public EmprestimoController() {
-		this.listador = new Listador();
+		this.listador = new EmprestimoListador();
 		this.validacao = new EmprestimoValidacao();
 		this.emprestimos = new HashMap<>();
 	}
