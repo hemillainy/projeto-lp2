@@ -1,4 +1,4 @@
-package principal;
+package principal.user;
 
 public class UsuarioValidacao {
 

@@ -1,4 +1,4 @@
-package principal;
+package principal.emprestimo;
 
 import principal.item.Item;
 
@@ -53,6 +53,12 @@ public class EmprestimoValidacao {
 	public void emprestimoNaoEncontrado(boolean contemEmprestimo) {
 		if (!contemEmprestimo) {
 			throw new IllegalArgumentException("Emprestimo nao encontrado");
+		}
+	}
+	
+	public void itemNaoEncontrado(boolean hasItem) {
+		if (!hasItem) {
+			throw new IllegalArgumentException("Item nao encontrado");
 		}
 	}
 }

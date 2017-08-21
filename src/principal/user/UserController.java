@@ -1,10 +1,11 @@
-package principal;
+package principal.user;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import principal.Listador;
 import principal.user.IdUsuario;
 import principal.user.Usuario;
 

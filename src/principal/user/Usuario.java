@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import principal.Validacao;
 import principal.emprestimo.Emprestimo;
 import principal.item.Item;
 import principal.item.blurays.Serie;
@@ -29,7 +28,6 @@ public class Usuario implements Comparable<Usuario> {
 	private String nome;
 	private String email;
 	private String telefone;
-	private Validacao validacao;
 	private CartaoFidelidade cartaoFidelidade;
 	private Map<String, Item> itens;
 	private Set<Emprestimo> emprestimos;
@@ -51,7 +49,6 @@ public class Usuario implements Comparable<Usuario> {
 		this.cartaoFidelidade = new CartaoFidelidade();
 		this.itens = new HashMap<>();
 		this.emprestimos = new HashSet<>();
-		this.validacao = new Validacao();
 	}
 
 	/**
@@ -246,7 +243,6 @@ public class Usuario implements Comparable<Usuario> {
 	 * @return o item pego.
 	 */
 	public Item getItem(String nomeItem) {
-		validacao.itemNaoEncontrado(hasItem(nomeItem));
 		return itens.get(nomeItem);
 	}
 
