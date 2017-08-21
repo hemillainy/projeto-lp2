@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import principal.Listador;
 import principal.item.Item;
 import principal.user.Usuario;
 
