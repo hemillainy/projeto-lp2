@@ -5,10 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import principal.Listador;
-import principal.user.IdUsuario;
-import principal.user.Usuario;
-
 /**
  * Representacao de um Controller de Usuario.
  * 
@@ -19,7 +15,7 @@ import principal.user.Usuario;
  *
  */
 public class UserController {
-	private Listador listador;
+	private UserListador listador;
 	private UsuarioValidacao validacao;
 	private Map<IdUsuario, Usuario> usuarios;
 
@@ -28,7 +24,7 @@ public class UserController {
 	 * de Usuarios e uma validacao.
 	 */
 	public UserController() {
-		this.listador = new Listador();
+		this.listador = new UserListador();
 		this.usuarios = new HashMap<>();
 		this.validacao = new UsuarioValidacao();
 	}
@@ -124,7 +120,15 @@ public class UserController {
 		validacao.usuarioInvalido(hasUsuario(id));
 		validacao.atributoInvalido(atributo);
 		Usuario usuario = usuarios.get(id);
-		return listador.getInfoUsuario(usuario, atributo);
+		String info = "";
+		if (atributo.toUpperCase().equals("EMAIL")) {
+			info += usuario.getEmail();
+		} else if (atributo.toUpperCase().equals("REPUTACAO")) {
+			info += usuario.getReputacao();
+		} else if (atributo.toUpperCase().equals("CARTAO")) {
+			info += usuario.getFidelidade();
+		}
+		return info;
 	}
 
 	/**

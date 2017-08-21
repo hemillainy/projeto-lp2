@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import principal.Listador;
 import principal.item.blurays.Filme;
 import principal.item.blurays.Serie;
 import principal.item.blurays.Show;
@@ -24,7 +23,7 @@ import principal.user.Usuario;
  */
 public class ItemController {
 
-	private Listador listador;
+	private ItemListador listador;
 	private ItemValidacao validacao;
 	private Map<String, Item> itens;
 
@@ -34,7 +33,7 @@ public class ItemController {
 	 */
 	public ItemController() {
 		this.itens = new HashMap<>();
-		this.listador = new Listador();
+		this.listador = new ItemListador();
 		this.validacao = new ItemValidacao();
 	}
 
@@ -225,7 +224,7 @@ public class ItemController {
 		validacao.itemNaoEncontrado(usuario.hasItem(nomeItem));
 		validacao.atributoInvalido(atributo);
 		Item item = itens.get(nomeItem);
-		return listador.getInfoItem(item, atributo);
+		return item.getInfoItem(atributo);
 	}
 
 	/**
