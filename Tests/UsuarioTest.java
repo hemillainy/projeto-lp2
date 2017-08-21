@@ -123,15 +123,6 @@ public class UsuarioTest {
 	public void testGetItem() {
 		assertEquals(14.0, usuario2.getItem("Liga da Justiça").getPreco(), 0.01);
 	}
-
-	/**
-	 * Testa o metodo getItem para um item nao cadastradao. Uma excecao eh
-	 * esperada.
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testGetItemInvalido() {
-		assertEquals(null, usuario3.getItem("Damas"));
-	}
 	
 	/**
 	 * Testa o metodo getReputacao.
