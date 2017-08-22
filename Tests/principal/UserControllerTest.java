@@ -183,7 +183,6 @@ public class UserControllerTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testPegarEmprestadoNoobForaDePeriodo() {
 		uc.getUsuario("Geovane", "1234-5678").cadastraItem(new JogoTabuleiro("Chess", 100));
-		;
 		uc.pegarEmprestado("Geovane", "1234-5678", 8);
 	}
 
@@ -241,7 +240,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetInfoUsuarioNomeNulo() {
-		assertEquals("geovane@email.com", uc.getInfoUsuario(null, "1234-5678", "email"));
+		uc.getInfoUsuario(null, "1234-5678", "email");
 	}
 
 	/**
@@ -249,7 +248,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetInfoUsuarioNomeVazio() {
-		assertEquals("geovane@email.com", uc.getInfoUsuario("", "1234-5678", "email"));
+		uc.getInfoUsuario("", "1234-5678", "email");
 	}
 
 	/**
@@ -258,7 +257,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetInfoUsuarioNomeEspacos() {
-		assertEquals("geovane@email.com", uc.getInfoUsuario("   ", "1234-5678", "email"));
+		uc.getInfoUsuario("   ", "1234-5678", "email");
 	}
 
 	/**
@@ -266,7 +265,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetInfoUsuarioTelefoneNulo() {
-		assertEquals("geovane@email.com", uc.getInfoUsuario("Geovane", null, "email"));
+		uc.getInfoUsuario("Geovane", null, "email");
 	}
 
 	/**
@@ -274,7 +273,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetInfoUsuarioTelefoneVazio() {
-		assertEquals("geovane@email.com", uc.getInfoUsuario("Geovane", "", "email"));
+		uc.getInfoUsuario("Geovane", "", "email");
 	}
 
 	/**
@@ -283,7 +282,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetInfoUsuarioTelefoneEspaco() {
-		assertEquals("geovane@email.com", uc.getInfoUsuario("Geovane", "    ", "email"));
+		uc.getInfoUsuario("Geovane", "    ", "email");
 	}
 
 	/**
@@ -291,7 +290,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetInfoUsuarioAtributoNulo() {
-		assertEquals("geovane@email.com", uc.getInfoUsuario("Geovane", "1234-5678", null));
+		uc.getInfoUsuario("Geovane", "1234-5678", null);
 	}
 
 	/**
@@ -299,7 +298,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetInfoUsuarioAtributoVazio() {
-		assertEquals("geovane@email.com", uc.getInfoUsuario("Geovane", "1234-5678", ""));
+		uc.getInfoUsuario("Geovane", "1234-5678", "");
 	}
 
 	/**
@@ -307,7 +306,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testGetInfoUsuarioAtributoEspcaos() {
-		assertEquals("geovane@email.com", uc.getInfoUsuario("Geovane", "1234-5678", "   "));
+		uc.getInfoUsuario("Geovane", "1234-5678", "   ");
 	}
 
 	/**
@@ -335,9 +334,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAtualizaUsuarioNomeNulo() {
-		Usuario us = new Usuario("Geovane", "2468-13579", "geovane@email.com");
 		uc.atualizaUsuario(null, "1234-5678", "Telefone", "2468-13579");
-		assertEquals(us, uc.getUsuario("Geovane", "2468-13579"));
 	}
 
 	/**
@@ -345,9 +342,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAtualizaUsuarioNomeVazio() {
-		Usuario us = new Usuario("Geovane", "2468-13579", "geovane@email.com");
 		uc.atualizaUsuario("", "1234-5678", "Telefone", "2468-13579");
-		assertEquals(us, uc.getUsuario("Geovane", "2468-13579"));
 	}
 
 	/**
@@ -355,9 +350,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAtualizaUsuarioNomeEspacos() {
-		Usuario us = new Usuario("Geovane", "2468-13579", "geovane@email.com");
 		uc.atualizaUsuario("   ", "1234-5678", "Telefone", "2468-13579");
-		assertEquals(us, uc.getUsuario("Geovane", "2468-13579"));
 	}
 
 	/**
@@ -365,9 +358,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAtualizaUsuarioTelfoneNulo() {
-		Usuario us = new Usuario("Geovane", "2468-13579", "geovane@email.com");
 		uc.atualizaUsuario("Geovane", null, "Telefone", "2468-13579");
-		assertEquals(us, uc.getUsuario("Geovane", "2468-13579"));
 	}
 
 	/**
@@ -375,9 +366,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAtualizaUsuarioTelfoneVazio() {
-		Usuario us = new Usuario("Geovane", "2468-13579", "geovane@email.com");
 		uc.atualizaUsuario("Geovane", "", "Telefone", "2468-13579");
-		assertEquals(us, uc.getUsuario("Geovane", "2468-13579"));
 	}
 
 	/**
@@ -385,9 +374,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAtualizaUsuarioTelfoneEspacos() {
-		Usuario us = new Usuario("Geovane", "2468-13579", "geovane@email.com");
 		uc.atualizaUsuario("Geovane", "   ", "Telefone", "2468-13579");
-		assertEquals(us, uc.getUsuario("Geovane", "2468-13579"));
 	}
 
 	/**
@@ -395,9 +382,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAtualizaUsuarioAtributoNulo() {
-		Usuario us = new Usuario("Geovane", "2468-13579", "geovane@email.com");
 		uc.atualizaUsuario("Geovane", "1234-5678", null, "2468-13579");
-		assertEquals(us, uc.getUsuario("Geovane", "2468-13579"));
 	}
 
 	/**
@@ -405,9 +390,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAtualizaUsuarioAtributoVazio() {
-		Usuario us = new Usuario("Geovane", "2468-13579", "geovane@email.com");
 		uc.atualizaUsuario("Geovane", "1234-5678", "", "2468-13579");
-		assertEquals(us, uc.getUsuario("Geovane", "2468-13579"));
 	}
 
 	/**
@@ -415,9 +398,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAtualizaUsuarioAtributoEspacos() {
-		Usuario us = new Usuario("Geovane", "2468-13579", "geovane@email.com");
 		uc.atualizaUsuario("Geovane", "1234-5678", "   ", "2468-13579");
-		assertEquals(us, uc.getUsuario("Geovane", "2468-13579"));
 	}
 
 	/**
@@ -425,9 +406,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAtualizaUsuarioEmailNulo() {
-		Usuario us = new Usuario("Geovane", "2468-13579", "geovane@email.com");
 		uc.atualizaUsuario("Geovane", "1234-5678", "Email", null);
-		assertEquals(us, uc.getUsuario("Geovane", "2468-13579"));
 	}
 
 	/**
@@ -435,9 +414,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAtualizaUsuarioEmailVazio() {
-		Usuario us = new Usuario("Geovane", "2468-13579", "geovane@email.com");
 		uc.atualizaUsuario("Geovane", "1234-5678", "Email", "");
-		assertEquals(us, uc.getUsuario("Geovane", "2468-13579"));
 	}
 
 	/**
@@ -446,9 +423,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAtualizaUsuarioEmailEspacos() {
-		Usuario us = new Usuario("Geovane", "2468-13579", "geovane@email.com");
 		uc.atualizaUsuario("Geovane", "1234-5678", "Email", "   ");
-		assertEquals(us, uc.getUsuario("Geovane", "2468-13579"));
 	}
 
 	/**
@@ -457,9 +432,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAtualizaUsuarioNovoTelefoneNulo() {
-		Usuario us = new Usuario("Geovane", "2468-13579", "geovane@email.com");
 		uc.atualizaUsuario("Geovane", "1234-5678", "Telefone", null);
-		assertEquals(us, uc.getUsuario("Geovane", "2468-13579"));
 	}
 
 	/**
@@ -468,9 +441,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAtualizaUsuarioNovoTelefoneVazio() {
-		Usuario us = new Usuario("Geovane", "2468-13579", "geovane@email.com");
 		uc.atualizaUsuario("Geovane", "1234-5678", "Telefone", "");
-		assertEquals(us, uc.getUsuario("Geovane", "2468-13579"));
 	}
 
 	/**
@@ -479,9 +450,7 @@ public class UserControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAtualizaUsuarioNovoTelefoneEspacos() {
-		Usuario us = new Usuario("Geovane", "2468-13579", "geovane@email.com");
 		uc.atualizaUsuario("Geovane", "1234-5678", "Telefone", "   ");
-		assertEquals(us, uc.getUsuario("Geovane", "2468-13579"));
 	}
 
 	/**
