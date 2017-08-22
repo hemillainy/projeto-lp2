@@ -5,6 +5,9 @@ public class UsuarioValidacao {
 	/**
 	 * Excecao lancada quando for passado um usuario que nao esta cadastrado no
 	 * sistema.
+	 * 
+	 * @param hasUsuario
+	 *            identifica se o usuario existe no sistema.
 	 */
 	public void usuarioInvalido(boolean hasUsuario) {
 		if (!hasUsuario) {
@@ -13,7 +16,11 @@ public class UsuarioValidacao {
 	}
 
 	/**
-	 * Excecao lancada quando tentar cadastrar um usuario que ja esta cadastrado.
+	 * Excecao lancada quando tentar cadastrar um usuario que ja esta
+	 * cadastrado.
+	 * 
+	 * @param hasUsuario
+	 *            identifica se o usuario ja esta cadastrado no sistema.
 	 */
 	public void usuarioJaCadastrado(boolean hasUsuario) {
 		if (hasUsuario) {
@@ -40,10 +47,14 @@ public class UsuarioValidacao {
 	}
 
 	/**
-	 * Veifica os parametros passados para a atualizacao de um usuario. 
-	 * @param hasUsuario identifica se o usuario existe no sistema.
-	 * @param atributo o atributo a ser verificado. 
-	 * @param valor o novo valor do atributo. 
+	 * Veifica os parametros passados para a atualizacao de um usuario.
+	 * 
+	 * @param hasUsuario
+	 *            identifica se o usuario existe no sistema.
+	 * @param atributo
+	 *            o atributo a ser verificado.
+	 * @param valor
+	 *            o novo valor do atributo.
 	 */
 	public void atualizaUsuario(boolean hasUsuario, String atributo, String valor) {
 		usuarioInvalido(hasUsuario);
@@ -64,7 +75,10 @@ public class UsuarioValidacao {
 	}
 
 	/**
-	 * Lanca excecao se o usuario nao pode pegar um item emprestado .
+	 * Lanca excecao se o usuario nao pode pegar um item emprestado.
+	 * 
+	 * @param podePegarEmprestado
+	 *            identifica se o usuario pode ou nao pegar itens emprestado.
 	 */
 	public void naoPodePegarEmprestado(boolean podePegarEmprestado) {
 		if (!podePegarEmprestado) {
@@ -73,8 +87,13 @@ public class UsuarioValidacao {
 	}
 
 	/**
-	 * Excecao lancada quando um emprestimos com periodo alem do permitido para o
-	 * requerente eh solicitado.
+	 * Excecao lancada quando um emprestimos com periodo alem do permitido para
+	 * o requerente eh solicitado.
+	 * 
+	 * @param periodo
+	 *            o periodo solicitado.
+	 * @param periodoUser
+	 *            o periodo que o usuario pode pegar emprestado.
 	 */
 	public void periodoInvalido(int periodo, int periodoUser) {
 		if (periodo > periodoUser) {

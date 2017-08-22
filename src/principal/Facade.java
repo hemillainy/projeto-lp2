@@ -94,7 +94,9 @@ public class Facade {
 	 * Metodo que atualiza um atributo de um usuario.
 	 * 
 	 * @param nome
-	 *            do usuario. nulo * @param telefone do usuario.
+	 *            do usuario
+	 * @param telefone
+	 *            do usuario.
 	 * @param atributo
 	 *            a ser alterado.
 	 * @param valor
@@ -236,7 +238,9 @@ public class Facade {
 	 * @param classificacao
 	 *            indicativa da serie.
 	 * @param genero
-	 *            da serie. nulo * @param temporada da serie.
+	 *            da serie
+	 * @param temporada
+	 *            da serie.
 	 */
 	public void cadastrarBluRaySerie(String nome, String telefone, String nomeItem, double preco, String descricao,
 			int duracao, String classificacao, String genero, int temporada) {

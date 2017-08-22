@@ -70,6 +70,19 @@ public class ItemController {
 	 * @param plataforma
 	 *            do jogo eletronico.
 	 */
+
+	/**
+	 * Metodo que cadastra um jogo eletronico.
+	 * 
+	 * @param usuario
+	 *            o usuario dono do jogo que sera cadastrado.
+	 * @param nomeItem
+	 *            o nome do item
+	 * @param preco
+	 *            o preco do jogo eletronico.
+	 * @param plataforma
+	 *            a plataforma do jogo eletronico.
+	 */
 	public void cadastrarEletronico(Usuario usuario, String nomeItem, double preco, String plataforma) {
 		validacao.eletronicoInvalido(nomeItem, preco, plataforma);
 		Item item = new JogoEletronico(nomeItem, preco, plataforma);
@@ -162,7 +175,9 @@ public class ItemController {
 	 * @param classificacao
 	 *            indicativa da serie.
 	 * @param genero
-	 *            da serie. nulo * @param temporada da serie.
+	 *            da serie
+	 * @param temporada
+	 *            da serie.
 	 */
 	public void cadastraBluRaySerie(Usuario usuario, String nomeItem, double preco, String descricao, int duracao,
 			String classificacao, String genero, int temporada) {
@@ -177,8 +192,6 @@ public class ItemController {
 	 * 
 	 * @param usuario
 	 *            dono do item que sera cadastrado.
-	 * @param telefone
-	 *            do usuario.
 	 * @param nomeBluRayTemporada
 	 *            a ser cadastrado o BluRay.
 	 * @param duracao
@@ -195,8 +208,6 @@ public class ItemController {
 	 * 
 	 * @param usuario
 	 *            dono do item que sera cadastrado.
-	 * @param telefone
-	 *            do usuario.
 	 * @param nomeItem
 	 *            a ser adicionada a peca.
 	 * @param nomePeca
@@ -232,8 +243,6 @@ public class ItemController {
 	 * 
 	 * @param usuario
 	 *            dono do item que sera removido.
-	 * @param telefone
-	 *            do usuario.
 	 * @param nomeItem
 	 *            a ser removido.
 	 */
@@ -244,9 +253,12 @@ public class ItemController {
 	}
 
 	/**
-	 * Alterar uma chave do mapa de itens. 
-	 * @param item o item que a chave sera alterada. 
-	 * @param nomeItem o novo nome do item. 
+	 * Alterar uma chave do mapa de itens.
+	 * 
+	 * @param item
+	 *            o item que a chave sera alterada.
+	 * @param nomeItem
+	 *            o novo nome do item.
 	 */
 	private void setKeyItem(Item item, String nomeItem) {
 		itens.remove(nomeItem);
@@ -268,7 +280,7 @@ public class ItemController {
 	public void atualizaItem(Usuario usuario, String nomeItem, String atributo, String valor) {
 		validacao.itemNaoEncontrado(usuario.hasItem(nomeItem));
 		validacao.atributoInvalido(atributo);
-		
+
 		Item item = itens.get(nomeItem);
 		if (atributo.toUpperCase().equals("NOME")) {
 			validacao.atributoInvalido(valor);

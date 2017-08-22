@@ -39,7 +39,7 @@ public class IdEmprestimoTest {
 	
 	/**
 	 * Teste do metodo equals.
-	 * @throws ParseException
+	 * 
 	 */
 	@Test
 	public void testEqualsObject() {
