@@ -1,10 +1,12 @@
 package principal.emprestimo;
 
+
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import principal.emprestimo.EmprestimoController;
 import principal.item.Item;
 import principal.item.jogos.JogoTabuleiro;
 import principal.user.Usuario;
@@ -107,6 +109,9 @@ public class EmprestimoControllerTest {
 		assertEquals("Nenhum item emprestado", ec.listarEmprestimosUsuarioEmprestando(user2));
 	}
 
+	/**
+	 * Teste do metodo listarEmprestimoUsuarioPegandoEmprestado.
+	 */
 	@Test
 	public void testListarEmprestimosUsuarioPegandoEmprestado() {
 		assertEquals("Emprestimos pegos: EMPRESTIMO - De: Cássio, Para: Geovane, Damas, 31/10/1517, 4 dias, ENTREGA: Emprestimo em andamento|", ec.listarEmprestimosUsuarioPegandoEmprestado(user2));
