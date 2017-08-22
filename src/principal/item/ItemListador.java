@@ -12,9 +12,8 @@ import principal.emprestimo.Emprestimo;
  * 
  * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
  * 
- * @author Cassio Cordeiro - 116210038
- * 		   Geovane Silva - 116211149
- * 		   Hemillainy Santos - 116210802
+ * @author Cassio Cordeiro - 116210038 Geovane Silva - 116211149 Hemillainy
+ *         Santos - 116210802
  *
  */
 public class ItemListador {
@@ -67,6 +66,8 @@ public class ItemListador {
 	/**
 	 * Metodo que lista os 10 itens mais emprestados.
 	 * 
+	 * @param inventario a lista de itens do sistema. 
+	 * 
 	 * @return a listagem dos 10 itens mais emprestados.
 	 */
 	public String listaTopDez(List<Item> inventario) {
@@ -86,6 +87,9 @@ public class ItemListador {
 	/**
 	 * Metodo que lista todos os itens em ordem crescente de valor.
 	 * 
+	 * @param itens
+	 *            a lista de itens do sistema.
+	 * 
 	 * @return a listagem de todos os itens em ordem crecente de valor.
 	 */
 	public String listaItensOrdenadosPorValor(List<Item> itens) {
@@ -99,6 +103,9 @@ public class ItemListador {
 
 	/**
 	 * Metodo que lista todos os itens em ordem lexicografica.
+	 * 
+	 * @param inventario
+	 *            a lista de itens do sistema.
 	 * 
 	 * @return a listagem de todos os itens em ordem lexicografica.
 	 */

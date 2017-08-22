@@ -42,7 +42,7 @@ public class EmprestimoTest {
 	
 	/**
 	 * Cria os objetos necessarios para os testes
-	 * @throws ParseException
+	 * 
 	 */
 	@Before
 	public void criaEmprestimo() {

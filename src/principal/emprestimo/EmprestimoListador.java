@@ -7,7 +7,8 @@ import principal.user.Usuario;
 
 /**
  * 
- * Classe que faz as listagens de informacoes de emprestimos solicitadas pelo usuario.
+ * Classe que faz as listagens de informacoes de emprestimos solicitadas pelo
+ * usuario.
  * 
  * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
  * 
@@ -15,15 +16,14 @@ import principal.user.Usuario;
  *         Santos - 116210802
  */
 public class EmprestimoListador {
-	
+
 	/**
 	 * Metodo que lista todos os itens que um usuario emprestou.
 	 * 
-	 * @param nome
-	 *            do usuario.
-	 * @param telefone
-	 *            do usuario.
-	 * @return a lista com os emprestimos feitos pelo usuario.
+	 * @param dono
+	 *            o usuario dono dos emprestimos a serem listados.
+	 *            
+	 * @return a lista de itens que um usuario esta emprestando. 
 	 */
 	public String listaEmprestimosUsuarioEmprestando(Usuario dono) {
 		String retorno = "Emprestimos: ";
@@ -38,7 +38,7 @@ public class EmprestimoListador {
 		}
 		return retorno;
 	}
-	
+
 	/**
 	 * Metodo que lista os emprestimos concedidos a um ususario.
 	 * 
@@ -58,7 +58,7 @@ public class EmprestimoListador {
 		}
 		return retorno;
 	}
-	
+
 	/**
 	 * Metodo que lista os associados a um item.
 	 * 
@@ -81,7 +81,7 @@ public class EmprestimoListador {
 		}
 		return retorno;
 	}
-	
+
 	/**
 	 * Remove os intens repetidos do List de emprestimos.
 	 * 
@@ -99,7 +99,7 @@ public class EmprestimoListador {
 			}
 		}
 	}
-	
+
 	/**
 	 * Metodo que lista os itens cadastrados nao emprestados.
 	 * 
@@ -114,7 +114,7 @@ public class EmprestimoListador {
 		for (Emprestimo emprestimo : emp) {
 			if (emprestimo.getItem().getStatus().equals("Emprestado")) {
 				saida += "Dono do item: " + emprestimo.getNomeDono() + ", Nome do item emprestado: "
-					+ emprestimo.getNomeItem() + "|"; 
+						+ emprestimo.getNomeItem() + "|";
 			}
 		}
 		return saida;

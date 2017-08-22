@@ -28,7 +28,7 @@ public abstract class Fidelidade {
 	/**
 	 * Altera o valor da reputacao do usuario.
 	 * 
-	 * @param valor
+	 * @param reputacao
 	 *            o valor a ser adicionado a reputacao do usuario. O valor pode
 	 *            ser positivo ou negativo.
 	 */

@@ -8,6 +8,9 @@ public class ItemValidacao {
 	/**
 	 * Excecao lancada quando for solicitado algo sobre um item que nao foi
 	 * cadastrado.
+	 * 
+	 * @param hasItem
+	 *            identifica se o item esta cadastrado para um usuario.
 	 */
 	public void itemNaoEncontrado(boolean hasItem) {
 		if (!hasItem) {
@@ -23,8 +26,6 @@ public class ItemValidacao {
 	 *            nome do item.
 	 * @param preco
 	 *            preco do item.
-	 * @param enumerate
-	 *            plataforma do item.
 	 */
 	public void itemInvalido(String nomeItem, double preco) {
 		if (nomeItem == null || nomeItem.trim().isEmpty()) {
@@ -67,12 +68,12 @@ public class ItemValidacao {
 	 * 
 	 * @param nome
 	 *            nome da serie.
-	 * @param preco
+	 * @param valor
 	 *            preco do bluray.
-	 * 
+	 * @param duracao
+	 *            a duracao do show.
 	 * @param classificacao
 	 *            a classificacao da serie.
-	 * 
 	 * @param genero
 	 *            o genero da serie.
 	 * @param temporada
@@ -90,12 +91,12 @@ public class ItemValidacao {
 	 * 
 	 * @param nome
 	 *            nome do filme.
-	 * @param preco
+	 * @param valor
 	 *            preco do bluray.
-	 * 
+	 * @param duracao
+	 *            a duracao do show.
 	 * @param classificacao
 	 *            a classificacao do filme.
-	 * 
 	 * @param genero
 	 *            o genero do filme.
 	 * @param lancamento
@@ -114,15 +115,14 @@ public class ItemValidacao {
 	 * 
 	 * @param nome
 	 *            nome do show.
-	 * @param preco
+	 * @param valor
 	 *            preco do bluray.
-	 * 
+	 * @param duracao
+	 *            a duracao do show.
 	 * @param classificacao
 	 *            a classificacao do show.
-	 * 
 	 * @param artista
 	 *            o nome do artista.
-	 * 
 	 * @param faixas
 	 *            o numero de faixas do show.
 	 */
@@ -225,6 +225,8 @@ public class ItemValidacao {
 	/**
 	 * Verifica se uma peca perdida eh valida.
 	 * 
+	 * @param hasItem
+	 *            identifica se o item existe no sistema.
 	 * @param peca
 	 *            a peca a ser verificada.
 	 */
@@ -238,8 +240,11 @@ public class ItemValidacao {
 	}
 
 	/**
-	 * Excecao lancada quando tentarem fazer um emprestimo de um item que ja esta
-	 * emprestado.
+	 * Excecao lancada quando tentarem fazer um emprestimo de um item que ja
+	 * esta emprestado.
+	 * 
+	 * @param itemJaEmprestado
+	 *            identifica se o item ja esta emprestado.
 	 */
 	public void ItemJaEmprestado(boolean itemJaEmprestado) {
 		if (itemJaEmprestado) {
@@ -262,8 +267,11 @@ public class ItemValidacao {
 
 	/**
 	 * Metodo que verifica se a adicao de uma temporada a um blueray eh valida.
-	 * @param containsKey se contem o bluray.
-	 * @param duracao da temporada.
+	 * 
+	 * @param containsKey
+	 *            se contem o bluray.
+	 * @param duracao
+	 *            da temporada.
 	 */
 	public void addTemporadaInvalida(boolean containsKey, int duracao) {
 		if (!containsKey) {
@@ -278,7 +286,9 @@ public class ItemValidacao {
 
 	/**
 	 * Metodo que verifica se a alteracao do atributo do item eh valida.
-	 * @param valor novo do parametro.
+	 * 
+	 * @param valor
+	 *            novo do parametro.
 	 */
 	public void valorInvalido(String valor) {
 		if (valor == null || valor.trim().isEmpty()) {
@@ -289,9 +299,12 @@ public class ItemValidacao {
 			throw new IllegalArgumentException("Valor invalido");
 		}
 	}
+
 	/**
 	 * Verifica se um atributo de pesquisa eh valido.
-	 * @param atributo o atributo a ser verificado. 
+	 * 
+	 * @param atributo
+	 *            o atributo a ser verificado.
 	 */
 	public void atributoInvalido(String atributo) {
 		if (atributo == null || atributo.trim().isEmpty()) {

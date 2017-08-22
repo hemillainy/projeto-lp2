@@ -128,10 +128,8 @@ public class Usuario implements Comparable<Usuario> {
 	/**
 	 * Metodo que cadastra um jogo de tabuleiro.
 	 * 
-	 * @param nomeItem
-	 *            a ser cadastrado.
-	 * @param preco
-	 *            do item.
+	 * @param item
+	 *            o item a ser cadastrado.
 	 */
 	public void cadastraItem(Item item) {
 		itens.put(item.getNome(), item);
@@ -142,10 +140,8 @@ public class Usuario implements Comparable<Usuario> {
 	/**
 	 * Metodo que adiciona um BluRay a uma serie.
 	 * 
-	 * @param nomeBluRayTemporada
-	 *            a ser cadastrado o BluRay.
-	 * @param duracao
-	 *            do episodio.
+	 * @param serie
+	 *            o bluray de serie a ser adicionado.
 	 */
 	public void adicionaBluRay(Serie serie) {
 		serie.adicionarBluRay(serie.getDuracao());

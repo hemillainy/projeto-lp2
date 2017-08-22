@@ -19,9 +19,9 @@ public class JogoEletronico extends Item {
 	
 	/**
 	 * Construtor de jogo eletronico.
-	 * @param nome
-	 * @param valor
-	 * @param plataforma
+	 * @param nome o nome do jogo 
+	 * @param valor o valor do jogo
+	 * @param plataforma a plataforma do jogo
 	 */
 	public JogoEletronico(String nome, double valor, String plataforma) {
 		super(nome, valor);

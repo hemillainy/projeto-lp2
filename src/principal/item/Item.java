@@ -116,11 +116,7 @@ public abstract class Item implements Comparable<Item> {
 	
 	/**
 	 * Metodo que retorna uma informacao de um item.
-	 * 
-	 * @param usuario
-	 *            o dono do item que tera uma info exibida.
-	 * @param nomeItem
-	 *            que se deseja pegar a informacao.
+	 *
 	 * @param atributo
 	 *            que se deseja visualizar.
 	 * @return a informacao correspondente ao atributo desejado.
