@@ -1,6 +1,5 @@
 package principal.emprestimo;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -66,7 +65,7 @@ public class EmprestimoController {
 	 * @param dono
 	 *            usuario dono do item.
 	 * @param requerente
-	 *            usuario que est� pegando o item emprestado.
+	 *            usuario que esta pegando o item emprestado.
 	 * @param nomeItem
 	 *            a ser emprestado.
 	 * @param dataEmprestimo
@@ -121,14 +120,13 @@ public class EmprestimoController {
 	 * @param dono
 	 *            dono do item.
 	 * @param requerente
-	 *            usuario que est� pegando o item emprestado.
+	 *            usuario que esta pegando o item emprestado.
 	 * @param nomeItem
 	 *            a ser devolvido.
 	 * @param dataEmprestimo
 	 *            que aconteceu o emprestimo.
 	 * @param dataDevolucao
 	 *            do item.
-	 * @throws ParseException
 	 */
 	public void devolveItem(Usuario dono, Usuario requerente, String nomeItem, String dataEmprestimo,
 			String dataDevolucao) {
