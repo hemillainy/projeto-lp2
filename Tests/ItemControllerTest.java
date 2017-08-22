@@ -1,15 +1,9 @@
 import static org.junit.Assert.assertEquals;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import principal.emprestimo.Emprestimo;
-import principal.item.Item;
 import principal.item.ItemController;
-import principal.item.blurays.Serie;
 import principal.user.Usuario;
 
 public class ItemControllerTest {
@@ -280,23 +274,18 @@ public class ItemControllerTest {
 	 */
 	@Test
 	public void testListarTop10Itens() {
-		Item item = new Serie("Sherlock", 90.00, 480, "DEZESSEIS_ANOS", "DRAMA", 1);
-		String data = "22/06/2017";
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		ic.cadastraBluRaySerie(usuario1, "Sherlock", 90.00, "UMA SERIE DESSA BIXO", 480, "DEZESSEIS_ANOS", "DRAMA", 1);
-		usuario1.addEmprestimo(new Emprestimo(usuario1, usuario2, item, LocalDate.parse(data, dtf), 7));
-		assertEquals("", ic.listarTop10Itens());
+		usuario1.getItem("Sherlock").addNumeroEmprestimo();
+		assertEquals("1) 1 emprestimos - SERIE: Sherlock, R$ 90.0, Nao emprestado, 480 min, DEZESSEIS_ANOS, DRAMA, Temporada 1|", ic.listarTop10Itens());
 	}
 
 	/**
 	 * Testa o metodo listarItensNaoEmprestados().
 	 */
+	@Test
 	public void testListarItensNaoEmprestados() {
-		String data = "22/06/2017";
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		Item item1 = new Serie("Sherlock", 90.00, 480, "DEZESSEIS_ANOS", "DRAMA", 1);
 		ic.cadastraBluRaySerie(usuario1, "Sherlock", 90.00, "UMA SERIE DESSA BIXO", 480, "DEZESSEIS_ANOS", "DRAMA", 1);
-		usuario1.addEmprestimo(new Emprestimo(usuario1, usuario2, item1, LocalDate.parse(data, dtf), 7));
-		assertEquals("", ic.listarItensNaoEmprestados());
+		assertEquals("FILME: Flashpoint, R$ 14.5, Nao emprestado, 180 min, LIVRE, ACAO, 2018|SHOW: Galinha pintadinha, R$ 2.99, Nao emprestado, 90 min, LIVRE, Galinha, 20 faixas|JOGO ELETRONICO: Guitar Hero, R$ 99.99, Nao emprestado, XBOX_ONE|FILME: Liga da Justiça, R$ 14.0, Nao emprestado, 180 min, DEZESSEIS_ANOS, ACAO, 2017|SERIE: Naruto, R$ 45.0, Nao emprestado, 20 min, QUATORZE_ANOS, OUTRO, Temporada 6|SERIE: Sherlock, R$ 90.0, Nao emprestado, 480 min, DEZESSEIS_ANOS, DRAMA, Temporada 1|JOGO ELETRONICO: Tetris, R$ 10.0, Nao emprestado, OUTRO|SERIE: The 100, R$ 59.99, Nao emprestado, 43 min, DEZESSEIS_ANOS, DRAMA, Temporada 1|JOGO DE TABULEIRO: Xadrez, R$ 89.63, Nao emprestado, COMPLETO|", ic.listarItensNaoEmprestados());
 	}
+	
 }
