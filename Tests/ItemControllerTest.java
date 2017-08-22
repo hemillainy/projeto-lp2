@@ -1,18 +1,24 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import principal.emprestimo.Emprestimo;
+import principal.item.Item;
 import principal.item.ItemController;
+import principal.item.blurays.Serie;
 import principal.user.Usuario;
 
 public class ItemControllerTest {
-	
+
 	ItemController ic;
 	Usuario usuario1;
 	Usuario usuario2;
 	Usuario usuario3;
-	
+
 	@Before
 	public void cria() {
 		ic = new ItemController();
@@ -25,11 +31,10 @@ public class ItemControllerTest {
 		ic.cadastraBluRayFilme(usuario2, "Flashpoint", 14.50, 180, "ACAO", "LIVRE", 2018);
 		ic.cadastraBluRayShow(usuario1, "Galinha pintadinha", 2.99, 90, 20, "Galinha", "LIVRE");
 		ic.cadastrarEletronico(usuario3, "Tetris", 10.00, "OUTRO");
-		ic.cadastraBluRaySerie(usuario3, "The 100", 59.99, "Octavia Linda", 43, "DEZESSEIS_ANOS","DRAMA", 1);
+		ic.cadastraBluRaySerie(usuario3, "The 100", 59.99, "Octavia Linda", 43, "DEZESSEIS_ANOS", "DRAMA", 1);
 		ic.cadastraBluRayFilme(usuario1, "Liga da Justiça", 14.00, 180, "ACAO", "DEZESSEIS_ANOS", 2017);
 	}
-	
-	
+
 	/**
 	 * Apos adicionar uma peca perdida verifica-se se o estado do enum que
 	 * representa um jogo completo foi alterado.
@@ -37,7 +42,8 @@ public class ItemControllerTest {
 	@Test
 	public void testAdicionaPecaPerdida() {
 		ic.adicionaPecaPerdida(usuario3, "Xadrez", "Torre");
-		assertEquals("JOGO DE TABULEIRO: Xadrez, R$ 89.63, Nao emprestado, COM PECAS PERDIDAS", ic.pesquisaDetalhesItens(usuario3, "Xadrez"));
+		assertEquals("JOGO DE TABULEIRO: Xadrez, R$ 89.63, Nao emprestado, COM PECAS PERDIDAS",
+				ic.pesquisaDetalhesItens(usuario3, "Xadrez"));
 	}
 
 	/**
@@ -134,8 +140,7 @@ public class ItemControllerTest {
 	 */
 	@Test
 	public void testCadastrarBluRaySerie() {
-		ic.cadastraBluRaySerie(usuario1, "Arrow", 19.90, "Nasce a lenda", 40, "QUATORZE_ANOS", "ACAO",
-				1);
+		ic.cadastraBluRaySerie(usuario1, "Arrow", 19.90, "Nasce a lenda", 40, "QUATORZE_ANOS", "ACAO", 1);
 		assertEquals("SERIE: Arrow, R$ 19.9, Nao emprestado, 40 min, QUATORZE_ANOS, ACAO, Temporada 1",
 				ic.pesquisaDetalhesItens(usuario1, "Arrow"));
 	}
@@ -145,8 +150,7 @@ public class ItemControllerTest {
 	 */
 	@Test
 	public void testPesquisaDetalhesItem() {
-		ic.cadastraBluRaySerie(usuario1, "The Flash", 19.90, "Nasce a lenda", 40, "QUATORZE_ANOS",
-				"ACAO", 1);
+		ic.cadastraBluRaySerie(usuario1, "The Flash", 19.90, "Nasce a lenda", 40, "QUATORZE_ANOS", "ACAO", 1);
 		assertEquals("SERIE: The Flash, R$ 19.9, Nao emprestado, 40 min, QUATORZE_ANOS, ACAO, Temporada 1",
 				ic.pesquisaDetalhesItens(usuario1, "The Flash"));
 	}
@@ -158,7 +162,6 @@ public class ItemControllerTest {
 	public void testPesquisaDetalhesItemInvalido() {
 		ic.pesquisaDetalhesItens(usuario1, "The Flash");
 	}
-
 
 	/**
 	 * Testa o metodo getPrecoItem em um item cadastrado no usuario3.
@@ -173,7 +176,7 @@ public class ItemControllerTest {
 	 */
 	@Test
 	public void testGetNomeItem() {
-		assertEquals("The 100", ic.getInfoItem(usuario3,"The 100", "Nome"));
+		assertEquals("The 100", ic.getInfoItem(usuario3, "The 100", "Nome"));
 	}
 
 	/**
@@ -221,7 +224,7 @@ public class ItemControllerTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testAlteraNomeItemInvalido() {
-		ic.atualizaItem(usuario1, "Jogos Vorazes","Nome", "X-men");
+		ic.atualizaItem(usuario1, "Jogos Vorazes", "Nome", "X-men");
 		ic.getInfoItem(usuario1, "X-men", "Nome");
 	}
 
@@ -235,4 +238,65 @@ public class ItemControllerTest {
 		assertEquals("50.0", ic.getInfoItem(usuario3, "Tetris", "Preco"));
 	}
 
+	/**
+	 * Testa o metodo getItens().
+	 */
+	@Test
+	public void testGetItens() {
+		assertEquals(8, ic.getItens().size());
+	}
+
+	/**
+	 * Testa o metodo listarItensOrdenadosPorNome().
+	 */
+	@Test
+	public void testListarItensOrdenadosPorNome() {
+		assertEquals(
+				"FILME: Flashpoint, R$ 14.5, Nao emprestado, 180 min, LIVRE, ACAO, 2018|SHOW: Galinha pintadinha, R$ 2.99, Nao emprestado, 90 min, LIVRE, Galinha, 20 faixas|JOGO ELETRONICO: Guitar Hero, R$ 99.99, Nao emprestado, XBOX_ONE|FILME: Liga da Justiça, R$ 14.0, Nao emprestado, 180 min, DEZESSEIS_ANOS, ACAO, 2017|SERIE: Naruto, R$ 45.0, Nao emprestado, 20 min, QUATORZE_ANOS, OUTRO, Temporada 6|JOGO ELETRONICO: Tetris, R$ 10.0, Nao emprestado, OUTRO|SERIE: The 100, R$ 59.99, Nao emprestado, 43 min, DEZESSEIS_ANOS, DRAMA, Temporada 1|JOGO DE TABULEIRO: Xadrez, R$ 89.63, Nao emprestado, COMPLETO|",
+				ic.listarItemOrdenadosPorNome());
+	}
+
+	/**
+	 * Testa o metodo listarItensOrdenadosPorValor().
+	 */
+	@Test
+	public void testListarItensOrdenadosPorValor() {
+		assertEquals(
+				"SHOW: Galinha pintadinha, R$ 2.99, Nao emprestado, 90 min, LIVRE, Galinha, 20 faixas|JOGO ELETRONICO: Tetris, R$ 10.0, Nao emprestado, OUTRO|FILME: Liga da Justiça, R$ 14.0, Nao emprestado, 180 min, DEZESSEIS_ANOS, ACAO, 2017|FILME: Flashpoint, R$ 14.5, Nao emprestado, 180 min, LIVRE, ACAO, 2018|SERIE: Naruto, R$ 45.0, Nao emprestado, 20 min, QUATORZE_ANOS, OUTRO, Temporada 6|SERIE: The 100, R$ 59.99, Nao emprestado, 43 min, DEZESSEIS_ANOS, DRAMA, Temporada 1|JOGO DE TABULEIRO: Xadrez, R$ 89.63, Nao emprestado, COMPLETO|JOGO ELETRONICO: Guitar Hero, R$ 99.99, Nao emprestado, XBOX_ONE|",
+				ic.listarItemOrdenadosPorValor());
+	}
+
+	/**
+	 * Testa o metodo pesquisaDetalhesItens().
+	 */
+	@Test
+	public void testPesquisaDetalhesItens() {
+		assertEquals("JOGO ELETRONICO: Guitar Hero, R$ 99.99, Nao emprestado, XBOX_ONE",
+				ic.pesquisaDetalhesItens(usuario1, "Guitar Hero"));
+	}
+
+	/**
+	 * Testa o metodo listarTop10Itens().
+	 */
+	@Test
+	public void testListarTop10Itens() {
+		Item item = new Serie("Sherlock", 90.00, 480, "DEZESSEIS_ANOS", "DRAMA", 1);
+		String data = "22/06/2017";
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		ic.cadastraBluRaySerie(usuario1, "Sherlock", 90.00, "UMA SERIE DESSA BIXO", 480, "DEZESSEIS_ANOS", "DRAMA", 1);
+		usuario1.addEmprestimo(new Emprestimo(usuario1, usuario2, item, LocalDate.parse(data, dtf), 7));
+		assertEquals("", ic.listarTop10Itens());
+	}
+
+	/**
+	 * Testa o metodo listarItensNaoEmprestados().
+	 */
+	public void testListarItensNaoEmprestados() {
+		String data = "22/06/2017";
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		Item item1 = new Serie("Sherlock", 90.00, 480, "DEZESSEIS_ANOS", "DRAMA", 1);
+		ic.cadastraBluRaySerie(usuario1, "Sherlock", 90.00, "UMA SERIE DESSA BIXO", 480, "DEZESSEIS_ANOS", "DRAMA", 1);
+		usuario1.addEmprestimo(new Emprestimo(usuario1, usuario2, item1, LocalDate.parse(data, dtf), 7));
+		assertEquals("", ic.listarItensNaoEmprestados());
+	}
 }
