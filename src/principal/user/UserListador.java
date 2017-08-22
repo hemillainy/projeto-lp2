@@ -5,6 +5,16 @@ import java.util.List;
 
 import principal.comparator.ComparadorReputacao;
 
+/**
+ * Classe responsavel pelas listagens concernentes a usuario.
+ * 
+ * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
+ * 
+ * @author Cassio Cordeiro - 116210038
+ * 		   Geovane Silva - 116211149
+ * 		   Hemillainy Santos - 116210802
+ *
+ */
 public class UserListador {
 	
 	private ComparadorReputacao comparadorReputacao;

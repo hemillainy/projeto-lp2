@@ -7,6 +7,16 @@ import principal.comparator.ComparadorNumeroEmprestimos;
 import principal.comparator.ComparadorValor;
 import principal.emprestimo.Emprestimo;
 
+/**
+ * Classe responsavel pelas listagens concernentes a itens.
+ * 
+ * Projeto de Laboratorio de Progamacao 2 - 2017.1 (TT - Tracking things)
+ * 
+ * @author Cassio Cordeiro - 116210038
+ * 		   Geovane Silva - 116211149
+ * 		   Hemillainy Santos - 116210802
+ *
+ */
 public class ItemListador {
 
 	private ComparadorNumeroEmprestimos comparadorNumeroEmprestimos;
