@@ -39,6 +39,12 @@ public class UsuarioValidacao {
 		}
 	}
 
+	/**
+	 * Veifica os parametros passados para a atualizacao de um usuario. 
+	 * @param hasUsuario identifica se o usuario existe no sistema.
+	 * @param atributo o atributo a ser verificado. 
+	 * @param valor o novo valor do atributo. 
+	 */
 	public void atualizaUsuario(boolean hasUsuario, String atributo, String valor) {
 		usuarioInvalido(hasUsuario);
 		atributoInvalido(atributo);

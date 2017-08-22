@@ -202,6 +202,7 @@ public class ItemValidacao {
 	 */
 	private void bluRayInvalido(String nome, double valor, int duracao, String classificacao) {
 		itemInvalido(nome, valor);
+		dadoInvalido("Duracao", duracao);
 		classificacaoInvalida(classificacao);
 	}
 
@@ -280,8 +281,11 @@ public class ItemValidacao {
 	 * @param valor novo do parametro.
 	 */
 	public void valorInvalido(String valor) {
+		if (valor == null || valor.trim().isEmpty()) {
+			throw new IllegalArgumentException("Valor invalido");
+		}
 		Double v = Double.parseDouble(valor);
-		if (valor == null || valor.trim().isEmpty() || v < 0) {
+		if (v < 0) {
 			throw new IllegalArgumentException("Valor invalido");
 		}
 	}
