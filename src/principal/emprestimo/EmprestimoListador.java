@@ -112,7 +112,7 @@ public class EmprestimoListador {
 		removeRepetidos(emp);
 		String saida = "";
 		for (Emprestimo emprestimo : emp) {
-			saida += "Dono do item: " + emprestimo.getNomeDome() + ", Nome do item emprestado: "
+			saida += "Dono do item: " + emprestimo.getNomeDono() + ", Nome do item emprestado: "
 					+ emprestimo.getNomeItem() + "|";
 		}
 		return saida;

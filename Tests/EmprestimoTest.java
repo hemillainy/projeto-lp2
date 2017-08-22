@@ -28,6 +28,9 @@ public class EmprestimoTest {
 	Usuario user1;
 	Usuario user2;
 	
+	Item i1;
+	Item i2;
+	
 	Emprestimo emprestimo;
 	Emprestimo emprestimo2;
 	Emprestimo emprestimo3;
@@ -45,9 +48,9 @@ public class EmprestimoTest {
 		user1 = new Usuario("Cássio", "123", "cassio.cordeiro");
 		user2 = new Usuario("Geovane", "1234", "geovane.nascimento");
 		
-		Item i1 = new JogoTabuleiro("Xadrez", 59.99);
+		i1 = new JogoTabuleiro("Xadrez", 59.99);
 		user1.cadastraItem(i1);
-		Item i2 = new JogoTabuleiro("Cubo mágico", 29.99);
+		i2 = new JogoTabuleiro("Cubo mágico", 29.99);
 		user2.cadastraItem(i2);
 		
 		
@@ -79,5 +82,53 @@ public class EmprestimoTest {
 		emprestimo.devolverItem(data);
 		assertEquals("EMPRESTIMO - De: Cássio, Para: Geovane, Xadrez, 11/08/2017, 7 dias, ENTREGA: 16/08/2017", emprestimo.toString());
 	}
-
+	
+	/**
+	 * Teste do metodo devolverItem.
+	 */
+	@Test
+	public void testDevolverItem() {
+		emprestimo.devolverItem(data3);
+		assertEquals("EMPRESTIMO - De: Cássio, Para: Geovane, Xadrez, 11/08/2017, 7 dias, ENTREGA: 13/08/2017" , emprestimo.toString());
+	}
+	
+	/**
+	 * Teste do metodo getDono.
+	 */
+	@Test
+	public void testGetDono() {
+		assertEquals(user1, emprestimo.getDono());
+	}
+	
+	/**
+	 * Teste do metodo getNomeDono.
+	 */
+	@Test
+	public void testGetNomeDono() {
+		assertEquals("Geovane", emprestimo2.getNomeDono());
+	}
+	
+	/**
+	 * Teste do metodo getRequerente.
+	 */
+	@Test
+	public void testGetRequerente() {
+		assertEquals(user2, emprestimo.getRequerente());
+	}
+	
+	/**
+	 * Teste do metodo getItem.
+	 */
+	@Test
+	public void testGetItem() {
+		assertEquals(i1, emprestimo.getItem());
+	}
+	
+	/**
+	 * Teste do metodo getNomoItem.
+	 */
+	@Test
+	public void testGetNomeItem() {
+		assertEquals("Cubo mágico", emprestimo2.getNomeItem());
+	}
 }

@@ -25,7 +25,10 @@ public class ComparadorValor implements Comparator<Item> {
 		if (result < 0) {
 			return -1;
 		}
-		return 1;
+		else if (result > 0) {
+			return 1;
+		}
+		return 0;
 	}
 
 }
