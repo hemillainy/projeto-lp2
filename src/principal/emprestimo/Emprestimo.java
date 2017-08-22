@@ -133,7 +133,7 @@ public class Emprestimo {
 	 * 
 	 * @return nome do dono item emprestado.
 	 */
-	public String getNomeDome() {
+	public String getNomeDono() {
 		return this.dono.getNome();
 	}
 
