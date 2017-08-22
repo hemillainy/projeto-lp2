@@ -69,8 +69,8 @@ public class EmprestimoListadorTest {
 	 */
 	@Test
 	public void testListaEmprestimosUsuarioEmprestando() {
-		assertEquals("Emprestimos: EMPRESTIMO - De: Cássio, Para: Hemillainy, Xadrez, 22/08/2017, 5 dias, ENTREGA: Emprestimo em andamento|", el.listaEmprestimosUsuarioEmprestando(emprestimos, user1));
-		assertEquals("Emprestimos: EMPRESTIMO - De: Hemillainy, Para: Cássio, Banco imobiliário, 22/08/2017, 5 dias, ENTREGA: Emprestimo em andamento|", el.listaEmprestimosUsuarioEmprestando(emprestimos, user2));
+		assertEquals("Emprestimos: EMPRESTIMO - De: Cássio, Para: Hemillainy, Xadrez, 22/08/2017, 5 dias, ENTREGA: Emprestimo em andamento|", el.listaEmprestimosUsuarioEmprestando(user1));
+		assertEquals("Emprestimos: EMPRESTIMO - De: Hemillainy, Para: Cássio, Banco imobiliário, 22/08/2017, 5 dias, ENTREGA: Emprestimo em andamento|", el.listaEmprestimosUsuarioEmprestando(user2));
 	}
 
 	/**
