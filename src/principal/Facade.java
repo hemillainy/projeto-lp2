@@ -1,7 +1,5 @@
 package principal;
 
-import java.text.ParseException;
-
 import easyaccept.EasyAccept;
 import principal.emprestimo.EmprestimoController;
 import principal.item.ItemController;
@@ -377,10 +375,9 @@ public class Facade {
 	 *            que houve o emprestimo.
 	 * @param periodo
 	 *            de emprestimo.
-	 * @throws ParseException
 	 */
 	public void registrarEmprestimo(String nomeDono, String telefoneDono, String nomeRequerente,
-			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) throws ParseException {
+			String telefoneRequerente, String nomeItem, String dataEmprestimo, int periodo) {
 		emprestimoController.registraEmprestimo(pegaUsuario(nomeDono, telefoneDono),
 				pegarEmprestado(nomeRequerente, telefoneRequerente, periodo), nomeItem, dataEmprestimo, periodo);
 	}
@@ -402,9 +399,8 @@ public class Facade {
 	 *            que aconteceu o emprestimo.
 	 * @param dataDevolucao
 	 *            do item.
-	 * @throws ParseException
+	 *
 	 */
-
 	public void devolverItem(String nomeDono, String telefoneDono, String nomeRequerente, String telefoneRequerente,
 			String nomeItem, String dataEmprestimo, String dataDevolucao) {
 		emprestimoController.devolveItem(pegaUsuario(nomeDono, telefoneDono),
