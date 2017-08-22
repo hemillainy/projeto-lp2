@@ -178,7 +178,7 @@ public class EmprestimoController {
 	}
 
 	/**
-	 * Metodo que lista os itens cadastrados nao emprestados.
+	 * Metodo que lista os itens cadastrados emprestados.
 	 * 
 	 * @return a listagem com os itens emprestados.
 	 */
