@@ -1,5 +1,6 @@
 package principal.user;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -24,7 +25,11 @@ import principal.user.reputacao.CartaoFidelidade;
  *         Santos - 116210802
  *
  */
-public class Usuario implements Comparable<Usuario> {
+public class Usuario implements Comparable<Usuario>, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nome;
 	private String email;
 	private String telefone;

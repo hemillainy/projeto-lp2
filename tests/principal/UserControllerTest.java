@@ -32,6 +32,7 @@ public class UserControllerTest {
 		uc.cadastraUsuario("Geovane", "1234-5678", "geovane@email.com");
 		uc.cadastraUsuario("Cassio", "4321-5678", "cassio@email.com");
 		uc.cadastraUsuario("Hemillainy", "5678-5678", "hemillainy@email.com");
+	
 	}
 
 	/**

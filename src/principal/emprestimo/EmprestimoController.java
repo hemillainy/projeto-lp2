@@ -1,5 +1,10 @@
 package principal.emprestimo;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -9,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import principal.item.Item;
+import principal.user.IdUsuario;
 import principal.user.Usuario;
 
 /**
@@ -205,5 +211,23 @@ public class EmprestimoController {
 	 */
 	public String listarEmprestimosUsuarioPegandoEmprestado(Usuario usuario) {
 		return listador.listaEmprestimosUsuarioPegandoEmprestado(usuario);
+	}
+	
+	public void salvar() {
+		ObjectOutputStream salvar;
+		try {
+			salvar = new ObjectOutputStream(new FileOutputStream("emprestimos.txt"));
+			salvar.writeObject(emprestimos);
+		} catch (IOException e) {
+			}
+	}
+	
+	public void abrir() {
+		try {
+			ObjectInputStream abrir = new ObjectInputStream(new FileInputStream("emprestimos.txt"));
+			emprestimos =  (Map<IdEmprestimo, Emprestimo>) abrir.readObject();
+		} catch (IOException | ClassNotFoundException e) {
+			
+		}
 	}
 }
