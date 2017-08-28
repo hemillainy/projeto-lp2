@@ -1,5 +1,10 @@
 package principal.item;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +15,7 @@ import principal.item.blurays.Serie;
 import principal.item.blurays.Show;
 import principal.item.jogos.JogoEletronico;
 import principal.item.jogos.JogoTabuleiro;
+import principal.user.IdUsuario;
 import principal.user.Usuario;
 
 /**
@@ -344,5 +350,23 @@ public class ItemController {
 	public String listarItensNaoEmprestados() {
 		List<Item> listItens = new ArrayList<>(itens.values());
 		return listador.listaItensNaoEmprestados(listItens);
+	}
+	
+	public void salvar() {
+		ObjectOutputStream salvar;
+		try {
+			salvar = new ObjectOutputStream(new FileOutputStream("itens.txt"));
+			salvar.writeObject(itens);
+		} catch (IOException e) {
+			}
+	}
+	
+	public void abrir() {
+		try {
+			ObjectInputStream abrir = new ObjectInputStream(new FileInputStream("itens.txt"));
+			itens =  (Map<String, Item>) abrir.readObject();
+		} catch (IOException | ClassNotFoundException e) {
+			
+		}
 	}
 }

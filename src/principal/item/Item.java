@@ -1,5 +1,7 @@
 package principal.item;
 
+import java.io.Serializable;
+
 import enums.*;
 
 /**
@@ -12,7 +14,11 @@ import enums.*;
  * 		   Hemillainy Santos - 116210802
  *
  */
-public abstract class Item implements Comparable<Item> {
+public abstract class Item implements Comparable<Item>, Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String nome;
 	protected double preco;
 	protected StatusEmprestado status;

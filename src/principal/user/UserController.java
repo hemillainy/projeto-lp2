@@ -1,5 +1,12 @@
 package principal.user;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -219,4 +226,23 @@ public class UserController {
 		List<Usuario> users = new ArrayList<>(usuarios.values());
 		return listador.listarTop10PioresUsuarios(users);
 	}
+	
+	public void salvar() {
+		ObjectOutputStream salvar;
+		try {
+			salvar = new ObjectOutputStream(new FileOutputStream("usuarios.txt", true));
+			salvar.writeObject(usuarios);
+		} catch (IOException e) {
+			}
+	}
+	
+	public void abrir() {
+		try {
+			ObjectInputStream abrir = new ObjectInputStream(new FileInputStream("usuarios.txt"));
+			usuarios = (Map<IdUsuario, Usuario>) abrir.readObject();
+		} catch (IOException | ClassNotFoundException e) {
+			
+		}
+	}
 }
+	
