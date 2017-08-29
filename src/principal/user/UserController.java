@@ -1,9 +1,8 @@
 package principal.user;
 
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -228,20 +227,40 @@ public class UserController {
 	}
 	
 	public void salvar() {
-		ObjectOutputStream salvar;
 		try {
-			salvar = new ObjectOutputStream(new FileOutputStream("usuarios.txt", true));
-			salvar.writeObject(usuarios);
-		} catch (IOException e) {
-			}
+			FileOutputStream fos = new FileOutputStream("usuarios.txt");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			
+			oos.writeObject(usuarios);
+			
+			oos.close();
+		}
+			
+		catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void abrir() {
+		ObjectInputStream ois = null;
 		try {
-			ObjectInputStream abrir = new ObjectInputStream(new FileInputStream("usuarios.txt"));
-			usuarios = (Map<IdUsuario, Usuario>) abrir.readObject();
-		} catch (IOException | ClassNotFoundException e) {
+			if (!new File("usuarios.txt").exists()) {
+				FileOutputStream fos = new FileOutputStream("usuarios.txt");
+				fos.close(); 
+			}
 			
+			FileInputStream fis = new FileInputStream("usuarios.txt");
+			
+			if (fis.available() > 0 ) {
+				ois = new ObjectInputStream(fis);
+				usuarios = (Map<IdUsuario, Usuario>) ois.readObject();
+				ois.close();
+			}
+			
+		}
+		catch (IOException | ClassNotFoundException ioecnfe) {
+			ioecnfe.printStackTrace();
 		}
 	}
 }

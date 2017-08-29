@@ -1,5 +1,7 @@
 package principal.user.reputacao;
 
+import java.io.Serializable;
+
 import enums.StatusFidelidade;
 
 /**
@@ -11,7 +13,11 @@ import enums.StatusFidelidade;
  *         Santos - 116210802
  *
  */
-public abstract class Fidelidade {
+public abstract class Fidelidade  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected StatusFidelidade statusFidelidade;
 	protected double reputacao;
 	protected int periodo; 

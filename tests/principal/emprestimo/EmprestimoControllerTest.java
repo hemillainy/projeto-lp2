@@ -55,7 +55,7 @@ public class EmprestimoControllerTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testRegistraEmprestimoItemJaEmprestado() {
 		ec.registraEmprestimo(user1, user2, "Damas", "07/09/1517", 5);
-	}
+	} 
 
 	/**
 	 * Teste do metodo devolveItem.

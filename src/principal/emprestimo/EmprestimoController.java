@@ -1,5 +1,6 @@
 package principal.emprestimo;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 import principal.item.Item;
-import principal.user.IdUsuario;
 import principal.user.Usuario;
 
 /**
@@ -214,20 +214,39 @@ public class EmprestimoController {
 	}
 	
 	public void salvar() {
-		ObjectOutputStream salvar;
 		try {
-			salvar = new ObjectOutputStream(new FileOutputStream("emprestimos.txt"));
-			salvar.writeObject(emprestimos);
-		} catch (IOException e) {
-			}
+			FileOutputStream fos = new FileOutputStream("emprestimos.txt");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			
+			oos.writeObject(emprestimos);
+			oos.close();
+		}
+			
+		catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void abrir() {
+		ObjectInputStream ois = null;
 		try {
-			ObjectInputStream abrir = new ObjectInputStream(new FileInputStream("emprestimos.txt"));
-			emprestimos =  (Map<IdEmprestimo, Emprestimo>) abrir.readObject();
-		} catch (IOException | ClassNotFoundException e) {
+			if (!new File("emprestimos.txt").exists()) {
+				FileOutputStream fos = new FileOutputStream("emprestimos.txt");
+				fos.close(); 
+			}
 			
+			FileInputStream fis = new FileInputStream("emprestimos.txt");
+			
+			if (fis.available() > 0 ) {
+				ois = new ObjectInputStream(fis);
+				emprestimos = (Map<IdEmprestimo, Emprestimo>) ois.readObject();
+				ois.close();
+			}
+			
+		}
+		catch (IOException | ClassNotFoundException ioecnfe) {
+			ioecnfe.printStackTrace();
 		}
 	}
 }

@@ -3,10 +3,8 @@ package principal.user;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import principal.emprestimo.Emprestimo;
 import principal.item.Item;
@@ -26,16 +24,14 @@ import principal.user.reputacao.CartaoFidelidade;
  *
  */
 public class Usuario implements Comparable<Usuario>, Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private String nome;
 	private String email;
 	private String telefone;
 	private CartaoFidelidade cartaoFidelidade;
 	private Map<String, Item> itens;
-	private Set<Emprestimo> emprestimos;
+	private List<Emprestimo> emprestimos;
 
 	/**
 	 * Controi um Usuario a partir de um nome, telefone e email.
@@ -53,7 +49,7 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 		this.email = email;
 		this.cartaoFidelidade = new CartaoFidelidade();
 		this.itens = new HashMap<>();
-		this.emprestimos = new HashSet<>();
+		this.emprestimos = new ArrayList<>();
 	}
 
 	/**
@@ -262,7 +258,7 @@ public class Usuario implements Comparable<Usuario>, Serializable {
 	 * 
 	 * @return o conjunto de emprestimos do usuario.
 	 */
-	public Set<Emprestimo> getEmprestimos() {
+	public List<Emprestimo> getEmprestimos() {
 		return this.emprestimos;
 	}
 

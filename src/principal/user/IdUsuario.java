@@ -1,5 +1,7 @@
 package principal.user;
 
+import java.io.Serializable;
+
 /**
  * Classe que representa a identificacao de um usuario.
  * 
@@ -9,8 +11,12 @@ package principal.user;
  *         Santos - 116210802
  *
  */
-public class IdUsuario {
+public class IdUsuario implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nome;
 	private String telefone;
 

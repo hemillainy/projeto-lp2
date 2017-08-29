@@ -15,7 +15,7 @@ import principal.user.Usuario;
  * @author Cassio Cordeiro - 116210038 Geovane Silva - 116211149 Hemillainy
  *         Santos - 116210802
  */
-public class EmprestimoListador {
+public class EmprestimoListador { 
 
 	/**
 	 * Metodo que lista todos os itens que um usuario emprestou.

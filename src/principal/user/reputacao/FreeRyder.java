@@ -14,6 +14,11 @@ import enums.StatusFidelidade;
 public class FreeRyder extends Fidelidade {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Contrutor de FreeRyder. 
 	 * @param valor o valor atual de reputacao do usuario. 
 	 */

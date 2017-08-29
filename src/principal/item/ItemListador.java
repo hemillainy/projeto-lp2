@@ -35,7 +35,6 @@ public class ItemListador {
 	 */
 	public String listaItensNaoEmprestados(List<Item> listItens) {
 		Collections.sort(listItens);
-
 		String saida = "";
 		for (Item item : listItens) {
 			if (item.getStatus().equals("Nao emprestado")) {
