@@ -1,5 +1,6 @@
 package principal.item;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,7 +16,6 @@ import principal.item.blurays.Serie;
 import principal.item.blurays.Show;
 import principal.item.jogos.JogoEletronico;
 import principal.item.jogos.JogoTabuleiro;
-import principal.user.IdUsuario;
 import principal.user.Usuario;
 
 /**
@@ -353,20 +353,39 @@ public class ItemController {
 	}
 	
 	public void salvar() {
-		ObjectOutputStream salvar;
 		try {
-			salvar = new ObjectOutputStream(new FileOutputStream("itens.txt"));
-			salvar.writeObject(itens);
-		} catch (IOException e) {
-			}
+			FileOutputStream fos = new FileOutputStream("itens.txt");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			
+			oos.writeObject(itens);
+			oos.close();
+		}
+			
+		catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void abrir() {
+		ObjectInputStream ois = null;
 		try {
-			ObjectInputStream abrir = new ObjectInputStream(new FileInputStream("itens.txt"));
-			itens =  (Map<String, Item>) abrir.readObject();
-		} catch (IOException | ClassNotFoundException e) {
+			if (!new File("itens.txt").exists()) {
+				FileOutputStream fos = new FileOutputStream("itens.txt");
+				fos.close(); 
+			}
 			
+			FileInputStream fis = new FileInputStream("itens.txt");
+			
+			if (fis.available() > 0 ) {
+				ois = new ObjectInputStream(fis);
+				itens = (Map<String, Item>) ois.readObject();
+				ois.close();
+			}
+			
+		}
+		catch (IOException | ClassNotFoundException ioecnfe) {
+			ioecnfe.printStackTrace();
 		}
 	}
 }

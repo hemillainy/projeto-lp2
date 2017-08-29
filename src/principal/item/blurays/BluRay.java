@@ -16,6 +16,10 @@ import principal.item.Item;
 public abstract class BluRay extends Item {
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected Classificacao classificacao;
 	protected int duracao;
 	

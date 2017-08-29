@@ -1,5 +1,7 @@
 package principal;
 
+import java.io.IOException;
+
 import easyaccept.EasyAccept;
 import principal.emprestimo.EmprestimoController;
 import principal.item.ItemController;
@@ -17,16 +19,14 @@ import principal.user.Usuario;
  */
 public class Facade {
 	public static void main(String[] args) {
-		Facade fc= new Facade();
+		Facade fc= new Facade(); 
 		fc.iniciarSistema();
-		System.out.println(fc.listarItensOrdenadosPorValor());
-//		args = new String[] { "principal.Facade", "acceptance_test/us1_test.txt", "acceptance_test/us2_test.txt",
-//				"acceptance_test/us3_test.txt", "acceptance_test/us4_test.txt", "acceptance_test/us5_test.txt",
-//				"acceptance_test/us6_test.txt", "acceptance_test/us7_test.txt", "acceptance_test/us8_test.txt" };
-//
-//		EasyAccept.main(args);
+		args = new String[] { "principal.Facade","acceptance_test/us1_test.txt", "acceptance_test/us2_test.txt",
+				"acceptance_test/us3_test.txt", "acceptance_test/us4_test.txt", "acceptance_test/us5_test.txt",
+				"acceptance_test/us6_test.txt", "acceptance_test/us7_test.txt", "acceptance_test/us8_test.txt"};
+		EasyAccept.main(args);
 	}
-
+	 
 	private UserController userController;
 	private ItemController itemController;
 	private EmprestimoController emprestimoController;
@@ -36,14 +36,15 @@ public class Facade {
 	 */
 	public Facade() {
 		this.userController = new UserController();
-		this.itemController = new ItemController();
+		this.itemController = new ItemController(); 
 		this.emprestimoController = new EmprestimoController();
-	}
+	} 
 
 	/**
+	 * @throws IOException 
 	 * 
 	 */
-	public void iniciarSistema() {
+	public void iniciarSistema()  {
 		userController.abrir();
 		itemController.abrir();
 		emprestimoController.abrir();

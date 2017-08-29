@@ -12,6 +12,10 @@ package principal.item.blurays;
  */
 public class Show extends BluRay {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String artista;
 	private int faixas;
 	

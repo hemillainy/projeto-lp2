@@ -16,6 +16,10 @@ import enums.Genero;
  */
 public class Serie extends BluRay {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Genero genero;
 	private int temporada;
 	private List<Integer> episodios;

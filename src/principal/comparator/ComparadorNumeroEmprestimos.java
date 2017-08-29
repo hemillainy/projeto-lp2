@@ -23,7 +23,7 @@ public class ComparadorNumeroEmprestimos implements Comparator<Item> {
 		else if (item2.getNumEmprestimos() - item1.getNumEmprestimos() < 0) {
 			return -1;
 		}
-		return 0;
+		return 0; 
 	}
 
 }

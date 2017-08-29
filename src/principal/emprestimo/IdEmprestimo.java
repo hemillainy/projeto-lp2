@@ -1,6 +1,7 @@
 package principal.emprestimo;
 
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import principal.item.Item;
@@ -16,7 +17,11 @@ import principal.user.Usuario;
  *         Santos - 116210802
  *
  */
-public class IdEmprestimo {
+public class IdEmprestimo implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Usuario dono;
 	Usuario requerente;
 	Item itemEmprestado;

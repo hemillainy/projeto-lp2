@@ -14,6 +14,11 @@ import enums.StatusFidelidade;
 public class Caloteiro extends Fidelidade {
 	
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Contrutor de Caloteiro. 
 	 * @param valor o valor atual de reputacao do usuario. 
 	 */

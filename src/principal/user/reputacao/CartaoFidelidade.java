@@ -1,5 +1,7 @@
 package principal.user.reputacao;
 
+import java.io.Serializable;
+
 /**
  * Classe Responsavel pela logica do cartao fidelidade de um usuario.
  * 
@@ -9,7 +11,11 @@ package principal.user.reputacao;
  *         Santos - 116210802
  *
  */
-public class CartaoFidelidade {
+public class CartaoFidelidade implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Fidelidade fidelidade;
 	private double reputacao;
 	private int quantidadeItens;
