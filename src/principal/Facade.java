@@ -1,7 +1,5 @@
 package principal;
 
-import java.io.IOException;
-
 import easyaccept.EasyAccept;
 import principal.emprestimo.EmprestimoController;
 import principal.item.ItemController;
@@ -21,11 +19,11 @@ public class Facade {
 	public static void main(String[] args) {
 		Facade fc= new Facade(); 
 		fc.iniciarSistema();
-		args = new String[] { "principal.Facade","acceptance_test/us1_test.txt", "acceptance_test/us2_test.txt",
-				"acceptance_test/us3_test.txt", "acceptance_test/us4_test.txt", "acceptance_test/us5_test.txt",
-				"acceptance_test/us6_test.txt", "acceptance_test/us7_test.txt", "acceptance_test/us8_test.txt"};
+		args = new String[] { "principal.Facade","acceptance_test/us8_test.txt"};
 		EasyAccept.main(args);
 	}
+	
+
 	 
 	private UserController userController;
 	private ItemController itemController;
@@ -41,22 +39,20 @@ public class Facade {
 	} 
 
 	/**
-	 * @throws IOException 
+	 * Inicializa o sistema carregando dados de execucoes passadas.
 	 * 
 	 */
 	public void iniciarSistema()  {
-		userController.abrir();
-		itemController.abrir();
-		emprestimoController.abrir();
+		Persistencia persistencia = new Persistencia();
+		persistencia.carregar(userController, itemController, emprestimoController);
 	}
 
 	/**
-	 * 
+	 * Fecha o sistema salvando dados para execucoes futuras.
 	 */
 	public void fecharSistema() {
-		userController.salvar();
-		itemController.salvar();
-		emprestimoController.salvar();
+		Persistencia persistencia = new Persistencia();
+		persistencia.salvar(userController.mapaUsuarios(), itemController.mapaItens(), emprestimoController.mapaEmprestimo());
 	}
 
 	/**
