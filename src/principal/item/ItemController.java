@@ -1,11 +1,5 @@
 package principal.item;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -351,41 +345,20 @@ public class ItemController {
 		List<Item> listItens = new ArrayList<>(itens.values());
 		return listador.listaItensNaoEmprestados(listItens);
 	}
-	
-	public void salvar() {
-		try {
-			FileOutputStream fos = new FileOutputStream("itens.txt");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			
-			oos.writeObject(itens);
-			oos.close();
-		}
-			
-		catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
+
+	/**
+	 * Metodo para acesso ao mapa de itens do sistema. 
+	 * @return o mapa de itens cadastrados. 
+	 */
+	public Map<String, Item> mapaItens() {
+		return itens;
 	}
-	
-	@SuppressWarnings("unchecked")
-	public void abrir() {
-		ObjectInputStream ois = null;
-		try {
-			if (!new File("itens.txt").exists()) {
-				FileOutputStream fos = new FileOutputStream("itens.txt");
-				fos.close(); 
-			}
-			
-			FileInputStream fis = new FileInputStream("itens.txt");
-			
-			if (fis.available() > 0 ) {
-				ois = new ObjectInputStream(fis);
-				itens = (Map<String, Item>) ois.readObject();
-				ois.close();
-			}
-			
-		}
-		catch (IOException | ClassNotFoundException ioecnfe) {
-			ioecnfe.printStackTrace();
-		}
+
+	/**
+	 * Metodo que altera a base de dados de itens cadastrados no sistema. 
+	 * @param usuarios o novo mapa de itens. 
+	 */
+	public void setData(Map<String, Item> itens) {
+		this.itens = itens;
 	}
 }

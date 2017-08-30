@@ -1,11 +1,5 @@
 package principal.emprestimo;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -212,41 +206,21 @@ public class EmprestimoController {
 	public String listarEmprestimosUsuarioPegandoEmprestado(Usuario usuario) {
 		return listador.listaEmprestimosUsuarioPegandoEmprestado(usuario);
 	}
-	
-	public void salvar() {
-		try {
-			FileOutputStream fos = new FileOutputStream("emprestimos.txt");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			
-			oos.writeObject(emprestimos);
-			oos.close();
-		}
-			
-		catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
+
+	/**
+	 * Metodo para acesso ao mapa de emprestimos do sistema. 
+	 * @return o mapa de emprestimos cadastrados. 
+	 */
+	public Map<IdEmprestimo, Emprestimo> mapaEmprestimo() {
+		return emprestimos;
 	}
-	
-	@SuppressWarnings("unchecked")
-	public void abrir() {
-		ObjectInputStream ois = null;
-		try {
-			if (!new File("emprestimos.txt").exists()) {
-				FileOutputStream fos = new FileOutputStream("emprestimos.txt");
-				fos.close(); 
-			}
-			
-			FileInputStream fis = new FileInputStream("emprestimos.txt");
-			
-			if (fis.available() > 0 ) {
-				ois = new ObjectInputStream(fis);
-				emprestimos = (Map<IdEmprestimo, Emprestimo>) ois.readObject();
-				ois.close();
-			}
-			
-		}
-		catch (IOException | ClassNotFoundException ioecnfe) {
-			ioecnfe.printStackTrace();
-		}
+
+	/**
+	 * Metodo que altera a base de dados de emprestimos cadastrados no sistema. 
+	 * @param usuarios o novo mapa de emprestimos. 
+	 */
+	public void setData(Map<IdEmprestimo, Emprestimo> emprestimos) {
+		this.emprestimos = emprestimos;
 	}
+
 }
