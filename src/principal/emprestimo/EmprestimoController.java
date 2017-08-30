@@ -217,7 +217,7 @@ public class EmprestimoController {
 
 	/**
 	 * Metodo que altera a base de dados de emprestimos cadastrados no sistema. 
-	 * @param usuarios o novo mapa de emprestimos. 
+	 * @param emprestimos novo mapa de emprestimos. 
 	 */
 	public void setData(Map<IdEmprestimo, Emprestimo> emprestimos) {
 		this.emprestimos = emprestimos;

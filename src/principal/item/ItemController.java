@@ -356,7 +356,7 @@ public class ItemController {
 
 	/**
 	 * Metodo que altera a base de dados de itens cadastrados no sistema. 
-	 * @param usuarios o novo mapa de itens. 
+	 * @param itens o novo mapa de itens. 
 	 */
 	public void setData(Map<String, Item> itens) {
 		this.itens = itens;
